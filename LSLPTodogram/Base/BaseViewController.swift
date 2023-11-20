@@ -17,7 +17,9 @@ class BaseViewController: UIViewController, Base {
         initialLayout()
     }
 
-    func initialAttributes() {}
+    func initialAttributes() {
+        view.backgroundColor = Color.systemBackground
+    }
 
     func initialHierarchy() {}
 
