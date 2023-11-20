@@ -26,6 +26,7 @@
 		57E98E162B0B6C8200330C6B /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E152B0B6C8200330C6B /* BaseView.swift */; };
 		57E98E182B0B6C9000330C6B /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E172B0B6C9000330C6B /* BaseViewController.swift */; };
 		57E98E1A2B0B6CDD00330C6B /* ViewIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E192B0B6CDD00330C6B /* ViewIdentifiable.swift */; };
+		57E98E202B0B6E8800330C6B /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E1F2B0B6E8800330C6B /* ViewModelType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		57E98E152B0B6C8200330C6B /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		57E98E172B0B6C9000330C6B /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		57E98E192B0B6CDD00330C6B /* ViewIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewIdentifiable.swift; sourceTree = "<group>"; };
+		57E98E1F2B0B6E8800330C6B /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				57E98E152B0B6C8200330C6B /* BaseView.swift */,
 				57E98E172B0B6C9000330C6B /* BaseViewController.swift */,
 				57E98E192B0B6CDD00330C6B /* ViewIdentifiable.swift */,
+				57E98E1F2B0B6E8800330C6B /* ViewModelType.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57E98E202B0B6E8800330C6B /* ViewModelType.swift in Sources */,
 				57E98E0C2B0B6C2F00330C6B /* Base.swift in Sources */,
 				57E98E142B0B6C7300330C6B /* BaseLabel.swift in Sources */,
 				57E98E122B0B6C6700330C6B /* BaseImageView.swift in Sources */,
