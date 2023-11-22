@@ -14,144 +14,17 @@ class NetworkManager {
 
     private init() {}
 
-    // 로그인 request
-    func requestLogin(url: URL, parameters: Parameters?, headers: HTTPHeaders?) -> Single<LoginResponse> {
-        return Single<LoginResponse>.create { observer in
+    func request<T: Decodable>(type: T.Type, api: Router) -> Single<T> {
+        return Single<T>.create { observer in
             AF
-                .request(
-                    url,
-                    method: .post,
-                    parameters: parameters,
-                    encoding: JSONEncoding.default,
-                    headers: headers
-                )
+                .request(api)
                 .validate()
-                .responseDecodable(of: LoginResponse.self) { response in
+                .responseDecodable(of: type) { response in
                     switch response.result {
                     case .success(let success):
                         observer(.success(success))
 
-                    case .failure:
-                        let statusCode = response.response?.statusCode ?? 500
-                        let error = LoginError(rawValue: statusCode) ?? .서버_에러
-                        observer(.failure(error))
-                    }
-                }
-
-            return Disposables.create {
-
-            }
-        }
-    }
-
-    // 이메일 중복 검증 request
-    func requestEmailValidation(url: URL, parameters: Parameters?, headers: HTTPHeaders?) -> Single<EmailValidationResponse> {
-        return Single<EmailValidationResponse>.create { observer in
-            AF
-                .request(
-                    url,
-                    method: .post,
-                    parameters: parameters,
-                    encoding: JSONEncoding.default,
-                    headers: headers
-                )
-                .responseDecodable(of: EmailValidationResponse.self) { response in
-                    switch response.result {
-                    case .success(let success):
-                        observer(.success(success))
-
-                    case .failure:
-                        let statusCode = response.response?.statusCode ?? 500
-                        let error = EmailValidationError(rawValue: statusCode) ?? .서버_에러
-                        observer(.failure(error))
-                    }
-                }
-
-            return Disposables.create()
-        }
-    }
-    func requestEmailValidation(
-        endpoint url: URL,
-        method: HTTPMethod,
-        parameters: Parameters?,
-        encoding: ParameterEncoding,
-        headers: HTTPHeaders?
-    ) -> Single<EmailValidationResponse> {
-        return Single<EmailValidationResponse>.create { observer in
-            AF
-                .request(
-                    url,
-                    method: method,
-                    parameters: parameters,
-                    encoding: encoding,
-                    headers: headers
-                )
-                .responseDecodable(of: EmailValidationResponse.self) { response in
-                    switch response.result {
-                    case .success(let success):
-                        observer(.success(success))
-
-                    case .failure:
-                        let statusCode = response.response?.statusCode ?? 500
-                        let error = JoinError(rawValue: statusCode) ?? .서버_에러
-                        observer(.failure(error))
-                    }
-                }
-
-            return Disposables.create()
-        }
-    }
-
-    // 회원가입 request
-    func requestJoin(url: URL, parameters: Parameters?, headers: HTTPHeaders?) -> Single<JoinDTO> {
-        return Single<JoinDTO>.create { observer in
-            AF
-                .request(
-                    url,
-                    method: .post,
-                    parameters: parameters,
-                    encoding: JSONEncoding.default,
-                    headers: headers
-                )
-                .responseDecodable(of: JoinDTO.self) { response in
-                    switch response.result {
-                    case .success(let success):
-                        observer(.success(success))
-
-                    case .failure:
-                        let statusCode = response.response?.statusCode ?? 500
-                        let error = JoinError(rawValue: statusCode) ?? .서버_에러
-                        observer(.failure(error))
-                    }
-                }
-
-            return Disposables.create()
-        }
-    }
-    func requestJoin(
-        endpoint url: URL,
-        method: HTTPMethod,
-        parameters: Parameters?,
-        encoding: URLEncoding,
-        headers: HTTPHeaders?
-    ) -> Single<JoinDTO> {
-        return Single<JoinDTO>.create { observer in
-            AF
-                .request(
-                    url,
-                    method: method,
-                    parameters: parameters,
-                    encoding: encoding,
-                    headers: headers
-                )
-                .responseDecodable(of: JoinDTO.self) { response in
-                    switch response.result {
-                    case .success(let success):
-                        observer(.success(success))
-
-                    case .failure:
-                        let statusCode = response.response?.statusCode ?? 500
-                        let error = JoinError(rawValue: statusCode) ?? .서버_에러
+                    case .failure(let error):
                         observer(.failure(error))
                     }
                 }
@@ -161,3 +34,17 @@ class NetworkManager {
     }
 
 }
+
+// 예시
+//NetworkManager.shared.request(
+//    type: EmailValidationResponse.self,
+//    api: Router.emailChek(email: "iamnexttime@sesac.com")
+//)
+//.subscribe { response in
+//    print(response)
+//} onFailure: { error in
+//    let statusCode = error.asAFError?.responseCode ?? 500
+//    let emailError = EmailValidationError(rawValue: statusCode) ?? .서버_에러
+//    print("에러 ==>", emailError.description)
+//}
+//.disposed(by: disposeBag)

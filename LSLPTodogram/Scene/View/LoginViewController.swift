@@ -11,6 +11,8 @@ import RxSwift
 
 final class LoginViewController: BaseViewController {
     let mainView = LoginMainView()
+
+    let disposeBag = DisposeBag()
     let viewModel = LoginViewModel()
 
     override func loadView() {
