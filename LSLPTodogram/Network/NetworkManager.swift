@@ -34,17 +34,3 @@ class NetworkManager {
     }
 
 }
-
-// 예시
-//NetworkManager.shared.request(
-//    type: EmailValidationResponse.self,
-//    api: Router.emailChek(email: "iamnexttime@sesac.com")
-//)
-//.subscribe { response in
-//    print(response)
-//} onFailure: { error in
-//    let statusCode = error.asAFError?.responseCode ?? 500
-//    let emailError = EmailValidationError(rawValue: statusCode) ?? .서버_에러
-//    print("에러 ==>", emailError.description)
-//}
-//.disposed(by: disposeBag)
