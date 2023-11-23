@@ -28,6 +28,13 @@ final class EmailMainView: BaseView {
         view.borderStyle = .roundedRect
         return view
     }()
+    let emailValidationButton = {
+        var config = UIButton.Configuration.filled()
+        config.cornerStyle = .capsule
+        config.title = "확인"
+        let button = UIButton(configuration: config)
+        return button
+    }()
     let nextButton = {
         var config = UIButton.Configuration.filled()
         config.cornerStyle = .capsule
@@ -43,6 +50,7 @@ final class EmailMainView: BaseView {
             titleLabel,
             subTitleLabel,
             emailTextField,
+            emailValidationButton,
             nextButton
         ].forEach { addSubview($0) }
     }
@@ -65,7 +73,14 @@ final class EmailMainView: BaseView {
 
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(subTitleLabel.snp.bottom).offset(offset+4)
-            make.horizontalEdges.equalToSuperview().inset(inset)
+            make.leading.equalToSuperview().inset(inset)
+            make.height.equalTo(height)
+        }
+
+        emailValidationButton.snp.makeConstraints { make in
+            make.centerY.equalTo(emailTextField.snp.centerY)
+            make.leading.equalTo(emailTextField.snp.trailing).offset(offset)
+            make.trailing.equalToSuperview().inset(inset)
             make.height.equalTo(height)
         }
 
