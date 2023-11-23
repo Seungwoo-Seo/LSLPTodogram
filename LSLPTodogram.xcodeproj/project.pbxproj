@@ -16,6 +16,9 @@
 		57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */; };
 		57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */; };
 		57DC508A2B0EEE1000B1F293 /* EmailValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50892B0EEE1000B1F293 /* EmailValidationError.swift */; };
+		57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */; };
+		57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */; };
+		57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */; };
 		57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A162B0CCEFE0048B27C /* NetworkManager.swift */; };
 		57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A192B0CCF420048B27C /* NetworkModel.swift */; };
 		57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98DDD2B0B660000330C6B /* AppDelegate.swift */; };
@@ -53,6 +56,9 @@
 		57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationResponse.swift; sourceTree = "<group>"; };
 		57DC50892B0EEE1000B1F293 /* EmailValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationError.swift; sourceTree = "<group>"; };
+		57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordMainView.swift; sourceTree = "<group>"; };
+		57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
+		57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
 		57E13A162B0CCEFE0048B27C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		57E13A192B0CCF420048B27C /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		57E98DDA2B0B660000330C6B /* LSLPTodogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LSLPTodogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				57DC505B2B0E34E900B1F293 /* Email */,
+				57DC50992B0F392F00B1F293 /* Password */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -134,6 +141,32 @@
 				57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57DC50992B0F392F00B1F293 /* Password */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50A12B0F3B5800B1F293 /* View */,
+				57DC50A02B0F3B5000B1F293 /* ViewModel */,
+			);
+			path = Password;
+			sourceTree = "<group>";
+		};
+		57DC50A02B0F3B5000B1F293 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57DC50A12B0F3B5800B1F293 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */,
+				57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		57E13A182B0CCF260048B27C /* Model */ = {
@@ -359,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				57DC50612B0E359A00B1F293 /* EmailMainView.swift in Sources */,
+				57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */,
 				57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */,
 				57E98E202B0B6E8800330C6B /* ViewModelType.swift in Sources */,
 				57DC50502B0E213F00B1F293 /* LoginError.swift in Sources */,
@@ -375,6 +409,8 @@
 				57E98E182B0B6C9000330C6B /* BaseViewController.swift in Sources */,
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */,
+				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
+				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
 				57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */,
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */,
