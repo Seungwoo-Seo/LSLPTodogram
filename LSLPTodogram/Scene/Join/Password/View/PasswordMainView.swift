@@ -28,6 +28,14 @@ final class PasswordMainView: BaseView {
         view.borderStyle = .roundedRect
         return view
     }()
+    let sameStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fillProportionally
+        view.spacing = 8
+        return view
+    }()
     let sameLabel = {
         let view = UILabel()
         view.textColor = Color.black
@@ -39,6 +47,13 @@ final class PasswordMainView: BaseView {
         let view = UITextField()
         view.textColor = Color.black
         view.borderStyle = .roundedRect
+        return view
+    }()
+    let sameErrorLabel = {
+        let view = UILabel()
+        view.textColor = Color.red
+        view.font = .systemFont(ofSize: 17, weight: .regular)
+        view.isHidden = true
         return view
     }()
     let nextButton = {
@@ -56,10 +71,15 @@ final class PasswordMainView: BaseView {
             titleLabel,
             passwordLabel,
             passwordTextField,
-            sameLabel,
-            sameTextField,
+            sameStackView,
             nextButton
         ].forEach { addSubview($0) }
+
+        [
+            sameLabel,
+            sameTextField,
+            sameErrorLabel
+        ].forEach { sameStackView.addArrangedSubview($0) }
     }
 
     override func initialLayout() {
@@ -84,23 +104,16 @@ final class PasswordMainView: BaseView {
             make.height.equalTo(height)
         }
 
-        sameLabel.snp.makeConstraints { make in
+        sameStackView.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(offset*2)
             make.horizontalEdges.equalToSuperview().inset(inset)
         }
 
-        sameTextField.snp.makeConstraints { make in
-            make.top.equalTo(sameLabel.snp.bottom).offset(offset/2)
-            make.horizontalEdges.equalToSuperview().inset(inset)
-            make.height.equalTo(height)
-        }
-
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(sameTextField.snp.bottom).offset(offset*2)
+            make.top.equalTo(sameStackView.snp.bottom).offset(offset*2)
             make.horizontalEdges.equalToSuperview().inset(inset)
             make.height.equalTo(height)
         }
     }
-
 
 }
