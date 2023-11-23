@@ -19,6 +19,9 @@
 		57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */; };
 		57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */; };
 		57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */; };
+		57DC50A72B0F654600B1F293 /* UserDetailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50A62B0F654600B1F293 /* UserDetailMainView.swift */; };
+		57DC50A92B0F655100B1F293 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50A82B0F655100B1F293 /* UserDetailViewController.swift */; };
+		57DC50AB2B0F657900B1F293 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50AA2B0F657900B1F293 /* UserDetailViewModel.swift */; };
 		57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50AC2B0F665200B1F293 /* InfoInputView.swift */; };
 		57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A162B0CCEFE0048B27C /* NetworkManager.swift */; };
 		57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A192B0CCF420048B27C /* NetworkModel.swift */; };
@@ -60,6 +63,9 @@
 		57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordMainView.swift; sourceTree = "<group>"; };
 		57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		57DC50A62B0F654600B1F293 /* UserDetailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailMainView.swift; sourceTree = "<group>"; };
+		57DC50A82B0F655100B1F293 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
+		57DC50AA2B0F657900B1F293 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
 		57DC50AC2B0F665200B1F293 /* InfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputView.swift; sourceTree = "<group>"; };
 		57E13A162B0CCEFE0048B27C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		57E13A192B0CCF420048B27C /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
@@ -115,6 +121,7 @@
 			children = (
 				57DC505B2B0E34E900B1F293 /* Email */,
 				57DC50992B0F392F00B1F293 /* Password */,
+				57DC50A32B0F64EB00B1F293 /* UserDetail */,
 			);
 			path = Join;
 			sourceTree = "<group>";
@@ -169,6 +176,32 @@
 				57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		57DC50A32B0F64EB00B1F293 /* UserDetail */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50A42B0F653400B1F293 /* View */,
+				57DC50A52B0F653900B1F293 /* ViewModel */,
+			);
+			path = UserDetail;
+			sourceTree = "<group>";
+		};
+		57DC50A42B0F653400B1F293 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50A62B0F654600B1F293 /* UserDetailMainView.swift */,
+				57DC50A82B0F655100B1F293 /* UserDetailViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		57DC50A52B0F653900B1F293 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50AA2B0F657900B1F293 /* UserDetailViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		57E13A182B0CCF260048B27C /* Model */ = {
@@ -421,7 +454,10 @@
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
 				57E98E1A2B0B6CDD00330C6B /* ViewIdentifiable.swift in Sources */,
+				57DC50A92B0F655100B1F293 /* UserDetailViewController.swift in Sources */,
+				57DC50AB2B0F657900B1F293 /* UserDetailViewModel.swift in Sources */,
 				57DC505F2B0E357B00B1F293 /* EmailViewController.swift in Sources */,
+				57DC50A72B0F654600B1F293 /* UserDetailMainView.swift in Sources */,
 				57E98E162B0B6C8200330C6B /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
