@@ -8,6 +8,11 @@
 import UIKit
 
 final class LoginMainView: BaseView {
+    let iconImageView = {
+        let view = UIImageView(image: UIImage(named: "fire.png"))
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
     let emailTextField = {
         let view = UITextField()
         view.borderStyle = .roundedRect
@@ -24,7 +29,17 @@ final class LoginMainView: BaseView {
     }()
     let loginButton = {
         var config = UIButton.Configuration.filled()
+        config.background.backgroundColor = Color.red
+        config.cornerStyle = .capsule
         config.title = "로그인"
+        let button = UIButton(configuration: config)
+        return button
+    }()
+    let joinButton = {
+        var config = UIButton.Configuration.filled()
+        config.background.backgroundColor = Color.red
+        config.cornerStyle = .capsule
+        config.title = "새 계정 만들기"
         let button = UIButton(configuration: config)
         return button
     }()
@@ -33,9 +48,11 @@ final class LoginMainView: BaseView {
         super.initialHierarchy()
 
         [
+            iconImageView,
             emailTextField,
             passwordTextField,
-            loginButton
+            loginButton,
+            joinButton
         ].forEach { addSubview($0) }
     }
 
@@ -45,6 +62,11 @@ final class LoginMainView: BaseView {
         let offset = 16
         let inset = 16
         let height = 44
+        iconImageView.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(emailTextField.snp.top).offset(-offset)
+        }
         emailTextField.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(inset)
             make.bottom.equalTo(passwordTextField.snp.top).offset(-offset)
@@ -59,6 +81,13 @@ final class LoginMainView: BaseView {
 
         loginButton.snp.makeConstraints { make in
             make.top.equalTo(passwordTextField.snp.bottom).offset(offset)
+            make.horizontalEdges.equalToSuperview().inset(inset)
+            make.height.equalTo(height)
+        }
+
+        joinButton.snp.makeConstraints { make in
+//            make.bottom.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(loginButton.snp.bottom).offset(offset)
             make.horizontalEdges.equalToSuperview().inset(inset)
             make.height.equalTo(height)
         }

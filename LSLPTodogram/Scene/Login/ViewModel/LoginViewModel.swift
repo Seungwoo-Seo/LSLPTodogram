@@ -16,14 +16,17 @@ final class LoginViewModel: ViewModelType {
         let email: ControlProperty<String?>
         let password: ControlProperty<String?>
         let loginButtonTapped: ControlEvent<Void>
+        let joinButtonTapped: ControlEvent<Void>
     }
 
     struct Output {
         let loginErrorDescription: PublishRelay<String>
+        let pushToJoin: PublishRelay<Void>
     }
 
     func transform(input: Input) -> Output {
         let loginErrorDescription = PublishRelay<String>()
+        let pushToJoin = PublishRelay<Void>()
 
         let loginInfo = Observable
             .combineLatest(
@@ -56,10 +59,17 @@ final class LoginViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        input.joinButtonTapped
+            .bind(with: self) { owner, void in
+                pushToJoin.accept(void)
+            }
+            .disposed(by: disposeBag)
 
 
-
-        return Output(loginErrorDescription: loginErrorDescription)
+        return Output(
+            loginErrorDescription: loginErrorDescription,
+            pushToJoin: pushToJoin
+        )
     }
 
 }

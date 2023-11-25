@@ -29,13 +29,21 @@ final class LoginViewController: BaseViewController {
         let input = LoginViewModel.Input(
             email: mainView.emailTextField.rx.text,
             password: mainView.passwordTextField.rx.text,
-            loginButtonTapped: mainView.loginButton.rx.tap
+            loginButtonTapped: mainView.loginButton.rx.tap,
+            joinButtonTapped: mainView.joinButton.rx.tap
         )
         let output = viewModel.transform(input: input)
 
         output.loginErrorDescription
             .bind(with: self) { owner, description in
                 owner.presentError(title: description)
+            }
+            .disposed(by: disposeBag)
+
+        output.pushToJoin
+            .bind(with: self) { owner, _ in
+                let vc = JoinTabViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
     }
