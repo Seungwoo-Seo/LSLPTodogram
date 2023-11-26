@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		579B36302B0B790B008ACCAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B362F2B0B790B008ACCAE /* Color.swift */; };
 		579B36322B0B7C3B008ACCAE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B36312B0B7C3B008ACCAE /* Router.swift */; };
+		57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA2A2B1328BD00A76420 /* NicknameError.swift */; };
+		57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA2C2B1328D300A76420 /* PhoneNumError.swift */; };
+		57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA2E2B1328E400A76420 /* BirthDayError.swift */; };
 		57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */; };
 		57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA322B133D9600A76420 /* ErrorLabel.swift */; };
 		57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */; };
@@ -64,6 +67,9 @@
 /* Begin PBXFileReference section */
 		579B362F2B0B790B008ACCAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		579B36312B0B7C3B008ACCAE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		57D5FA2A2B1328BD00A76420 /* NicknameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameError.swift; sourceTree = "<group>"; };
+		57D5FA2C2B1328D300A76420 /* PhoneNumError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumError.swift; sourceTree = "<group>"; };
+		57D5FA2E2B1328E400A76420 /* BirthDayError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayError.swift; sourceTree = "<group>"; };
 		57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
 		57D5FA322B133D9600A76420 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputDescriptionLabel.swift; sourceTree = "<group>"; };
@@ -129,6 +135,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57D5FA282B1328A800A76420 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57D5FA2A2B1328BD00A76420 /* NicknameError.swift */,
+				57D5FA2C2B1328D300A76420 /* PhoneNumError.swift */,
+				57D5FA2E2B1328E400A76420 /* BirthDayError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		57D5FA342B133E3A00A76420 /* InfoInput */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +241,7 @@
 		57DC50A32B0F64EB00B1F293 /* UserDetail */ = {
 			isa = PBXGroup;
 			children = (
+				57D5FA282B1328A800A76420 /* Model */,
 				57DC50A42B0F653400B1F293 /* View */,
 				57DC50A52B0F653900B1F293 /* ViewModel */,
 			);
@@ -505,11 +522,14 @@
 				57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
 				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
+				57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
+				57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
 				57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */,
+				57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */,
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */,
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
