@@ -8,24 +8,24 @@
 import UIKit
 
 final class UserDetailMainView: BaseView {
-    let titleLabel = {
-        let view = UILabel()
-        view.textColor = Color.black
-        view.font = .systemFont(ofSize: 24, weight: .bold)
-        view.text = "추가 정보 입력"
+    private let titleLabel = InfoInputTitleLabel(text: "추가 정보 입력")
+    let nicknameView = InfoInputView(description: "닉네임을 정해주세요. (필수)", placeholder: "2글자 이상 입력해주세요.")
+    let phoneNumView = InfoInputView(description: "핸드폰 번호를 입력해주세요. (선택)", placeholder: "- 를 빼고 입력해주세요.")
+    let datePicker = {
+        let view = UIDatePicker()
+        view.maximumDate = Date()
+        view.datePickerMode = .date
+        view.preferredDatePickerStyle = .wheels
+        view.locale = Locale(identifier: "ko-KR")
         return view
     }()
-    let nicknameView = InfoInputView(description: "닉네임을 정해주세요. (필수)")
-    let phoneNumView = InfoInputView(description: "핸드폰 번호를 입력해주세요. (선택)")
-    let birthDayView = InfoInputView(description: "생년월일을 입력해주세요. (선택)")
-
-    let completeButton = {
-        var config = UIButton.Configuration.filled()
-        config.cornerStyle = .capsule
-        config.title = "가입하기"
-        let button = UIButton(configuration: config)
-        return button
+    lazy var birthDayView = {
+        let view = InfoInputView(description: "생년월일을 입력해주세요. (선택)", placeholder: "yyyy년 MM월 dd일")
+        view.textField.inputView = datePicker
+        return view
     }()
+    let joinButton = InfoInputButton(title: "가입하기")
+    let prevButton = InfoInputButton(title: "이전")
 
     override func initialHierarchy() {
         super.initialHierarchy()
@@ -35,7 +35,8 @@ final class UserDetailMainView: BaseView {
             nicknameView,
             phoneNumView,
             birthDayView,
-            completeButton
+            joinButton,
+            prevButton
         ].forEach { addSubview($0) }
     }
 
@@ -44,6 +45,7 @@ final class UserDetailMainView: BaseView {
 
         let offset = 16
         let inset = 16
+        let height = 44
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).inset(inset)
             make.horizontalEdges.equalToSuperview().inset(inset)
@@ -64,10 +66,16 @@ final class UserDetailMainView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(inset)
         }
 
-        completeButton.snp.makeConstraints { make in
+        joinButton.snp.makeConstraints { make in
             make.top.equalTo(birthDayView.snp.bottom).offset(offset*2)
             make.horizontalEdges.equalToSuperview().inset(inset)
-            make.height.equalTo(44)
+            make.height.equalTo(height)
+        }
+
+        prevButton.snp.makeConstraints { make in
+            make.top.equalTo(joinButton.snp.bottom).offset(offset)
+            make.horizontalEdges.equalToSuperview().inset(inset)
+            make.height.equalTo(height)
         }
     }
 
