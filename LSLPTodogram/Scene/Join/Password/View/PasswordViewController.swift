@@ -13,7 +13,37 @@ final class PasswordViewController: BaseViewController {
     private let mainView = PasswordMainView()
 
     private let disposeBag = DisposeBag()
-    private let viewModel = PasswordViewModel()
+
+    init(viewModel: PasswordViewModel) {
+        super.init(nibName: nil, bundle: nil)
+
+        let input = PasswordViewModel.Input(
+            passwordText: mainView.passwordView.textField.rx.text,
+            sameText: mainView.reconfirmView.textField.rx.text,
+            nextButtonTapped: mainView.nextButton.rx.tap,
+            prevButtonTapped: mainView.prevButton.rx.tap
+        )
+
+        let output = viewModel.transform(input: input)
+
+        output.comparisonResult
+            .bind(with: self) { owner, bool in
+                owner.mainView.reconfirmView.errorLabel.isHidden = false
+                owner.mainView.reconfirmView.errorLabel.textColor = bool ? Color.green : Color.red
+                owner.mainView.reconfirmView.errorLabel.text = bool ? "비밀번호가 같습니다." : "비밀번호가 다릅니다."
+            }
+            .disposed(by: disposeBag)
+
+        output.hideSameErrorLabel
+            .bind(to: mainView.reconfirmView.errorLabel.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        output.localError
+            .bind(with: self) { owner, errorString in
+                owner.presentAlert(title: errorString)
+            }
+            .disposed(by: disposeBag)
+    }
 
     override func loadView() {
         view = mainView
@@ -22,28 +52,13 @@ final class PasswordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bind()
     }
 
-    private func bind() {
-        let input = PasswordViewModel.Input(
-            passwordText: mainView.passwordTextField.rx.text,
-            sameText: mainView.sameTextField.rx.text
-        )
-
-        let output = viewModel.transform(input: input)
-
-        output.comparisonResult
-            .bind(with: self) { owner, bool in
-                owner.mainView.sameErrorLabel.isHidden = false
-                owner.mainView.sameErrorLabel.textColor = bool ? Color.green : Color.red
-                owner.mainView.sameErrorLabel.text = bool ? "비밀번호가 같습니다." : "비밀번호가 다릅니다."
-            }
-            .disposed(by: disposeBag)
-
-        output.hideSameErrorLabel
-            .bind(to: mainView.sameErrorLabel.rx.isHidden)
-            .disposed(by: disposeBag)
+    private func presentAlert(title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(confirm)
+        present(alert, animated: true)
     }
 
 }
