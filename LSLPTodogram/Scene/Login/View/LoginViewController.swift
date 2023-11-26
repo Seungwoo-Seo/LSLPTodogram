@@ -25,6 +25,13 @@ final class LoginViewController: BaseViewController {
         bind()
     }
 
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        navigationController?.navigationBar.tintColor = Color.red
+        navigationItem.hidesBackButton = true
+    }
+
     private func bind() {
         let input = LoginViewModel.Input(
             email: mainView.emailTextField.rx.text,
