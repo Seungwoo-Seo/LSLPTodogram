@@ -10,6 +10,7 @@
 		579B36302B0B790B008ACCAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B362F2B0B790B008ACCAE /* Color.swift */; };
 		579B36322B0B7C3B008ACCAE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B36312B0B7C3B008ACCAE /* Router.swift */; };
 		57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */; };
+		57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA322B133D9600A76420 /* ErrorLabel.swift */; };
 		57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */; };
 		57D5FA382B133EA200A76420 /* InfoInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA372B133EA200A76420 /* InfoInputTextField.swift */; };
 		57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA392B133EBA00A76420 /* BaseTextField.swift */; };
@@ -62,6 +63,7 @@
 		579B362F2B0B790B008ACCAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		579B36312B0B7C3B008ACCAE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
+		57D5FA322B133D9600A76420 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputDescriptionLabel.swift; sourceTree = "<group>"; };
 		57D5FA372B133EA200A76420 /* InfoInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputTextField.swift; sourceTree = "<group>"; };
 		57D5FA392B133EBA00A76420 /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				57D5FA342B133E3A00A76420 /* InfoInput */,
+				57D5FA322B133D9600A76420 /* ErrorLabel.swift */,
 			);
 			path = "View+";
 			sourceTree = "<group>";
@@ -485,6 +488,7 @@
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
+				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
