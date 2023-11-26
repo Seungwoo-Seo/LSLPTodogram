@@ -13,7 +13,38 @@ final class EmailViewController: BaseViewController {
     private let mainView = EmailMainView()
 
     private let disposeBag = DisposeBag()
-    private let viewModel = EmailViewModel()
+
+    init(viewModel: EmailViewModel) {
+        super.init(nibName: nil, bundle: nil)
+
+        let input = EmailViewModel.Input(
+            emailText: mainView.textField.rx.controlEvent(.editingChanged)
+                .withLatestFrom(mainView.textField.rx.text.orEmpty),
+            validationButtonTapped: mainView.validationButton.rx.tap,
+            nextButtonTapped: mainView.nextButton.rx.tap
+        )
+
+        let output = viewModel.transform(input: input)
+        output.emailState
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let success):
+                    switch success {
+                    case .available:
+                        owner.mainView.errorLabel.isHidden = true
+                    case .duplicatePass:
+                        owner.mainView.errorLabel.text = success.description
+                        owner.mainView.errorLabel.isHidden = false
+                        owner.mainView.errorLabel.textColor = Color.green
+                    }
+                case .failure(let error):
+                    owner.mainView.errorLabel.text = error.description
+                    owner.mainView.errorLabel.isHidden = false
+                    owner.mainView.errorLabel.textColor = Color.red
+                }
+            }
+            .disposed(by: disposeBag)
+    }
 
     override func loadView() {
         view = mainView
@@ -22,41 +53,6 @@ final class EmailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        bind()
-    }
-
-    private func bind() {
-        let input = EmailViewModel.Input(
-            emailText: mainView.emailTextField.rx.text,
-            emailValidationButtonTapped: mainView.emailValidationButton.rx.tap,
-            nextButtonTapped: mainView.nextButton.rx.tap
-        )
-
-        let output = viewModel.transform(input: input)
-        output.localError
-            .bind(with: self) { owner, localError in
-                owner.presentAlert(title: localError)
-            }
-            .disposed(by: disposeBag)
-
-        output.emailValidationError
-            .bind(with: self) { owner, emailValidationError in
-                owner.presentAlert(title: emailValidationError.description)
-            }
-            .disposed(by: disposeBag)
-
-        output.emailSuccessMessage
-            .bind(with: self) { owner, message in
-                owner.presentAlert(title: message)
-            }
-            .disposed(by: disposeBag)
-    }
-
-    private func presentAlert(title: String) {
-        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        let confirm = UIAlertAction(title: "확인", style: .default)
-        alert.addAction(confirm)
-        present(alert, animated: true)
     }
 
 }
