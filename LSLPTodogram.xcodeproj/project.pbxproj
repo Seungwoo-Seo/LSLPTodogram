@@ -36,7 +36,9 @@
 		57DC50AB2B0F657900B1F293 /* UserDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50AA2B0F657900B1F293 /* UserDetailViewModel.swift */; };
 		57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50AC2B0F665200B1F293 /* InfoInputView.swift */; };
 		57DC50BF2B119CD400B1F293 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 57DC50BE2B119CD400B1F293 /* Tabman */; };
+		57DC50C12B119CF400B1F293 /* JoinTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50C02B119CF400B1F293 /* JoinTabViewController.swift */; };
 		57DC50C42B11A26C00B1F293 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57DC50C32B11A26C00B1F293 /* IQKeyboardManagerSwift */; };
+		57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50C52B12292300B1F293 /* JoinViewModel.swift */; };
 		57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A162B0CCEFE0048B27C /* NetworkManager.swift */; };
 		57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A192B0CCF420048B27C /* NetworkModel.swift */; };
 		57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98DDD2B0B660000330C6B /* AppDelegate.swift */; };
@@ -93,6 +95,8 @@
 		57DC50A82B0F655100B1F293 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		57DC50AA2B0F657900B1F293 /* UserDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewModel.swift; sourceTree = "<group>"; };
 		57DC50AC2B0F665200B1F293 /* InfoInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputView.swift; sourceTree = "<group>"; };
+		57DC50C02B119CF400B1F293 /* JoinTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTabViewController.swift; sourceTree = "<group>"; };
+		57DC50C52B12292300B1F293 /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		57E13A162B0CCEFE0048B27C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		57E13A192B0CCF420048B27C /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		57E98DDA2B0B660000330C6B /* LSLPTodogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LSLPTodogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +182,7 @@
 		57DC50522B0E338700B1F293 /* Join */ = {
 			isa = PBXGroup;
 			children = (
+				57DC50BC2B119C7000B1F293 /* Container */,
 				57DC505B2B0E34E900B1F293 /* Email */,
 				57DC50992B0F392F00B1F293 /* Password */,
 				57DC50A32B0F64EB00B1F293 /* UserDetail */,
@@ -263,6 +268,31 @@
 				57DC50AA2B0F657900B1F293 /* UserDetailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57DC50BC2B119C7000B1F293 /* Container */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50C82B12294B00B1F293 /* View */,
+				57DC50C72B12294200B1F293 /* ViewModel */,
+			);
+			path = Container;
+			sourceTree = "<group>";
+		};
+		57DC50C72B12294200B1F293 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50C52B12292300B1F293 /* JoinViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57DC50C82B12294B00B1F293 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50C02B119CF400B1F293 /* JoinTabViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		57E13A182B0CCF260048B27C /* Model */ = {
@@ -513,6 +543,7 @@
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
 				579B36322B0B7C3B008ACCAE /* Router.swift in Sources */,
+				57DC50C12B119CF400B1F293 /* JoinTabViewController.swift in Sources */,
 				57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */,
 				57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */,
 				57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */,
@@ -525,6 +556,7 @@
 				57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
+				57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
 				57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,

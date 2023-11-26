@@ -49,7 +49,7 @@ final class LoginViewController: BaseViewController {
 
         output.pushToJoin
             .bind(with: self) { owner, _ in
-                let vc = JoinTabViewController()
+                let vc = JoinTabViewController(viewModel: JoinViewModel())
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
