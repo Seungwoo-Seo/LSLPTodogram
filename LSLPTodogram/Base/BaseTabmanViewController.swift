@@ -1,13 +1,14 @@
 //
-//  BaseViewController.swift
+//  BaseTabmanViewController.swift
 //  LSLPTodogram
 //
-//  Created by 서승우 on 2023/11/20.
+//  Created by 서승우 on 2023/11/26.
 //
 
 import UIKit
+import Tabman
 
-class BaseViewController: UIViewController, Base {
+class BaseTabmanViewController: TabmanViewController, Base {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
