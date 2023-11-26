@@ -8,51 +8,48 @@
 import UIKit
 
 final class EmailMainView: BaseView {
-    let titleLabel = {
-        let view = UILabel()
-        view.textColor = Color.black
-        view.font = .systemFont(ofSize: 24, weight: .bold)
-        view.text = "이메일 입력"
+    private let titleLabel = InfoInputTitleLabel(text: "이메일 입력")
+    private let descriptionLabel = InfoInputDescriptionLabel(text: "이메일을 입력해주세요.")
+    private let horizontalStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .fill
+        view.distribution = .fill
+        view.spacing = 16
         return view
     }()
-    let subTitleLabel = {
-        let view = UILabel()
-        view.textColor = Color.black
-        view.font = .systemFont(ofSize: 17, weight: .regular)
-        view.text = "이메일을 입력해보세요."
+    let textField = InfoInputTextField()
+    let validationButton = InfoInputButton(title: "확인", cornerStyle: .large)
+    private let verticalStackView = {
+        let view = UIStackView()
+        view.axis = .vertical
+        view.alignment = .fill
+        view.distribution = .fillProportionally
+        view.spacing = 4
         return view
     }()
-    let emailTextField = {
-        let view = UITextField()
-        view.textColor = Color.black
-        view.borderStyle = .roundedRect
-        return view
-    }()
-    let emailValidationButton = {
-        var config = UIButton.Configuration.filled()
-        config.cornerStyle = .capsule
-        config.title = "확인"
-        let button = UIButton(configuration: config)
-        return button
-    }()
-    let nextButton = {
-        var config = UIButton.Configuration.filled()
-        config.cornerStyle = .capsule
-        config.title = "다음"
-        let button = UIButton(configuration: config)
-        return button
-    }()
+    let errorLabel = ErrorLabel()
+    let nextButton = InfoInputButton(title: "다음")
 
     override func initialHierarchy() {
         super.initialHierarchy()
 
         [
             titleLabel,
-            subTitleLabel,
-            emailTextField,
-            emailValidationButton,
+            descriptionLabel,
+            verticalStackView,
             nextButton
         ].forEach { addSubview($0) }
+
+        [
+            textField,
+            validationButton
+        ].forEach { horizontalStackView.addArrangedSubview($0) }
+
+        [
+            horizontalStackView,
+            errorLabel
+        ].forEach { verticalStackView.addArrangedSubview($0) }
     }
 
     override func initialLayout() {
@@ -66,26 +63,22 @@ final class EmailMainView: BaseView {
             make.horizontalEdges.equalToSuperview().inset(inset)
         }
 
-        subTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(offset/2)
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(offset*2)
             make.horizontalEdges.equalToSuperview().inset(inset)
         }
 
-        emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(subTitleLabel.snp.bottom).offset(offset+4)
-            make.leading.equalToSuperview().inset(inset)
-            make.height.equalTo(height)
+        verticalStackView.snp.makeConstraints { make in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(offset/2)
+            make.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(inset)
         }
 
-        emailValidationButton.snp.makeConstraints { make in
-            make.centerY.equalTo(emailTextField.snp.centerY)
-            make.leading.equalTo(emailTextField.snp.trailing).offset(offset)
-            make.trailing.equalToSuperview().inset(inset)
+        validationButton.snp.makeConstraints { make in
             make.height.equalTo(height)
         }
 
         nextButton.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(offset)
+            make.top.equalTo(verticalStackView.snp.bottom).offset(offset*2)
             make.horizontalEdges.equalToSuperview().inset(inset)
             make.height.equalTo(height)
         }
