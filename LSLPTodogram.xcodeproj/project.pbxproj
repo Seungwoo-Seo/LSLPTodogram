@@ -10,7 +10,11 @@
 		579B36302B0B790B008ACCAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B362F2B0B790B008ACCAE /* Color.swift */; };
 		579B36322B0B7C3B008ACCAE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B36312B0B7C3B008ACCAE /* Router.swift */; };
 		57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */; };
+		57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */; };
+		57D5FA382B133EA200A76420 /* InfoInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA372B133EA200A76420 /* InfoInputTextField.swift */; };
 		57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA392B133EBA00A76420 /* BaseTextField.swift */; };
+		57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA3B2B133F2400A76420 /* InfoInputTitleLabel.swift */; };
+		57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA3D2B1340A000A76420 /* InfoInputButton.swift */; };
 		57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC504D2B0E208B00B1F293 /* LoginResponse.swift */; };
 		57DC50502B0E213F00B1F293 /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC504F2B0E213F00B1F293 /* LoginError.swift */; };
 		57DC505F2B0E357B00B1F293 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC505E2B0E357B00B1F293 /* EmailViewController.swift */; };
@@ -58,7 +62,11 @@
 		579B362F2B0B790B008ACCAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		579B36312B0B7C3B008ACCAE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabmanViewController.swift; sourceTree = "<group>"; };
+		57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputDescriptionLabel.swift; sourceTree = "<group>"; };
+		57D5FA372B133EA200A76420 /* InfoInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputTextField.swift; sourceTree = "<group>"; };
 		57D5FA392B133EBA00A76420 /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
+		57D5FA3B2B133F2400A76420 /* InfoInputTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputTitleLabel.swift; sourceTree = "<group>"; };
+		57D5FA3D2B1340A000A76420 /* InfoInputButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoInputButton.swift; sourceTree = "<group>"; };
 		57DC504D2B0E208B00B1F293 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		57DC504F2B0E213F00B1F293 /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		57DC505E2B0E357B00B1F293 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +123,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57D5FA342B133E3A00A76420 /* InfoInput */ = {
+			isa = PBXGroup;
+			children = (
+				57DC50AC2B0F665200B1F293 /* InfoInputView.swift */,
+				57D5FA3B2B133F2400A76420 /* InfoInputTitleLabel.swift */,
+				57D5FA352B133E5200A76420 /* InfoInputDescriptionLabel.swift */,
+				57D5FA372B133EA200A76420 /* InfoInputTextField.swift */,
+				57D5FA3D2B1340A000A76420 /* InfoInputButton.swift */,
+			);
+			path = InfoInput;
+			sourceTree = "<group>";
+		};
 		57DC50512B0E26FE00B1F293 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,7 +321,7 @@
 		57E98DF42B0B666B00330C6B /* View+ */ = {
 			isa = PBXGroup;
 			children = (
-				57DC50AC2B0F665200B1F293 /* InfoInputView.swift */,
+				57D5FA342B133E3A00A76420 /* InfoInput */,
 			);
 			path = "View+";
 			sourceTree = "<group>";
@@ -453,15 +473,19 @@
 				57E98E142B0B6C7300330C6B /* BaseLabel.swift in Sources */,
 				57E98E122B0B6C6700330C6B /* BaseImageView.swift in Sources */,
 				57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */,
+				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
 				579B36322B0B7C3B008ACCAE /* Router.swift in Sources */,
 				57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */,
 				57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */,
+				57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */,
+				57D5FA382B133EA200A76420 /* InfoInputTextField.swift in Sources */,
 				57E98E182B0B6C9000330C6B /* BaseViewController.swift in Sources */,
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
+				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,

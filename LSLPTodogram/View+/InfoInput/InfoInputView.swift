@@ -8,45 +8,33 @@
 import UIKit
 
 final class InfoInputView: BaseView {
+    private let descriptionLabel = InfoInputDescriptionLabel(text: nil)
     private let stackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.alignment = .fill
         view.distribution = .fillProportionally
-        view.spacing = 8
+        view.spacing = 4
         return view
     }()
-    let descriptionLabel = {
-        let view = UILabel()
-        view.textColor = Color.black
-        view.font = .systemFont(ofSize: 17, weight: .regular)
-        return view
-    }()
-    let textField = {
-        let view = UITextField()
-        view.textColor = Color.black
-        view.borderStyle = .roundedRect
-        return view
-    }()
-    let errorLabel = {
-        let view = UILabel()
-        view.font = .systemFont(ofSize: 17, weight: .regular)
-        view.isHidden = true
-        return view
-    }()
+    let textField = InfoInputTextField()
+    let errorLabel = ErrorLabel()
 
-    convenience init(description: String?) {
-        self.init(frame: .zero)
+    init(description: String?, placeholder: String? = nil) {
+        super.init(frame: .zero)
         self.descriptionLabel.text = description
+        self.textField.placeholder = placeholder
     }
 
     override func initialHierarchy() {
         super.initialHierarchy()
 
-        addSubview(stackView)
-
         [
             descriptionLabel,
+            stackView
+        ].forEach { addSubview($0) }
+
+        [
             textField,
             errorLabel
         ].forEach { stackView.addArrangedSubview($0) }
@@ -55,8 +43,13 @@ final class InfoInputView: BaseView {
     override func initialLayout() {
         super.initialLayout()
 
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalToSuperview()
+        }
+
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalToSuperview()
         }
 
         textField.snp.makeConstraints { make in
