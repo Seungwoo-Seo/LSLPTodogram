@@ -18,29 +18,52 @@ final class PasswordViewController: BaseViewController {
         super.init(nibName: nil, bundle: nil)
 
         let input = PasswordViewModel.Input(
-            passwordText: mainView.passwordView.textField.rx.text,
-            sameText: mainView.reconfirmView.textField.rx.text,
+            passwordText: mainView.passwordView.textField.rx.text.orEmpty.asDriver(),
+            reconfirmText: mainView.reconfirmView.textField.rx.text.orEmpty.asDriver(),
             nextButtonTapped: mainView.nextButton.rx.tap,
             prevButtonTapped: mainView.prevButton.rx.tap
         )
 
         let output = viewModel.transform(input: input)
 
-        output.comparisonResult
-            .bind(with: self) { owner, bool in
-                owner.mainView.reconfirmView.errorLabel.isHidden = false
-                owner.mainView.reconfirmView.errorLabel.textColor = bool ? Color.green : Color.red
-                owner.mainView.reconfirmView.errorLabel.text = bool ? "비밀번호가 같습니다." : "비밀번호가 다릅니다."
+        output.passwordState
+            .debug()
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let success):
+                    owner.mainView.passwordView.errorLabel.text = success.description
+                    owner.mainView.passwordView.errorLabel.isHidden = false
+                    owner.mainView.passwordView.errorLabel.textColor = Color.green
+                case .failure(let error):
+                    switch error {
+                    case .never:
+                        owner.mainView.passwordView.errorLabel.isHidden = true
+                    default:
+                        owner.mainView.passwordView.errorLabel.text = error.description
+                        owner.mainView.passwordView.errorLabel.isHidden = false
+                        owner.mainView.passwordView.errorLabel.textColor = Color.red
+                    }
+                }
             }
             .disposed(by: disposeBag)
 
-        output.hideSameErrorLabel
-            .bind(to: mainView.reconfirmView.errorLabel.rx.isHidden)
-            .disposed(by: disposeBag)
-
-        output.localError
-            .bind(with: self) { owner, errorString in
-                owner.presentAlert(title: errorString)
+        output.reconfirmState
+            .bind(with: self) { owner, result in
+                switch result {
+                case .success(let success):
+                    owner.mainView.reconfirmView.errorLabel.text = success.description
+                    owner.mainView.reconfirmView.errorLabel.isHidden = false
+                    owner.mainView.reconfirmView.errorLabel.textColor = Color.green
+                case .failure(let error):
+                    switch error {
+                    case .never:
+                        owner.mainView.reconfirmView.errorLabel.isHidden = true
+                    default:
+                        owner.mainView.reconfirmView.errorLabel.text = error.description
+                        owner.mainView.reconfirmView.errorLabel.isHidden = false
+                        owner.mainView.reconfirmView.errorLabel.textColor = Color.red
+                    }
+                }
             }
             .disposed(by: disposeBag)
     }

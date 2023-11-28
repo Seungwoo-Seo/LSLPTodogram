@@ -17,75 +17,121 @@ final class PasswordViewModel: ViewModelType {
     let scrollToPrev = PublishRelay<Void>()
 
     struct Input {
-        let passwordText: ControlProperty<String?>
-        let sameText: ControlProperty<String?>
+        let passwordText: Driver<String>
+        let reconfirmText: Driver<String>
         let nextButtonTapped: ControlEvent<Void>
         let prevButtonTapped: ControlEvent<Void>
     }
 
     struct Output {
-        let comparisonResult: PublishRelay<Bool>
-        let hideSameErrorLabel: BehaviorRelay<Bool>
-        let localError: PublishRelay<String>
+        let passwordState: BehaviorRelay<Result<PasswordSuccess, PasswordError>>
+        let reconfirmState: BehaviorRelay<Result<ReconfrimSuccess, ReconfrimError>>
     }
 
     func transform(input: Input) -> Output {
-        let comparisonResult = PublishRelay<Bool>()
-        let hideSameErrorLabel = BehaviorRelay(value: true)
-        let localError = PublishRelay<String>()
-        let passwordState = BehaviorRelay(value: false)
+        let passwordState = BehaviorRelay<Result<PasswordSuccess, PasswordError>>(value: .failure(.never))
+        let reconfirmState = BehaviorRelay<Result<ReconfrimSuccess, ReconfrimError>>(value: .failure(.never))
 
-        passwordState
-            .filter { $0 }
-            .withLatestFrom(input.passwordText.orEmpty)
-            .bind(with: self) { owner, password in
-                owner.password.accept(password)
+        let passwordAndReconfirm = Driver
+            .combineLatest(input.passwordText, input.reconfirmText)
+
+        // 비밀번호가 비었을 때
+        passwordAndReconfirm
+            .skip(1)
+            .filter { $0.0.isEmpty }
+            .drive(with: self) { owner, _ in
+                passwordState.accept(.failure(.empty))
             }
             .disposed(by: disposeBag)
 
-        let comparisonTexts = Observable
-            .combineLatest(
-                input.passwordText.orEmpty,
-                input.sameText.orEmpty
-            )
-            .share()
-
-        comparisonTexts
-            .filter { !$0.0.isEmpty && !$0.1.isEmpty }
-            .map { $0.0 == $0.1 }
-            .bind(with: self) { owner, bool in
-                passwordState.accept(bool)
-                comparisonResult.accept(bool)
+        // 비밀번호가 정규식을 통과하지 못할 때
+        passwordAndReconfirm
+            .filter { !$0.0.isEmpty }
+            .filter { [weak self] in
+                guard let owner = self else {return false}
+                return !owner.isValidPassword($0.0)
+            }
+            .drive(with: self) { owner, _ in
+                passwordState.accept(.failure(.invalid))
             }
             .disposed(by: disposeBag)
 
-        comparisonTexts
+        // 비밀번호를 사용할 수 있을 때
+        passwordAndReconfirm
+            .filter { !$0.0.isEmpty }
+            .filter { [weak self] in
+                guard let owner = self else {return false}
+                return owner.isValidPassword($0.0)
+            }
+            .drive(with: self) { owner, _ in
+                passwordState.accept(.success(.availablePassword))
+            }
+            .disposed(by: disposeBag)
+
+        // 재확인 비밀번호가 비었을 때
+        passwordAndReconfirm
             .filter { $0.1.isEmpty }
-            .map { _ in true }
-            .bind(with: self) { owner, bool in
-                hideSameErrorLabel.accept(bool)
+            .drive(with: self) { owner, _ in
+                reconfirmState.accept(.failure(.never))
             }
             .disposed(by: disposeBag)
 
+        // 재확인 비밀번호와 비밀번호가 동일할 때
+        passwordAndReconfirm
+            .filter { !$0.1.isEmpty }
+            .filter { $0.0 == $0.1 }
+            .drive(with: self) { owner, _ in
+                reconfirmState.accept(.success(.compareSame))
+            }
+            .disposed(by: disposeBag)
 
-        let isNextOk = input.nextButtonTapped
-            .withLatestFrom(passwordState)
-            .share()
+        // 재확인 비밀번호와 비밀번호가 동일하지 않을 때
+        passwordAndReconfirm
+            .filter { !$0.1.isEmpty }
+            .filter { $0.0 != $0.1 }
+            .drive(with: self) { owner, _ in
+                reconfirmState.accept(.failure(.compareNotSame))
+            }
+            .disposed(by: disposeBag)
 
-        isNextOk
-            .filter { $0 }
+        let combineState = Observable
+            .combineLatest(passwordState, reconfirmState)
+
+        // 다음 버튼 눌렀을 때
+        input.nextButtonTapped
+            .withLatestFrom(combineState)
+            .filter {
+                switch $0.0 {
+                case .success: return true
+                case .failure(let error):
+                    switch error {
+                    case .never:
+                        passwordState.accept(.failure(.empty))
+                    default:
+                        passwordState.accept(.failure(error))
+                    }
+                    return false
+                }
+            }
+            .filter {
+                switch $0.1 {
+                case .success: return true
+                case .failure(let error):
+                    switch error {
+                    case .never:
+                        reconfirmState.accept(.failure(.empty))
+                    default:
+                        reconfirmState.accept(.failure(error))
+                    }
+                    return false
+                }
+            }
             .bind(with: self) { owner, _ in
                 owner.scrollToNext.accept(Void())
             }
             .disposed(by: disposeBag)
 
-        isNextOk
-            .filter { !$0 }
-            .bind(with: self) { owner, _ in
-                localError.accept("비밀번호를 확인해주세요.")
-            }
-            .disposed(by: disposeBag)
-
+        // 이전 버튼 눌렀을 때
         input.prevButtonTapped
             .bind(with: self) { owner, void in
                 owner.scrollToPrev.accept(void)
@@ -93,9 +139,8 @@ final class PasswordViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         return Output(
-            comparisonResult: comparisonResult,
-            hideSameErrorLabel: hideSameErrorLabel,
-            localError: localError
+            passwordState: passwordState,
+            reconfirmState: reconfirmState
         )
     }
 
