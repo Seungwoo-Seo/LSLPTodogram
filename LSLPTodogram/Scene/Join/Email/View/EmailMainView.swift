@@ -18,7 +18,7 @@ final class EmailMainView: BaseView {
         view.spacing = 16
         return view
     }()
-    let textField = InfoInputTextField()
+    let textField = InfoInputTextField(placeholder: "ex) sesac@sesac.com")
     let validationButton = InfoInputButton(title: "확인", cornerStyle: .large)
     private let verticalStackView = {
         let view = UIStackView()

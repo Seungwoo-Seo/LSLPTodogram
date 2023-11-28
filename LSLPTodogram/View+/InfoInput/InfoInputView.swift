@@ -17,7 +17,7 @@ final class InfoInputView: BaseView {
         view.spacing = 4
         return view
     }()
-    let textField = InfoInputTextField()
+    let textField = InfoInputTextField(placeholder: nil)
     let errorLabel = ErrorLabel()
 
     init(description: String?, placeholder: String? = nil) {

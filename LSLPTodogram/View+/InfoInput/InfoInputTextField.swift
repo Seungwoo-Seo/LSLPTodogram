@@ -9,6 +9,11 @@ import UIKit
 
 final class InfoInputTextField: BaseTextField {
 
+    init(placeholder: String?) {
+        super.init(frame: .zero)
+        self.placeholder = placeholder
+    }
+
     override func initialAttributes() {
         super.initialAttributes()
 
