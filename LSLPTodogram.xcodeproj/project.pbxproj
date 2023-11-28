@@ -27,7 +27,6 @@
 		57DC50612B0E359A00B1F293 /* EmailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50602B0E359A00B1F293 /* EmailMainView.swift */; };
 		57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */; };
 		57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */; };
-		57DC508A2B0EEE1000B1F293 /* EmailValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50892B0EEE1000B1F293 /* EmailValidationError.swift */; };
 		57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */; };
 		57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */; };
 		57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */; };
@@ -87,7 +86,6 @@
 		57DC50602B0E359A00B1F293 /* EmailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailMainView.swift; sourceTree = "<group>"; };
 		57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
 		57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationResponse.swift; sourceTree = "<group>"; };
-		57DC50892B0EEE1000B1F293 /* EmailValidationError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationError.swift; sourceTree = "<group>"; };
 		57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordMainView.swift; sourceTree = "<group>"; };
 		57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 				57DC504D2B0E208B00B1F293 /* LoginResponse.swift */,
 				57DC504F2B0E213F00B1F293 /* LoginError.swift */,
 				57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */,
-				57DC50892B0EEE1000B1F293 /* EmailValidationError.swift */,
 				57E13A192B0CCF420048B27C /* NetworkModel.swift */,
 			);
 			path = Model;
@@ -533,7 +530,6 @@
 				57DC50502B0E213F00B1F293 /* LoginError.swift in Sources */,
 				57D5FA432B1376DD00A76420 /* EmailSuccess.swift in Sources */,
 				57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */,
-				57DC508A2B0EEE1000B1F293 /* EmailValidationError.swift in Sources */,
 				57E98E0C2B0B6C2F00330C6B /* Base.swift in Sources */,
 				57D5FA412B1376C500A76420 /* EmailError.swift in Sources */,
 				57E98E142B0B6C7300330C6B /* BaseLabel.swift in Sources */,
