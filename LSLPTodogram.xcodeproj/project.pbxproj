@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		579B36302B0B790B008ACCAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B362F2B0B790B008ACCAE /* Color.swift */; };
 		579B36322B0B7C3B008ACCAE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B36312B0B7C3B008ACCAE /* Router.swift */; };
+		57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */; };
+		57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAF12B15B043006CAE1F /* PasswordError.swift */; };
+		57BDFAF42B15B055006CAE1F /* ReconfrimSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAF32B15B055006CAE1F /* ReconfrimSuccess.swift */; };
+		57BDFAF62B15B063006CAE1F /* ReconfrimError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAF52B15B063006CAE1F /* ReconfrimError.swift */; };
 		57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA2A2B1328BD00A76420 /* NicknameError.swift */; };
 		57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA2C2B1328D300A76420 /* PhoneNumError.swift */; };
 		57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D5FA2E2B1328E400A76420 /* BirthDayError.swift */; };
@@ -68,6 +72,10 @@
 /* Begin PBXFileReference section */
 		579B362F2B0B790B008ACCAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		579B36312B0B7C3B008ACCAE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordSuccess.swift; sourceTree = "<group>"; };
+		57BDFAF12B15B043006CAE1F /* PasswordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordError.swift; sourceTree = "<group>"; };
+		57BDFAF32B15B055006CAE1F /* ReconfrimSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconfrimSuccess.swift; sourceTree = "<group>"; };
+		57BDFAF52B15B063006CAE1F /* ReconfrimError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconfrimError.swift; sourceTree = "<group>"; };
 		57D5FA2A2B1328BD00A76420 /* NicknameError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameError.swift; sourceTree = "<group>"; };
 		57D5FA2C2B1328D300A76420 /* PhoneNumError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumError.swift; sourceTree = "<group>"; };
 		57D5FA2E2B1328E400A76420 /* BirthDayError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthDayError.swift; sourceTree = "<group>"; };
@@ -137,6 +145,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		57BDFAEE2B15B01F006CAE1F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */,
+				57BDFAF12B15B043006CAE1F /* PasswordError.swift */,
+				57BDFAF32B15B055006CAE1F /* ReconfrimSuccess.swift */,
+				57BDFAF52B15B063006CAE1F /* ReconfrimError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		57D5FA282B1328A800A76420 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +237,7 @@
 		57DC50992B0F392F00B1F293 /* Password */ = {
 			isa = PBXGroup;
 			children = (
+				57BDFAEE2B15B01F006CAE1F /* Model */,
 				57DC50A12B0F3B5800B1F293 /* View */,
 				57DC50A02B0F3B5000B1F293 /* ViewModel */,
 			);
@@ -533,9 +553,11 @@
 				57E98E0C2B0B6C2F00330C6B /* Base.swift in Sources */,
 				57D5FA412B1376C500A76420 /* EmailError.swift in Sources */,
 				57E98E142B0B6C7300330C6B /* BaseLabel.swift in Sources */,
+				57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */,
 				57E98E122B0B6C6700330C6B /* BaseImageView.swift in Sources */,
 				57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */,
 				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,
+				57BDFAF42B15B055006CAE1F /* ReconfrimSuccess.swift in Sources */,
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
 				579B36322B0B7C3B008ACCAE /* Router.swift in Sources */,
@@ -554,10 +576,12 @@
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
+				57BDFAF62B15B063006CAE1F /* ReconfrimError.swift in Sources */,
 				57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
 				57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */,
 				57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */,
+				57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */,
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */,
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
