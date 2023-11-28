@@ -11,28 +11,11 @@ import RxSwift
 
 final class LoginViewController: BaseViewController {
     private let mainView = LoginMainView()
-
     private let disposeBag = DisposeBag()
-    private let viewModel = LoginViewModel()
 
-    override func loadView() {
-        view = mainView
-    }
+    init(_ viewModel: LoginViewModel) {
+        super.init(nibName: nil, bundle: nil)
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        bind()
-    }
-
-    override func initialAttributes() {
-        super.initialAttributes()
-
-        navigationController?.navigationBar.tintColor = Color.red
-        navigationItem.hidesBackButton = true
-    }
-
-    private func bind() {
         let input = LoginViewModel.Input(
             email: mainView.emailTextField.rx.text,
             password: mainView.passwordTextField.rx.text,
@@ -53,6 +36,22 @@ final class LoginViewController: BaseViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+    }
+
+    override func loadView() {
+        view = mainView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+    }
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        navigationController?.navigationBar.tintColor = Color.red
+        navigationItem.hidesBackButton = true
     }
 
     private func presentError(title: String) {

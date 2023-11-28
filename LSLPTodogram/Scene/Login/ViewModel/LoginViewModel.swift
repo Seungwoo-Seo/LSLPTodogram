@@ -55,6 +55,7 @@ final class LoginViewModel: ViewModelType {
             .bind(with: self) { owner, loginResponse in
                 // TODO: UserDefeaults에 토큰 저장 => KeyChain에 토큰 저장
                 // TODO: 다음 화면으로 이동
+                print("response ==> \(loginResponse)")
                 print("성공")
             }
             .disposed(by: disposeBag)
