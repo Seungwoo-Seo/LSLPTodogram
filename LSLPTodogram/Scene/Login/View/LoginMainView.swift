@@ -8,41 +8,28 @@
 import UIKit
 
 final class LoginMainView: BaseView {
-    let iconImageView = {
+    private let iconImageView = {
         let view = UIImageView(image: UIImage(named: "fire.png"))
         view.contentMode = .scaleAspectFit
         return view
     }()
-    let emailTextField = {
-        let view = UITextField()
-        view.borderStyle = .roundedRect
-        view.placeholder = "이메일을 입력해주세요."
-        view.textColor = .black
-        return view
-    }()
-    let passwordTextField = {
-        let view = UITextField()
-        view.borderStyle = .roundedRect
-        view.placeholder = "비밀번호를 입력해주세요."
-        view.textColor = .black
-        return view
-    }()
-    let loginButton = {
-        var config = UIButton.Configuration.filled()
-        config.background.backgroundColor = Color.red
-        config.cornerStyle = .capsule
-        config.title = "로그인"
-        let button = UIButton(configuration: config)
-        return button
-    }()
-    let joinButton = {
-        var config = UIButton.Configuration.filled()
-        config.background.backgroundColor = Color.red
-        config.cornerStyle = .capsule
-        config.title = "새 계정 만들기"
-        let button = UIButton(configuration: config)
-        return button
-    }()
+    let emailTextField = InfoInputTextField(placeholder: "이메일을 입력해주세요.")
+    let passwordTextField = InfoInputTextField(placeholder: "비밀번호를 입력해주세요.")
+    let loginButton = InfoInputButton(title: "로그인")
+    let joinButton = InfoInputButton(title: "새 계정 만들기")
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        let passwordButton = UIButton()
+        passwordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        passwordButton.setImage(UIImage(systemName: "eye.fill"), for: .selected)
+        passwordButton.addTarget(self, action: #selector(didTapButtonPassword), for: .touchUpInside)
+
+        passwordTextField.rightViewMode = .always
+        passwordTextField.rightView = passwordButton
+        passwordTextField.isSecureTextEntry = true
+    }
 
     override func initialHierarchy() {
         super.initialHierarchy()
@@ -86,10 +73,23 @@ final class LoginMainView: BaseView {
         }
 
         joinButton.snp.makeConstraints { make in
-//            make.bottom.equalTo(safeAreaLayoutGuide)
             make.top.equalTo(loginButton.snp.bottom).offset(offset)
             make.horizontalEdges.equalToSuperview().inset(inset)
             make.height.equalTo(height)
+        }
+    }
+
+}
+
+private extension LoginMainView {
+
+    @objc
+    func didTapButtonPassword(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            passwordTextField.isSecureTextEntry = false
+        } else {
+            passwordTextField.isSecureTextEntry = true
         }
     }
 
