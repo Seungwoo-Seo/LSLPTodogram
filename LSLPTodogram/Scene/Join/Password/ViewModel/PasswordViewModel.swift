@@ -126,7 +126,9 @@ final class PasswordViewModel: ViewModelType {
                     return false
                 }
             }
-            .bind(with: self) { owner, _ in
+            .withLatestFrom(input.passwordText)
+            .bind(with: self) { owner, password in
+                owner.password.accept(password)
                 owner.scrollToNext.accept(Void())
             }
             .disposed(by: disposeBag)

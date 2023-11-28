@@ -31,6 +31,7 @@ final class JoinViewModel: ViewModelType {
         let scrollToUserDetail: PublishRelay<Void>
         let backScrollToEmail: PublishRelay<Void>
         let backScrollToPassword: PublishRelay<Void>
+        let popToRoot: PublishRelay<Void>
     }
 
     func transform(input: Input) -> Output {
@@ -38,6 +39,7 @@ final class JoinViewModel: ViewModelType {
         let scrollToUserDetail = PublishRelay<Void>()
         let backScrollToEmail = PublishRelay<Void>()
         let backScrollToPassword = PublishRelay<Void>()
+        let popToRoot = PublishRelay<Void>()
 
         // email -> password
         emailViewModel.scrollToNext
@@ -81,7 +83,8 @@ final class JoinViewModel: ViewModelType {
                 }
             }
             .bind(with: self) { owner, responseDTO in
-                print("success")
+                print("\(responseDTO)")
+
             }
             .disposed(by: disposeBag)
 
@@ -96,7 +99,8 @@ final class JoinViewModel: ViewModelType {
             scrollToPassword: scrollToPassword,
             scrollToUserDetail: scrollToUserDetail,
             backScrollToEmail: backScrollToEmail,
-            backScrollToPassword: backScrollToPassword
+            backScrollToPassword: backScrollToPassword,
+            popToRoot: popToRoot
         )
     }
 

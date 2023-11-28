@@ -62,6 +62,12 @@ final class JoinTabViewController: BaseTabmanViewController {
                 owner.scrollToPage(.previous, animated: true)
             }
             .disposed(by: disposeBag)
+
+        output.popToRoot
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.popToRootViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 
     override func viewDidLoad() {
