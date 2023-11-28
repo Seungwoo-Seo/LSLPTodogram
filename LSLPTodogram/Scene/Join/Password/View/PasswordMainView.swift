@@ -14,6 +14,28 @@ final class PasswordMainView: BaseView {
     let nextButton = InfoInputButton(title: "다음")
     let prevButton = InfoInputButton(title: "이전")
 
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        let passwordButton = UIButton()
+        passwordButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        passwordButton.setImage(UIImage(systemName: "eye.fill"), for: .selected)
+        passwordButton.addTarget(self, action: #selector(didTapButtonPassword), for: .touchUpInside)
+
+        passwordView.textField.rightViewMode = .always
+        passwordView.textField.rightView = passwordButton
+        passwordView.textField.isSecureTextEntry = true
+
+        let reconfirmButton = UIButton()
+        reconfirmButton.setImage(UIImage(systemName: "eye"), for: .normal)
+        reconfirmButton.setImage(UIImage(systemName: "eye.fill"), for: .selected)
+        reconfirmButton.addTarget(self, action: #selector(didTapButtonReconfirm), for: .touchUpInside)
+        
+        reconfirmView.textField.rightViewMode = .always
+        reconfirmView.textField.rightView = reconfirmButton
+        reconfirmView.textField.isSecureTextEntry = true
+    }
+
     override func initialHierarchy() {
         super.initialHierarchy()
 
@@ -57,6 +79,30 @@ final class PasswordMainView: BaseView {
             make.top.equalTo(nextButton.snp.bottom).offset(offset)
             make.horizontalEdges.equalToSuperview().inset(inset)
             make.height.equalTo(height)
+        }
+    }
+
+}
+
+private extension PasswordMainView {
+
+    @objc
+    func didTapButtonPassword(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            passwordView.textField.isSecureTextEntry = false
+        } else {
+            passwordView.textField.isSecureTextEntry = true
+        }
+    }
+
+    @objc
+    func didTapButtonReconfirm(_ sender: UIButton) {
+        sender.isSelected.toggle()
+        if sender.isSelected {
+            reconfirmView.textField.isSecureTextEntry = false
+        } else {
+            reconfirmView.textField.isSecureTextEntry = true
         }
     }
 
