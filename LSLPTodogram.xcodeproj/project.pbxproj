@@ -67,6 +67,9 @@
 		57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E212B0B6EFB00330C6B /* LoginViewController.swift */; };
 		57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E232B0B6F1000330C6B /* LoginViewModel.swift */; };
 		57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E272B0B6F8F00330C6B /* LoginMainView.swift */; };
+		57FBCB632B15F08600C83C93 /* TodoNewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB622B15F08600C83C93 /* TodoNewsfeedViewController.swift */; };
+		57FBCB652B15F09200C83C93 /* TodoNewsfeedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB642B15F09200C83C93 /* TodoNewsfeedMainView.swift */; };
+		57FBCB672B15F0A900C83C93 /* TodoNewsfeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB662B15F0A900C83C93 /* TodoNewsfeedViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -124,6 +127,9 @@
 		57E98E212B0B6EFB00330C6B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		57E98E232B0B6F1000330C6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57E98E272B0B6F8F00330C6B /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
+		57FBCB622B15F08600C83C93 /* TodoNewsfeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedViewController.swift; sourceTree = "<group>"; };
+		57FBCB642B15F09200C83C93 /* TodoNewsfeedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedMainView.swift; sourceTree = "<group>"; };
+		57FBCB662B15F0A900C83C93 /* TodoNewsfeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +400,7 @@
 			children = (
 				57DC50512B0E26FE00B1F293 /* Login */,
 				57DC50522B0E338700B1F293 /* Join */,
+				57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -451,6 +458,40 @@
 				57E98E232B0B6F1000330C6B /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */ = {
+			isa = PBXGroup;
+			children = (
+				57FBCB682B1602EF00C83C93 /* Model */,
+				57FBCB602B15F06900C83C93 /* View */,
+				57FBCB612B15F07300C83C93 /* ViewModel */,
+			);
+			path = TodoNewsfeed;
+			sourceTree = "<group>";
+		};
+		57FBCB602B15F06900C83C93 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57FBCB642B15F09200C83C93 /* TodoNewsfeedMainView.swift */,
+				57FBCB622B15F08600C83C93 /* TodoNewsfeedViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		57FBCB612B15F07300C83C93 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57FBCB662B15F0A900C83C93 /* TodoNewsfeedViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57FBCB682B1602EF00C83C93 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,9 +608,12 @@
 				57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */,
 				57D5FA382B133EA200A76420 /* InfoInputTextField.swift in Sources */,
 				57E98E182B0B6C9000330C6B /* BaseViewController.swift in Sources */,
+				57FBCB632B15F08600C83C93 /* TodoNewsfeedViewController.swift in Sources */,
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
+				57FBCB672B15F0A900C83C93 /* TodoNewsfeedViewModel.swift in Sources */,
 				57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
+				57FBCB652B15F09200C83C93 /* TodoNewsfeedMainView.swift in Sources */,
 				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
 				57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
