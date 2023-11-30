@@ -10,6 +10,8 @@
 		570E01B02B1828B300D1E012 /* TodoNewsfeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570E01AF2B1828B300D1E012 /* TodoNewsfeedCell.swift */; };
 		570E01B22B1828C500D1E012 /* TodoNewsfeedHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570E01B12B1828C500D1E012 /* TodoNewsfeedHeader.swift */; };
 		570E01B42B1828FE00D1E012 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */; };
+		57625DF02B18C7000066642F /* TodoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57625DEF2B18C7000066642F /* TodoInfo.swift */; };
+		57625DF22B18C70E0066642F /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57625DF12B18C70E0066642F /* Todo.swift */; };
 		579B36302B0B790B008ACCAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B362F2B0B790B008ACCAE /* Color.swift */; };
 		579B36322B0B7C3B008ACCAE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B36312B0B7C3B008ACCAE /* Router.swift */; };
 		57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */; };
@@ -82,6 +84,8 @@
 		570E01AF2B1828B300D1E012 /* TodoNewsfeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedCell.swift; sourceTree = "<group>"; };
 		570E01B12B1828C500D1E012 /* TodoNewsfeedHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedHeader.swift; sourceTree = "<group>"; };
 		570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
+		57625DEF2B18C7000066642F /* TodoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfo.swift; sourceTree = "<group>"; };
+		57625DF12B18C70E0066642F /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		579B362F2B0B790B008ACCAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		579B36312B0B7C3B008ACCAE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordSuccess.swift; sourceTree = "<group>"; };
@@ -491,10 +495,19 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		57FB02152B18C659003CAD51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57625DEF2B18C7000066642F /* TodoInfo.swift */,
+				57625DF12B18C70E0066642F /* Todo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */ = {
 			isa = PBXGroup;
 			children = (
-				57FBCB682B1602EF00C83C93 /* Model */,
+				57FB02152B18C659003CAD51 /* Model */,
 				57FBCB602B15F06900C83C93 /* View */,
 				57FBCB612B15F07300C83C93 /* ViewModel */,
 			);
@@ -519,13 +532,6 @@
 				57FBCB662B15F0A900C83C93 /* TodoNewsfeedViewModel.swift */,
 			);
 			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		57FBCB682B1602EF00C83C93 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -629,6 +635,7 @@
 				57D5FA432B1376DD00A76420 /* EmailSuccess.swift in Sources */,
 				57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */,
 				57E98E0C2B0B6C2F00330C6B /* Base.swift in Sources */,
+				57625DF02B18C7000066642F /* TodoInfo.swift in Sources */,
 				57D5FA412B1376C500A76420 /* EmailError.swift in Sources */,
 				57E98E142B0B6C7300330C6B /* BaseLabel.swift in Sources */,
 				57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */,
@@ -666,6 +673,7 @@
 				57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */,
 				57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */,
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */,
+				57625DF22B18C70E0066642F /* Todo.swift in Sources */,
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
 				57E98E1A2B0B6CDD00330C6B /* ViewIdentifiable.swift in Sources */,
