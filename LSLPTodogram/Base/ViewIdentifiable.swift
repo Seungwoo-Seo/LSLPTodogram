@@ -17,6 +17,12 @@ extension UITableViewCell: ViewIdentifiable {
     }
 }
 
+extension UITableViewHeaderFooterView: ViewIdentifiable {
+    static var identifier: String {
+        return String(describing: self)
+    }
+}
+
 extension UICollectionReusableView: ViewIdentifiable {
     static var identifier: String {
         return String(describing: self)
