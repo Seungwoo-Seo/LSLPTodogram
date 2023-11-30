@@ -68,6 +68,7 @@
 		57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E212B0B6EFB00330C6B /* LoginViewController.swift */; };
 		57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E232B0B6F1000330C6B /* LoginViewModel.swift */; };
 		57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E272B0B6F8F00330C6B /* LoginMainView.swift */; };
+		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB020A2B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02092B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift */; };
 		57FBCB632B15F08600C83C93 /* TodoNewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB622B15F08600C83C93 /* TodoNewsfeedViewController.swift */; };
 		57FBCB652B15F09200C83C93 /* TodoNewsfeedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB642B15F09200C83C93 /* TodoNewsfeedMainView.swift */; };
@@ -130,6 +131,7 @@
 		57E98E212B0B6EFB00330C6B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		57E98E232B0B6F1000330C6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57E98E272B0B6F8F00330C6B /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
+		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02092B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		57FBCB622B15F08600C83C93 /* TodoNewsfeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedViewController.swift; sourceTree = "<group>"; };
 		57FBCB642B15F09200C83C93 /* TodoNewsfeedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoNewsfeedMainView.swift; sourceTree = "<group>"; };
@@ -445,6 +447,7 @@
 		57E98E0A2B0B6A4D00330C6B /* Repository */ = {
 			isa = PBXGroup;
 			children = (
+				57FB01FC2B187388003CAD51 /* Keychain */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -464,6 +467,14 @@
 				57E98E232B0B6F1000330C6B /* LoginViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57FB01FC2B187388003CAD51 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */,
+			);
+			path = Keychain;
 			sourceTree = "<group>";
 		};
 		57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */ = {
@@ -594,6 +605,7 @@
 				57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */,
 				57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */,
 				57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */,
+				57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */,
 				57E98E202B0B6E8800330C6B /* ViewModelType.swift in Sources */,
 				57DC50502B0E213F00B1F293 /* LoginError.swift in Sources */,
 				57D5FA432B1376DD00A76420 /* EmailSuccess.swift in Sources */,
