@@ -202,6 +202,7 @@
 		57DC50512B0E26FE00B1F293 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				57FB01FF2B18761A003CAD51 /* Model */,
 				57E98E252B0B6F2D00330C6B /* View */,
 				57E98E262B0B6F3200330C6B /* ViewModel */,
 			);
@@ -328,8 +329,6 @@
 		57E13A182B0CCF260048B27C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				57DC504D2B0E208B00B1F293 /* LoginResponse.swift */,
-				57DC504F2B0E213F00B1F293 /* LoginError.swift */,
 				57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */,
 				57E13A192B0CCF420048B27C /* NetworkModel.swift */,
 			);
@@ -475,6 +474,15 @@
 				57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */,
 			);
 			path = Keychain;
+			sourceTree = "<group>";
+		};
+		57FB01FF2B18761A003CAD51 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				57DC504D2B0E208B00B1F293 /* LoginResponse.swift */,
+				57DC504F2B0E213F00B1F293 /* LoginError.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */ = {
