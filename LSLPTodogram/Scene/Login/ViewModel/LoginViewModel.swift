@@ -22,11 +22,13 @@ final class LoginViewModel: ViewModelType {
     struct Output {
         let loginErrorDescription: PublishRelay<String>
         let pushToJoin: PublishRelay<Void>
+        let windowReset: PublishRelay<Void>
     }
 
     func transform(input: Input) -> Output {
         let loginErrorDescription = PublishRelay<String>()
         let pushToJoin = PublishRelay<Void>()
+        let windowReset = PublishRelay<Void>()
 
         let loginInfo = Observable
             .combineLatest(
@@ -47,16 +49,23 @@ final class LoginViewModel: ViewModelType {
                     let statusCode = error.asAFError?.responseCode ?? 500
                     let loginError = LoginError(rawValue: statusCode) ?? .서버_에러
                     loginErrorDescription.accept(loginError.description)
-
-                    return Single.just(LoginResponse(isError: true))
+                    return Single.never()
                 }
             }
-            .filter { !$0.isError }
             .bind(with: self) { owner, loginResponse in
-                // TODO: UserDefeaults에 토큰 저장 => KeyChain에 토큰 저장
-                // TODO: 다음 화면으로 이동
                 print("response ==> \(loginResponse)")
-                print("성공")
+                // TODO: UserDefeaults에 토큰 저장 => KeyChain에 토큰 저장
+                KeychainManager.create(
+                    key: KeychainKey.token.rawValue,
+                    token: loginResponse.token
+                )
+                KeychainManager.create(
+                    key: KeychainKey.refresh.rawValue,
+                    token: loginResponse.refreshToken
+                )
+
+                // TODO: 화면 전환
+                windowReset.accept(Void())
             }
             .disposed(by: disposeBag)
 
@@ -69,7 +78,8 @@ final class LoginViewModel: ViewModelType {
 
         return Output(
             loginErrorDescription: loginErrorDescription,
-            pushToJoin: pushToJoin
+            pushToJoin: pushToJoin,
+            windowReset: windowReset
         )
     }
 

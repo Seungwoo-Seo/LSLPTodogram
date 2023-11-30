@@ -36,6 +36,12 @@ final class LoginViewController: BaseViewController {
                 owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
+
+        output.windowReset
+            .bind(with: self) { owner, _ in
+                owner.windowResetByTodoNewsfeedMainViewController()
+            }
+            .disposed(by: disposeBag)
     }
 
     override func loadView() {
@@ -59,6 +65,15 @@ final class LoginViewController: BaseViewController {
         let confirm = UIAlertAction(title: "확인", style: .default)
         alert.addAction(confirm)
         present(alert, animated: true)
+    }
+
+    private func windowResetByTodoNewsfeedMainViewController() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        let viewModel = TodoNewsfeedViewModel()
+        let vc = TodoNewsfeedViewController(viewModel)
+        sceneDelegate?.window?.rootViewController = UINavigationController(rootViewController: vc)
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 
 }
