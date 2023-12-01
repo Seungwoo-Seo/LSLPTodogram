@@ -420,6 +420,7 @@
 				57DC50512B0E26FE00B1F293 /* Login */,
 				57DC50522B0E338700B1F293 /* Join */,
 				57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */,
+				57FB02002B188FC1003CAD51 /* TodoInput */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -495,6 +496,16 @@
 				57DC504F2B0E213F00B1F293 /* LoginError.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		57FB02002B188FC1003CAD51 /* TodoInput */ = {
+			isa = PBXGroup;
+			children = (
+				57FB02112B18A3A1003CAD51 /* Model */,
+				57FB02012B1893B9003CAD51 /* View */,
+				57FB02022B1893BE003CAD51 /* ViewModel */,
+			);
+			path = TodoInput;
 			sourceTree = "<group>";
 		};
 		57FB02152B18C659003CAD51 /* Model */ = {
