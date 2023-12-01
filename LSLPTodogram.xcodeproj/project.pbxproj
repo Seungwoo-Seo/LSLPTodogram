@@ -72,6 +72,7 @@
 		57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E212B0B6EFB00330C6B /* LoginViewController.swift */; };
 		57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E232B0B6F1000330C6B /* LoginViewModel.swift */; };
 		57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E272B0B6F8F00330C6B /* LoginMainView.swift */; };
+		57F101772B19BD7400BE333F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 57F101762B19BD7400BE333F /* RxDataSources */; };
 		57FB01FB2B186547003CAD51 /* TodoNewsfeedFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FA2B186547003CAD51 /* TodoNewsfeedFooter.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB020A2B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02092B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift */; };
@@ -159,6 +160,7 @@
 				57DC50BF2B119CD400B1F293 /* Tabman in Frameworks */,
 				57E98E032B0B66CE00330C6B /* RxSwift in Frameworks */,
 				57E98E062B0B66ED00330C6B /* Alamofire in Frameworks */,
+				57F101772B19BD7400BE333F /* RxDataSources in Frameworks */,
 				57E98E012B0B66CE00330C6B /* RxRelay in Frameworks */,
 				57E98DF92B0B66B300330C6B /* SnapKit in Frameworks */,
 			);
@@ -559,6 +561,7 @@
 				57E98E052B0B66ED00330C6B /* Alamofire */,
 				57DC50BE2B119CD400B1F293 /* Tabman */,
 				57DC50C32B11A26C00B1F293 /* IQKeyboardManagerSwift */,
+				57F101762B19BD7400BE333F /* RxDataSources */,
 			);
 			productName = LSLPTodogram;
 			productReference = 57E98DDA2B0B660000330C6B /* LSLPTodogram.app */;
@@ -595,6 +598,7 @@
 				57E98E042B0B66ED00330C6B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				57DC50BD2B119CD400B1F293 /* XCRemoteSwiftPackageReference "Tabman" */,
 				57DC50C22B11A26C00B1F293 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				57F101752B19BD7400BE333F /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 57E98DDB2B0B660000330C6B /* Products */;
 			projectDirPath = "";
@@ -948,6 +952,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		57F101752B19BD7400BE333F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -990,6 +1002,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 57E98E042B0B66ED00330C6B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		57F101762B19BD7400BE333F /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 57F101752B19BD7400BE333F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
