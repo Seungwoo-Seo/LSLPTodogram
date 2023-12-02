@@ -435,6 +435,7 @@
 		57E98DF32B0B666200330C6B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				57F101782B19DFF900BE333F /* TabBarController.swift */,
 				57DC50512B0E26FE00B1F293 /* Login */,
 				57DC50522B0E338700B1F293 /* Join */,
 				57FBCB5F2B15F05400C83C93 /* TodoNewsfeed */,
