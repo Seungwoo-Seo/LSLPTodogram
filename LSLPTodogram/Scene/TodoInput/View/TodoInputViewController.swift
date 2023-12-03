@@ -14,20 +14,11 @@ final class TodoInputViewController: BaseViewController {
     private let mainView = TodoInputMainView()
     private let disposeBag = DisposeBag()
 
-
-    private let viewModel: TodoInputViewModel
-
     init(_ viewModel: TodoInputViewModel) {
-        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
         let todoAddButtonTapped = PublishRelay<Void>()
-
-        let input = TodoInputViewModel.Input(
-            todoAddButtonTapped: todoAddButtonTapped,
-            itemDeleted: mainView.tableView.rx.itemDeleted
-        )
-        let output = viewModel.transform(input: input)
+        let titleChanged = PublishRelay<(title: String, row: Int)>()
 
         let dataSource = RxTableViewSectionedReloadDataSource<TodoInputSection>(
             configureCell: { dataSource, tableView, indexPath, item in
@@ -39,13 +30,21 @@ final class TodoInputViewController: BaseViewController {
 
                     cell.profileImageView.image = todoInfo.profileImage
                     cell.nicknameLabel.text = todoInfo.nickname
+                    cell.titleTextView.text = todoInfo.title
 
-                    cell.titleTextView.rx.text.orEmpty
-                        .bind(with: self) { owner, text in
+                    cell.titleTextView.rx.didChange
+                        .bind(with: self) { owner, _ in
                             UIView.setAnimationsEnabled(false)
                             tableView.beginUpdates()
                             tableView.endUpdates()
                             UIView.setAnimationsEnabled(true)
+                        }
+                        .disposed(by: cell.disposeBag)
+
+                    cell.titleTextView.rx.didEndEditing
+                        .withLatestFrom(cell.titleTextView.rx.text.orEmpty)
+                        .bind(with: self) { owner, text in
+                            titleChanged.accept((text, indexPath.row))
                         }
                         .disposed(by: cell.disposeBag)
 
@@ -58,12 +57,19 @@ final class TodoInputViewController: BaseViewController {
 
                     cell.todoInputTextView.text = todo.title
 
-                    cell.todoInputTextView.rx.text.orEmpty
-                        .bind(with: self) { owner, text in
+                    cell.todoInputTextView.rx.didChange
+                        .bind(with: self) { owner, _ in
                             UIView.setAnimationsEnabled(false)
                             tableView.beginUpdates()
                             tableView.endUpdates()
                             UIView.setAnimationsEnabled(true)
+                        }
+                        .disposed(by: cell.disposeBag)
+
+                    cell.todoInputTextView.rx.didEndEditing
+                        .withLatestFrom(cell.todoInputTextView.rx.text.orEmpty)
+                        .bind(with: self) { owner, text in
+                            titleChanged.accept((text, indexPath.row))
                         }
                         .disposed(by: cell.disposeBag)
 
@@ -76,6 +82,7 @@ final class TodoInputViewController: BaseViewController {
 
                     cell.todoAddButton.rx.tap
                         .bind(with: self) { owner, void in
+                            owner.view.endEditing(true) // 필수
                             todoAddButtonTapped.accept(void)
                         }
                         .disposed(by: cell.disposeBag)
@@ -86,18 +93,22 @@ final class TodoInputViewController: BaseViewController {
 
         dataSource.canEditRowAtIndexPath = { dataSource, indexPath in
             let section = dataSource.sectionModels[indexPath.section]
-            if let test = section.items.first {
-                switch test {
-                case .todoInfo, .todoAdd:
-                    return false
-                case .todo:
-                    return true
-                }
+
+            if indexPath.row == 0 || section.items.count - 1 == indexPath.row {
+                return false
             }
-            return false
+
+            return true
         }
 
-        output.todoInputSectionList
+        let input = TodoInputViewModel.Input(
+            titleChanged: titleChanged,
+            todoAddButtonTapped: todoAddButtonTapped,
+            itemDeleted: mainView.tableView.rx.itemDeleted
+        )
+        let output = viewModel.transform(input: input)
+
+        output.sections
             .bind(to: mainView.tableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }

@@ -37,6 +37,12 @@ final class TodoInputCell: BaseTableViewCell {
         disposeBag = DisposeBag()
     }
 
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        selectionStyle = .none
+    }
+
     override func initialHierarchy() {
         super.initialHierarchy()
 

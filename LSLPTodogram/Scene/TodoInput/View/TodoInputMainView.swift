@@ -10,9 +10,8 @@ import UIKit
 final class TodoInputMainView: BaseView {
     lazy var tableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.estimatedRowHeight = UITableView.automaticDimension
-        view.estimatedSectionHeaderHeight = UITableView.automaticDimension
-        view.estimatedSectionFooterHeight = UITableView.automaticDimension
+        view.rowHeight = UITableView.automaticDimension
+        view.estimatedRowHeight = 44
         view.register(TodoInfoInputCell.self, forCellReuseIdentifier: TodoInfoInputCell.identifier)
         view.register(TodoInputCell.self, forCellReuseIdentifier: TodoInputCell.identifier)
         view.register(TodoAddCell.self, forCellReuseIdentifier: TodoAddCell.identifier)

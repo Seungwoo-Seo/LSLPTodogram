@@ -8,7 +8,7 @@
 import Foundation
 
 enum TodoInputItemIdentifiable {
-    case todoInfo(TodoInfo)
-    case todo(Todo)
+    case todoInfo(TodoInfoInput)
+    case todo(TodoInput)
     case todoAdd(Void)
 }

@@ -13,45 +13,68 @@ import UIKit
 final class TodoInputViewModel: ViewModelType {
     private let disposeBag = DisposeBag()
 
-    private var todoInputSectionList: [TodoInputSection] = [
-        TodoInputSection(
-            items: [.todoInfo(TodoInfo(profileImage: UIImage(systemName: "person")!, nickname: "하하", title: ""))]
-        ),
-        TodoInputSection(items: [.todoAdd(Void())])
+    private var items: [TodoInputItemIdentifiable] = [
+        .todoInfo(TodoInfoInput(profileImage: UIImage(systemName: "person")!, nickname: "하하", title: "각오, 결의, 목표 등...", todoList: [])),
+        .todo(TodoInput(text: "")),
+        .todoAdd(Void())
     ]
+    private lazy var todoList: BehaviorRelay<[TodoInputItemIdentifiable]> = BehaviorRelay(value: items)
+    private var todoInputSection = TodoInputSection()
 
     struct Input {
+        let titleChanged: PublishRelay<(title: String, row: Int)>
         let todoAddButtonTapped: PublishRelay<Void>
         let itemDeleted: ControlEvent<IndexPath>
     }
 
     struct Output {
-        let todoInputSectionList: BehaviorRelay<[TodoInputSection]>
+        let sections: Observable<[TodoInputSection]>
     }
 
     func transform(input: Input) -> Output {
-        let todoInputSectionList = BehaviorRelay(value: todoInputSectionList)
+        input.titleChanged
+            .bind(with: self) { owner, titleInfo in
+                switch owner.items[titleInfo.row] {
+                case .todoInfo(let todoInfo):
+                    todoInfo.title = titleInfo.title
+
+                case .todo(let todo):
+                    todo.title = titleInfo.title
+
+                default:
+                    print("❌ 여긴 나오면 안됌")
+                }
+            }
+            .disposed(by: disposeBag)
 
         input.todoAddButtonTapped
-            .bind(with: self) { owner, _ in
-                // 배열의 마지막 요소의 인덱스
-                let lastIndex = owner.todoInputSectionList.count - 1
-                // 마지막 요소 바로 앞에 새로운 요소를 추가
-
-                let todo = Todo(title: "hello")
-                owner.todoInputSectionList.insert(TodoInputSection(items: [.todo(todo)]), at: lastIndex)
-                todoInputSectionList.accept(owner.todoInputSectionList)
+            .map { _ -> TodoInputItemIdentifiable in
+                let todoInput = TodoInput(text: "")
+                return TodoInputItemIdentifiable.todo(todoInput)
+            }
+            .bind(with: self) { owner, item in
+                let lastIndex = owner.items.count - 1
+                print(lastIndex)
+                owner.items.insert(item, at: lastIndex)
+                owner.todoList.accept(owner.items)
             }
             .disposed(by: disposeBag)
 
         input.itemDeleted
             .bind(with: self) { owner, indexPath in
-                owner.todoInputSectionList.remove(at: indexPath.row)
-                todoInputSectionList.accept(owner.todoInputSectionList)
+                owner.items.remove(at: indexPath.row)
+                owner.todoList.accept(owner.items)
             }
             .disposed(by: disposeBag)
 
-        return Output(todoInputSectionList: todoInputSectionList)
+        let sections = todoList
+            .withUnretained(self)
+            .map { (owner, todoList) in
+                owner.todoInputSection.items = todoList
+                return [owner.todoInputSection]
+            }
+
+        return Output(sections: sections)
     }
 
 }
