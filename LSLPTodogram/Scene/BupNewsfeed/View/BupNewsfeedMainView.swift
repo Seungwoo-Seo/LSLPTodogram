@@ -1,5 +1,5 @@
 //
-//  TodoNewsfeedMainView.swift
+//  BupNewsfeedMainView.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/28.
@@ -8,23 +8,16 @@
 import UIKit
 import Kingfisher
 
-final class TodoNewsfeedMainView: BaseView {
-    var dataSource: UICollectionViewDiffableDataSource<TodoInfo, Todo>!
+final class BupNewsfeedMainView: BaseView {
+    var dataSource: UICollectionViewDiffableDataSource<BupContainer, BupContent>!
 
     lazy var collectionView = {
         let view = UICollectionView(
             frame: .zero,
             collectionViewLayout: createLayout()
         )
-        view.backgroundColor = Color.lightGray
         return view
     }()
-
-    override func initialAttributes() {
-        super.initialAttributes()
-
-//        configureDataSource()
-    }
 
     override func initialHierarchy() {
         super.initialHierarchy()
@@ -42,13 +35,18 @@ final class TodoNewsfeedMainView: BaseView {
 
 }
 
-private extension TodoNewsfeedMainView {
+private extension BupNewsfeedMainView {
 
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { [weak self] (_, _) in
-            guard let self else {return nil}
-            return self.todoLayout()
-        }
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 16
+
+        let layout = UICollectionViewCompositionalLayout(
+            sectionProvider: { [weak self] _, _ in
+                guard let self else {return nil}
+                return self.todoLayout()
+            }, configuration: config
+        )
 
         return layout
     }
@@ -71,30 +69,32 @@ private extension TodoNewsfeedMainView {
             subitems: [item]
         )
 
-        let headerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
+        let headerFooterSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
             heightDimension: .estimated(80)
         )
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerSize,
-            elementKind: TodoNewsfeedHeader.identifier,
+            layoutSize: headerFooterSize,
+            elementKind: BupNewsfeedHeader.identifier,
             alignment: .top
         )
 
-        let footerSize = NSCollectionLayoutSize(
-            widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(80)
-        )
-
         let footer = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: footerSize,
-            elementKind: TodoNewsfeedFooter.identifier,
+            layoutSize: headerFooterSize,
+            elementKind: BupNewsfeedFooter.identifier,
             alignment: .bottom
         )
 
         let section = NSCollectionLayoutSection(group: group)
         section.boundarySupplementaryItems = [header, footer]
+        section.interGroupSpacing = 1
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 1,
+            leading: 16,
+            bottom: 1,
+            trailing: 16
+        )
 
         return section
     }

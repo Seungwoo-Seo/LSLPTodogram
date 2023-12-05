@@ -1,5 +1,5 @@
 //
-//  TodoNewsfeedFooter.swift
+//  BupNewsfeedFooter.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TodoNewsfeedFooter: BaseCollectionReusableView {
+final class BupNewsfeedFooter: BaseCollectionReusableView {
     private let buttonStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -30,6 +30,15 @@ final class TodoNewsfeedFooter: BaseCollectionReusableView {
         let button = UIButton(configuration: config)
         return button
     }()
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        backgroundColor = Color.green
+        layer.cornerRadius = 16
+        clipsToBounds = true
+        layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+    }
 
     override func initialHierarchy() {
         super.initialHierarchy()

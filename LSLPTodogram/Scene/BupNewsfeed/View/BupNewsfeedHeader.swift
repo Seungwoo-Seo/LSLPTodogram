@@ -1,5 +1,5 @@
 //
-//  TodoNewsfeedHeader.swift
+//  BupNewsfeedHeader.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TodoNewsfeedHeader: BaseCollectionReusableView {
+final class BupNewsfeedHeader: BaseCollectionReusableView {
     private let hStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -16,11 +16,7 @@ final class TodoNewsfeedHeader: BaseCollectionReusableView {
         view.spacing = 16
         return view
     }()
-    let profileImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
+    let profileImageView = ProfileImageView(image: UIImage(systemName: "person.fill"))
     private let labelStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -29,24 +25,26 @@ final class TodoNewsfeedHeader: BaseCollectionReusableView {
         view.spacing = 4
         return view
     }()
-    let nicknameLabel = {
-        let label = UILabel()
-        label.textColor = Color.black
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
-        return label
-    }()
-    let titleLabel = {
-        let label = UILabel()
-        label.numberOfLines = 2
-        label.textColor = Color.black
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
-        return label
-    }()
+    let nicknameLabel = NicknameLabel()
+    let phoneNumLabel = NicknameLabel()
+    let titleLabel = BupTitleLabel()
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        backgroundColor = Color.green
+        layer.cornerRadius = 16
+        clipsToBounds = true
+        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
 
     override func initialHierarchy() {
         super.initialHierarchy()
 
-        addSubview(hStackView)
+        [
+            hStackView,
+            titleLabel
+        ].forEach { addSubview($0) }
 
         [
             profileImageView,
@@ -55,21 +53,22 @@ final class TodoNewsfeedHeader: BaseCollectionReusableView {
 
         [
             nicknameLabel,
-            titleLabel
+            phoneNumLabel
         ].forEach { labelStackView.addArrangedSubview($0) }
     }
 
     override func initialLayout() {
         super.initialLayout()
 
+        let offset = 16
         let inset = 16
         hStackView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview().inset(inset)
-            make.bottom.equalToSuperview()
         }
 
-        profileImageView.snp.makeConstraints { make in
-            make.size.equalTo(44)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(offset)
+            make.horizontalEdges.bottom.equalToSuperview().inset(inset)
         }
     }
 
