@@ -49,6 +49,11 @@
 		57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50C52B12292300B1F293 /* JoinViewModel.swift */; };
 		57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A162B0CCEFE0048B27C /* NetworkManager.swift */; };
 		57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A192B0CCF420048B27C /* NetworkModel.swift */; };
+		57E5979A2B1F0DCA00C5251C /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E597992B1F0DCA00C5251C /* ProfileImageView.swift */; };
+		57E5979E2B1F0F0500C5251C /* NicknameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5979D2B1F0F0500C5251C /* NicknameLabel.swift */; };
+		57E597A02B1F0F1B00C5251C /* BupTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5979F2B1F0F1B00C5251C /* BupTitleLabel.swift */; };
+		57E597A22B1F21A400C5251C /* BupContentLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E597A12B1F21A400C5251C /* BupContentLabel.swift */; };
+		57E597A42B1F21DA00C5251C /* MiddlePointLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E597A32B1F21DA00C5251C /* MiddlePointLabel.swift */; };
 		57E635CC2B19FC9200B9F112 /* TodoInfoInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635CB2B19FC9200B9F112 /* TodoInfoInputCell.swift */; };
 		57E635CE2B1A09D200B9F112 /* TodoAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635CD2B1A09D200B9F112 /* TodoAddCell.swift */; };
 		57E635D02B1A149F00B9F112 /* TodoInputItemIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635CF2B1A149F00B9F112 /* TodoInputItemIdentifiable.swift */; };
@@ -133,6 +138,11 @@
 		57DC50C52B12292300B1F293 /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		57E13A162B0CCEFE0048B27C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		57E13A192B0CCF420048B27C /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		57E597992B1F0DCA00C5251C /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
+		57E5979D2B1F0F0500C5251C /* NicknameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameLabel.swift; sourceTree = "<group>"; };
+		57E5979F2B1F0F1B00C5251C /* BupTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupTitleLabel.swift; sourceTree = "<group>"; };
+		57E597A12B1F21A400C5251C /* BupContentLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupContentLabel.swift; sourceTree = "<group>"; };
+		57E597A32B1F21DA00C5251C /* MiddlePointLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiddlePointLabel.swift; sourceTree = "<group>"; };
 		57E635CB2B19FC9200B9F112 /* TodoInfoInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfoInputCell.swift; sourceTree = "<group>"; };
 		57E635CD2B1A09D200B9F112 /* TodoAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoAddCell.swift; sourceTree = "<group>"; };
 		57E635CF2B1A149F00B9F112 /* TodoInputItemIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputItemIdentifiable.swift; sourceTree = "<group>"; };
@@ -453,6 +463,11 @@
 			children = (
 				57D5FA342B133E3A00A76420 /* InfoInput */,
 				57D5FA322B133D9600A76420 /* ErrorLabel.swift */,
+				57E597992B1F0DCA00C5251C /* ProfileImageView.swift */,
+				57E5979D2B1F0F0500C5251C /* NicknameLabel.swift */,
+				57E5979F2B1F0F1B00C5251C /* BupTitleLabel.swift */,
+				57E597A12B1F21A400C5251C /* BupContentLabel.swift */,
+				57E597A32B1F21DA00C5251C /* MiddlePointLabel.swift */,
 			);
 			path = "View+";
 			sourceTree = "<group>";
@@ -702,6 +717,7 @@
 				57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */,
 				57E98E202B0B6E8800330C6B /* ViewModelType.swift in Sources */,
 				570E01B22B1828C500D1E012 /* TodoNewsfeedHeader.swift in Sources */,
+				57E597A42B1F21DA00C5251C /* MiddlePointLabel.swift in Sources */,
 				57DC50502B0E213F00B1F293 /* LoginError.swift in Sources */,
 				57D5FA432B1376DD00A76420 /* EmailSuccess.swift in Sources */,
 				57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */,
@@ -719,6 +735,7 @@
 				57E635D02B1A149F00B9F112 /* TodoInputItemIdentifiable.swift in Sources */,
 				57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */,
 				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,
+				57E5979A2B1F0DCA00C5251C /* ProfileImageView.swift in Sources */,
 				57BDFAF42B15B055006CAE1F /* ReconfrimSuccess.swift in Sources */,
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
@@ -747,10 +764,13 @@
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
 				57FB01FB2B186547003CAD51 /* TodoNewsfeedFooter.swift in Sources */,
 				57FB02062B1893D6003CAD51 /* TodoInputMainView.swift in Sources */,
+				57E5979E2B1F0F0500C5251C /* NicknameLabel.swift in Sources */,
 				570E01B42B1828FE00D1E012 /* BaseCollectionReusableView.swift in Sources */,
 				57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */,
+				57E597A02B1F0F1B00C5251C /* BupTitleLabel.swift in Sources */,
 				57E635D42B1C977A00B9F112 /* TodoInfoInput.swift in Sources */,
 				57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */,
+				57E597A22B1F21A400C5251C /* BupContentLabel.swift in Sources */,
 				57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */,
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */,
 				57625DF22B18C70E0066642F /* Todo.swift in Sources */,
