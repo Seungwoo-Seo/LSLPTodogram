@@ -25,6 +25,7 @@ final class TodoInputViewModel: ViewModelType {
         let titleChanged: PublishRelay<(title: String, row: Int)>
         let todoAddButtonTapped: PublishRelay<Void>
         let itemDeleted: ControlEvent<IndexPath>
+        let postingButtonTapped: ControlEvent<Void>
     }
 
     struct Output {
@@ -48,6 +49,10 @@ final class TodoInputViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         input.todoAddButtonTapped
+            .filter { [weak self] in
+                guard let owner = self else {return false}
+                return owner.items.count <= 7
+            }
             .map { _ -> TodoInputItemIdentifiable in
                 let todoInput = TodoInput(text: "")
                 return TodoInputItemIdentifiable.todo(todoInput)
@@ -74,7 +79,58 @@ final class TodoInputViewModel: ViewModelType {
                 return [owner.todoInputSection]
             }
 
+        input.postingButtonTapped
+            .withLatestFrom(todoList)
+            .bind(with: self) { owner, items in
+
+                var title: String = ""
+                let product_id: String = "PersonalTodo"
+                var contents: [String: String] = [:]
+
+                for (index, item) in items.enumerated() {
+                    switch item {
+                    case .todoInfo(let todoInfoInput):
+                        title = todoInfoInput.title
+
+                    case .todo(let todoInput):
+                        if index == 1 {
+                            contents.updateValue(todoInput.title, forKey: "content")
+                        } else {
+                            contents.updateValue(todoInput.title, forKey: "content\(index-1)")
+                        }
+
+                    case .todoAdd:
+                        continue
+                    }
+                }
+
+                let request = PostCreateRequest(
+                    title: title,
+                    content: contents["content"] ?? "데이터 손실됨.",
+                    file: nil,
+                    product_id: product_id,
+                    content1: contents["content1"],
+                    content2: contents["content2"],
+                    content3: contents["content3"],
+                    content4: contents["content4"],
+                    content5: contents["content5"]
+                )
+
+                print(request)
+
+                if let token = KeychainManager.read(key: KeychainKey.token.rawValue) {
+//                    NetworkManager.shared.requestTest(type: PostCreationResponse.self, api: PostRouter.create(token: token, body: request))
+                } else {
+
+                }
+            }
+            .disposed(by: disposeBag)
+
         return Output(sections: sections)
+    }
+
+    deinit {
+        print("너가 찍히진 않겠찌?")
     }
 
 }

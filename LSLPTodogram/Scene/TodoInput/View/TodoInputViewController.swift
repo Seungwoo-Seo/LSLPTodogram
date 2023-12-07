@@ -11,10 +11,19 @@ import RxDataSources
 import RxSwift
 
 final class TodoInputViewController: BaseViewController {
+    private let postingButton = {
+        let barButtonItem = UIBarButtonItem()
+        barButtonItem.title = "게시"
+        barButtonItem.style = .plain
+        return barButtonItem
+    }()
     private let mainView = TodoInputMainView()
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+
+    private let viewModel: TodoInputViewModel   // 메모리 때문에 작성
 
     init(_ viewModel: TodoInputViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
         let todoAddButtonTapped = PublishRelay<Void>()
@@ -81,6 +90,7 @@ final class TodoInputViewController: BaseViewController {
                     }
 
                     cell.todoAddButton.rx.tap
+                        .debug()
                         .bind(with: self) { owner, void in
                             owner.view.endEditing(true) // 필수
                             todoAddButtonTapped.accept(void)
@@ -104,7 +114,8 @@ final class TodoInputViewController: BaseViewController {
         let input = TodoInputViewModel.Input(
             titleChanged: titleChanged,
             todoAddButtonTapped: todoAddButtonTapped,
-            itemDeleted: mainView.tableView.rx.itemDeleted
+            itemDeleted: mainView.tableView.rx.itemDeleted,
+            postingButtonTapped: postingButton.rx.tap
         )
         let output = viewModel.transform(input: input)
 
@@ -122,10 +133,17 @@ final class TodoInputViewController: BaseViewController {
 
     }
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        disposeBag = DisposeBag()
+    }
+
     override func initialAttributes() {
         super.initialAttributes()
 
         navigationItem.title = "새로운 Todo"
+        navigationItem.rightBarButtonItem = postingButton
     }
 
 }
