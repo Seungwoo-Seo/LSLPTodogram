@@ -7,17 +7,15 @@
 
 import UIKit
 
-final class FakeViewController: UIViewController {}
-
-enum TabBarItem: Int, CaseIterable {
+fileprivate enum MainTabBarItem: Int, CaseIterable {
     case todoNewsfeed
     case todoAdd
 
     var viewController: UIViewController {
         switch self {
         case .todoNewsfeed:
-            let viewModel = TodoNewsfeedViewModel()
-            let vc = TodoNewsfeedViewController(viewModel)
+            let viewModel = BupNewsfeedViewModel()
+            let vc = BupNewsfeedViewController(viewModel)
             vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house.fill"), tag: rawValue)
             return UINavigationController(rootViewController: vc)
         case .todoAdd:
@@ -28,13 +26,13 @@ enum TabBarItem: Int, CaseIterable {
     }
 }
 
-final class TabBarController: UITabBarController, UITabBarControllerDelegate {
+final class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         delegate = self
-        viewControllers = TabBarItem.allCases.map { $0.viewController }
+        viewControllers = MainTabBarItem.allCases.map { $0.viewController }
     }
 
     func tabBarController(
@@ -53,3 +51,5 @@ final class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
 }
+
+fileprivate final class FakeViewController: UIViewController {}
