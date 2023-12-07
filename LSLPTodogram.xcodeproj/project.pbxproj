@@ -105,6 +105,7 @@
 		57FBCB632B15F08600C83C93 /* BupNewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */; };
 		57FBCB652B15F09200C83C93 /* BupNewsfeedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB642B15F09200C83C93 /* BupNewsfeedMainView.swift */; };
 		57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB662B15F0A900C83C93 /* BupNewsfeedViewModel.swift */; };
+		57FD7C872B1F87E2006C284B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD7C862B1F87E2006C284B /* Request.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +200,7 @@
 		57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedViewController.swift; sourceTree = "<group>"; };
 		57FBCB642B15F09200C83C93 /* BupNewsfeedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedMainView.swift; sourceTree = "<group>"; };
 		57FBCB662B15F0A900C83C93 /* BupNewsfeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedViewModel.swift; sourceTree = "<group>"; };
+		57FD7C862B1F87E2006C284B /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -474,6 +476,7 @@
 			children = (
 				57E13A182B0CCF260048B27C /* Model */,
 				579B36312B0B7C3B008ACCAE /* Router.swift */,
+				57FD7C862B1F87E2006C284B /* Request.swift */,
 				57E13A162B0CCEFE0048B27C /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -751,6 +754,7 @@
 				57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */,
 				57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */,
 				57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */,
+				57FD7C872B1F87E2006C284B /* Request.swift in Sources */,
 				57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */,
 				57E98E202B0B6E8800330C6B /* ViewModelType.swift in Sources */,
 				57E597A42B1F21DA00C5251C /* MiddlePointLabel.swift in Sources */,
