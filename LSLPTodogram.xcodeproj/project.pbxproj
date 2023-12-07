@@ -12,6 +12,8 @@
 		570E01B42B1828FE00D1E012 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */; };
 		57625DF02B18C7000066642F /* TodoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57625DEF2B18C7000066642F /* TodoInfo.swift */; };
 		57625DF22B18C70E0066642F /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57625DF12B18C70E0066642F /* Todo.swift */; };
+		576920FB2B1E51A800B8CE80 /* PostCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */; };
+		576920FD2B1E5C5600B8CE80 /* PostReadResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO.swift */; };
 		576920FF2B1EA45C00B8CE80 /* BupContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FE2B1EA45C00B8CE80 /* BupContent.swift */; };
 		576921012B1EA4F200B8CE80 /* BupBottom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576921002B1EA4F200B8CE80 /* BupBottom.swift */; };
 		576921032B1EA4FE00B8CE80 /* BupTop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576921022B1EA4FE00B8CE80 /* BupTop.swift */; };
@@ -64,6 +66,7 @@
 		57E635D22B1A14B900B9F112 /* TodoInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D12B1A14B900B9F112 /* TodoInputSection.swift */; };
 		57E635D42B1C977A00B9F112 /* TodoInfoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D32B1C977A00B9F112 /* TodoInfoInput.swift */; };
 		57E635D62B1C979B00B9F112 /* TodoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D52B1C979B00B9F112 /* TodoInput.swift */; };
+		57E635DC2B1CEDF600B9F112 /* PostCreateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */; };
 		57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98DDD2B0B660000330C6B /* AppDelegate.swift */; };
 		57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98DDF2B0B660000330C6B /* SceneDelegate.swift */; };
 		57E98DE72B0B660300330C6B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57E98DE62B0B660300330C6B /* Assets.xcassets */; };
@@ -89,6 +92,9 @@
 		57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E272B0B6F8F00330C6B /* LoginMainView.swift */; };
 		57F101772B19BD7400BE333F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 57F101762B19BD7400BE333F /* RxDataSources */; };
 		57F101792B19DFF900BE333F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F101782B19DFF900BE333F /* MainTabBarController.swift */; };
+		57F50FB12B1F973000E15811 /* PostReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F50FB02B1F973000E15811 /* PostReadRequest.swift */; };
+		57F50FB32B1F979900E15811 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F50FB22B1F979900E15811 /* PostDTO.swift */; };
+		57F6DDA92B2150340090C646 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDA82B2150340090C646 /* Creator.swift */; };
 		57FB01FB2B186547003CAD51 /* BupNewsfeedFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FA2B186547003CAD51 /* BupNewsfeedFooter.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB02042B1893CD003CAD51 /* TodoInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */; };
@@ -107,6 +113,8 @@
 		570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		57625DEF2B18C7000066642F /* TodoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfo.swift; sourceTree = "<group>"; };
 		57625DF12B18C70E0066642F /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRequest.swift; sourceTree = "<group>"; };
+		576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadResponseDTO.swift; sourceTree = "<group>"; };
 		576920FE2B1EA45C00B8CE80 /* BupContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupContent.swift; sourceTree = "<group>"; };
 		576921002B1EA4F200B8CE80 /* BupBottom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupBottom.swift; sourceTree = "<group>"; };
 		576921022B1EA4FE00B8CE80 /* BupTop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupTop.swift; sourceTree = "<group>"; };
@@ -157,6 +165,7 @@
 		57E635D12B1A14B900B9F112 /* TodoInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputSection.swift; sourceTree = "<group>"; };
 		57E635D32B1C977A00B9F112 /* TodoInfoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfoInput.swift; sourceTree = "<group>"; };
 		57E635D52B1C979B00B9F112 /* TodoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInput.swift; sourceTree = "<group>"; };
+		57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateResponseDTO.swift; sourceTree = "<group>"; };
 		57E98DDA2B0B660000330C6B /* LSLPTodogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LSLPTodogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57E98DDD2B0B660000330C6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		57E98DDF2B0B660000330C6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -177,6 +186,9 @@
 		57E98E232B0B6F1000330C6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57E98E272B0B6F8F00330C6B /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
 		57F101782B19DFF900BE333F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		57F50FB02B1F973000E15811 /* PostReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadRequest.swift; sourceTree = "<group>"; };
+		57F50FB22B1F979900E15811 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
+		57F6DDA82B2150340090C646 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		57FB01FA2B186547003CAD51 /* BupNewsfeedFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedFooter.swift; sourceTree = "<group>"; };
 		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputViewModel.swift; sourceTree = "<group>"; };
@@ -378,7 +390,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		57E13A182B0CCF260048B27C /* Model */ = {
+		57E635D92B1CEDD400B9F112 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */,
+				57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */,
+				57F50FB02B1F973000E15811 /* PostReadRequest.swift */,
+				576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO.swift */,
+				57F50FB22B1F979900E15811 /* PostDTO.swift */,
+				57F6DDA82B2150340090C646 /* Creator.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		57E635DA2B1CEDE000B9F112 /* Account */ = {
 			isa = PBXGroup;
 			children = (
 				57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */,
@@ -732,6 +757,7 @@
 				576921012B1EA4F200B8CE80 /* BupBottom.swift in Sources */,
 				570E01B22B1828C500D1E012 /* BupNewsfeedHeader.swift in Sources */,
 				57DC50502B0E213F00B1F293 /* LoginError.swift in Sources */,
+				576920FD2B1E5C5600B8CE80 /* PostReadResponseDTO.swift in Sources */,
 				57D5FA432B1376DD00A76420 /* EmailSuccess.swift in Sources */,
 				57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */,
 				57FB02102B189F54003CAD51 /* TodoInputCell.swift in Sources */,
@@ -748,6 +774,9 @@
 				57E635D02B1A149F00B9F112 /* TodoInputItemIdentifiable.swift in Sources */,
 				576921032B1EA4FE00B8CE80 /* BupTop.swift in Sources */,
 				57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */,
+				576920FB2B1E51A800B8CE80 /* PostCreateRequest.swift in Sources */,
+				57F6DDA92B2150340090C646 /* Creator.swift in Sources */,
+				57F50FB32B1F979900E15811 /* PostDTO.swift in Sources */,
 				576921052B1EA52500B8CE80 /* BupContainer.swift in Sources */,
 				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,
 				57E5979A2B1F0DCA00C5251C /* ProfileImageView.swift in Sources */,
@@ -772,10 +801,12 @@
 				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
 				57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
+				57E635DC2B1CEDF600B9F112 /* PostCreateResponseDTO.swift in Sources */,
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */,
 				57DC504E2B0E208B00B1F293 /* LoginResponse.swift in Sources */,
 				57BDFAF62B15B063006CAE1F /* ReconfrimError.swift in Sources */,
+				57F50FB12B1F973000E15811 /* PostReadRequest.swift in Sources */,
 				57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
 				57FB01FB2B186547003CAD51 /* BupNewsfeedFooter.swift in Sources */,
