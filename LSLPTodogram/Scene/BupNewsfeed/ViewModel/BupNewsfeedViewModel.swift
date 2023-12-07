@@ -28,14 +28,14 @@ final class BupNewsfeedViewModel: ViewModelType {
 
     func transform(input: Input) -> Output {
         let token = BehaviorRelay(value: KeychainManager.read(key: KeychainKey.token.rawValue) ?? "")
-        let parameters = BehaviorRelay(value: BupIquiryRequest(next: nil, limit: 3, product_id: "PersonalTodo"))
+        let parameters = BehaviorRelay(value: PostReadRequest(next: nil, limit: 3, product_id: "PersonalTodo"))
 
         Observable
             .combineLatest(token, parameters)
             .flatMapLatest { (token, paramters) in
                 return NetworkManager.shared.request(
-                    type: BupIquiryResponse.self,
-                    api: Post.read(token: token, parameters: paramters)
+                    type: PostReadResponseDTO.self,
+                    api: PostRouter.read(token: token, parameters: paramters)
                 )
                 .catch { error in
                     print(error.localizedDescription)
@@ -59,7 +59,7 @@ final class BupNewsfeedViewModel: ViewModelType {
                         let nextCursor = owner.bupContainerList.value[indexPath.section].nextCursor
 
                         if nextCursor != "0" {
-                            parameters.accept(BupIquiryRequest(next: nextCursor, limit: 1, product_id: "PersonalTodo"))
+                            parameters.accept(PostReadRequest(next: nextCursor, limit: 1, product_id: "PersonalTodo"))
                         }
                     }
                 }
@@ -77,7 +77,7 @@ final class BupNewsfeedViewModel: ViewModelType {
 
 private extension BupNewsfeedViewModel {
 
-    func toDomainList(_ response: BupIquiryResponse) -> [BupContainer] {
+    func toDomainList(_ response: PostReadResponseDTO) -> [BupContainer] {
         let bupList = response.data
 
         return bupList.map { bup in

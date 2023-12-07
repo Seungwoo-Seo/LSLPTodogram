@@ -39,7 +39,7 @@ final class LoginViewController: BaseViewController {
 
         output.windowReset
             .bind(with: self) { owner, _ in
-                owner.windowResetByTodoNewsfeedMainViewController()
+                owner.windowResetByMainTabBarController()
             }
             .disposed(by: disposeBag)
     }
@@ -67,12 +67,10 @@ final class LoginViewController: BaseViewController {
         present(alert, animated: true)
     }
 
-    private func windowResetByTodoNewsfeedMainViewController() {
+    private func windowResetByMainTabBarController() {
         let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
         let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        let viewModel = TodoNewsfeedViewModel()
-        let vc = TodoNewsfeedViewController(viewModel)
-        sceneDelegate?.window?.rootViewController = UINavigationController(rootViewController: vc)
+        sceneDelegate?.window?.rootViewController = MainTabBarController()
         sceneDelegate?.window?.makeKeyAndVisible()
     }
 

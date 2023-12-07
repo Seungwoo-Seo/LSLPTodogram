@@ -70,7 +70,7 @@ final class EmailViewModel: ViewModelType {
             } // 이메일 유효성 검사
             .flatMapLatest {
                 return NetworkManager.shared.request(
-                    type: EmailValidationResponse.self,
+                    type: EmailValidationResponseDTO.self,
                     api: Router.emailChek(email: $0)
                 )
                 .catch { error in
