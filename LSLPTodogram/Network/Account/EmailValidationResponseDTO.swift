@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct EmailValidationResponse: Decodable {
+struct EmailValidationResponseDTO: Decodable {
     let message: String
 }

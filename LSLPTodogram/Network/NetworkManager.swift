@@ -9,12 +9,14 @@ import Foundation
 import Alamofire
 import RxSwift
 
-class NetworkManager {
+final class NetworkManager {
     static let shared = NetworkManager()
 
     private init() {}
 
-    func request<T: Decodable>(type: T.Type, api: Router) -> Single<T> {
+    // MARK: - 공용
+
+    func request<T: Decodable>(type: T.Type, api: URLRequestConvertible) -> Single<T> {
         return Single<T>.create { observer in
             AF
                 .request(api)
@@ -26,6 +28,29 @@ class NetworkManager {
 
                     case .failure(let error):
                         observer(.failure(error))
+                    }
+                }
+
+            return Disposables.create()
+        }
+    }
+
+    // MARK: - PostRouter 전용
+
+    func upload<T: Decodable>(type: T.Type, api: PostRouter) -> Single<T> {
+        return Single<T>.create { observer in
+            AF
+                .upload(multipartFormData: api.multipartFormData, with: api)
+                .validate()
+                .responseDecodable(of: type) { response in
+                    switch response.result {
+                    case .success(let success):
+                        observer(.success(success))
+                        print("success => ", success)
+                        
+                    case .failure(let error):
+                        observer(.failure(error))
+                        print(error)
                     }
                 }
 

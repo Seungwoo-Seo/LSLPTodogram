@@ -41,7 +41,7 @@
 		57DC505F2B0E357B00B1F293 /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC505E2B0E357B00B1F293 /* EmailViewController.swift */; };
 		57DC50612B0E359A00B1F293 /* EmailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50602B0E359A00B1F293 /* EmailMainView.swift */; };
 		57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */; };
-		57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */; };
+		57DC50882B0EEDF600B1F293 /* EmailValidationResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50872B0EEDF600B1F293 /* EmailValidationResponseDTO.swift */; };
 		57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */; };
 		57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */; };
 		57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */; };
@@ -54,7 +54,6 @@
 		57DC50C42B11A26C00B1F293 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 57DC50C32B11A26C00B1F293 /* IQKeyboardManagerSwift */; };
 		57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57DC50C52B12292300B1F293 /* JoinViewModel.swift */; };
 		57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A162B0CCEFE0048B27C /* NetworkManager.swift */; };
-		57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E13A192B0CCF420048B27C /* NetworkModel.swift */; };
 		57E5979A2B1F0DCA00C5251C /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E597992B1F0DCA00C5251C /* ProfileImageView.swift */; };
 		57E5979E2B1F0F0500C5251C /* NicknameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5979D2B1F0F0500C5251C /* NicknameLabel.swift */; };
 		57E597A02B1F0F1B00C5251C /* BupTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E5979F2B1F0F1B00C5251C /* BupTitleLabel.swift */; };
@@ -95,6 +94,8 @@
 		57F50FB12B1F973000E15811 /* PostReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F50FB02B1F973000E15811 /* PostReadRequest.swift */; };
 		57F50FB32B1F979900E15811 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F50FB22B1F979900E15811 /* PostDTO.swift */; };
 		57F6DDA92B2150340090C646 /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDA82B2150340090C646 /* Creator.swift */; };
+		57F6DDAB2B2178F70090C646 /* JoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAA2B2178F70090C646 /* JoinDTO.swift */; };
+		57F6DDAD2B2179090090C646 /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAC2B2179090090C646 /* JoinError.swift */; };
 		57FB01FB2B186547003CAD51 /* BupNewsfeedFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FA2B186547003CAD51 /* BupNewsfeedFooter.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB02042B1893CD003CAD51 /* TodoInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */; };
@@ -143,7 +144,7 @@
 		57DC505E2B0E357B00B1F293 /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		57DC50602B0E359A00B1F293 /* EmailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailMainView.swift; sourceTree = "<group>"; };
 		57DC50642B0E35BC00B1F293 /* EmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewModel.swift; sourceTree = "<group>"; };
-		57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationResponse.swift; sourceTree = "<group>"; };
+		57DC50872B0EEDF600B1F293 /* EmailValidationResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationResponseDTO.swift; sourceTree = "<group>"; };
 		57DC509A2B0F393E00B1F293 /* PasswordMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordMainView.swift; sourceTree = "<group>"; };
 		57DC509C2B0F3B1200B1F293 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		57DC509E2B0F3B2C00B1F293 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
@@ -154,7 +155,6 @@
 		57DC50C02B119CF400B1F293 /* JoinTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinTabViewController.swift; sourceTree = "<group>"; };
 		57DC50C52B12292300B1F293 /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		57E13A162B0CCEFE0048B27C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		57E13A192B0CCF420048B27C /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
 		57E597992B1F0DCA00C5251C /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		57E5979D2B1F0F0500C5251C /* NicknameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameLabel.swift; sourceTree = "<group>"; };
 		57E5979F2B1F0F1B00C5251C /* BupTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupTitleLabel.swift; sourceTree = "<group>"; };
@@ -190,6 +190,8 @@
 		57F50FB02B1F973000E15811 /* PostReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadRequest.swift; sourceTree = "<group>"; };
 		57F50FB22B1F979900E15811 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		57F6DDA82B2150340090C646 /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
+		57F6DDAA2B2178F70090C646 /* JoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDTO.swift; sourceTree = "<group>"; };
+		57F6DDAC2B2179090090C646 /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		57FB01FA2B186547003CAD51 /* BupNewsfeedFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedFooter.swift; sourceTree = "<group>"; };
 		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputViewModel.swift; sourceTree = "<group>"; };
@@ -408,10 +410,11 @@
 		57E635DA2B1CEDE000B9F112 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				57DC50872B0EEDF600B1F293 /* EmailValidationResponse.swift */,
-				57E13A192B0CCF420048B27C /* NetworkModel.swift */,
+				57DC50872B0EEDF600B1F293 /* EmailValidationResponseDTO.swift */,
+				57F6DDAA2B2178F70090C646 /* JoinDTO.swift */,
+				57F6DDAC2B2179090090C646 /* JoinError.swift */,
 			);
-			path = Model;
+			path = Account;
 			sourceTree = "<group>";
 		};
 		57E98DD12B0B660000330C6B = {
@@ -474,7 +477,8 @@
 		57E98DF22B0B665800330C6B /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				57E13A182B0CCF260048B27C /* Model */,
+				57E635DA2B1CEDE000B9F112 /* Account */,
+				57E635D92B1CEDD400B9F112 /* Post */,
 				579B36312B0B7C3B008ACCAE /* Router.swift */,
 				57FD7C862B1F87E2006C284B /* Request.swift */,
 				57E13A162B0CCEFE0048B27C /* NetworkManager.swift */,
@@ -799,7 +803,6 @@
 				576920FF2B1EA45C00B8CE80 /* BupContent.swift in Sources */,
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */,
-				57E13A1A2B0CCF420048B27C /* NetworkModel.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
 				57FBCB652B15F09200C83C93 /* BupNewsfeedMainView.swift in Sources */,
 				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
@@ -813,6 +816,7 @@
 				57F50FB12B1F973000E15811 /* PostReadRequest.swift in Sources */,
 				57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
+				57F6DDAD2B2179090090C646 /* JoinError.swift in Sources */,
 				57FB01FB2B186547003CAD51 /* BupNewsfeedFooter.swift in Sources */,
 				57FB02062B1893D6003CAD51 /* TodoInputMainView.swift in Sources */,
 				57E5979E2B1F0F0500C5251C /* NicknameLabel.swift in Sources */,
@@ -822,8 +826,9 @@
 				57E635D42B1C977A00B9F112 /* TodoInfoInput.swift in Sources */,
 				57D5FA2D2B1328D300A76420 /* PhoneNumError.swift in Sources */,
 				57E597A22B1F21A400C5251C /* BupContentLabel.swift in Sources */,
+				57F6DDAB2B2178F70090C646 /* JoinDTO.swift in Sources */,
 				57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */,
-				57DC50882B0EEDF600B1F293 /* EmailValidationResponse.swift in Sources */,
+				57DC50882B0EEDF600B1F293 /* EmailValidationResponseDTO.swift in Sources */,
 				57625DF22B18C70E0066642F /* Todo.swift in Sources */,
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
