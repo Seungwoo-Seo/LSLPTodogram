@@ -65,6 +65,7 @@
 		57E635D22B1A14B900B9F112 /* TodoInputSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D12B1A14B900B9F112 /* TodoInputSection.swift */; };
 		57E635D42B1C977A00B9F112 /* TodoInfoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D32B1C977A00B9F112 /* TodoInfoInput.swift */; };
 		57E635D62B1C979B00B9F112 /* TodoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D52B1C979B00B9F112 /* TodoInput.swift */; };
+		57E635D82B1CEAB300B9F112 /* TodoOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D72B1CEAB300B9F112 /* TodoOutput.swift */; };
 		57E635DC2B1CEDF600B9F112 /* PostCreateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */; };
 		57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98DDD2B0B660000330C6B /* AppDelegate.swift */; };
 		57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98DDF2B0B660000330C6B /* SceneDelegate.swift */; };
@@ -166,6 +167,7 @@
 		57E635D12B1A14B900B9F112 /* TodoInputSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputSection.swift; sourceTree = "<group>"; };
 		57E635D32B1C977A00B9F112 /* TodoInfoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInfoInput.swift; sourceTree = "<group>"; };
 		57E635D52B1C979B00B9F112 /* TodoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInput.swift; sourceTree = "<group>"; };
+		57E635D72B1CEAB300B9F112 /* TodoOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoOutput.swift; sourceTree = "<group>"; };
 		57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateResponseDTO.swift; sourceTree = "<group>"; };
 		57E98DDA2B0B660000330C6B /* LSLPTodogram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LSLPTodogram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		57E98DDD2B0B660000330C6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -613,6 +615,7 @@
 				57E635CF2B1A149F00B9F112 /* TodoInputItemIdentifiable.swift */,
 				57E635D32B1C977A00B9F112 /* TodoInfoInput.swift */,
 				57E635D52B1C979B00B9F112 /* TodoInput.swift */,
+				57E635D72B1CEAB300B9F112 /* TodoOutput.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
 				57E98E1A2B0B6CDD00330C6B /* ViewIdentifiable.swift in Sources */,
 				570E01B02B1828B300D1E012 /* BupNewsfeedCell.swift in Sources */,
+				57E635D82B1CEAB300B9F112 /* TodoOutput.swift in Sources */,
 				57DC50A92B0F655100B1F293 /* UserDetailViewController.swift in Sources */,
 				57DC50AB2B0F657900B1F293 /* UserDetailViewModel.swift in Sources */,
 				57DC505F2B0E357B00B1F293 /* EmailViewController.swift in Sources */,
