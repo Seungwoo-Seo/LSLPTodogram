@@ -1,5 +1,5 @@
 //
-//  BupNewsfeedHeader.swift
+//  BupHeader.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BupNewsfeedHeader: BaseCollectionReusableView {
+final class BupHeader: BaseCollectionReusableView {
     private let hStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -28,6 +28,13 @@ final class BupNewsfeedHeader: BaseCollectionReusableView {
     let nicknameLabel = NicknameLabel()
     let phoneNumLabel = NicknameLabel()
     let titleLabel = BupTitleLabel()
+
+    func configure(_ item: BupTop) {
+        profileImageView.image = UIImage(systemName: "person")
+        nicknameLabel.text = item.nick
+        phoneNumLabel.text = "핸드폰: 미설정"
+        titleLabel.text = item.title
+    }
 
     override func initialAttributes() {
         super.initialAttributes()
