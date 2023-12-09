@@ -1,5 +1,5 @@
 //
-//  BupNewsfeedFooter.swift
+//  BupFooter.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BupNewsfeedFooter: BaseCollectionReusableView {
+final class BupFooter: BaseCollectionReusableView {
     private let buttonStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -30,6 +30,10 @@ final class BupNewsfeedFooter: BaseCollectionReusableView {
         let button = UIButton(configuration: config)
         return button
     }()
+
+    func configure(_ item: BupBottom) {
+
+    }
 
     override func initialAttributes() {
         super.initialAttributes()

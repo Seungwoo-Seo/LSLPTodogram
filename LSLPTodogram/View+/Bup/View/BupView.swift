@@ -1,14 +1,13 @@
 //
-//  BupNewsfeedMainView.swift
+//  BupView.swift
 //  LSLPTodogram
 //
-//  Created by 서승우 on 2023/11/28.
+//  Created by 서승우 on 2023/12/07.
 //
 
 import UIKit
-import Kingfisher
 
-final class BupNewsfeedMainView: BaseView {
+final class BupView: BaseView {
     var dataSource: UICollectionViewDiffableDataSource<BupContainer, BupContent>!
 
     lazy var collectionView = {
@@ -33,9 +32,53 @@ final class BupNewsfeedMainView: BaseView {
         }
     }
 
+    func configureDataSource<T: BupViewModelType>(_ viewModel: T) where T: AnyObject {
+        let cellRegistration = UICollectionView.CellRegistration<BupCell, BupContent> { cell, indexPath, itemIdentifier in
+            cell.configure(itemIdentifier)
+        }
+
+        let headerRegistration = UICollectionView.SupplementaryRegistration<BupHeader>(
+            elementKind: BupHeader.identifier
+        ) { [unowned viewModel] (supplementaryView, elementKind, indexPath) in
+            let bupTop = viewModel.bupContainerList.value[indexPath.section].bupTop
+            supplementaryView.configure(bupTop)
+        }
+
+        let footerRegistration = UICollectionView.SupplementaryRegistration<BupFooter>(
+            elementKind: BupFooter.identifier
+        ) { [unowned viewModel] (supplementaryView, elementKind, indexPath) in
+            let bupBottom = viewModel.bupContainerList.value[indexPath.section].bupBottom
+            supplementaryView.configure(bupBottom)
+        }
+
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: collectionView
+        ) { collectionView, indexPath, itemIdentifier in
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: itemIdentifier
+            )
+        }
+
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            if kind == BupHeader.identifier {
+                return collectionView.dequeueConfiguredReusableSupplementary(
+                    using: headerRegistration,
+                    for: indexPath
+                )
+            } else {
+                return collectionView.dequeueConfiguredReusableSupplementary(
+                    using: footerRegistration,
+                    for: indexPath
+                )
+            }
+        }
+    }
+
 }
 
-private extension BupNewsfeedMainView {
+private extension BupView {
 
     func createLayout() -> UICollectionViewLayout {
         let config = UICollectionViewCompositionalLayoutConfiguration()
@@ -44,14 +87,14 @@ private extension BupNewsfeedMainView {
         let layout = UICollectionViewCompositionalLayout(
             sectionProvider: { [weak self] _, _ in
                 guard let self else {return nil}
-                return self.todoLayout()
+                return self.bupSection()
             }, configuration: config
         )
 
         return layout
     }
 
-    func todoLayout() -> NSCollectionLayoutSection {
+    func bupSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
             heightDimension: .estimated(50)
@@ -76,13 +119,13 @@ private extension BupNewsfeedMainView {
 
         let header = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerFooterSize,
-            elementKind: BupNewsfeedHeader.identifier,
+            elementKind: BupHeader.identifier,
             alignment: .top
         )
 
         let footer = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerFooterSize,
-            elementKind: BupNewsfeedFooter.identifier,
+            elementKind: BupFooter.identifier,
             alignment: .bottom
         )
 

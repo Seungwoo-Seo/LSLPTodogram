@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import RxRelay
 
 protocol ViewModelType {
     associatedtype Input
     associatedtype Output
 
     func transform(input: Input) -> Output
+}
+
+protocol BupViewModelType: ViewModelType {
+    var bupContainerList: BehaviorRelay<[BupContainer]> {get}
 }

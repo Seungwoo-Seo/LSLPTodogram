@@ -1,5 +1,5 @@
 //
-//  BupNewsfeedCell.swift
+//  BupCell.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -7,9 +7,13 @@
 
 import UIKit
 
-final class BupNewsfeedCell: BaseCollectionViewCell {
+final class BupCell: BaseCollectionViewCell {
     private let middlePointLabel = MiddlePointLabel()
     let bupContentLabel = BupContentLabel()
+
+    func configure(_ item: BupContent) {
+        bupContentLabel.text = item.content
+    }
 
     override func initialAttributes() {
         super.initialAttributes()
