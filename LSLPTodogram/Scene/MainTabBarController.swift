@@ -7,32 +7,14 @@
 
 import UIKit
 
-fileprivate enum MainTabBarItem: Int, CaseIterable {
-    case todoNewsfeed
-    case todoAdd
-
-    var viewController: UIViewController {
-        switch self {
-        case .todoNewsfeed:
-            let viewModel = BupNewsfeedViewModel()
-            let vc = BupNewsfeedViewController(viewModel)
-            vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "house.fill"), tag: rawValue)
-            return UINavigationController(rootViewController: vc)
-        case .todoAdd:
-            let vc = FakeViewController()
-            vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "pencil.line"), tag: rawValue)
-            return vc
-        }
-    }
-}
-
 final class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+    private let viewModel = MainTabBarViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         delegate = self
-        viewControllers = MainTabBarItem.allCases.map { $0.viewController }
+        viewControllers = viewModel.viewControllerList
     }
 
     func tabBarController(
@@ -40,8 +22,7 @@ final class MainTabBarController: UITabBarController, UITabBarControllerDelegate
         shouldSelect viewController: UIViewController
     ) -> Bool {
         if viewController is FakeViewController {
-            let viewModel = TodoInputViewModel()
-            let vc = TodoInputViewController(viewModel)
+            let vc = viewModel.todoInputViewController
             let navi = UINavigationController(rootViewController: vc)
             present(navi, animated: true)
             return false
@@ -51,5 +32,3 @@ final class MainTabBarController: UITabBarController, UITabBarControllerDelegate
     }
 
 }
-
-fileprivate final class FakeViewController: UIViewController {}

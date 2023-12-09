@@ -9,9 +9,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-import UIKit
-
-final class BupNewsfeedViewModel: ViewModelType {
+final class BupNewsfeedViewModel: BupViewModelType {
     private let disposeBag = DisposeBag()
 
     private var lists: [BupContainer] = []
@@ -113,33 +111,5 @@ private extension BupNewsfeedViewModel {
             )
         }
     }
-
-//    func toBupContainer(_ bup: BupDTO) -> BupContainer {
-//        // top
-//        let bupTop = BupTop(nick: bup.creator.nick, title: bup.title)
-//
-//        // content
-//        let bupContents = [
-//            bup.content,
-//            bup.content1,
-//            bup.content2,
-//            bup.content3,
-//            bup.content4
-//        ].filter { $0 != nil }
-//            .compactMap { $0 }
-//            .map { BupContent(content: $0) }
-//
-//        // bottom
-//        let bupBottom = BupBottom(
-//            likes: bup.likes,
-//            image: bup.image,
-//            hashTags: bup.hashTags,
-//            comments: bup.comments
-//        )
-//
-//
-//
-//        return BupContainer(bupTop: bupTop, bupContents: bupContents, bupBottom: bupBottom)
-//    }
 
 }
