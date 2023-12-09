@@ -98,6 +98,7 @@
 		57F6DDAB2B2178F70090C646 /* JoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAA2B2178F70090C646 /* JoinDTO.swift */; };
 		57F6DDAD2B2179090090C646 /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAC2B2179090090C646 /* JoinError.swift */; };
 		57F6DDB92B21B8210090C646 /* BupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDB82B21B8210090C646 /* BupView.swift */; };
+		57F6DDBB2B21C90D0090C646 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */; };
 		57FB01FB2B186547003CAD51 /* BupFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FA2B186547003CAD51 /* BupFooter.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB02042B1893CD003CAD51 /* TodoInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */; };
@@ -195,6 +196,7 @@
 		57F6DDAA2B2178F70090C646 /* JoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDTO.swift; sourceTree = "<group>"; };
 		57F6DDAC2B2179090090C646 /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		57F6DDB82B21B8210090C646 /* BupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupView.swift; sourceTree = "<group>"; };
+		57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
 		57FB01FA2B186547003CAD51 /* BupFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupFooter.swift; sourceTree = "<group>"; };
 		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputViewModel.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				57F101782B19DFF900BE333F /* MainTabBarController.swift */,
+				57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */,
 				57DC50512B0E26FE00B1F293 /* Login */,
 				57DC50522B0E338700B1F293 /* Join */,
 				57FBCB5F2B15F05400C83C93 /* BupNewsfeed */,
@@ -823,6 +826,7 @@
 				57DC50C12B119CF400B1F293 /* JoinTabViewController.swift in Sources */,
 				57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */,
 				57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */,
+				57F6DDBB2B21C90D0090C646 /* MainTabBarViewModel.swift in Sources */,
 				57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */,
 				57D5FA382B133EA200A76420 /* InfoInputTextField.swift in Sources */,
 				57E98E182B0B6C9000330C6B /* BaseViewController.swift in Sources */,
