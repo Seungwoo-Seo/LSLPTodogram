@@ -106,7 +106,6 @@
 		57FB020A2B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02092B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift */; };
 		57FB02102B189F54003CAD51 /* TodoInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB020F2B189F54003CAD51 /* TodoInputCell.swift */; };
 		57FBCB632B15F08600C83C93 /* BupNewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */; };
-		57FBCB652B15F09200C83C93 /* BupNewsfeedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB642B15F09200C83C93 /* BupNewsfeedMainView.swift */; };
 		57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB662B15F0A900C83C93 /* BupNewsfeedViewModel.swift */; };
 		57FD7C872B1F87E2006C284B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD7C862B1F87E2006C284B /* Request.swift */; };
 /* End PBXBuildFile section */
@@ -204,7 +203,6 @@
 		57FB02092B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeaderFooterView.swift; sourceTree = "<group>"; };
 		57FB020F2B189F54003CAD51 /* TodoInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputCell.swift; sourceTree = "<group>"; };
 		57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedViewController.swift; sourceTree = "<group>"; };
-		57FBCB642B15F09200C83C93 /* BupNewsfeedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedMainView.swift; sourceTree = "<group>"; };
 		57FBCB662B15F0A900C83C93 /* BupNewsfeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedViewModel.swift; sourceTree = "<group>"; };
 		57FD7C862B1F87E2006C284B /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -676,7 +674,6 @@
 		57FBCB602B15F06900C83C93 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				57FBCB642B15F09200C83C93 /* BupNewsfeedMainView.swift */,
 				57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */,
 			);
 			path = View;
@@ -835,7 +832,6 @@
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
-				57FBCB652B15F09200C83C93 /* BupNewsfeedMainView.swift in Sources */,
 				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
 				57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
