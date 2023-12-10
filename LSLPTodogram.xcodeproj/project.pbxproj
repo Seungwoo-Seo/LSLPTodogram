@@ -99,6 +99,7 @@
 		57F6DDAD2B2179090090C646 /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAC2B2179090090C646 /* JoinError.swift */; };
 		57F6DDB92B21B8210090C646 /* BupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDB82B21B8210090C646 /* BupView.swift */; };
 		57F6DDBB2B21C90D0090C646 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */; };
+		57F956EC2B24DA9700A86F43 /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956EB2B24DA9700A86F43 /* ProfileResponseDTO.swift */; };
 		57FB01FB2B186547003CAD51 /* BupFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FA2B186547003CAD51 /* BupFooter.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB02042B1893CD003CAD51 /* TodoInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */; };
@@ -197,6 +198,7 @@
 		57F6DDAC2B2179090090C646 /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		57F6DDB82B21B8210090C646 /* BupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupView.swift; sourceTree = "<group>"; };
 		57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
+		57F956EB2B24DA9700A86F43 /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
 		57FB01FA2B186547003CAD51 /* BupFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupFooter.swift; sourceTree = "<group>"; };
 		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02032B1893CD003CAD51 /* TodoInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoInputViewModel.swift; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 			children = (
 				57E635DA2B1CEDE000B9F112 /* Account */,
 				57E635D92B1CEDD400B9F112 /* Post */,
+				57F956EA2B24D83400A86F43 /* Profile */,
 				579B36312B0B7C3B008ACCAE /* Router.swift */,
 				57FD7C862B1F87E2006C284B /* Request.swift */,
 				57E13A162B0CCEFE0048B27C /* NetworkManager.swift */,
@@ -594,6 +597,14 @@
 				570E01AF2B1828B300D1E012 /* BupCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		57F956EA2B24D83400A86F43 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				57F956EB2B24DA9700A86F43 /* ProfileResponseDTO.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		57FB01FC2B187388003CAD51 /* Keychain */ = {
@@ -785,6 +796,7 @@
 				57F101792B19DFF900BE333F /* MainTabBarController.swift in Sources */,
 				57FB020A2B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				57DC50612B0E359A00B1F293 /* EmailMainView.swift in Sources */,
+				57F956EC2B24DA9700A86F43 /* ProfileResponseDTO.swift in Sources */,
 				57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */,
 				57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */,
 				57F6DDB92B21B8210090C646 /* BupView.swift in Sources */,
