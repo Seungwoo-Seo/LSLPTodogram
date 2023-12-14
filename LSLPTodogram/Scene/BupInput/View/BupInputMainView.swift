@@ -1,5 +1,5 @@
 //
-//  TodoInputMainView.swift
+//  BupInputMainView.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -7,14 +7,21 @@
 
 import UIKit
 
-final class TodoInputMainView: BaseView {
+enum BupInputItemIdentifiable: Hashable {
+    case info(BupInfoInput)
+    case content(BupContentInput)
+    case add
+}
+
+final class BupInputMainView: BaseView {
     lazy var tableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.rowHeight = UITableView.automaticDimension
         view.estimatedRowHeight = 44
-        view.register(TodoInfoInputCell.self, forCellReuseIdentifier: TodoInfoInputCell.identifier)
-        view.register(TodoInputCell.self, forCellReuseIdentifier: TodoInputCell.identifier)
-        view.register(TodoAddCell.self, forCellReuseIdentifier: TodoAddCell.identifier)
+        view.sectionHeaderTopPadding = 0
+        view.register(BupInfoInputCell.self, forCellReuseIdentifier: BupInfoInputCell.identifier)
+        view.register(BupContentInputCell.self, forCellReuseIdentifier: BupContentInputCell.identifier)
+        view.register(BupContentAddCell.self, forCellReuseIdentifier: BupContentAddCell.identifier)
         return view
     }()
 
