@@ -1,5 +1,5 @@
 //
-//  TodoInputCell.swift
+//  BupContentInputCell.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/11/30.
@@ -9,7 +9,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-final class TodoInputCell: BaseTableViewCell {
+final class BupContentInputCell: BaseTableViewCell {
     private let middlePointLabel = {
         let label = UILabel()
         label.text = "•"
@@ -19,7 +19,7 @@ final class TodoInputCell: BaseTableViewCell {
         label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         return label
     }()
-    let todoInputTextView = {
+    let bupContentInputTextView = {
         let view = UITextView()
         view.text = "할 일..."
         view.textColor = Color.black
@@ -30,6 +30,10 @@ final class TodoInputCell: BaseTableViewCell {
     }()
 
     var disposeBag = DisposeBag()
+
+    func configure(_ item: BupContentInput) {
+        bupContentInputTextView.text = item.content
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -48,7 +52,7 @@ final class TodoInputCell: BaseTableViewCell {
 
         [
             middlePointLabel,
-            todoInputTextView
+            bupContentInputTextView
         ].forEach { contentView.addSubview($0) }
     }
 
@@ -57,11 +61,11 @@ final class TodoInputCell: BaseTableViewCell {
 
         let offset = 8
         middlePointLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(todoInputTextView)
+            make.centerY.equalTo(bupContentInputTextView)
             make.leading.equalToSuperview().offset(offset)
         }
 
-        todoInputTextView.snp.makeConstraints { make in
+        bupContentInputTextView.snp.makeConstraints { make in
             make.leading.equalTo(middlePointLabel.snp.trailing).offset(offset)
             make.verticalEdges.equalToSuperview()
             make.trailing.equalToSuperview()

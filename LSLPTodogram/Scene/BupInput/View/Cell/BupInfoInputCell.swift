@@ -1,5 +1,5 @@
 //
-//  TodoInfoInputCell.swift
+//  BupInfoInputCell.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/12/01.
@@ -7,8 +7,9 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
-final class TodoInfoInputCell: BaseTableViewCell {
+final class BupInfoInputCell: BaseTableViewCell {
     private let hStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -17,25 +18,17 @@ final class TodoInfoInputCell: BaseTableViewCell {
         view.spacing = 16
         return view
     }()
-    let profileImageView = {
-        let view = UIImageView()
-        view.contentMode = .scaleAspectFit
-        return view
-    }()
-    private let vStackView = {
+    private let profileImageView = ProfileImageView(image: UIImage(systemName: "person.fill"))
+    private let labelStackView = {
         let view = UIStackView()
         view.axis = .vertical
-        view.alignment = .fill
+        view.alignment = .top
         view.distribution = .equalSpacing
         view.spacing = 4
         return view
     }()
-    let nicknameLabel = {
-        let label = UILabel()
-        label.textColor = Color.black
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
-        return label
-    }()
+    private let nicknameLabel = NicknameLabel()
+    private let phoneNumLabel = NicknameLabel()
     let titleTextView = {
         let view = UITextView()
         view.text = "과제, 목표, 각오 등 제목을 작성.."
@@ -47,6 +40,12 @@ final class TodoInfoInputCell: BaseTableViewCell {
     }()
 
     var disposeBag = DisposeBag()
+
+    func configure(_ item: BupInfoInput) {
+        profileImageView.image = UIImage(systemName: "person")
+        nicknameLabel.text = item.nickname
+        titleTextView.text = item.title
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -66,28 +65,37 @@ final class TodoInfoInputCell: BaseTableViewCell {
         contentView.addSubview(hStackView)
 
         [
+            hStackView,
+            titleTextView
+        ].forEach { addSubview($0) }
+
+        [
             profileImageView,
-            vStackView
+            labelStackView
         ].forEach { hStackView.addArrangedSubview($0) }
 
         [
             nicknameLabel,
-            titleTextView
-        ].forEach { vStackView.addArrangedSubview($0) }
+            phoneNumLabel
+        ].forEach { labelStackView.addArrangedSubview($0) }
     }
 
     override func initialLayout() {
         super.initialLayout()
 
+        let offset = 16
         let inset = 16
         hStackView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
-            make.horizontalEdges.equalToSuperview().inset(inset)
-            make.bottom.equalToSuperview().inset(inset/2)
+            make.top.horizontalEdges.equalToSuperview().inset(inset)
         }
 
         profileImageView.snp.makeConstraints { make in
-            make.size.equalTo(44)
+            make.size.equalTo(40)
+        }
+
+        titleTextView.snp.makeConstraints { make in
+            make.top.equalTo(profileImageView.snp.bottom).offset(offset)
+            make.horizontalEdges.bottom.equalToSuperview().inset(inset)
         }
     }
 

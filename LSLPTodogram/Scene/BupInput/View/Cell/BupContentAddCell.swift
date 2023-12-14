@@ -1,5 +1,5 @@
 //
-//  TodoAddCell.swift
+//  BupContentAddCell.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/12/01.
@@ -8,11 +8,11 @@
 import UIKit
 import RxSwift
 
-final class TodoAddCell: BaseTableViewCell {
-    let todoAddButton = {
+final class BupContentAddCell: BaseTableViewCell {
+    let bupAddButton = {
         var config = UIButton.Configuration.plain()
         config.baseForegroundColor = Color.lightGray
-        config.title = "todo Add..."
+        config.title = "bup Add..."
         let button = UIButton(configuration: config)
         return button
     }()
@@ -34,14 +34,14 @@ final class TodoAddCell: BaseTableViewCell {
     override func initialHierarchy() {
         super.initialHierarchy()
 
-        contentView.addSubview(todoAddButton)
+        contentView.addSubview(bupAddButton)
     }
 
     override func initialLayout() {
         super.initialLayout()
 
         let inset = 16
-        todoAddButton.snp.makeConstraints { make in
+        bupAddButton.snp.makeConstraints { make in
             make.verticalEdges.equalToSuperview()
             make.leading.equalToSuperview().inset(inset)
             make.height.equalTo(44)
