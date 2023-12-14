@@ -8,9 +8,9 @@
 import UIKit
 
 final class ProfileImageView: BaseImageView {
-    
-    override func initialAttributes() {
-        super.initialAttributes()
+
+    override init(image: UIImage?) {
+        super.init(image: image)
 
         setContentHuggingPriority(.defaultHigh, for: .vertical)
         setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -19,16 +19,12 @@ final class ProfileImageView: BaseImageView {
         contentMode = .scaleAspectFit
         layer.borderColor = Color.black.cgColor
         layer.borderWidth = 0.5
-        layer.cornerRadius = 20
         clipsToBounds = true
     }
 
-    override func initialLayout() {
-        super.initialLayout()
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-        snp.makeConstraints { make in
-            make.size.equalTo(40)
-        }
+        layer.cornerRadius = bounds.height/2
     }
-
 }
