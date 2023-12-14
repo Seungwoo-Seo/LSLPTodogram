@@ -1,13 +1,13 @@
 //
-//  BupHeader.swift
+//  BupInfoView.swift
 //  LSLPTodogram
 //
-//  Created by 서승우 on 2023/11/30.
+//  Created by 서승우 on 2023/12/12.
 //
 
 import UIKit
 
-final class BupHeader: BaseCollectionReusableView {
+final class BupInfoView: BaseView {
     private let hStackView = {
         let view = UIStackView()
         view.axis = .horizontal
@@ -28,13 +28,6 @@ final class BupHeader: BaseCollectionReusableView {
     let nicknameLabel = NicknameLabel()
     let phoneNumLabel = NicknameLabel()
     let titleLabel = BupTitleLabel()
-
-    func configure(_ item: BupTop) {
-        profileImageView.image = UIImage(systemName: "person")
-        nicknameLabel.text = item.nick
-        phoneNumLabel.text = "핸드폰: 미설정"
-        titleLabel.text = item.title
-    }
 
     override func initialAttributes() {
         super.initialAttributes()
@@ -71,6 +64,10 @@ final class BupHeader: BaseCollectionReusableView {
         let inset = 16
         hStackView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview().inset(inset)
+        }
+
+        profileImageView.snp.makeConstraints { make in
+            make.size.equalTo(40)
         }
 
         titleLabel.snp.makeConstraints { make in
