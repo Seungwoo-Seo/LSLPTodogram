@@ -60,6 +60,8 @@
 		57E635D42B1C977A00B9F112 /* BupInfoInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D32B1C977A00B9F112 /* BupInfoInput.swift */; };
 		57E635D62B1C979B00B9F112 /* BupContentInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635D52B1C979B00B9F112 /* BupContentInput.swift */; };
 		57E635DC2B1CEDF600B9F112 /* PostCreateResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */; };
+		57E696E22B2B4BD100294ABA /* FollowersButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E696E12B2B4BD100294ABA /* FollowersButton.swift */; };
+		57E696E42B2B4BE900294ABA /* FollowingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E696E32B2B4BE900294ABA /* FollowingButton.swift */; };
 		57E935772B261AD50098F28E /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E935762B261AD50098F28E /* ProfileMainView.swift */; };
 		57E9357A2B26416D0098F28E /* BupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E935792B26416D0098F28E /* BupView.swift */; };
 		57E935882B2749EC0098F28E /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E935872B2749EC0098F28E /* ProfileCell.swift */; };
@@ -163,6 +165,8 @@
 		57E635D32B1C977A00B9F112 /* BupInfoInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInfoInput.swift; sourceTree = "<group>"; };
 		57E635D52B1C979B00B9F112 /* BupContentInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupContentInput.swift; sourceTree = "<group>"; };
 		57E635DB2B1CEDF600B9F112 /* PostCreateResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateResponseDTO.swift; sourceTree = "<group>"; };
+		57E696E12B2B4BD100294ABA /* FollowersButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersButton.swift; sourceTree = "<group>"; };
+		57E696E32B2B4BE900294ABA /* FollowingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingButton.swift; sourceTree = "<group>"; };
 		57E935762B261AD50098F28E /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		57E935792B26416D0098F28E /* BupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupView.swift; sourceTree = "<group>"; };
 		57E935872B2749EC0098F28E /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
@@ -535,6 +539,8 @@
 				57E5979F2B1F0F1B00C5251C /* BupTitleLabel.swift */,
 				57E597A12B1F21A400C5251C /* BupContentLabel.swift */,
 				57E597A32B1F21DA00C5251C /* MiddlePointLabel.swift */,
+				57E696E12B2B4BD100294ABA /* FollowersButton.swift */,
+				57E696E32B2B4BE900294ABA /* FollowingButton.swift */,
 			);
 			path = "View+";
 			sourceTree = "<group>";
@@ -843,6 +849,7 @@
 				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,
 				57E5979A2B1F0DCA00C5251C /* ProfileImageView.swift in Sources */,
 				57F956E72B24CE4200A86F43 /* ProfileViewController.swift in Sources */,
+				57E696E22B2B4BD100294ABA /* FollowersButton.swift in Sources */,
 				57BDFAF42B15B055006CAE1F /* ReconfrimSuccess.swift in Sources */,
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
@@ -893,6 +900,7 @@
 				57DC50A92B0F655100B1F293 /* UserDetailViewController.swift in Sources */,
 				57DC50AB2B0F657900B1F293 /* UserDetailViewModel.swift in Sources */,
 				57DC505F2B0E357B00B1F293 /* EmailViewController.swift in Sources */,
+				57E696E42B2B4BE900294ABA /* FollowingButton.swift in Sources */,
 				57DC50A72B0F654600B1F293 /* UserDetailMainView.swift in Sources */,
 				57E98E162B0B6C8200330C6B /* BaseView.swift in Sources */,
 			);
