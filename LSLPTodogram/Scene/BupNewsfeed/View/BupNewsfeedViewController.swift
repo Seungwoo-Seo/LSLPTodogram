@@ -10,27 +10,54 @@ import RxCocoa
 import RxSwift
 
 final class BupNewsfeedViewController: BaseViewController {
-    private let mainView = BupView()
+    private let mainView = BupNewsfeedMainView()
     private let disposeBag = DisposeBag()
 
     init(_ viewModel: BupNewsfeedViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        mainView.configureDataSource(viewModel)
+        let commentInBup = PublishRelay<Bup>()
+
+        mainView.dataSource = UITableViewDiffableDataSource(
+            tableView: mainView.tableView
+        ) { tableView, indexPath, itemIdentifier in
+
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: BupCell.identifier,
+                for: indexPath
+            ) as! BupCell
+
+            cell.bupView.communicationView.commentButton.rx.tap
+                .withLatestFrom(cell.bup)
+                .bind(to: commentInBup)
+                .disposed(by: cell.disposeBag)
+
+            cell.bup.accept(itemIdentifier)
+
+            return cell
+        }
+        mainView.snapshot.appendSections(BupNewsfeedSection.allCases)
+        mainView.dataSource.apply(mainView.snapshot)
 
         let input = BupNewsfeedViewModel.Input(
-            prefetchItems: mainView.collectionView.rx.prefetchItems
+            prefetchRows: mainView.tableView.rx.prefetchRows,
+            commentInBup: commentInBup
         )
         let output = viewModel.transform(input: input)
 
-        output.bupContainerList
-            .bind(with: self) { owner, bupContainerList in
-                var snapshot = NSDiffableDataSourceSnapshot<BupContainer, BupContent>()
-                snapshot.appendSections(bupContainerList)
-                for bupContainer in bupContainerList {
-                    snapshot.appendItems(bupContainer.bupContents, toSection: bupContainer)
-                }
-                owner.mainView.dataSource.apply(snapshot)
+        output.bupList
+            .bind(with: self) { owner, bupList in
+                owner.mainView.snapshot.appendItems(bupList)
+                owner.mainView.dataSource.apply(owner.mainView.snapshot)
+            }
+            .disposed(by: disposeBag)
+
+        output.presentCommentViewController
+            .debug()
+            .bind(with: self) { owner, viewModel in
+                let vc = CommentViewController(viewModel)
+                let navi = UINavigationController(rootViewController: vc)
+                owner.present(navi, animated: true)
             }
             .disposed(by: disposeBag)
     }

@@ -11,6 +11,7 @@
 		57048C082B283D7A00E6D39E /* BupInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57048C072B283D7A00E6D39E /* BupInfoView.swift */; };
 		57048C0A2B283D8E00E6D39E /* BupContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57048C092B283D8E00E6D39E /* BupContentView.swift */; };
 		57048C0C2B283DA600E6D39E /* BupCommunicationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57048C0B2B283DA600E6D39E /* BupCommunicationView.swift */; };
+		57048C0E2B28406500E6D39E /* BupNewsfeedMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57048C0D2B28406500E6D39E /* BupNewsfeedMainView.swift */; };
 		570E01B42B1828FE00D1E012 /* BaseCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */; };
 		576920FB2B1E51A800B8CE80 /* PostCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */; };
 		576920FD2B1E5C5600B8CE80 /* PostReadResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO.swift */; };
@@ -118,6 +119,7 @@
 		57048C072B283D7A00E6D39E /* BupInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInfoView.swift; sourceTree = "<group>"; };
 		57048C092B283D8E00E6D39E /* BupContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupContentView.swift; sourceTree = "<group>"; };
 		57048C0B2B283DA600E6D39E /* BupCommunicationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupCommunicationView.swift; sourceTree = "<group>"; };
+		57048C0D2B28406500E6D39E /* BupNewsfeedMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedMainView.swift; sourceTree = "<group>"; };
 		570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionReusableView.swift; sourceTree = "<group>"; };
 		576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRequest.swift; sourceTree = "<group>"; };
 		576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadResponseDTO.swift; sourceTree = "<group>"; };
@@ -707,6 +709,7 @@
 		57FBCB602B15F06900C83C93 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				57048C0D2B28406500E6D39E /* BupNewsfeedMainView.swift */,
 				57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */,
 			);
 			path = View;
@@ -858,6 +861,7 @@
 				57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */,
 				57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */,
 				57048C0C2B283DA600E6D39E /* BupCommunicationView.swift in Sources */,
+				57048C0E2B28406500E6D39E /* BupNewsfeedMainView.swift in Sources */,
 				57F6DDBB2B21C90D0090C646 /* MainTabBarViewModel.swift in Sources */,
 				57E9358A2B274A040098F28E /* BupCell.swift in Sources */,
 				57D5FA362B133E5200A76420 /* InfoInputDescriptionLabel.swift in Sources */,
