@@ -23,7 +23,6 @@ final class ProfileMainView: BaseView {
 
     lazy var tableView = {
         let view = UITableView(frame: .zero, style: .plain)
-        view.delegate = self
         view.sectionHeaderTopPadding = 0
         view.rowHeight = UITableView.automaticDimension
         view.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
@@ -43,32 +42,6 @@ final class ProfileMainView: BaseView {
 
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(safeAreaLayoutGuide)
-        }
-    }
-
-}
-
-extension ProfileMainView: UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let section = ProfileSection.allCases[section]
-        switch section {
-        case .profile:
-            return nil
-        case .bup:
-            let header = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: BupSegmentHeader.identifier
-            ) as! BupSegmentHeader
-
-            return header
-        }
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let section = ProfileSection.allCases[section]
-        switch section {
-        case .profile: return 0
-        case .bup: return UITableView.automaticDimension
         }
     }
 

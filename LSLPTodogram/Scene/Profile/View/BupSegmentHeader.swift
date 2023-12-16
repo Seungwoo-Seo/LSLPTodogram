@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 final class BupSegmentHeader: BaseTableViewHeaderFooterView {
+    var disposeBag = DisposeBag()
+
     private lazy var hStackView = {
         let view = UIStackView(arrangedSubviews: [activeBupButton, historyBupButton])
         view.axis = .horizontal
@@ -32,6 +35,12 @@ final class BupSegmentHeader: BaseTableViewHeaderFooterView {
         let button = UIButton(configuration: config)
         return button
     }()
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        disposeBag = DisposeBag()
+    }
 
     override func initialHierarchy() {
         super.initialHierarchy()
