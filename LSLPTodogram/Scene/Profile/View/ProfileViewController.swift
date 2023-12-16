@@ -28,6 +28,14 @@ final class ProfileViewController: BaseViewController {
 
                 cell.configure(profile)
 
+                cell.profileEditButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        owner.presentProfileEditViewController()
+                    }
+                    .disposed(by: cell.disposeBag)
+
+//                cell.profileShareButton
+
                 return cell
 
             case .bup(let bup):
@@ -95,5 +103,61 @@ final class ProfileViewController: BaseViewController {
         super.viewDidLoad()
         
     }
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        mainView.tableView.delegate = self
+    }
+
+}
+
+extension ProfileViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let section = ProfileSection.allCases[section]
+        switch section {
+        case .profile:
+            return nil
+        case .bup:
+            let header = tableView.dequeueReusableHeaderFooterView(
+                withIdentifier: BupSegmentHeader.identifier
+            ) as! BupSegmentHeader
+
+            header.activeBupButton.rx.tap
+                .bind(with: self) { owner, _ in
+
+                }
+                .disposed(by: header.disposeBag)
+
+            header.historyBupButton.rx.tap
+                .bind(with: self) { owner, _ in
+//                    owner.presentProfileEditViewController()
+                }
+                .disposed(by: header.disposeBag)
+
+            return header
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let section = ProfileSection.allCases[section]
+        switch section {
+        case .profile: return 0
+        case .bup: return UITableView.automaticDimension
+        }
+    }
+
+}
+
+private extension ProfileViewController {
+
+    func presentProfileEditViewController() {
+        let viewModel = ProfileEditViewModel()
+        let vc = ProfileEditViewController(viewModel)
+        let navi = UINavigationController(rootViewController: vc)
+        present(navi, animated: true)
+    }
+
 
 }

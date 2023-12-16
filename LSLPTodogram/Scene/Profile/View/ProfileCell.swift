@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import RxSwift
 
 final class ProfileCell: BaseTableViewCell {
+    var disposeBag = DisposeBag()
+
     let labelStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -74,6 +77,12 @@ final class ProfileCell: BaseTableViewCell {
         emailLabel.text = item.email
         followersButton.configuration?.title = "팔로워 \(item.followers.count)명"
         followingButton.configuration?.title = "팔로잉 \(item.following.count)명"
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        disposeBag = DisposeBag()
     }
 
     override func initialHierarchy() {

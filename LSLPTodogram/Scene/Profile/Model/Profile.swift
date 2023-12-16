@@ -15,6 +15,8 @@ struct Profile: Hashable, Identifiable {
     let followers: [String]
     let following: [String]
     let profileImageString: String?
+    let phoneNum: String?
+    let birthDay: String?
 
     let id = UUID()
 }
