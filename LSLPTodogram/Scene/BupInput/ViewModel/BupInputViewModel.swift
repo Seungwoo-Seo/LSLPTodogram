@@ -108,7 +108,7 @@ final class BupInputViewModel: ViewModelType {
             }
             .flatMapLatest {
                 return NetworkManager.shared.upload(
-                    type: PostCreateResponseDTO.self,
+                    type: PostCreateResponse.self,
                     api: PostRouter.create(token: $0.token, body: $0.request)
                 )
                 .catch { error in

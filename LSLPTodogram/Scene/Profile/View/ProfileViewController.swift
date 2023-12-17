@@ -46,7 +46,7 @@ final class ProfileViewController: BaseViewController {
 
                 let infoView = cell.bupView.infoView
                 infoView.profileImageView.image = UIImage(systemName: "person")
-                infoView.nicknameLabel.text = bup.nick
+                infoView.nicknameLabel.text = bup.creator.nick
                 infoView.titleLabel.text = bup.title
 
                 cell.bupView.contentView0.bupContentLabel.text = bup.content0

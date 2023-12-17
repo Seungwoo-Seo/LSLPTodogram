@@ -22,7 +22,7 @@ final class MainTabBarController: UITabBarController, UITabBarControllerDelegate
         shouldSelect viewController: UIViewController
     ) -> Bool {
         if viewController is FakeViewController {
-            let vc = viewModel.todoInputViewController
+            let vc = viewModel.bupInputViewController
             let navi = UINavigationController(rootViewController: vc)
             present(navi, animated: true)
             return false

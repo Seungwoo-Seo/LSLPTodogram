@@ -7,21 +7,8 @@
 
 import UIKit
 
-enum BupNewsfeedSection: Int, CaseIterable {
-    case bup
-}
-
 final class BupNewsfeedMainView: BaseView {
-    var dataSource: UITableViewDiffableDataSource<BupNewsfeedSection, Bup>!
-    var snapshot = NSDiffableDataSourceSnapshot<BupNewsfeedSection, Bup>()
-
-    lazy var tableView = {
-        let view = UITableView(frame: .zero, style: .plain)
-        view.sectionHeaderTopPadding = 0
-        view.rowHeight = UITableView.automaticDimension
-        view.register(BupCell.self, forCellReuseIdentifier: BupCell.identifier)
-        return view
-    }()
+    let tableView = BupNewsfeedTableView(frame: .zero, style: .plain)
 
     override func initialHierarchy() {
         super.initialHierarchy()

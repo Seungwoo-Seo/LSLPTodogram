@@ -9,48 +9,49 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-enum BupCellStyle {         // TODO: 커멘드 달 때 커뮤니케이션 뷰를 없애야함 여차하면 시발 걍 넘어가부러~
-    case normal
-    case noCommunication
-}
-
 final class BupCell: BaseTableViewCell {
     var disposeBag = DisposeBag()
 
-    let profile = PublishRelay<Profile>()
-    let bup = PublishRelay<Bup>()
-
     let bupView = BupView()
 
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    func configure(_ item: Bup) {
+        bupView.infoView.profileImageView.image = UIImage(systemName: "person")
+        bupView.infoView.nicknameLabel.text = item.creator.nick
+        bupView.infoView.titleLabel.text = item.title
 
-        bup
-            .bind(with: self) { owner, bup in
-                owner.bupView.infoView.profileImageView.image = UIImage(systemName: "person")
-                owner.bupView.infoView.nicknameLabel.text = bup.nick
-                owner.bupView.infoView.titleLabel.text = bup.title
+        bupView.contentView0.bupContentLabel.text = item.content0
+        bupView.contentView1.bupContentLabel.text = item.content1
+        bupView.contentView2.bupContentLabel.text = item.content2
 
-                owner.bupView.contentView0.bupContentLabel.text = bup.content0
-                owner.bupView.contentView1.bupContentLabel.text = bup.content1
-                owner.bupView.contentView2.bupContentLabel.text = bup.content2
-
-                let contentStackView = owner.bupView.contentStackView
-                for subview in contentStackView.arrangedSubviews {
-                    if let contentView = subview as? BupContentView {
-                        if !(contentView.bupContentLabel.text!.isEmpty) {
-                            contentView.isHidden = false
-                        } else {
-                            contentView.isHidden = true
-                        }
-                    }
+        let contentStackView = bupView.contentStackView
+        for subview in contentStackView.arrangedSubviews {
+            if let contentView = subview as? BupContentView {
+                if !(contentView.bupContentLabel.text!.isEmpty) {
+                    contentView.isHidden = false
+                } else {
+                    contentView.isHidden = true
                 }
             }
-            .disposed(by: disposeBag)
-    }
+        }
 
-    func configure(_ item: Bup) {
+        if let likes = item.likes {
+            print("✅ likes --> ", likes)
+            print("✅ item.creator.id --> ", item.creator.id)
+            if likes.contains(item.creator.id) {
+                bupView.communicationView.likeButton.isSelected = true
+            } else {
+                bupView.communicationView.likeButton.isSelected = false
+            }
+            bupView.communicationView.likeCountButton.configuration?.title = "\(likes.count) 좋아요"
+        } else {
+            bupView.communicationView.likeCountButton.configuration?.title = "0 좋아요"
+        }
 
+        if let comments = item.comments {
+            bupView.communicationView.commentCountButton.configuration?.title = "\(comments.count) 답글"
+        } else {
+            bupView.communicationView.commentCountButton.configuration?.title = "0 답글"
+        }
     }
 
     override func prepareForReuse() {
