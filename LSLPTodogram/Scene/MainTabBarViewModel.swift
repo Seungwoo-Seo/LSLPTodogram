@@ -11,6 +11,7 @@ final class FakeViewController: UIViewController {}
 
 final class MainTabBarViewModel {
     private let bupNewsfeedViewModel = BupNewsfeedViewModel()
+    private let profileViewModel = ProfileViewModel()
 
     private lazy var bupNewsfeedViewController = {
         let vc = BupNewsfeedViewController(bupNewsfeedViewModel)
@@ -22,14 +23,20 @@ final class MainTabBarViewModel {
         vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "pencil.line"), tag: 1)
         return vc
     }()
+    private lazy var profileViewController = {
+        let vc = ProfileViewController(profileViewModel)
+        vc.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "person.fill"), tag: 2)
+        return vc
+    }()
 
     lazy var viewControllerList = [
         bupNewsfeedViewController,
-        fakeViewController
+        fakeViewController,
+        profileViewController
     ]
 
-    var todoInputViewController: UIViewController {
-        return TodoInputViewController(TodoInputViewModel())
+    var bupInputViewController: UIViewController {
+        return BupInputViewController(BupInputViewModel())
     }
 
 }

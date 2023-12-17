@@ -18,9 +18,7 @@ final class BupCommunicationView: BaseView {
     }()
     let likeButton = {
         var config = UIButton.Configuration.plain()
-        config.baseForegroundColor = Color.black
         config.background.backgroundColor = Color.clear
-        config.image = UIImage(systemName: "heart")
         config.preferredSymbolConfigurationForImage = .init(pointSize: 15, weight: .bold)
         config.contentInsets = NSDirectionalEdgeInsets(
             top: 8,
@@ -29,8 +27,16 @@ final class BupCommunicationView: BaseView {
             trailing: 0
         )
         let button = UIButton(configuration: config)
-        button.contentMode = .scaleToFill
-
+        button.configurationUpdateHandler = { button in
+            switch button.state {
+            case .selected:
+                button.configuration?.baseForegroundColor = Color.red
+                button.configuration?.image = UIImage(systemName: "heart.fill")
+            default:
+                button.configuration?.baseForegroundColor = Color.black
+                button.configuration?.image = UIImage(systemName: "heart")
+            }
+        }
         return button
     }()
     let commentButton = {

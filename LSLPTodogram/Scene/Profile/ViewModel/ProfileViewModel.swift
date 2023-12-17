@@ -58,7 +58,7 @@ final class ProfileViewModel: ViewModelType {
                 }
                 .flatMapLatest { (id, token, paramters) in
                     return NetworkManager.shared.request(
-                        type: PostReadResponseDTO.self,
+                        type: PostReadResponse.self,
                         api: PostRouter.userRead(token: token, id: id, parameters: paramters)
                     )
                     .catch { error in

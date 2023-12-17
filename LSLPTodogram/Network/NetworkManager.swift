@@ -35,9 +35,7 @@ final class NetworkManager {
         }
     }
 
-    // MARK: - PostRouter 전용
-
-    func upload<T: Decodable>(type: T.Type, api: PostRouter) -> Single<T> {
+    func upload<T: Decodable>(type: T.Type, api: MultipartFormConvertible) -> Single<T> {
         return Single<T>.create { observer in
             AF
                 .upload(multipartFormData: api.multipartFormData, with: api)

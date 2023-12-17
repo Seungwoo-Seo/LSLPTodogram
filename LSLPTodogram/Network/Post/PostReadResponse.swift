@@ -1,5 +1,5 @@
 //
-//  PostReadResponseDTO.swift
+//  PostReadResponse.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/12/05.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PostReadResponseDTO: Decodable {
+struct PostReadResponse: Decodable {
     let data: [PostDTO]
     let nextCursor: String
 
