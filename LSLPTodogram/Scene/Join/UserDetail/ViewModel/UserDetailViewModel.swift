@@ -28,12 +28,14 @@ final class UserDetailViewModel: ViewModelType {
         let nicknameState: PublishRelay<Result<Void, NicknameError>>
         let phoneNumState: PublishRelay<Result<Void, PhoneNumError>>
         let birthDayState: PublishRelay<Result<Void, BirthDayError>>
+        let windowReset: PublishRelay<Void>
     }
 
     func transform(input: Input) -> Output {
         let nicknameState = PublishRelay<Result<Void, NicknameError>>()
         let phoneNumState = PublishRelay<Result<Void, PhoneNumError>>()
         let birthDayState = PublishRelay<Result<Void, BirthDayError>>()
+        let windowReset = PublishRelay<Void>()
 
         input.nicknameText
             .orEmpty
@@ -190,10 +192,16 @@ final class UserDetailViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        join
+            .map { _ in Void() }
+            .bind(to: windowReset)
+            .disposed(by: disposeBag)
+
         return Output(
             nicknameState: nicknameState,
             phoneNumState: phoneNumState,
-            birthDayState: birthDayState
+            birthDayState: birthDayState,
+            windowReset: windowReset
         )
     }
 

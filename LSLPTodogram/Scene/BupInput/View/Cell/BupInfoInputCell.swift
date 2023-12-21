@@ -18,7 +18,7 @@ final class BupInfoInputCell: BaseTableViewCell {
         view.spacing = 16
         return view
     }()
-    private let profileImageView = ProfileImageView(image: UIImage(systemName: "person.fill"))
+    private let profileImageButton = ProfileImageButton()
     private let labelStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -27,13 +27,15 @@ final class BupInfoInputCell: BaseTableViewCell {
         view.spacing = 4
         return view
     }()
-    private let nicknameLabel = NicknameLabel()
+    private let profileNicknameButton = ProfileNicknameButton()
     private let phoneNumLabel = NicknameLabel()
     let titleTextView = {
         let view = UITextView()
         view.text = "과제, 목표, 각오 등 제목을 작성.."
         view.textColor = Color.black
         view.font = .systemFont(ofSize: 16, weight: .semibold)
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
         view.isScrollEnabled = false
         view.sizeToFit()
         return view
@@ -42,9 +44,8 @@ final class BupInfoInputCell: BaseTableViewCell {
     var disposeBag = DisposeBag()
 
     func configure(_ item: BupInfoInput) {
-        profileImageView.image = UIImage(systemName: "person")
-        nicknameLabel.text = item.nickname
-        titleTextView.text = item.title
+        profileImageButton.configuration?.image = UIImage(named: "profile")
+        profileNicknameButton.configuration?.title = item.nickname
     }
 
     override func prepareForReuse() {
@@ -53,29 +54,21 @@ final class BupInfoInputCell: BaseTableViewCell {
         disposeBag = DisposeBag()
     }
 
-    override func initialAttributes() {
-        super.initialAttributes()
-
-        selectionStyle = .none
-    }
-
     override func initialHierarchy() {
         super.initialHierarchy()
-
-        contentView.addSubview(hStackView)
 
         [
             hStackView,
             titleTextView
-        ].forEach { addSubview($0) }
+        ].forEach { contentView.addSubview($0) }
 
         [
-            profileImageView,
+            profileImageButton,
             labelStackView
         ].forEach { hStackView.addArrangedSubview($0) }
 
         [
-            nicknameLabel,
+            profileNicknameButton,
             phoneNumLabel
         ].forEach { labelStackView.addArrangedSubview($0) }
     }
@@ -89,12 +82,12 @@ final class BupInfoInputCell: BaseTableViewCell {
             make.top.horizontalEdges.equalToSuperview().inset(inset)
         }
 
-        profileImageView.snp.makeConstraints { make in
+        profileImageButton.snp.makeConstraints { make in
             make.size.equalTo(40)
         }
 
         titleTextView.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(offset)
+            make.top.equalTo(profileImageButton.snp.bottom).offset(offset)
             make.horizontalEdges.bottom.equalToSuperview().inset(inset)
         }
     }

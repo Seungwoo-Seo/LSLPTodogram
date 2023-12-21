@@ -14,11 +14,13 @@ enum BupInputItemIdentifiable: Hashable {
 }
 
 final class BupInputMainView: BaseView {
+    let backgroundImageView = UIImageView(image: UIImage(named: "fireBackground"))
     lazy var tableView = {
         let view = UITableView(frame: .zero, style: .plain)
+        view.backgroundColor = Color.clear
         view.rowHeight = UITableView.automaticDimension
-        view.estimatedRowHeight = 44
         view.sectionHeaderTopPadding = 0
+        view.separatorStyle = .none
         view.register(BupInfoInputCell.self, forCellReuseIdentifier: BupInfoInputCell.identifier)
         view.register(BupContentInputCell.self, forCellReuseIdentifier: BupContentInputCell.identifier)
         view.register(BupContentAddCell.self, forCellReuseIdentifier: BupContentAddCell.identifier)
@@ -28,11 +30,16 @@ final class BupInputMainView: BaseView {
     override func initialHierarchy() {
         super.initialHierarchy()
 
+        addSubview(backgroundImageView)
         addSubview(tableView)
     }
 
     override func initialLayout() {
         super.initialLayout()
+
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
 
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(safeAreaLayoutGuide)

@@ -22,7 +22,9 @@ class BaseView: UIView, Base {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func initialAttributes() {}
+    func initialAttributes() {
+        backgroundColor = Color.white
+    }
 
     func initialHierarchy() {}
 

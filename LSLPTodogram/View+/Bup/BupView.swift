@@ -23,7 +23,7 @@ final class BupView: BaseView {
         view.axis = .vertical
         view.distribution = .fillProportionally
         view.alignment = .fill
-        view.spacing = 4
+        view.spacing = 1
         return view
     }()
 
@@ -37,6 +37,12 @@ final class BupView: BaseView {
     }()
     let communicationView = BupCommunicationView()
 
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        backgroundColor = Color.clear
+    }
+
     override func initialHierarchy() {
         super.initialHierarchy()
 
@@ -44,7 +50,6 @@ final class BupView: BaseView {
             infoView,
             contentStackView,
             tStackView
-//            communicationView
         ].forEach { addSubview($0) }
     }
 
@@ -56,18 +61,14 @@ final class BupView: BaseView {
         }
 
         contentStackView.snp.makeConstraints { make in
-            make.top.equalTo(infoView.snp.bottom).offset(4)
+            make.top.equalTo(infoView.snp.bottom).offset(1)
             make.horizontalEdges.equalToSuperview()
         }
 
         tStackView.snp.makeConstraints { make in
-            make.top.equalTo(contentStackView.snp.bottom).offset(4)
+            make.top.equalTo(contentStackView.snp.bottom).offset(1)
             make.horizontalEdges.bottom.equalToSuperview()
         }
-//        communicationView.snp.makeConstraints { make in
-//            make.top.equalTo(contentStackView.snp.bottom).offset(4)
-//            make.horizontalEdges.bottom.equalToSuperview()
-//        }
     }
 
 }

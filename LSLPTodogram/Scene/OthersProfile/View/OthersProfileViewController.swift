@@ -1,40 +1,51 @@
 //
-//  ProfileViewController.swift
+//  OthersProfileViewController.swift
 //  LSLPTodogram
 //
-//  Created by 서승우 on 2023/12/10.
+//  Created by 서승우 on 2023/12/19.
 //
 
 import UIKit
 import RxCocoa
 import RxSwift
 
-final class ProfileViewController: BaseViewController {
-    private let mainView = ProfileMainView()
+final class OthersProfileViewController: BaseViewController {
+    private let mainView = OthersProfileMainView()
     private let disposeBag = DisposeBag()
 
-    init(_ viewModel: ProfileViewModel) {
+    private let viewModel: OthersProfileViewModel
+
+    init(_ viewModel: OthersProfileViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+
+        let itemOfFollowButton = PublishRelay<OthersProfile>()
+
+        let input = OthersProfileViewModel.Input(
+            itemOfFollowButton: itemOfFollowButton
+        )
+        let output = viewModel.transform(input: input)
 
         mainView.dataSource = UITableViewDiffableDataSource(
             tableView: mainView.tableView
         ) { tableView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .profile(let profile):
+            case .profile(let item):
                 let cell = tableView.dequeueReusableCell(
-                    withIdentifier: ProfileCell.identifier,
+                    withIdentifier: OthersProfileCell.identifier,
                     for: indexPath
-                ) as! ProfileCell
+                ) as! OthersProfileCell
 
-                cell.configure(profile)
+                cell.configure(item)
 
-                cell.profileEditButton.rx.tap
-                    .bind(with: self) { owner, _ in
-                        owner.presentProfileEditViewController()
-                    }
+                cell.followButton.rx.tap
+                    .withLatestFrom(Observable.just(item))
+                    .bind(to: itemOfFollowButton)
                     .disposed(by: cell.disposeBag)
 
-//                cell.profileShareButton
+                output.followState
+                    .bind(to: cell.followButton.rx.isSelected)
+                    .disposed(by: cell.disposeBag)
 
                 return cell
 
@@ -68,23 +79,20 @@ final class ProfileViewController: BaseViewController {
             }
         }
 
-        mainView.snapshot.appendSections(ProfileSection.allCases)
+        mainView.snapshot.appendSections(OthersProfileSection.allCases)
         mainView.dataSource.apply(mainView.snapshot)
-
-        let input = ProfileViewModel.Input()
-        let output = viewModel.transform(input: input)
 
         output.items
             .bind(with: self) { owner, items in
-                var profiles: [ProfileItemIdentifiable] = []
-                var bups: [ProfileItemIdentifiable] = []
+                var profiles: [OthersProfileItemIdentifiable] = []
+                var bups: [OthersProfileItemIdentifiable] = []
 
                 for item in items {
                     switch item {
                     case .profile(let profile):
-                        profiles.append(ProfileItemIdentifiable.profile(profile))
+                        profiles.append(OthersProfileItemIdentifiable.profile(profile))
                     case .bup(let bup):
-                        bups.append(ProfileItemIdentifiable.bup(bup))
+                        bups.append(OthersProfileItemIdentifiable.bup(bup))
                     }
                 }
 
@@ -93,6 +101,8 @@ final class ProfileViewController: BaseViewController {
                 owner.mainView.dataSource.apply(owner.mainView.snapshot)
             }
             .disposed(by: disposeBag)
+
+
     }
 
     override func loadView() {
@@ -101,7 +111,7 @@ final class ProfileViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
     }
 
     override func initialAttributes() {
@@ -112,7 +122,7 @@ final class ProfileViewController: BaseViewController {
 
 }
 
-extension ProfileViewController: UITableViewDelegate {
+extension OthersProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let section = ProfileSection.allCases[section]
@@ -141,23 +151,11 @@ extension ProfileViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let section = ProfileSection.allCases[section]
+        let section = OthersProfileSection.allCases[section]
         switch section {
         case .profile: return 0
         case .bup: return UITableView.automaticDimension
         }
     }
-
-}
-
-private extension ProfileViewController {
-
-    func presentProfileEditViewController() {
-        let viewModel = ProfileEditViewModel()
-        let vc = ProfileEditViewController(viewModel)
-        let navi = UINavigationController(rootViewController: vc)
-        present(navi, animated: true)
-    }
-
 
 }

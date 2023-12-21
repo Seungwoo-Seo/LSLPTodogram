@@ -1,34 +1,30 @@
 //
-//  ProfileMainView.swift
+//  OthersProfileMainView.swift
 //  LSLPTodogram
 //
-//  Created by 서승우 on 2023/12/11.
+//  Created by 서승우 on 2023/12/19.
 //
 
 import UIKit
 
-enum ProfileSection: Int, CaseIterable {
+enum OthersProfileSection: Int, CaseIterable {
     case profile
     case bup
 }
 
-enum ProfileItemIdentifiable: Hashable {
-    case profile(Profile)
+enum OthersProfileItemIdentifiable: Hashable {
+    case profile(OthersProfile)
     case bup(Bup)
 }
 
-final class ProfileMainView: BaseView {
-    var dataSource: UITableViewDiffableDataSource<ProfileSection, ProfileItemIdentifiable>!
-    var snapshot = NSDiffableDataSourceSnapshot<ProfileSection, ProfileItemIdentifiable>()    // 섹션은 어차피 안바뀔거임!
-
+final class OthersProfileMainView: BaseView {
     let backgroundImageView = UIImageView(image: UIImage(named: "fireBackground"))
+    var dataSource: UITableViewDiffableDataSource<OthersProfileSection, OthersProfileItemIdentifiable>!
+    var snapshot = NSDiffableDataSourceSnapshot<OthersProfileSection, OthersProfileItemIdentifiable>()    // 섹션은 어차피 안바뀔거임!
+
     lazy var tableView = {
-        let view = UITableView(frame: .zero, style: .plain)
-        view.backgroundColor = Color.clear
-        view.sectionHeaderTopPadding = 0
-        view.rowHeight = UITableView.automaticDimension
-        view.separatorStyle = .none
-        view.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
+        let view = BaseTableView(frame: .zero, style: .plain)
+        view.register(OthersProfileCell.self, forCellReuseIdentifier: OthersProfileCell.identifier)
         view.register(BupSegmentHeader.self, forHeaderFooterViewReuseIdentifier: BupSegmentHeader.identifier)
         view.register(BupCell.self, forCellReuseIdentifier: BupCell.identifier)
         return view

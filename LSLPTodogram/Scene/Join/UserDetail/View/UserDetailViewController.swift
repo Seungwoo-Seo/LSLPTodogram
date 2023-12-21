@@ -75,6 +75,10 @@ final class UserDetailViewController: BaseViewController {
                 }
             }
             .disposed(by: disposeBag)
+
+        output.windowReset
+            .bind(to: rx.windowReset)
+            .disposed(by: disposeBag)
     }
 
     override func loadView() {
@@ -84,6 +88,19 @@ final class UserDetailViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+    }
+
+}
+
+private extension Reactive where Base: UserDetailViewController {
+
+    var windowReset: Binder<Void> {
+        return Binder(base) { (_, _) in
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            let sceneDelegate = windowScene?.delegate as? SceneDelegate
+            sceneDelegate?.window?.rootViewController = LoginViewController()
+            sceneDelegate?.window?.makeKeyAndVisible()
+        }
     }
 
 }

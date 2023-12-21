@@ -185,7 +185,7 @@ private extension BupInputViewModel {
             }
             .filter { !$0.isEmpty }
 
-        let product_id = "Bup"
+        let product_id = "PersonalTodo"  // Bup
 
         return PostCreateRequest(
             title: title,

@@ -100,11 +100,9 @@ final class BupCommunicationView: BaseView {
         return button
     }()
 
-
     override func initialAttributes() {
         super.initialAttributes()
 
-        backgroundColor = Color.green
         layer.cornerRadius = 16
         clipsToBounds = true
         layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]

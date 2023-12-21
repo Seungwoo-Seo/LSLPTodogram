@@ -30,7 +30,7 @@ final class MainTabBarViewModel {
     }()
 
     lazy var viewControllerList = [
-        bupNewsfeedViewController,
+        UINavigationController(rootViewController: bupNewsfeedViewController),
         fakeViewController,
         profileViewController
     ]

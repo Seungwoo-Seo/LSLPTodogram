@@ -13,7 +13,10 @@ final class LoginViewController: BaseViewController {
     private let mainView = LoginMainView()
     private let disposeBag = DisposeBag()
 
-    init(_ viewModel: LoginViewModel) {
+    private let viewModel: LoginViewModel
+
+    init(_ viewModel: LoginViewModel = LoginViewModel()) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
         let input = LoginViewModel.Input(

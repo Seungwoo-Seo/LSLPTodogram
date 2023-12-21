@@ -11,12 +11,14 @@ final class BupContentView: BaseView {
     
     let bupContentLabel = BupContentLabel()
 
+    func reset() {
+        bupContentLabel.text = nil
+    }
+
     override func initialAttributes() {
         super.initialAttributes()
 
         isHidden = true
-        backgroundColor = Color.green
-
         bupContentLabel.text = "시발 좀 되라"
     }
 

@@ -56,6 +56,10 @@ final class LoginViewModel: ViewModelType {
                 print("response ==> \(loginResponse)")
                 // TODO: UserDefeaults에 토큰 저장 => KeyChain에 토큰 저장
                 KeychainManager.create(
+                    key: KeychainKey.id.rawValue,
+                    token: loginResponse._id
+                )
+                KeychainManager.create(
                     key: KeychainKey.token.rawValue,
                     token: loginResponse.token
                 )

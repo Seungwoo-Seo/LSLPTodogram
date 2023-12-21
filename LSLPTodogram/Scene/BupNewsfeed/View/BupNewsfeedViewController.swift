@@ -17,9 +17,12 @@ final class BupNewsfeedViewController: BaseViewController {
         super.init(nibName: nil, bundle: nil)
 
         let rowOfLikebutton = PublishRelay<Int>()
+        let itemOfProfileImageButton = PublishRelay<Bup>()
 
         let input = BupNewsfeedViewModel.Input(
+//            pullToRefresh: mainView.refresh.rx.controlEvent(.valueChanged).asObservable(),
             prefetchRows: mainView.tableView.rx.prefetchRows,
+            itemOfProfileImageButton: itemOfProfileImageButton,
             rowOfLikebutton: rowOfLikebutton
         )
         let output = viewModel.transform(input: input)
@@ -31,6 +34,21 @@ final class BupNewsfeedViewController: BaseViewController {
                 ) as? BupCell else {return UITableViewCell()}
 
                 cell.configure(item)
+
+//                cell.bupView.infoView.profileImageButton.rx.tap
+//                    .withLatestFrom(Observable.just(item))
+//                    .bind(to: itemOfProfileImageButton)
+//                    .disposed(by: cell.disposeBag)
+
+                cell.bupView.infoView.profileImageButton.rx.tap
+                    .withLatestFrom(Observable.just(item.creator.id))
+                    .debug()
+                    .bind(with: self) { owner, id in
+                        let vm = OthersProfileViewModel(id: id)
+                        let vc = OthersProfileViewController(vm)
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    .disposed(by: cell.disposeBag)
 
                 cell.bupView.communicationView.likeButton.rx.tap
                     .withLatestFrom(Observable.just(row))
@@ -53,6 +71,11 @@ final class BupNewsfeedViewController: BaseViewController {
         output.likeStatus
             .bind(to: mainView.tableView.rx.likeButtonUpdate)
             .disposed(by: disposeBag)
+
+        output.isRefreshing
+            .debug()
+            .bind(to: mainView.refresh.rx.isRefreshing)
+            .disposed(by: disposeBag)
     }
 
     override func loadView() {
@@ -62,6 +85,17 @@ final class BupNewsfeedViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+
+    override func initialHierarchy() {
+        super.initialHierarchy()
+
+        let label = UILabel()
+        label.text = "Bupgram"
+        label.textColor = Color.white
+        label.font = UIFont(name: "Marker Felt Thin", size: 40)
+        let leftBarButtonItem = UIBarButtonItem(customView: label)
+        navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 
 }

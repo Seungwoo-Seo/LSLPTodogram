@@ -19,21 +19,24 @@ final class BupNewsfeedViewModel: ViewModelType {
 
 
     struct Input {
+//        let pullToRefresh: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
+        let itemOfProfileImageButton: PublishRelay<Bup>
         let rowOfLikebutton: PublishRelay<Int>
     }
 
     struct Output {
         let items: BehaviorRelay<[Bup]>
-
         let likeStatus: PublishRelay<(row: Int, status: Bool, bup: Bup)>
+        let isRefreshing: PublishRelay<Bool>
     }
 
     func transform(input: Input) -> Output {
         let likeStatus = PublishRelay<(row: Int, status: Bool, bup: Bup)>()
+        let isRefreshing = PublishRelay<Bool>()
 
         let token = BehaviorRelay(value: KeychainManager.read(key: KeychainKey.token.rawValue) ?? "")
-        let parameters = BehaviorRelay(value: PostReadRequest(next: nil, limit: 3, product_id: "PersonalTodo"))
+        let parameters = BehaviorRelay(value: PostReadRequest(next: nil, limit: 4, product_id: "PersonalTodo"))
 
         let response = Observable
             .combineLatest(token, parameters)
@@ -57,8 +60,16 @@ final class BupNewsfeedViewModel: ViewModelType {
         response
             .map { $0.data.map { $0.toBup } }
             .bind(with: self) { owner, bupList in
-                owner.baseItems += bupList
-                owner.items.accept(owner.baseItems)
+                if parameters.value.next == nil {
+                    print("11")
+                    owner.baseItems = bupList
+                    owner.items.accept(owner.baseItems)
+                    isRefreshing.accept(false)
+                } else {
+                    print("22")
+                    owner.baseItems += bupList
+                    owner.items.accept(owner.baseItems)
+                }
             }
             .disposed(by: disposeBag)
 
@@ -74,6 +85,18 @@ final class BupNewsfeedViewModel: ViewModelType {
                 }
             }
             .disposed(by: disposeBag)
+
+
+
+//        input.pullToRefresh
+//            .debug()
+//            .map { _ in PostReadRequest(next: nil, limit: 3, product_id: "PersonalTodo") }
+//            .bind(to: parameters)
+//            .disposed(by: disposeBag)
+
+
+        input.itemOfProfileImageButton
+
 
         // MARK: - likeButton
 
@@ -105,7 +128,8 @@ final class BupNewsfeedViewModel: ViewModelType {
 
         return Output(
             items: items,
-            likeStatus: likeStatus
+            likeStatus: likeStatus,
+            isRefreshing: isRefreshing
         )
     }
 

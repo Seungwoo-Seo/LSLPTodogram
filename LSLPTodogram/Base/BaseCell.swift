@@ -22,7 +22,11 @@ class BaseTableViewCell: UITableViewCell, Base {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func initialAttributes() {}
+    func initialAttributes() {
+        backgroundColor = Color.clear
+        contentView.backgroundColor = Color.clear
+        selectionStyle = .none
+    }
 
     func initialHierarchy() {}
 

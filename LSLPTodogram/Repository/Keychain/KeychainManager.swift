@@ -15,6 +15,7 @@ import Foundation
 //}
 
 enum KeychainKey: String {
+    case id
     case token
     case refresh
 }

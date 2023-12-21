@@ -10,15 +10,18 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private let loginViewModel = LoginViewModel()
-    private let todoNewsfeedViewModel = BupNewsfeedViewModel()
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: LoginViewController(loginViewModel))
+
+//        if let _ = KeychainManager.read(key: KeychainKey.token.rawValue) {
+//            window?.rootViewController = MainTabBarController()
+//        } else {
+            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+//        }
+
         window?.makeKeyAndVisible()
     }
 

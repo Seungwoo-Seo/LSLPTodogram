@@ -15,6 +15,9 @@ final class FollowersButton: BaseButton {
         var config = UIButton.Configuration.plain()
         config.baseForegroundColor = Color.lightGray
         config.background.backgroundColor = Color.clear
+        config.contentInsets = NSDirectionalEdgeInsets(
+            top: 0, leading: 0, bottom: 0, trailing: 0
+        )
         config.title = "팔로워 0명"
         configuration = config
     }

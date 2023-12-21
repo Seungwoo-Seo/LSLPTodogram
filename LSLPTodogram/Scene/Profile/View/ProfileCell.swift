@@ -11,15 +11,7 @@ import RxSwift
 final class ProfileCell: BaseTableViewCell {
     var disposeBag = DisposeBag()
 
-    let labelStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.alignment = .fill
-        view.distribution = .fillProportionally
-        view.spacing = 8
-        return view
-    }()
-    let nicknameLabel = NicknameLabel(fontSize: 24, weight: .bold)
+    let profileNicknameButton = ProfileNicknameButton(size: 24)
     let emailLabel = {
         let label = UILabel()
         label.textColor = Color.black
@@ -27,21 +19,21 @@ final class ProfileCell: BaseTableViewCell {
 
         return label
     }()
-    let profileImageView = ProfileImageView(image: UIImage(systemName: "person"))
+    let profileImageButton = ProfileImageButton(size: CGSize(width: 60, height: 60))
 
-    private let fButtonStackView = {
-        let view = UIStackView()
+    private lazy var fButtonStackView = {
+        let view = UIStackView(arrangedSubviews: [followersButton, followingButton])
         view.axis = .horizontal
         view.alignment = .fill
         view.distribution = .fillProportionally
-        view.spacing = 0
+        view.spacing = 16
         return view
     }()
     let followersButton = FollowersButton()
     let followingButton = FollowingButton()
 
-    private let pButtonStackView = {
-        let view = UIStackView()
+    private lazy var pButtonStackView = {
+        let view = UIStackView(arrangedSubviews: [profileEditButton, profileShareButton])
         view.axis = .horizontal
         view.distribution = .fillEqually
         view.alignment = .fill
@@ -72,11 +64,11 @@ final class ProfileCell: BaseTableViewCell {
     }()
 
     func configure(_ item: Profile) {
-        profileImageView.image = UIImage(systemName: "person")
-        nicknameLabel.text = item.nick
+        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        profileNicknameButton.updateTitle(title: item.nick)
         emailLabel.text = item.email
-        followersButton.configuration?.title = "팔로워 \(item.followers.count)명"
-        followingButton.configuration?.title = "팔로잉 \(item.following.count)명"
+        followersButton.configuration?.title = "팔로워 \(item.followers?.count ?? 0)명"
+        followingButton.configuration?.title = "팔로잉 \(item.following?.count ?? 0)명"
     }
 
     override func prepareForReuse() {
@@ -89,18 +81,12 @@ final class ProfileCell: BaseTableViewCell {
         super.initialHierarchy()
 
         [
-
-            labelStackView,
-            profileImageView,
+            profileNicknameButton,
+            profileImageButton,
+            emailLabel,
             fButtonStackView,
             pButtonStackView
         ].forEach { contentView.addSubview($0) }
-
-        [nicknameLabel, emailLabel].forEach { labelStackView.addArrangedSubview($0) }
-
-        [followersButton, followingButton].forEach { fButtonStackView.addArrangedSubview($0) }
-
-        [profileEditButton, profileShareButton].forEach { pButtonStackView.addArrangedSubview($0) }
     }
 
     override func initialLayout() {
@@ -109,20 +95,26 @@ final class ProfileCell: BaseTableViewCell {
         let offset = 16
         let inset = 16
         let height = 44
-        labelStackView.snp.makeConstraints { make in
+        profileNicknameButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(inset)
             make.leading.equalToSuperview().inset(inset)
-            make.centerY.equalTo(profileImageView)
+            make.trailing.lessThanOrEqualTo(profileImageButton.snp.leading).offset(-offset)
         }
 
-        profileImageView.snp.makeConstraints { make in
+        profileImageButton.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(inset)
-            make.leading.equalTo(labelStackView.snp.trailing).offset(offset)
-            make.size.equalTo(labelStackView.snp.height)
+//            make.size.equalTo(60)
+        }
+
+        emailLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileNicknameButton.snp.bottom).offset(4)
+            make.leading.equalToSuperview().inset(inset)
+            make.trailing.lessThanOrEqualTo(profileImageButton.snp.leading).offset(-offset)
         }
 
         fButtonStackView.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(offset)
-            make.leading.equalToSuperview()
+            make.top.equalTo(emailLabel.snp.bottom).offset(offset)
+            make.leading.equalToSuperview().inset(inset)
             make.trailing.lessThanOrEqualToSuperview().inset(inset)
             make.height.equalTo(height)
         }

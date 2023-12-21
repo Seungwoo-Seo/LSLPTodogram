@@ -18,8 +18,8 @@ final class BupCell: BaseTableViewCell {
 
     func configure(_ item: Bup) {
         // info
-        bupView.infoView.profileImageView.image = UIImage(systemName: "person")
-        bupView.infoView.nicknameLabel.text = item.creator.nick
+        bupView.infoView.profileImageButton.configuration?.image = UIImage(named: "profile")
+        bupView.infoView.profileNicknameButton.configuration?.title = item.creator.nick
         bupView.infoView.titleLabel.text = item.title
 
         // content
@@ -84,7 +84,18 @@ final class BupCell: BaseTableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        bupView.infoView.reset()
+        bupView.contentView0.reset()
+        bupView.contentView1.reset()
+        bupView.contentView2.reset()
         disposeBag = DisposeBag()
+    }
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        backgroundColor = Color.clear
+        contentView.backgroundColor = Color.clear
     }
 
     override func initialHierarchy() {

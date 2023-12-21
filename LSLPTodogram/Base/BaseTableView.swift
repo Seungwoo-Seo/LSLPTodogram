@@ -8,6 +8,7 @@
 import UIKit
 
 class BaseTableView: UITableView, Base {
+    let refresh = UIRefreshControl()
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -22,9 +23,15 @@ class BaseTableView: UITableView, Base {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func initialAttributes() {}
+    func initialAttributes() {
+        backgroundColor = Color.clear
+        sectionHeaderTopPadding = 0
+        separatorStyle = .none
+    }
 
-    func initialHierarchy() {}
+    func initialHierarchy() {
+        refreshControl = refresh
+    }
 
     func initialLayout() {}
 

@@ -15,6 +15,7 @@ final class MainTabBarController: UITabBarController, UITabBarControllerDelegate
 
         delegate = self
         viewControllers = viewModel.viewControllerList
+        tabBar.tintColor = Color.white
     }
 
     func tabBarController(
