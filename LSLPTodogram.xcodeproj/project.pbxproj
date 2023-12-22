@@ -138,6 +138,7 @@
 		57FBCB632B15F08600C83C93 /* BupNewsfeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */; };
 		57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FBCB662B15F0A900C83C93 /* BupNewsfeedViewModel.swift */; };
 		57FD7C872B1F87E2006C284B /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD7C862B1F87E2006C284B /* RequestProtocol.swift */; };
+		57FDA8CA2B35D3110080AB2C /* TestBupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDA8C92B35D3110080AB2C /* TestBupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +266,7 @@
 		57FBCB622B15F08600C83C93 /* BupNewsfeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedViewController.swift; sourceTree = "<group>"; };
 		57FBCB662B15F0A900C83C93 /* BupNewsfeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupNewsfeedViewModel.swift; sourceTree = "<group>"; };
 		57FD7C862B1F87E2006C284B /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		57FDA8C92B35D3110080AB2C /* TestBupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -721,6 +723,7 @@
 		57E98DF42B0B666B00330C6B /* View+ */ = {
 			isa = PBXGroup;
 			children = (
+				57FDA8C82B35D2F80080AB2C /* TestView */,
 				57F6DDB72B21B7F60090C646 /* Bup */,
 				57D5FA342B133E3A00A76420 /* InfoInput */,
 				57D5FA322B133D9600A76420 /* ErrorLabel.swift */,
@@ -905,6 +908,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		57FDA8C82B35D2F80080AB2C /* TestView */ = {
+			isa = PBXGroup;
+			children = (
+				57FDA8C92B35D3110080AB2C /* TestBupView.swift */,
+			);
+			path = TestView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1034,6 +1045,7 @@
 				57E635CC2B19FC9200B9F112 /* BupInfoInputCell.swift in Sources */,
 				57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */,
 				57E98E122B0B6C6700330C6B /* BaseImageView.swift in Sources */,
+				57FDA8CA2B35D3110080AB2C /* TestBupView.swift in Sources */,
 				57048C062B283BE000E6D39E /* BupSegmentHeader.swift in Sources */,
 				57E935772B261AD50098F28E /* ProfileMainView.swift in Sources */,
 				57E696F82B2CDFAB00294ABA /* RouterProtocol.swift in Sources */,
