@@ -22,7 +22,12 @@ class BaseLabel: UILabel, Base {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func initialAttributes() {}
+    func initialAttributes() {
+        setContentHuggingPriority(.defaultLow, for: .horizontal)
+        setContentHuggingPriority(.defaultLow, for: .vertical)
+        setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+    }
 
     func initialHierarchy() {}
 

@@ -22,7 +22,12 @@ class BaseButton: UIButton, Base {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func initialAttributes() {}
+    func initialAttributes() {
+        setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        setContentHuggingPriority(.defaultHigh, for: .vertical)
+        setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+    }
 
     func initialHierarchy() {}
 

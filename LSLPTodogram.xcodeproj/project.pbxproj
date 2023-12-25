@@ -140,6 +140,8 @@
 		57FD7C872B1F87E2006C284B /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FD7C862B1F87E2006C284B /* RequestProtocol.swift */; };
 		57FDA8CA2B35D3110080AB2C /* TestBupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDA8C92B35D3110080AB2C /* TestBupView.swift */; };
 		57FDA8CC2B35D3840080AB2C /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57FDA8CB2B35D3840080AB2C /* Test.storyboard */; };
+		57FDA8D42B3766920080AB2C /* BaseStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDA8D32B3766920080AB2C /* BaseStackView.swift */; };
+		57FDA8F12B38CEAF0080AB2C /* BaseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FDA8F02B38CEAF0080AB2C /* BaseCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -269,6 +271,8 @@
 		57FD7C862B1F87E2006C284B /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		57FDA8C92B35D3110080AB2C /* TestBupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestBupView.swift; sourceTree = "<group>"; };
 		57FDA8CB2B35D3840080AB2C /* Test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		57FDA8D32B3766920080AB2C /* BaseStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStackView.swift; sourceTree = "<group>"; };
+		57FDA8F02B38CEAF0080AB2C /* BaseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -674,8 +678,10 @@
 				57E98E0D2B0B6C4800330C6B /* BaseButton.swift */,
 				57E98E0F2B0B6C5700330C6B /* BaseCell.swift */,
 				570E01B32B1828FE00D1E012 /* BaseCollectionReusableView.swift */,
+				57FDA8F02B38CEAF0080AB2C /* BaseCollectionView.swift */,
 				57E98E112B0B6C6700330C6B /* BaseImageView.swift */,
 				57E98E132B0B6C7300330C6B /* BaseLabel.swift */,
+				57FDA8D32B3766920080AB2C /* BaseStackView.swift */,
 				57E6970D2B2EFDC600294ABA /* BaseTableView.swift */,
 				57FB02092B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift */,
 				57D5FA302B1337A600A76420 /* BaseTabmanViewController.swift */,
@@ -1020,6 +1026,7 @@
 				57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */,
 				57E9357A2B26416D0098F28E /* BupView.swift in Sources */,
 				57E696EC2B2B902B00294ABA /* ProfileEditMainView.swift in Sources */,
+				57FDA8D42B3766920080AB2C /* BaseStackView.swift in Sources */,
 				57E697022B2E4DB400294ABA /* CommentTableViewModel.swift in Sources */,
 				57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */,
 				57E697202B307D2200294ABA /* Extension+UITableView.swift in Sources */,
@@ -1064,6 +1071,7 @@
 				57E696E22B2B4BD100294ABA /* FollowersButton.swift in Sources */,
 				57BDFAF42B15B055006CAE1F /* ReconfrimSuccess.swift in Sources */,
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
+				57FDA8F12B38CEAF0080AB2C /* BaseCollectionView.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
 				579B36322B0B7C3B008ACCAE /* Router.swift in Sources */,
 				57E6971B2B2FBA0000294ABA /* Extension+UIButton.swift in Sources */,

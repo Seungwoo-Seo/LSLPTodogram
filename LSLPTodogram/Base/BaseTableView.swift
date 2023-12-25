@@ -25,8 +25,13 @@ class BaseTableView: UITableView, Base {
 
     func initialAttributes() {
         backgroundColor = Color.clear
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
         sectionHeaderTopPadding = 0
-        separatorStyle = .none
+        separatorStyle = .singleLine
+        separatorColor = Color.white
+        separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        rowHeight = UITableView.automaticDimension
     }
 
     func initialHierarchy() {
