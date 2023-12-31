@@ -16,11 +16,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         window = UIWindow(windowScene: windowScene)
 
-        if let _ = KeychainManager.read(key: KeychainKey.token.rawValue) {
-            window?.rootViewController = MainTabBarController()
-        } else {
-            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
-        }
+//        if let _ = KeychainManager.read(key: KeychainKey.token.rawValue) {
+//            window?.rootViewController = MainTabBarController()
+//        } else {
+//            window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
+//        }
+
+        window?.rootViewController = UINavigationController(rootViewController: LoginViewController())
 
         window?.makeKeyAndVisible()
     }
