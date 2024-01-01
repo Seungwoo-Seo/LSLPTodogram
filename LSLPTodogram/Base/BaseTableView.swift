@@ -8,7 +8,6 @@
 import UIKit
 
 class BaseTableView: UITableView, Base {
-    let refresh = UIRefreshControl()
 
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
@@ -34,9 +33,7 @@ class BaseTableView: UITableView, Base {
         rowHeight = UITableView.automaticDimension
     }
 
-    func initialHierarchy() {
-        refreshControl = refresh
-    }
+    func initialHierarchy() {}
 
     func initialLayout() {}
 
