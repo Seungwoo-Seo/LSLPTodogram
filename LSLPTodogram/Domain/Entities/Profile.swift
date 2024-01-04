@@ -12,8 +12,8 @@ struct Profile: Hashable, Identifiable {
     let nick: String
     let email: String
     let posts: [String]
-    let followers: [Followers]?
-    let following: [Following]?
+    let followers: [String]
+    let following: [String]
     let profileImageString: String?
     let phoneNum: String?
     let birthDay: String?
