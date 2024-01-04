@@ -1,0 +1,21 @@
+//
+//  FollowingButton.swift
+//  LSLPTodogram
+//
+//  Created by 서승우 on 2023/12/14.
+//
+
+import UIKit
+
+final class FollowingButton: BaseButton {
+
+    init() {
+        super.init(frame: .zero)
+
+        var config = UIButton.Configuration.plain()
+        config.baseForegroundColor = Color.lightGray
+        config.background.backgroundColor = Color.clear
+        config.title = "팔로잉 0명"
+        configuration = config
+    }
+}

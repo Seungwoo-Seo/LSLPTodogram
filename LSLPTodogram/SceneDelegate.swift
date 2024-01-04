@@ -13,17 +13,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private let loginViewModel = LoginViewModel()
     private let todoNewsfeedViewModel = BupNewsfeedViewModel()
 
-    private let todoAddViewModel = TodoInputViewModel()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         window = UIWindow(windowScene: windowScene)
-
-//        window?.rootViewController = TodoInputViewController(todoAddViewModel)
-
         window?.rootViewController = UINavigationController(rootViewController: LoginViewController(loginViewModel))
-
         window?.makeKeyAndVisible()
     }
 

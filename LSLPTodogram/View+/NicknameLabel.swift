@@ -9,12 +9,12 @@ import UIKit
 
 final class NicknameLabel: BaseLabel {
 
-    override func initialAttributes() {
-        super.initialAttributes()
+    init(fontSize: CGFloat = 15, weight: UIFont.Weight = .semibold) {
+        super.init(frame: .zero)
 
         numberOfLines = 0
         textColor = Color.black
-        font = .systemFont(ofSize: 15, weight: .semibold)
+        font = .systemFont(ofSize: fontSize, weight: weight)
     }
 
 }
