@@ -10,11 +10,15 @@ import Foundation
 struct Bup: Hashable {
     let id: String
     let creator: Creator
-    let title: String
-    let content0: String
-    let content1: String?
-    let content2: String?
+    let content: String
+    let width: CGFloat?
+    let height: CGFloat?
     let image, hashTags: [String]?
     let likes: [String]?
     let comments: [Comment]?
+}
+
+struct BupPage {
+    let nextCursor: String
+    let bups: [Bup]
 }
