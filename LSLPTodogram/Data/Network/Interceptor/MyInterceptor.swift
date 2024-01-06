@@ -42,7 +42,7 @@ final class MyInterceptor: RequestInterceptor {
         print("몇 번 찍힐까요?")
         let refreshToken = KeychainManager.read(key: KeychainKey.refresh.rawValue) ?? ""
         AF
-            .request(Router.refresh(refreshToken: refreshToken))
+            .request(AccountRouter.refresh(refreshToken: refreshToken))
             .validate()
             .responseDecodable(of: RefreshResponse.self) { response in
                 switch response.result {

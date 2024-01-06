@@ -30,7 +30,6 @@
 		577B9C5A2B32D272002D8A4A /* OthersProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577B9C592B32D272002D8A4A /* OthersProfileCell.swift */; };
 		577B9C5C2B32DE50002D8A4A /* FollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577B9C5B2B32DE50002D8A4A /* FollowResponse.swift */; };
 		579B36302B0B790B008ACCAE /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B362F2B0B790B008ACCAE /* Color.swift */; };
-		579B36322B0B7C3B008ACCAE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579B36312B0B7C3B008ACCAE /* Router.swift */; };
 		57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */; };
 		57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAF12B15B043006CAE1F /* PasswordError.swift */; };
 		57BDFAF42B15B055006CAE1F /* ReconfrimSuccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BDFAF32B15B055006CAE1F /* ReconfrimSuccess.swift */; };
@@ -126,6 +125,13 @@
 		57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E212B0B6EFB00330C6B /* LoginViewController.swift */; };
 		57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E232B0B6F1000330C6B /* LoginViewModel.swift */; };
 		57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E272B0B6F8F00330C6B /* LoginMainView.swift */; };
+		57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF112B494C3000A0DD09 /* PostRouter.swift */; };
+		57EBEF142B494C7900A0DD09 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF132B494C7900A0DD09 /* CommentRouter.swift */; };
+		57EBEF162B494C9000A0DD09 /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF152B494C9000A0DD09 /* LikeRouter.swift */; };
+		57EBEF182B494CA700A0DD09 /* AccountRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF172B494CA700A0DD09 /* AccountRouter.swift */; };
+		57EBEF1A2B494CBA00A0DD09 /* FollowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF192B494CBA00A0DD09 /* FollowRouter.swift */; };
+		57EBEF1C2B494CC900A0DD09 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF1B2B494CC900A0DD09 /* ProfileRouter.swift */; };
+		57EBEF1E2B494D0400A0DD09 /* NetworkBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF1D2B494D0400A0DD09 /* NetworkBase.swift */; };
 		57EF40232B44B29E0078F196 /* SesacAuthenticator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EF40222B44B29E0078F196 /* SesacAuthenticator.swift */; };
 		57F101772B19BD7400BE333F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 57F101762B19BD7400BE333F /* RxDataSources */; };
 		57F101792B19DFF900BE333F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F101782B19DFF900BE333F /* MainTabBarController.swift */; };
@@ -188,7 +194,6 @@
 		577B9C592B32D272002D8A4A /* OthersProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfileCell.swift; sourceTree = "<group>"; };
 		577B9C5B2B32DE50002D8A4A /* FollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowResponse.swift; sourceTree = "<group>"; };
 		579B362F2B0B790B008ACCAE /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		579B36312B0B7C3B008ACCAE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		57BDFAEF2B15B02E006CAE1F /* PasswordSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordSuccess.swift; sourceTree = "<group>"; };
 		57BDFAF12B15B043006CAE1F /* PasswordError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordError.swift; sourceTree = "<group>"; };
 		57BDFAF32B15B055006CAE1F /* ReconfrimSuccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReconfrimSuccess.swift; sourceTree = "<group>"; };
@@ -278,6 +283,13 @@
 		57E98E212B0B6EFB00330C6B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		57E98E232B0B6F1000330C6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57E98E272B0B6F8F00330C6B /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
+		57EBEF112B494C3000A0DD09 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
+		57EBEF132B494C7900A0DD09 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
+		57EBEF152B494C9000A0DD09 /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
+		57EBEF172B494CA700A0DD09 /* AccountRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRouter.swift; sourceTree = "<group>"; };
+		57EBEF192B494CBA00A0DD09 /* FollowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRouter.swift; sourceTree = "<group>"; };
+		57EBEF1B2B494CC900A0DD09 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		57EBEF1D2B494D0400A0DD09 /* NetworkBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkBase.swift; sourceTree = "<group>"; };
 		57EF40222B44B29E0078F196 /* SesacAuthenticator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SesacAuthenticator.swift; sourceTree = "<group>"; };
 		57F101782B19DFF900BE333F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		57F50FB02B1F973000E15811 /* PostReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadRequest.swift; sourceTree = "<group>"; };
@@ -416,7 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				5705C9CE2B46A3BE00E1D806 /* Protocol */,
-				579B36312B0B7C3B008ACCAE /* Router.swift */,
+				57EBEF0E2B494A3600A0DD09 /* Router */,
 				5705C9B52B44DAC000E1D806 /* DataMapping */,
 				5705C9CF2B46A59200E1D806 /* Error */,
 				57EF40212B44B2890078F196 /* Interceptor */,
@@ -955,6 +967,20 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		57EBEF0E2B494A3600A0DD09 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				57EBEF1D2B494D0400A0DD09 /* NetworkBase.swift */,
+				57EBEF112B494C3000A0DD09 /* PostRouter.swift */,
+				57EBEF132B494C7900A0DD09 /* CommentRouter.swift */,
+				57EBEF152B494C9000A0DD09 /* LikeRouter.swift */,
+				57EBEF172B494CA700A0DD09 /* AccountRouter.swift */,
+				57EBEF192B494CBA00A0DD09 /* FollowRouter.swift */,
+				57EBEF1B2B494CC900A0DD09 /* ProfileRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		57EF40212B44B2890078F196 /* Interceptor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1222,7 +1248,9 @@
 				5715F2B52B3A2561008C0A45 /* ImageCell.swift in Sources */,
 				57FDA8D82B376B2C0080AB2C /* ProfileImageButton.swift in Sources */,
 				57E696D82B2A372800294ABA /* CommentMainView.swift in Sources */,
+				57EBEF1E2B494D0400A0DD09 /* NetworkBase.swift in Sources */,
 				57E98E0C2B0B6C2F00330C6B /* Base.swift in Sources */,
+				57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */,
 				57D5FA412B1376C500A76420 /* EmailError.swift in Sources */,
 				57FB02082B1893E1003CAD51 /* BupInputViewController.swift in Sources */,
 				570C72F02B3FF84700E61FC2 /* NetworkError.swift in Sources */,
@@ -1232,12 +1260,15 @@
 				57DE62C22B31B235001EFCC8 /* OthersProfileViewController.swift in Sources */,
 				577B9C5C2B32DE50002D8A4A /* FollowResponse.swift in Sources */,
 				57FB02042B1893CD003CAD51 /* BupInputViewModel.swift in Sources */,
+				57EBEF142B494C7900A0DD09 /* CommentRouter.swift in Sources */,
 				57E98E142B0B6C7300330C6B /* BaseLabel.swift in Sources */,
 				57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */,
 				57E98E122B0B6C6700330C6B /* BaseImageView.swift in Sources */,
 				57048C062B283BE000E6D39E /* BupSegmentHeader.swift in Sources */,
 				57E935772B261AD50098F28E /* ProfileMainView.swift in Sources */,
+				57EBEF1C2B494CC900A0DD09 /* ProfileRouter.swift in Sources */,
 				57E696F82B2CDFAB00294ABA /* RouterProtocol.swift in Sources */,
+				57EBEF162B494C9000A0DD09 /* LikeRouter.swift in Sources */,
 				57E98DDE2B0B660000330C6B /* AppDelegate.swift in Sources */,
 				576920FB2B1E51A800B8CE80 /* PostCreateRequest.swift in Sources */,
 				570C72EE2B3FA1AB00E61FC2 /* SesacAuthenticationCredential.swift in Sources */,
@@ -1256,7 +1287,6 @@
 				57E98E0E2B0B6C4800330C6B /* BaseButton.swift in Sources */,
 				57FDA8F12B38CEAF0080AB2C /* BaseCollectionView.swift in Sources */,
 				579B36302B0B790B008ACCAE /* Color.swift in Sources */,
-				579B36322B0B7C3B008ACCAE /* Router.swift in Sources */,
 				57E6971B2B2FBA0000294ABA /* Extension+UIButton.swift in Sources */,
 				57DC50C12B119CF400B1F293 /* JoinTabViewController.swift in Sources */,
 				57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */,
@@ -1283,6 +1313,7 @@
 				57DC509B2B0F393F00B1F293 /* PasswordMainView.swift in Sources */,
 				57DC50C62B12292300B1F293 /* JoinViewModel.swift in Sources */,
 				57FDA8DC2B376B880080AB2C /* ProfileNicknameButton.swift in Sources */,
+				57EBEF1A2B494CBA00A0DD09 /* FollowRouter.swift in Sources */,
 				5705C9BA2B452B7800E1D806 /* FetchPostUseCase.swift in Sources */,
 				57FDA8E82B377CED0080AB2C /* BupInputCell.swift in Sources */,
 				57E696FE2B2E141800294ABA /* AccountValidator.swift in Sources */,
@@ -1330,6 +1361,7 @@
 				57E696E92B2B804800294ABA /* Extension+UITextView.swift in Sources */,
 				57E696E42B2B4BE900294ABA /* FollowingButton.swift in Sources */,
 				57DC50A72B0F654600B1F293 /* UserDetailMainView.swift in Sources */,
+				57EBEF182B494CA700A0DD09 /* AccountRouter.swift in Sources */,
 				57E98E162B0B6C8200330C6B /* BaseView.swift in Sources */,
 				57E696E02B2A39FA00294ABA /* CommentCell.swift in Sources */,
 			);

@@ -43,7 +43,7 @@ final class LoginViewModel: ViewModelType {
             .flatMapLatest { (email: String, password: String) in
                 return NetworkManager.shared.requestForUser(
                     type: LoginResponse.self,
-                    api: Router.login(email: email, password: password)
+                    api: AccountRouter.login(email: email, password: password)
                 )
                 .catch { error in
                     let statusCode = error.asAFError?.responseCode ?? 500
