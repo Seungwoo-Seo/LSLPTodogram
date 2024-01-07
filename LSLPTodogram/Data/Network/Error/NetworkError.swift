@@ -12,6 +12,7 @@ protocol NetworkErrorProtocol: Error {
     associatedtype RefreshError: NetworkAPIError
     associatedtype PostCreateError: NetworkAPIError
     associatedtype PostReadError: NetworkAPIError
+    associatedtype ProfileReadError: NetworkAPIError
 
     var description: String {get}
 }
@@ -141,6 +142,29 @@ enum NetworkError: NetworkErrorProtocol {
         var description: String {
             switch self {
             case .invalidRequest: return "잘못된 요청"
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+    }
+
+    /// 내 프로필 조회 에러
+    enum ProfileReadError: Int, NetworkAPIError {
+        case invalidAccessToken = 401       // 유효하지 않은 액세스 토큰
+        case forbidden = 403                // 접근 권한이 없음
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
             case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
             case .forbidden: return "접근 권한 없음"
             case .accessTokenExpiration: return "액세스 토큰 만료"
