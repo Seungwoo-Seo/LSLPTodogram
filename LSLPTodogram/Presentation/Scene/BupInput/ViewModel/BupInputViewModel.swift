@@ -65,7 +65,7 @@ final class BupInputViewModel: ViewModelType {
                     return Single.never()
                 }
             }
-            .map { $0.toDomain }
+            .map { $0.toDomain() }
             .bind(with: self) { owner, profile in
                 owner.baseItems = [profile]
                 owner.items.accept(owner.baseItems)

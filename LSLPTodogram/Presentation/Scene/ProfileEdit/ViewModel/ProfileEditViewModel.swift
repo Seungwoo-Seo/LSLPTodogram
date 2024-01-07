@@ -56,7 +56,7 @@ final class ProfileEditViewModel: ViewModelType {
             }
             .withUnretained(self)
             .map { (owner, response) in
-                return response.toDomain
+                return response.toDomain()
             }
 
         isProfile
