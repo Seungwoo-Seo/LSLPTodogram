@@ -1,5 +1,5 @@
 //
-//  ProfileResponseDTO.swift
+//  ProfileResponseDTO+Mapping.swift
 //  LSLPTodogram
 //
 //  Created by 서승우 on 2023/12/10.
@@ -47,6 +47,12 @@ struct OthersProfileResponseDTO: Decodable {
 }
 
 struct ProfileResponseDTO: Decodable {
+    private enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case nick, email, posts, followers, following
+        case profileImageString = "profile"
+        case phoneNum, birthDay
+    }
     let id: String
     let nick: String
     let email: String
@@ -56,15 +62,12 @@ struct ProfileResponseDTO: Decodable {
     let profileImageString: String?
     let phoneNum: String?
     let birthDay: String?
+}
 
-    enum CodingKeys: String, CodingKey {
-        case id = "_id"
-        case nick, email, posts, followers, following
-        case profileImageString = "profile"
-        case phoneNum, birthDay
-    }
+// MARK: - Mappings to Domain
 
-    var toDomain: Profile {
+extension ProfileResponseDTO {
+    func toDomain() -> Profile {
         return Profile(
             _id: id,
             nick: nick,
@@ -77,5 +80,4 @@ struct ProfileResponseDTO: Decodable {
             birthDay: birthDay
         )
     }
-
 }

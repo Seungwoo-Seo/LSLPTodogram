@@ -144,7 +144,7 @@
 		57F870E82B284DC800370D3A /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F870E72B284DC800370D3A /* Profile.swift */; };
 		57F956E72B24CE4200A86F43 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956E62B24CE4200A86F43 /* ProfileViewController.swift */; };
 		57F956E92B24CE4D00A86F43 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956E82B24CE4D00A86F43 /* ProfileViewModel.swift */; };
-		57F956EC2B24DA9700A86F43 /* ProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956EB2B24DA9700A86F43 /* ProfileResponseDTO.swift */; };
+		57F956EC2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956EB2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB02042B1893CD003CAD51 /* BupInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02032B1893CD003CAD51 /* BupInputViewModel.swift */; };
 		57FB02062B1893D6003CAD51 /* BupInputMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02052B1893D6003CAD51 /* BupInputMainView.swift */; };
@@ -301,7 +301,7 @@
 		57F870E72B284DC800370D3A /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		57F956E62B24CE4200A86F43 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		57F956E82B24CE4D00A86F43 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		57F956EB2B24DA9700A86F43 /* ProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseDTO.swift; sourceTree = "<group>"; };
+		57F956EB2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02032B1893CD003CAD51 /* BupInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInputViewModel.swift; sourceTree = "<group>"; };
 		57FB02052B1893D6003CAD51 /* BupInputMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInputMainView.swift; sourceTree = "<group>"; };
@@ -1013,7 +1013,7 @@
 		57F956EA2B24D83400A86F43 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				57F956EB2B24DA9700A86F43 /* ProfileResponseDTO.swift */,
+				57F956EB2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift */,
 				57E696F52B2CDC1900294ABA /* ProfileUpdateRequest.swift */,
 			);
 			path = Profile;
@@ -1221,7 +1221,7 @@
 				5715F2B32B3A2535008C0A45 /* ImageCollectionViewLayout.swift in Sources */,
 				57FB020A2B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				57DC50612B0E359A00B1F293 /* EmailMainView.swift in Sources */,
-				57F956EC2B24DA9700A86F43 /* ProfileResponseDTO.swift in Sources */,
+				57F956EC2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift in Sources */,
 				57DC509F2B0F3B2C00B1F293 /* PasswordViewModel.swift in Sources */,
 				57E696EC2B2B902B00294ABA /* ProfileEditMainView.swift in Sources */,
 				57FDA8D42B3766920080AB2C /* BaseStackView.swift in Sources */,
