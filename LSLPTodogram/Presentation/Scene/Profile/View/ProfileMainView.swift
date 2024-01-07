@@ -19,18 +19,21 @@ enum ProfileItemIdentifiable: Hashable {
 
 final class ProfileMainView: BaseView {
     var dataSource: UITableViewDiffableDataSource<ProfileSection, ProfileItemIdentifiable>!
-    var snapshot = NSDiffableDataSourceSnapshot<ProfileSection, ProfileItemIdentifiable>()    // 섹션은 어차피 안바뀔거임!
 
-    let backgroundImageView = UIImageView(image: UIImage(named: "fireBackground"))
+    let backgroundImageView = {
+        let view = UIImageView(image: UIImage(named: "fireBackground"))
+        view.alpha = 0.7
+        return view
+    }()
+    let refresh = {
+        return UIRefreshControl()
+    }()
     lazy var tableView = {
-        let view = UITableView(frame: .zero, style: .plain)
-        view.backgroundColor = Color.clear
-        view.sectionHeaderTopPadding = 0
-        view.rowHeight = UITableView.automaticDimension
-        view.separatorStyle = .none
+        let view = BaseTableView(frame: .zero, style: .plain)
         view.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         view.register(BupSegmentHeader.self, forHeaderFooterViewReuseIdentifier: BupSegmentHeader.identifier)
         view.register(BupCell.self, forCellReuseIdentifier: BupCell.identifier)
+        view.refreshControl = refresh
         return view
     }()
 

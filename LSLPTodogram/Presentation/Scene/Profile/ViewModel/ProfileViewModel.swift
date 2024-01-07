@@ -12,75 +12,107 @@ import RxSwift
 final class ProfileViewModel: ViewModelType {
     private let disposeBag = DisposeBag()
 
+    private var baseItems: [ProfileItemIdentifiable] = []
     let items: BehaviorRelay<[ProfileItemIdentifiable]> = BehaviorRelay(value: [])
 
-    struct Input {
+    private let baseParameters = PostReadRequest(next: nil)
+    private lazy var nextParameters = baseParameters
 
+    struct Input {
+        let trigger: Observable<Void>
+        let prefetchRows: ControlEvent<[IndexPath]>
+        let rowOfLikebutton: PublishRelay<Int>
     }
 
     struct Output {
         let items: BehaviorRelay<[ProfileItemIdentifiable]>
+        let fetching: Driver<Bool>
+//        let likeStatus: PublishRelay<(row: Int, status: Bool, bup: Bup)>
+        let error: Driver<NetworkError>
     }
 
     func transform(input: Input) -> Output {
-        let profile = PublishRelay<Profile>()
+        let activityIndicator = ActivityIndicator()
+        let errorTracker = ErrorTracker()
 
-        let token = BehaviorRelay(value: KeychainManager.read(key: KeychainKey.token.rawValue) ?? "")
-        let parameters = BehaviorRelay(value: PostReadRequest(next: nil))
+        let fetching = activityIndicator.asDriver()
+        let errors = errorTracker
+            .compactMap { $0 as? NetworkError }
+            .asDriver()
 
-        // 1. 토큰 확인
-        let isProfile = token
+        let myProfile = input.trigger
             .flatMapLatest { _ in
-                print("🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥")
                 return NetworkManager.shared.request(
                     type: ProfileResponseDTO.self,
-                    api: ProfileRouter.read
+                    api: ProfileRouter.read,
+                    error: NetworkError.ProfileReadError.self
                 )
-                .catch { error in
-                    print("❌ 59번 줄이요", error.localizedDescription)
-                    return Single.never()
-                }
-            }
-            .withUnretained(self)
-            .map { (owner, response) in
-                return response.toDomain
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
             }
 
-        isProfile
-            .bind(with: self) { owner, result in
-                profile.accept(result)
+        myProfile
+            .bind(with: self) { owner, domain in
+                owner.baseItems.removeAll()
+                owner.baseItems.insert(ProfileItemIdentifiable.profile(domain), at: 0)
+                owner.items.accept(owner.baseItems)
             }
             .disposed(by: disposeBag)
 
-        isProfile
-            .withLatestFrom(Observable
-                .combineLatest(token, parameters)) { profile, tokenParameters in
-                    return (profile._id, tokenParameters.0, tokenParameters.1)
-                }
-                .flatMapLatest { (id, token, paramters) in
-                    return NetworkManager.shared.request(
-                        type: PostReadResponseDTO.self,
-                        api: PostRouter.userRead(id: id, parameters: paramters)
-                    )
-                    .catch { error in
-                        print(error.localizedDescription)
-                        return Single.never()
+        myProfile
+            .flatMapLatest { [unowned self] (profile) in
+                return NetworkManager.shared.request(
+                    type: PostReadResponseDTO.self,
+                    api: PostRouter.userRead(id: profile._id, parameters: self.baseParameters),
+                    error: NetworkError.PostReadError.self
+                )
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
+            }
+            .bind(with: self) { owner, domain in
+                owner.nextParameters = PostReadRequest(next: domain.nextCursor)
+                let bups = domain.bups.map { ProfileItemIdentifiable.bup($0) }
+                owner.baseItems.append(contentsOf: bups)
+                owner.items.accept(owner.baseItems)
+            }
+            .disposed(by: disposeBag)
+
+        input.prefetchRows
+            .bind(with: self) { owner, indexPaths in
+                for indexPath in indexPaths {
+                    if indexPath.row == owner.baseItems.count - 2 {
+                        if let next = owner.nextParameters.next, next != "0" {
+                            NetworkManager.shared.request(
+                                type: PostReadResponseDTO.self,
+                                api: PostRouter.read(parameters: self.nextParameters),
+                                error: NetworkError.PostReadError.self
+                            )
+                            .trackActivity(activityIndicator)
+                            .trackError(errorTracker)
+                            .catch { _ in Observable.empty() }
+                            .map { $0.toDomain() }
+                            .bind(with: self) { owner, domain in
+                                owner.nextParameters = PostReadRequest(next: domain.nextCursor)
+                                let bups = domain.bups.map { ProfileItemIdentifiable.bup($0) }
+                                owner.baseItems.append(contentsOf: bups)
+                                owner.items.accept(owner.baseItems)
+                            }
+                            .disposed(by: owner.disposeBag)
+                        }
                     }
                 }
-                .withLatestFrom(profile) { responseDTO, profile in
-                    return (profile: profile, response: responseDTO)
-                }
-                .bind(with: self) { owner, value in
-                    let profile = value.profile
-                    let bupList = value.response.data.map { ProfileItemIdentifiable.bup($0.toBup()) }
+            }
+            .disposed(by: disposeBag)
 
-                    let lists = [ProfileItemIdentifiable.profile(profile)] + bupList
-
-                    owner.items.accept(lists)
-                }
-                .disposed(by: disposeBag)
-
-        return Output(items: items)
+        return Output(
+            items: items,
+            fetching: fetching,
+            error: errors
+        )
     }
 
 }

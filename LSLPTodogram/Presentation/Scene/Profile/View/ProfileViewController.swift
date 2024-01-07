@@ -19,6 +19,19 @@ final class ProfileViewController: BaseViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
+        let rowOfLikebutton = PublishRelay<Int>()
+
+        let viewDidLoad = rx.sentMessage(#selector(UIViewController.viewDidLoad))
+            .map { _ in Void() }
+        let pull = mainView.tableView.refreshControl!.rx.controlEvent(.valueChanged).asObservable()
+
+        let input = ProfileViewModel.Input(
+            trigger: Observable.merge(viewDidLoad, pull),
+            prefetchRows: mainView.tableView.rx.prefetchRows,
+            rowOfLikebutton: rowOfLikebutton
+        )
+        let output = viewModel.transform(input: input)
+
         mainView.dataSource = UITableViewDiffableDataSource(
             tableView: mainView.tableView
         ) { tableView, indexPath, itemIdentifier in
@@ -37,29 +50,44 @@ final class ProfileViewController: BaseViewController {
                     }
                     .disposed(by: cell.disposeBag)
 
-//                cell.profileShareButton
-
                 return cell
 
-            case .bup(let bup):
+            case .bup(let item):
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: BupCell.identifier,
                     for: indexPath
                 ) as! BupCell
 
-                cell.profileImageButton.configuration?.image = UIImage(systemName: "person")
-                cell.profileNicknameButton.configuration?.title = bup.creator.nick
-                cell.contentLabel.text = bup.content
+                cell.configure(item: item)
+
+                cell.imageUrls
+                    .bind(to: cell.imageCollectionView.rx.items(cellIdentifier: ImageCell.identifier)) { index, string, cell in
+                        guard let cell = cell as? ImageCell else {return}
+
+                        cell.removeButton.isHidden = true
+                        let token = KeychainManager.read(key: KeychainKey.token.rawValue) ?? ""
+                        cell.imageView.requestModifier(with: string, token: token)
+                    }
+                    .disposed(by: cell.disposeBag)
+
+
+                cell.communicationButtonStackView.likeButton.rx.tap
+                    .withLatestFrom(Observable.just(indexPath.row))
+                    .bind(to: rowOfLikebutton)
+                    .disposed(by: cell.disposeBag)
+
+                cell.communicationButtonStackView.commentButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        let vm = CommentViewModel(bup: item)
+                        let vc = CommentViewController(vm)
+                        let navi = UINavigationController(rootViewController: vc)
+                        owner.present(navi, animated: true)
+                    }
+                    .disposed(by: cell.disposeBag)
 
                 return cell
             }
         }
-
-        mainView.snapshot.appendSections(ProfileSection.allCases)
-        mainView.dataSource.apply(mainView.snapshot)
-
-        let input = ProfileViewModel.Input()
-        let output = viewModel.transform(input: input)
 
         output.items
             .bind(with: self) { owner, items in
@@ -75,10 +103,21 @@ final class ProfileViewController: BaseViewController {
                     }
                 }
 
-                owner.mainView.snapshot.appendItems(profiles, toSection: .profile)
-                owner.mainView.snapshot.appendItems(bups, toSection: .bup)
-                owner.mainView.dataSource.apply(owner.mainView.snapshot)
+                var snapshot = NSDiffableDataSourceSnapshot<ProfileSection, ProfileItemIdentifiable>()
+                snapshot.appendSections(ProfileSection.allCases)
+                snapshot.appendItems(profiles, toSection: .profile)
+                snapshot.appendItems(bups, toSection: .bup)
+                owner.mainView.dataSource.apply(snapshot)
             }
+            .disposed(by: disposeBag)
+
+        output.fetching
+            .drive(mainView.tableView.refreshControl!.rx.isRefreshing)
+            .disposed(by: disposeBag)
+
+        output.error
+            .map { $0.description }
+            .drive(rx.presentAlertToNetworkingErrorDescription)
             .disposed(by: disposeBag)
     }
 
@@ -137,7 +176,35 @@ extension ProfileViewController: UITableViewDelegate {
 
 }
 
+private extension Reactive where Base: ProfileViewController {
+
+    var presentAlertToNetworkingErrorDescription: Binder<String> {
+        return Binder(base) { (vc, description) in
+            let alert = UIAlertController(
+                title: description,
+                message: nil,
+                preferredStyle: .alert
+            )
+            let confirm = UIAlertAction(
+                title: "로그인 화면으로",
+                style: .default
+            ) { _ in
+                vc.windowReset()
+            }
+            alert.addAction(confirm)
+            vc.present(alert, animated: true)
+        }
+    }
+}
+
 private extension ProfileViewController {
+
+    func windowReset() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        sceneDelegate?.window?.rootViewController = LoginViewController()
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
 
     func presentProfileEditViewController() {
         let viewModel = ProfileEditViewModel()
