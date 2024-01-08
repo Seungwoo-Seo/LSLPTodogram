@@ -21,9 +21,11 @@ struct PostReadResponseDTO: Decodable {
 extension PostReadResponseDTO {
 
     func toDomain() -> BupPage {
+        let hostID = KeychainManager.read(key: KeychainKey.id.rawValue)!
+
         return BupPage(
             nextCursor: nextCursor,
-            bups: data.map { $0.toBup() } 
+            bups: data.map { $0.toBup(hostID: hostID) }
         )
     }
 

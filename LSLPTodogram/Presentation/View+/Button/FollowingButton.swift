@@ -21,4 +21,9 @@ final class FollowingButton: BaseButton {
         config.title = "팔로잉 0명"
         configuration = config
     }
+
+    func updateTitle(_ title: String?) {
+        configuration?.title = title
+    }
+    
 }

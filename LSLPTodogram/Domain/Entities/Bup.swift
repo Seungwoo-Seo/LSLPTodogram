@@ -17,13 +17,15 @@ struct Bup: Hashable {
     let image, hashTags: [String]?
     let likes: [String]?
     let comments: [Comment]?
+
+    let hostID: String
 }
 
 extension Bup {
     /// 내가 좋아요를 한 게시글인지 판단할 수 있는 연산 프로퍼티
     var isIliked: Bool {
         let likes = likes ?? []
-        return likes.contains(creator.id)
+        return likes.contains(hostID)
     }
 
     /// 로컬에서 현재 좋아요 갯수를 문자열로 리턴해줄 메서드
@@ -32,7 +34,7 @@ extension Bup {
     func localLikesCountString(isSelected: Bool) -> String {
         if let likes = likes {
             let count = likes.count
-            if likes.contains(creator.id) {
+            if likes.contains(hostID) {
                 return isSelected ? "\(count) 좋아요" : "\(count - 1) 좋아요"
             } else {
                 return isSelected ? "\(count + 1) 좋아요" : "\(count) 좋아요"

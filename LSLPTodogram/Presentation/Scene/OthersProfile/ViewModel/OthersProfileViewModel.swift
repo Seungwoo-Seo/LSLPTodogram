@@ -12,101 +12,214 @@ import RxSwift
 final class OthersProfileViewModel: ViewModelType {
     private let disposeBag = DisposeBag()
 
-    let id: BehaviorRelay<String>
-
-    init(id: String) {
-        self.id = BehaviorRelay(value: id)
-    }
-
+    private var baseItems: [OthersProfileItemIdentifiable] = []
     let items: BehaviorRelay<[OthersProfileItemIdentifiable]> = BehaviorRelay(value: [])
 
+    private var commentBaseItems: [OthersProfileItemIdentifiable] = [
+        OthersProfileItemIdentifiable.empty("아직 답글을 게시하지 않았습니다.")
+    ]
+    private var repostBaseItems: [OthersProfileItemIdentifiable] = [
+        OthersProfileItemIdentifiable.empty("아직 Bup을 리포스트하지 않았습니다.")
+    ]
+
+    private let baseParameters = PostReadRequest(next: nil)
+    private lazy var nextParameters = baseParameters
+
+    var likeState: [Int: Bool] = [:]
+
+    let segmentIndex = BehaviorRelay(value: 0)
+
+    let othersId: String
+
+    init(othersId: String) {
+        self.othersId = othersId
+    }
+
     struct Input {
-        let itemOfFollowButton: PublishRelay<OthersProfile>
+        let trigger: Observable<Void>
+        let prefetchRows: ControlEvent<[IndexPath]>
+        let followState: PublishRelay<(othersID: String, isSelected: Bool)>
+        let rowOfLikebutton: PublishRelay<Int>
+        let didTapLikeButtonOfId: PublishRelay<String>
+        let likeState: PublishRelay<(row: Int, isSelected: Bool)>
     }
 
     struct Output {
         let items: BehaviorRelay<[OthersProfileItemIdentifiable]>
-        let followState: PublishRelay<Bool>
+        let fetching: Driver<Bool>
+        let error: Driver<NetworkError>
+        let followButtonIsSelected: Signal<Bool>
+        let changedSegmentItems: PublishRelay<[OthersProfileItemIdentifiable]>
     }
 
     func transform(input: Input) -> Output {
-        let othersProfile = PublishRelay<OthersProfile>()
-        let followState = PublishRelay<Bool>()
+        let activityIndicator = ActivityIndicator()
+        let errorTracker = ErrorTracker()
 
-        let token = BehaviorRelay(value: KeychainManager.read(key: KeychainKey.token.rawValue) ?? "")
-        let myId = BehaviorRelay(value: KeychainManager.read(key: KeychainKey.id.rawValue) ?? "")
-        let parameters = BehaviorRelay(value: PostReadRequest(next: nil))
+        let fetching = activityIndicator.asDriver()
+        let errors = errorTracker
+            .compactMap { $0 as? NetworkError }
+            .asDriver()
 
-
-        // 1. 토큰 확인
-        let isProfile = Observable
-            .combineLatest(token, id)
-            .debug()
-            .flatMapLatest {
+        let othersProfile = input.trigger
+            .flatMapLatest { [unowned self] _ in
                 return NetworkManager.shared.request(
-                    type: OthersProfileResponseDTO.self,
-                    api: ProfileRouter.others(id: $1)
+                    type: OthersProfileReadResponseDTO.self,
+                    api: ProfileRouter.others(id: self.othersId),
+                    error: NetworkError.OthersProfileReadError.self
                 )
-                .catch { error in
-                    print("❌ 59번 줄이요", error.localizedDescription)
-                    return Single.never()
-                }
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
             }
-            .withLatestFrom(myId) { $0.toDomain(myId: $1) }
 
-        isProfile
-            .bind(with: self) { owner, result in
-                othersProfile.accept(result)
+        othersProfile
+            .bind(with: self) { owner, domain in
+                owner.likeState.removeAll()
+                owner.baseItems.removeAll()
+                owner.baseItems.insert(OthersProfileItemIdentifiable.profile(domain), at: 0)
+                owner.items.accept(owner.baseItems)
             }
             .disposed(by: disposeBag)
 
-        isProfile
-            .withLatestFrom(Observable
-                .combineLatest(token, parameters)) { profile, tokenParameters in
-                    return (profile.id, tokenParameters.0, tokenParameters.1)
-                }
-                .flatMapLatest { (id, token, paramters) in
-                    return NetworkManager.shared.request(
-                        type: PostReadResponseDTO.self,
-                        api: PostRouter.userRead(id: id, parameters: paramters)
-                    )
-                    .catch { error in
-                        print(error.localizedDescription)
-                        return Single.never()
+        othersProfile
+            .flatMapLatest { [unowned self] (othersProfile) in
+                return NetworkManager.shared.request(
+                    type: PostReadResponseDTO.self,
+                    api: PostRouter.userRead(id: othersProfile.id, parameters: self.baseParameters),
+                    error: NetworkError.PostReadError.self
+                )
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
+            }
+            .bind(with: self) { owner, domain in
+                owner.nextParameters = PostReadRequest(next: domain.nextCursor)
+                let bups = domain.bups.map { OthersProfileItemIdentifiable.bup($0) }
+                owner.baseItems.append(contentsOf: bups)
+                owner.items.accept(owner.baseItems)
+            }
+            .disposed(by: disposeBag)
+
+        input.prefetchRows
+            .bind(with: self) { owner, indexPaths in
+                for indexPath in indexPaths {
+                    if indexPath.row == owner.baseItems.count - 2 {
+                        if let next = owner.nextParameters.next, next != "0" {
+                            NetworkManager.shared.request(
+                                type: PostReadResponseDTO.self,
+                                api: PostRouter.userRead(id: owner.othersId, parameters: owner.nextParameters),
+                                error: NetworkError.PostReadError.self
+                            )
+                            .trackActivity(activityIndicator)
+                            .trackError(errorTracker)
+                            .catch { _ in Observable.empty() }
+                            .map { $0.toDomain() }
+                            .bind(with: self) { owner, domain in
+                                owner.nextParameters = PostReadRequest(next: domain.nextCursor)
+                                let bups = domain.bups.map { OthersProfileItemIdentifiable.bup($0) }
+                                owner.baseItems.append(contentsOf: bups)
+                                owner.items.accept(owner.baseItems)
+                            }
+                            .disposed(by: owner.disposeBag)
+                        }
                     }
                 }
-                .withLatestFrom(othersProfile) { responseDTO, profile in
-                    return (profile: profile, response: responseDTO)
-                }
-                .bind(with: self) { owner, value in
-                    let profile = value.profile
-                    let bupList = value.response.data.map { OthersProfileItemIdentifiable.bup($0.toBup()) }
+            }
+            .disposed(by: disposeBag)
 
-                    let lists = [OthersProfileItemIdentifiable.profile(profile)] + bupList
+        // MARK: - follow
+        let followState = input.followState
+            .share()
 
-                    owner.items.accept(lists)
-                }
-                .disposed(by: disposeBag)
+        let followButtonIsSelected: PublishSubject<Bool> = PublishSubject()
 
-        input.itemOfFollowButton
-            .withLatestFrom(token) { (token: $1, id: $0.id) }
+        followState
+            .debug()
+            .filter { !$0.isSelected }
             .flatMapLatest {
-                return NetworkManager.shared.request(
-                    type: FollowResponse.self,
-                    api: FollowRouter.follow(id: $0.id)
+                NetworkManager.shared.request(
+                    type: UnFollowResponse.self,
+                    api: FollowRouter.unfollow(id: $0.othersID),
+                    error: NetworkError.UnFollowError.self
                 )
-                .catch { error in
-                    print("100 ❌", error.localizedDescription)
-                    return Single.never()
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.status }
+            }
+            .debug()
+            .bind(to: followButtonIsSelected)
+            .disposed(by: disposeBag)
+
+        followState
+            .debug()
+            .filter { $0.isSelected }
+            .flatMapLatest {
+                NetworkManager.shared.request(
+                    type: FollowResponse.self,
+                    api: FollowRouter.follow(id: $0.othersID),
+                    error: NetworkError.FollowError.self
+                )
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.status }
+            }
+            .debug()
+            .bind(to: followButtonIsSelected)
+            .disposed(by: disposeBag)
+
+        // MARK: - like
+        input.didTapLikeButtonOfId
+            .flatMapLatest { (id) in
+                return NetworkManager.shared.request(
+                    type: LikeUpdateResponseDTO.self,
+                    api: LikeRouter.update(id: id),
+                    error: NetworkError.LikeUpdateError.self
+                )
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
+            }
+            .withLatestFrom(input.likeState) { (domain: $0, likeState: $1) }
+            .bind(with: self) { owner, value in
+                // MARK: 현재로썬 굳이 response 값을 사용할 필요가 없어졌다.
+            }
+            .disposed(by: disposeBag)
+
+        input.likeState
+            .bind(with: self) { owner, localLikeState in
+                owner.likeState.updateValue(localLikeState.isSelected, forKey: localLikeState.row)
+            }
+            .disposed(by: disposeBag)
+
+        let changedSegmentItems: PublishRelay<[OthersProfileItemIdentifiable]> = PublishRelay()
+
+        segmentIndex
+            .distinctUntilChanged()
+            .bind(with: self) { owner, index in
+                if index == 0 {
+                    if !owner.baseItems.isEmpty {
+                        changedSegmentItems.accept(Array(owner.baseItems.suffix(from: 1)))
+                    }
+                } else if index == 1 {
+                    changedSegmentItems.accept(owner.commentBaseItems)
+                } else {
+                    changedSegmentItems.accept(owner.repostBaseItems)
                 }
             }
-            .map { $0.status }
-            .bind(to: followState)
             .disposed(by: disposeBag)
 
         return Output(
             items: items,
-            followState: followState
+            fetching: fetching,
+            error: errors,
+            followButtonIsSelected: followButtonIsSelected.asSignal { _ in return Signal.empty() },
+            changedSegmentItems: changedSegmentItems
         )
     }
 

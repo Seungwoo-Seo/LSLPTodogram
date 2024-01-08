@@ -89,7 +89,7 @@ final class BupNewsfeedViewController: BaseViewController {
                     let vc = ProfileViewController(vm)
                     owner.navigationController?.pushViewController(vc, animated: true)
                 } else {
-                    let vm = OthersProfileViewModel(id: postCreatorState.id)
+                    let vm = OthersProfileViewModel(othersId: postCreatorState.id)
                     let vc = OthersProfileViewController(vm)
                     owner.navigationController?.pushViewController(vc, animated: true)
                 }

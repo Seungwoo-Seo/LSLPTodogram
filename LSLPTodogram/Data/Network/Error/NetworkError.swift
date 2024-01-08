@@ -13,6 +13,10 @@ protocol NetworkErrorProtocol: Error {
     associatedtype PostCreateError: NetworkAPIError
     associatedtype PostReadError: NetworkAPIError
     associatedtype ProfileReadError: NetworkAPIError
+    associatedtype LikeUpdateError: NetworkAPIError
+    associatedtype OthersProfileReadError: NetworkAPIError
+    associatedtype FollowError: NetworkAPIError
+    associatedtype UnFollowError: NetworkAPIError
 
     var description: String {get}
 }
@@ -172,7 +176,7 @@ enum NetworkError: NetworkErrorProtocol {
         }
     }
 
-    /// 포스트 좋아요 | 좋아요 취소
+    /// 포스트 좋아요 | 좋아요 취소 에러
     enum LikeUpdateError: Int, NetworkAPIError {
         case invalidAccessToken = 401       // 유효하지 않은. 액세스 토큰
         case forbidden = 403                // 접근 권한이 없음
@@ -197,4 +201,82 @@ enum NetworkError: NetworkErrorProtocol {
         }
     }
 
+    /// 다른 유저 프로필 조회 에러
+    enum OthersProfileReadError: Int, NetworkAPIError {
+        case invalidAccessToken = 401       // 유효하지 않은. 액세스 토큰
+        case forbidden = 403                // 접근 권한이 없음
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+    }
+
+    /// 팔로우 에러
+    enum FollowError: Int, NetworkAPIError {
+        case invalidRequest = 400           // 잘못된 요청
+        case invalidAccessToken = 401       // 유효하지 않은. 액세스 토큰
+        case forbidden = 403                // 접근 권한이 없음
+        case alreadyFollowing = 409         // 이미 팔로잉 중
+        case unknownAccount = 410           // 계정 정보가 없는 유저에 대해 팔로우 요청을 했을 때
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .invalidRequest: return "잘못된 요청"
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .alreadyFollowing: return "이미 팔로잉 된 계정입니다"
+            case .unknownAccount: return "알 수 없는 계정입니다"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+    }
+
+    /// 언팔로우 에러
+    enum UnFollowError: Int, NetworkAPIError {
+        case invalidRequest = 400           // 잘못된 요청
+        case invalidAccessToken = 401       // 유효하지 않은. 액세스 토큰
+        case forbidden = 403                // 접근 권한이 없음
+        case unknownAccount = 410           // 나의 팔로잉 목록에 없는 계정에 대해서 언팔로우 한 경우
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .invalidRequest: return "잘못된 요청"
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .unknownAccount: return "알 수 없는 계정입니다"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+    }
 }

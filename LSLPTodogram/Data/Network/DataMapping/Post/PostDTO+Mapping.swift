@@ -31,7 +31,7 @@ struct PostDTO: Decodable {
 
 extension PostDTO {
 
-    func toBup() -> Bup {
+    func toBup(hostID: String) -> Bup {
         return Bup(
             id: _id,
             creator: creator.toDomain,
@@ -42,7 +42,8 @@ extension PostDTO {
             image: image,
             hashTags: hashTags,
             likes: likes,
-            comments: comments?.compactMap { $0.toDomain }
+            comments: comments?.compactMap { $0.toDomain },
+            hostID: hostID
         )
     }
 

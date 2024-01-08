@@ -15,18 +15,27 @@ enum OthersProfileSection: Int, CaseIterable {
 enum OthersProfileItemIdentifiable: Hashable {
     case profile(OthersProfile)
     case bup(Bup)
+    case empty(String)
 }
 
 final class OthersProfileMainView: BaseView {
-    let backgroundImageView = UIImageView(image: UIImage(named: "fireBackground"))
     var dataSource: UITableViewDiffableDataSource<OthersProfileSection, OthersProfileItemIdentifiable>!
-    var snapshot = NSDiffableDataSourceSnapshot<OthersProfileSection, OthersProfileItemIdentifiable>()    // 섹션은 어차피 안바뀔거임!
-
+    
+    let backgroundImageView = {
+        let view = UIImageView(image: UIImage(named: "fireBackground"))
+        view.alpha = 0.7
+        return view
+    }()
+    let refresh = {
+        return UIRefreshControl()
+    }()
     lazy var tableView = {
         let view = BaseTableView(frame: .zero, style: .plain)
         view.register(OthersProfileCell.self, forCellReuseIdentifier: OthersProfileCell.identifier)
         view.register(BupSegmentHeader.self, forHeaderFooterViewReuseIdentifier: BupSegmentHeader.identifier)
         view.register(BupCell.self, forCellReuseIdentifier: BupCell.identifier)
+        view.register(EmptyCell.self, forCellReuseIdentifier: EmptyCell.identifier)
+        view.refreshControl = refresh
         return view
     }()
 
