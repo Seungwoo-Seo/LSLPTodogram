@@ -35,8 +35,65 @@ final class BupCell: BaseTableViewCell {
             title: viewModel.bup.creator.nick
         )
         contentLabel.text = viewModel.bup.content
+    }
 
-        
+    func configure(item: Bup, likeState: Bool?) {
+        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        profileNicknameButton.updateTitle(title: item.creator.nick)
+        contentLabel.text = item.content
+        communicationButtonStackView.likeButton.isSelected = item.isIliked
+        countButtonStackView.likeCountButton.updateTitle(title: item.serverLikesCountString())
+        countButtonStackView.commentCountButton.updateTitle(title: item.commentCountString())
+
+        // 좋아요 버튼의 상태 업데이트
+        if let likeState = likeState {
+            communicationButtonStackView.likeButton.isSelected = likeState
+            countButtonStackView.likeCountButton.updateTitle(
+                title: item.localLikesCountString(isSelected: likeState)
+            )
+        }
+
+
+        baseImageUrls = item.image
+        if let images = item.image {
+            //           let _ = item.width,
+            //           let height = item.height {
+            let height = 200.0
+            // 1개
+            if images.count == 1 {
+                imageCollectionView.snp.remakeConstraints { make in
+                    make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
+                    make.horizontalEdges.equalTo(contentLabel)
+                    make.height.equalTo(height/2)
+                }
+
+                layoutIfNeeded()
+
+                // 1개 이상
+            } else if images.count > 1  {
+                imageCollectionView.snp.remakeConstraints { make in
+                    make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
+                    make.horizontalEdges.equalToSuperview()
+                    make.height.equalTo(height)
+                }
+
+                layoutIfNeeded()
+
+            } else {
+                // 0개
+                imageCollectionView.snp.remakeConstraints { make in
+                    make.top.equalTo(contentLabel.snp.bottom)
+                    make.horizontalEdges.equalToSuperview()
+                    make.height.equalTo(0)
+                }
+
+                layoutIfNeeded()
+
+                imageUrls.accept([])
+            }
+
+            imageUrls.accept(images)
+        }
     }
 
     func configure(item: Bup) {
