@@ -118,17 +118,6 @@ extension OthersProfileViewController: UITableViewDelegate {
                 withIdentifier: BupSegmentHeader.identifier
             ) as! BupSegmentHeader
 
-            header.activeBupButton.rx.tap
-                .bind(with: self) { owner, _ in
-
-                }
-                .disposed(by: header.disposeBag)
-
-            header.historyBupButton.rx.tap
-                .bind(with: self) { owner, _ in
-//                    owner.presentProfileEditViewController()
-                }
-                .disposed(by: header.disposeBag)
 
             return header
         }
