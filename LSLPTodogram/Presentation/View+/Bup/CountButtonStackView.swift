@@ -12,8 +12,8 @@ final class CountButtonStackView: BaseStackView {
         let view = UIStackView(arrangedSubviews: [likeCountButton, commentCountButton])
         view.axis = .horizontal
         view.alignment = .fill
-        view.distribution = .fillProportionally
-        view.spacing = 16
+        view.distribution = .fillEqually
+        view.spacing = 8
         return view
     }()
     let likeCountButton = CountButton()
