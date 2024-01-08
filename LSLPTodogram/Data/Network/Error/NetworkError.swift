@@ -151,7 +151,7 @@ enum NetworkError: NetworkErrorProtocol {
 
     /// 내 프로필 조회 에러
     enum ProfileReadError: Int, NetworkAPIError {
-        case invalidAccessToken = 401       // 유효하지 않은 액세스 토큰
+        case invalidAccessToken = 401       // 유효하지 않은. 액세스 토큰
         case forbidden = 403                // 접근 권한이 없음
         case accessTokenExpiration = 419    // 액세스 토큰 만료
 
@@ -167,6 +167,31 @@ enum NetworkError: NetworkErrorProtocol {
             switch self {
             case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
             case .forbidden: return "접근 권한 없음"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+    }
+
+    /// 포스트 좋아요 | 좋아요 취소
+    enum LikeUpdateError: Int, NetworkAPIError {
+        case invalidAccessToken = 401       // 유효하지 않은. 액세스 토큰
+        case forbidden = 403                // 접근 권한이 없음
+        case invalidPost = 410              // 좋아요 할 포스트(게시글)를 찾을 수 없을 때
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .invalidPost: return "게시글을 찾을 수 없습니다."
             case .accessTokenExpiration: return "액세스 토큰 만료"
             }
         }
