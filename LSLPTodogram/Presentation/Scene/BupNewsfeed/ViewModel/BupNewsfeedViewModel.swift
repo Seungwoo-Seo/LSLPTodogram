@@ -115,7 +115,7 @@ final class BupNewsfeedViewModel: ViewModelType {
             .withLatestFrom(items) { $1[$0].id }
             .flatMapLatest {
                 return NetworkManager.shared.request(
-                    type: LikeUpdateResponse.self,
+                    type: LikeUpdateResponseDTO.self,
                     api: LikeRouter.update(id: $0)
                 )
                 .catch { error in
@@ -123,7 +123,7 @@ final class BupNewsfeedViewModel: ViewModelType {
                     return Single.never()
                 }
             }
-            .map { $0.toDomain.status }
+            .map { $0.toDomain().status }
             .withLatestFrom(input.rowOfLikebutton) { [unowned self] in
                 return (row: $1, status: $0, bup: self.baseItems[$1])
             }

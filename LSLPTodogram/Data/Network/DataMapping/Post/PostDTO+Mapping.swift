@@ -36,6 +36,7 @@ extension PostDTO {
             id: _id,
             creator: creator.toDomain,
             content: content,
+            time: time,
             width: stringToCGFloat(width),
             height: stringToCGFloat(height),
             image: image,

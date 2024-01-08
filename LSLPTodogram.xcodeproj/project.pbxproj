@@ -94,7 +94,7 @@
 		57E697042B2E6B7D00294ABA /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697032B2E6B7D00294ABA /* CommentDTO.swift */; };
 		57E697072B2ECEC700294ABA /* LikeReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697062B2ECEC700294ABA /* LikeReadRequest.swift */; };
 		57E6970E2B2EFDC600294ABA /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E6970D2B2EFDC600294ABA /* BaseTableView.swift */; };
-		57E697112B2F124400294ABA /* LikeUpdateResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697102B2F124400294ABA /* LikeUpdateResponse.swift */; };
+		57E697112B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697102B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift */; };
 		57E697152B2F208F00294ABA /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697142B2F208F00294ABA /* Creator.swift */; };
 		57E697172B2F20B100294ABA /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697162B2F20B100294ABA /* Like.swift */; };
 		57E6971B2B2FBA0000294ABA /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E6971A2B2FB9FF00294ABA /* Extension+UIButton.swift */; };
@@ -258,7 +258,7 @@
 		57E697032B2E6B7D00294ABA /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
 		57E697062B2ECEC700294ABA /* LikeReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeReadRequest.swift; sourceTree = "<group>"; };
 		57E6970D2B2EFDC600294ABA /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
-		57E697102B2F124400294ABA /* LikeUpdateResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeUpdateResponse.swift; sourceTree = "<group>"; };
+		57E697102B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikeUpdateResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57E697142B2F208F00294ABA /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		57E697162B2F20B100294ABA /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		57E6971A2B2FB9FF00294ABA /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
@@ -826,7 +826,7 @@
 		57E697052B2ECEBB00294ABA /* Like */ = {
 			isa = PBXGroup;
 			children = (
-				57E697102B2F124400294ABA /* LikeUpdateResponse.swift */,
+				57E697102B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift */,
 				57E697062B2ECEC700294ABA /* LikeReadRequest.swift */,
 			);
 			path = Like;
@@ -1373,7 +1373,7 @@
 				57DC50A92B0F655100B1F293 /* UserDetailViewController.swift in Sources */,
 				57DC50AB2B0F657900B1F293 /* UserDetailViewModel.swift in Sources */,
 				57DC505F2B0E357B00B1F293 /* EmailViewController.swift in Sources */,
-				57E697112B2F124400294ABA /* LikeUpdateResponse.swift in Sources */,
+				57E697112B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift in Sources */,
 				57E696E92B2B804800294ABA /* Extension+UITextView.swift in Sources */,
 				57E696E42B2B4BE900294ABA /* FollowingButton.swift in Sources */,
 				57DC50A72B0F654600B1F293 /* UserDetailMainView.swift in Sources */,
