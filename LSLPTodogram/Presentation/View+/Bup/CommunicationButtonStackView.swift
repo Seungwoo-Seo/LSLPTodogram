@@ -32,4 +32,13 @@ final class CommunicationButtonStackView: BaseStackView {
             shareButton
         ].forEach { addArrangedSubview($0) }
     }
+
+    override func initialLayout() {
+        super.initialLayout()
+
+        snp.makeConstraints { make in
+            make.width.equalTo(137.33)
+            make.height.equalTo(22)
+        }
+    }
 }
