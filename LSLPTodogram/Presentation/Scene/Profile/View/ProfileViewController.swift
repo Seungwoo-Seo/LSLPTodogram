@@ -19,16 +19,19 @@ final class ProfileViewController: BaseViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        let rowOfLikebutton = PublishRelay<Int>()
-
         let viewDidLoad = rx.sentMessage(#selector(UIViewController.viewDidLoad))
             .map { _ in Void() }
         let pull = mainView.tableView.refreshControl!.rx.controlEvent(.valueChanged).asObservable()
+        let rowOfLikebutton = PublishRelay<Int>()
+        let didTapLikeButtonOfId = PublishRelay<String>()
+        let likeState = PublishRelay<(row: Int, isSelected: Bool)>()
 
         let input = ProfileViewModel.Input(
             trigger: Observable.merge(viewDidLoad, pull),
             prefetchRows: mainView.tableView.rx.prefetchRows,
-            rowOfLikebutton: rowOfLikebutton
+            rowOfLikebutton: rowOfLikebutton,
+            didTapLikeButtonOfId: didTapLikeButtonOfId,
+            likeState: likeState
         )
         let output = viewModel.transform(input: input)
 
@@ -58,7 +61,7 @@ final class ProfileViewController: BaseViewController {
                     for: indexPath
                 ) as! BupCell
 
-                cell.configure(item: item)
+                cell.configure(item: item, likeState: viewModel.likeState[indexPath.row])
 
                 cell.imageUrls
                     .bind(to: cell.imageCollectionView.rx.items(cellIdentifier: ImageCell.identifier)) { index, string, cell in
@@ -70,10 +73,40 @@ final class ProfileViewController: BaseViewController {
                     }
                     .disposed(by: cell.disposeBag)
 
+                // 좋아요 버튼 누르면
+                let didTapLikeButton = cell.communicationButtonStackView.likeButton.rx.tap
+                    .scan(item.isIliked) { lastState, _ in !lastState } // isSelected 상태 토글
+                    .flatMapLatest { isSelected in
+                        Observable<Void>.create { observer in
+                            // UI 업데이트
+                            cell.communicationButtonStackView.likeButton.isSelected = isSelected
+                            let countString = item.localLikesCountString(isSelected: isSelected)
+                            cell.countButtonStackView.likeCountButton.updateTitle(title: countString)
+                            observer.onNext(Void())
+                            observer.onCompleted()
+                            return Disposables.create()
+                        }
+                    }
+                    .share()
 
-                cell.communicationButtonStackView.likeButton.rx.tap
-                    .withLatestFrom(Observable.just(indexPath.row))
-                    .bind(to: rowOfLikebutton)
+                let rowAndIsSelected = Observable.combineLatest(
+                    Observable.just(indexPath.row),
+                    cell.communicationButtonStackView.likeButton.rx.observe(\.isSelected)
+                )
+
+                // 이벤트가 발생한 좋아요 버튼의 정보를 viewModel로 전달
+                didTapLikeButton
+                    .withLatestFrom(rowAndIsSelected)
+                    .bind(with: self) { owner, rowAndIsSelected in
+                        likeState.accept(rowAndIsSelected)
+                    }
+                    .disposed(by: cell.disposeBag)
+
+                // 무분별한 API request를 방지하기 위해 throttle operator 사용
+                didTapLikeButton
+                    .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+                    .withLatestFrom(Observable.just(item.id))
+                    .bind(to: didTapLikeButtonOfId)
                     .disposed(by: cell.disposeBag)
 
                 cell.communicationButtonStackView.commentButton.rx.tap
@@ -86,6 +119,16 @@ final class ProfileViewController: BaseViewController {
                     .disposed(by: cell.disposeBag)
 
                 return cell
+
+            case .empty(let placeholder):
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: EmptyCell.identifier,
+                    for: indexPath
+                ) as! EmptyCell
+
+                cell.configure(placeholder: placeholder)
+
+                return cell
             }
         }
 
@@ -93,6 +136,7 @@ final class ProfileViewController: BaseViewController {
             .bind(with: self) { owner, items in
                 var profiles: [ProfileItemIdentifiable] = []
                 var bups: [ProfileItemIdentifiable] = []
+                var placeholders: [ProfileItemIdentifiable] = []
 
                 for item in items {
                     switch item {
@@ -100,6 +144,8 @@ final class ProfileViewController: BaseViewController {
                         profiles.append(ProfileItemIdentifiable.profile(profile))
                     case .bup(let bup):
                         bups.append(ProfileItemIdentifiable.bup(bup))
+                    case .empty(let placeholder):
+                        placeholders.append(ProfileItemIdentifiable.empty(placeholder))
                     }
                 }
 
@@ -107,6 +153,16 @@ final class ProfileViewController: BaseViewController {
                 snapshot.appendSections(ProfileSection.allCases)
                 snapshot.appendItems(profiles, toSection: .profile)
                 snapshot.appendItems(bups, toSection: .bup)
+                owner.mainView.dataSource.apply(snapshot)
+            }
+            .disposed(by: disposeBag)
+
+        output.changedSegmentItems
+            .bind(with: self) { owner, items in
+                var snapshot = owner.mainView.dataSource.snapshot()
+                snapshot.deleteSections([.bup])
+                snapshot.appendSections([.bup])
+                snapshot.appendItems(items, toSection: .bup)
                 owner.mainView.dataSource.apply(snapshot)
             }
             .disposed(by: disposeBag)
@@ -150,18 +206,10 @@ extension ProfileViewController: UITableViewDelegate {
                 withIdentifier: BupSegmentHeader.identifier
             ) as! BupSegmentHeader
 
-            header.activeBupButton.rx.tap
-                .bind(with: self) { owner, _ in
-
-                }
+            header.underlineSegmentedControl.rx.selectedSegmentIndex
+                .bind(to: viewModel.segmentIndex)
                 .disposed(by: header.disposeBag)
-
-            header.historyBupButton.rx.tap
-                .bind(with: self) { owner, _ in
-//                    owner.presentProfileEditViewController()
-                }
-                .disposed(by: header.disposeBag)
-
+        
             return header
         }
     }

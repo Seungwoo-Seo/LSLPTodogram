@@ -15,20 +15,33 @@ final class ProfileViewModel: ViewModelType {
     private var baseItems: [ProfileItemIdentifiable] = []
     let items: BehaviorRelay<[ProfileItemIdentifiable]> = BehaviorRelay(value: [])
 
+    private var commentBaseItems: [ProfileItemIdentifiable] = [
+        ProfileItemIdentifiable.empty("아직 답글을 게시하지 않았습니다.")
+    ]
+    private var repostBaseItems: [ProfileItemIdentifiable] = [
+        ProfileItemIdentifiable.empty("아직 Bup을 리포스트하지 않았습니다.")
+    ]
+
     private let baseParameters = PostReadRequest(next: nil)
     private lazy var nextParameters = baseParameters
+
+    var likeState: [Int: Bool] = [:]
+
+    let segmentIndex = BehaviorRelay(value: 0)
 
     struct Input {
         let trigger: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
         let rowOfLikebutton: PublishRelay<Int>
+        let didTapLikeButtonOfId: PublishRelay<String>
+        let likeState: PublishRelay<(row: Int, isSelected: Bool)>
     }
 
     struct Output {
         let items: BehaviorRelay<[ProfileItemIdentifiable]>
         let fetching: Driver<Bool>
-//        let likeStatus: PublishRelay<(row: Int, status: Bool, bup: Bup)>
         let error: Driver<NetworkError>
+        let changedSegmentItems: PublishRelay<[ProfileItemIdentifiable]>
     }
 
     func transform(input: Input) -> Output {
@@ -55,6 +68,8 @@ final class ProfileViewModel: ViewModelType {
 
         myProfile
             .bind(with: self) { owner, domain in
+                // 최초로 데이터를 가져오거나 새로고침하면 기존 캐시를 다 지워준다.
+                owner.likeState.removeAll()
                 owner.baseItems.removeAll()
                 owner.baseItems.insert(ProfileItemIdentifiable.profile(domain), at: 0)
                 owner.items.accept(owner.baseItems)
@@ -108,10 +123,53 @@ final class ProfileViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        // MARK: - likeButton
+        input.didTapLikeButtonOfId
+            .flatMapLatest { (id) in
+                return NetworkManager.shared.request(
+                    type: LikeUpdateResponseDTO.self,
+                    api: LikeRouter.update(id: id),
+                    error: NetworkError.LikeUpdateError.self
+                )
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
+            }
+            .withLatestFrom(input.likeState) { (domain: $0, likeState: $1) }
+            .bind(with: self) { owner, value in
+                // MARK: 현재로썬 굳이 response 값을 사용할 필요가 없어졌다.
+            }
+            .disposed(by: disposeBag)
+
+        input.likeState
+            .bind(with: self) { owner, localLikeState in
+                owner.likeState.updateValue(localLikeState.isSelected, forKey: localLikeState.row)
+            }
+            .disposed(by: disposeBag)
+
+        let changedSegmentItems: PublishRelay<[ProfileItemIdentifiable]> = PublishRelay()
+
+        segmentIndex
+            .distinctUntilChanged()
+            .bind(with: self) { owner, index in
+                if index == 0 {
+                    if !owner.baseItems.isEmpty {
+                        changedSegmentItems.accept(Array(owner.baseItems.suffix(from: 1)))
+                    }
+                } else if index == 1 {
+                    changedSegmentItems.accept(owner.commentBaseItems)
+                } else {
+                    changedSegmentItems.accept(owner.repostBaseItems)
+                }
+            }
+            .disposed(by: disposeBag)
+
         return Output(
             items: items,
             fetching: fetching,
-            error: errors
+            error: errors,
+            changedSegmentItems: changedSegmentItems
         )
     }
 
