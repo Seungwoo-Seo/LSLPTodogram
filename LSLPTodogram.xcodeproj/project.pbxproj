@@ -15,6 +15,7 @@
 		5705C9CA2B46800B00E1D806 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705C9C92B46800B00E1D806 /* ActivityIndicator.swift */; };
 		5705C9CC2B46867900E1D806 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705C9CB2B46867900E1D806 /* ErrorTracker.swift */; };
 		5705C9D12B46A71800E1D806 /* BupCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705C9D02B46A71800E1D806 /* BupCellViewModel.swift */; };
+		570BB0C82B4B030E00A5B0B7 /* UnderlineSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570BB0C72B4B030E00A5B0B7 /* UnderlineSegmentedControl.swift */; };
 		570C72E12B3EB1F800E61FC2 /* UIImageView+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C72E02B3EB1F800E61FC2 /* UIImageView+RequestModifier.swift */; };
 		570C72E32B3EF1F300E61FC2 /* CommentOwnerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C72E22B3EF1F300E61FC2 /* CommentOwnerCell.swift */; };
 		570C72E82B3F8C4B00E61FC2 /* RefreshResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C72E72B3F8C4B00E61FC2 /* RefreshResponse.swift */; };
@@ -179,6 +180,7 @@
 		5705C9C92B46800B00E1D806 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		5705C9CB2B46867900E1D806 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		5705C9D02B46A71800E1D806 /* BupCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupCellViewModel.swift; sourceTree = "<group>"; };
+		570BB0C72B4B030E00A5B0B7 /* UnderlineSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlineSegmentedControl.swift; sourceTree = "<group>"; };
 		570C72E02B3EB1F800E61FC2 /* UIImageView+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+RequestModifier.swift"; sourceTree = "<group>"; };
 		570C72E22B3EF1F300E61FC2 /* CommentOwnerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentOwnerCell.swift; sourceTree = "<group>"; };
 		570C72E72B3F8C4B00E61FC2 /* RefreshResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponse.swift; sourceTree = "<group>"; };
@@ -487,6 +489,14 @@
 				570C72EF2B3FF84700E61FC2 /* NetworkError.swift */,
 			);
 			path = Error;
+			sourceTree = "<group>";
+		};
+		570BB0C62B4B02F000A5B0B7 /* SegmentControl */ = {
+			isa = PBXGroup;
+			children = (
+				570BB0C72B4B030E00A5B0B7 /* UnderlineSegmentedControl.swift */,
+			);
+			path = SegmentControl;
 			sourceTree = "<group>";
 		};
 		5715F2B12B3A251A008C0A45 /* ImageCollectionView */ = {
@@ -926,6 +936,7 @@
 				57FDA8E32B376F200080AB2C /* LineView.swift */,
 				57FDA8DD2B376BB00080AB2C /* Button */,
 				57FDA8DE2B376E8B0080AB2C /* Label */,
+				570BB0C62B4B02F000A5B0B7 /* SegmentControl */,
 			);
 			path = "View+";
 			sourceTree = "<group>";
@@ -1276,6 +1287,7 @@
 				57F6DDA92B2150340090C646 /* CreatorDTO.swift in Sources */,
 				57F50FB32B1F979900E15811 /* PostDTO+Mapping.swift in Sources */,
 				57E696DC2B2A373D00294ABA /* CommentViewModel.swift in Sources */,
+				570BB0C82B4B030E00A5B0B7 /* UnderlineSegmentedControl.swift in Sources */,
 				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,
 				57FDA8E62B37715C0080AB2C /* CountButtonStackView.swift in Sources */,
 				57E5979A2B1F0DCA00C5251C /* ProfileImageView.swift in Sources */,
