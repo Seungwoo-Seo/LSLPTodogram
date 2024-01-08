@@ -15,6 +15,7 @@ enum ProfileSection: Int, CaseIterable {
 enum ProfileItemIdentifiable: Hashable {
     case profile(Profile)
     case bup(Bup)
+    case empty(String)
 }
 
 final class ProfileMainView: BaseView {
@@ -33,6 +34,7 @@ final class ProfileMainView: BaseView {
         view.register(ProfileCell.self, forCellReuseIdentifier: ProfileCell.identifier)
         view.register(BupSegmentHeader.self, forHeaderFooterViewReuseIdentifier: BupSegmentHeader.identifier)
         view.register(BupCell.self, forCellReuseIdentifier: BupCell.identifier)
+        view.register(EmptyCell.self, forCellReuseIdentifier: EmptyCell.identifier)
         view.refreshControl = refresh
         return view
     }()
