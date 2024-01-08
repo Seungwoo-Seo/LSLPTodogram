@@ -126,6 +126,7 @@
 		57E98E222B0B6EFB00330C6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E212B0B6EFB00330C6B /* LoginViewController.swift */; };
 		57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E232B0B6F1000330C6B /* LoginViewModel.swift */; };
 		57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E98E272B0B6F8F00330C6B /* LoginMainView.swift */; };
+		57EB271F2B4BB91300C7283A /* EmptyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB271E2B4BB91300C7283A /* EmptyCell.swift */; };
 		57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF112B494C3000A0DD09 /* PostRouter.swift */; };
 		57EBEF142B494C7900A0DD09 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF132B494C7900A0DD09 /* CommentRouter.swift */; };
 		57EBEF162B494C9000A0DD09 /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF152B494C9000A0DD09 /* LikeRouter.swift */; };
@@ -285,6 +286,7 @@
 		57E98E212B0B6EFB00330C6B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		57E98E232B0B6F1000330C6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		57E98E272B0B6F8F00330C6B /* LoginMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginMainView.swift; sourceTree = "<group>"; };
+		57EB271E2B4BB91300C7283A /* EmptyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCell.swift; sourceTree = "<group>"; };
 		57EBEF112B494C3000A0DD09 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		57EBEF132B494C7900A0DD09 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
 		57EBEF152B494C9000A0DD09 /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				57F956E62B24CE4200A86F43 /* ProfileViewController.swift */,
 				57E935872B2749EC0098F28E /* ProfileCell.swift */,
 				57048C052B283BE000E6D39E /* BupSegmentHeader.swift */,
+				57EB271E2B4BB91300C7283A /* EmptyCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1302,6 +1305,7 @@
 				57E6971B2B2FBA0000294ABA /* Extension+UIButton.swift in Sources */,
 				57DC50C12B119CF400B1F293 /* JoinTabViewController.swift in Sources */,
 				57E98E282B0B6F8F00330C6B /* LoginMainView.swift in Sources */,
+				57EB271F2B4BB91300C7283A /* EmptyCell.swift in Sources */,
 				57E13A172B0CCEFE0048B27C /* NetworkManager.swift in Sources */,
 				57E697152B2F208F00294ABA /* Creator.swift in Sources */,
 				57048C0E2B28406500E6D39E /* BupNewsfeedMainView.swift in Sources */,
