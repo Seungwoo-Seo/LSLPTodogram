@@ -12,6 +12,8 @@ import RxSwift
 final class ProfileViewModel: ViewModelType {
     private let disposeBag = DisposeBag()
 
+    private var profile: Profile?
+
     private var baseItems: [ProfileItemIdentifiable] = []
     let items: BehaviorRelay<[ProfileItemIdentifiable]> = BehaviorRelay(value: [])
 
@@ -32,6 +34,7 @@ final class ProfileViewModel: ViewModelType {
     struct Input {
         let trigger: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
+        let didTapFollowersButton: PublishRelay<Void>
         let rowOfLikebutton: PublishRelay<Int>
         let didTapLikeButtonOfId: PublishRelay<String>
         let likeState: PublishRelay<(row: Int, isSelected: Bool)>
@@ -41,6 +44,7 @@ final class ProfileViewModel: ViewModelType {
         let items: BehaviorRelay<[ProfileItemIdentifiable]>
         let fetching: Driver<Bool>
         let error: Driver<NetworkError>
+        let followers: Signal<[Follower]>
         let changedSegmentItems: PublishRelay<[ProfileItemIdentifiable]>
     }
 
@@ -69,8 +73,10 @@ final class ProfileViewModel: ViewModelType {
         myProfile
             .bind(with: self) { owner, domain in
                 // 최초로 데이터를 가져오거나 새로고침하면 기존 캐시를 다 지워준다.
+                owner.profile = nil
                 owner.likeState.removeAll()
                 owner.baseItems.removeAll()
+                owner.profile = domain
                 owner.baseItems.insert(ProfileItemIdentifiable.profile(domain), at: 0)
                 owner.items.accept(owner.baseItems)
             }
@@ -123,6 +129,19 @@ final class ProfileViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        let followers: PublishSubject<[Follower]> = PublishSubject()
+
+        input.didTapFollowersButton
+            .bind(with: self) { owner, _ in
+                if let profile = owner.profile,
+                   let _followers = profile.followers,
+                   !_followers.isEmpty {
+                    followers.onNext(_followers)
+                }
+            }
+            .disposed(by: disposeBag)
+
+
         // MARK: - likeButton
         input.didTapLikeButtonOfId
             .flatMapLatest { (id) in
@@ -169,6 +188,7 @@ final class ProfileViewModel: ViewModelType {
             items: items,
             fetching: fetching,
             error: errors,
+            followers: followers.asSignal(onErrorJustReturn: []),
             changedSegmentItems: changedSegmentItems
         )
     }

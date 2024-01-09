@@ -130,6 +130,14 @@
 		57EB27212B4BECFF00C7283A /* OthersProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27202B4BECFF00C7283A /* OthersProfile.swift */; };
 		57EB27232B4BED2600C7283A /* OthersProfileReadResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27222B4BED2600C7283A /* OthersProfileReadResponseDTO+Mapping.swift */; };
 		57EB27252B4C167000C7283A /* UnFollowResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27242B4C167000C7283A /* UnFollowResponse.swift */; };
+		57EB272A2B4D060A00C7283A /* FollowerListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27292B4D060A00C7283A /* FollowerListMainView.swift */; };
+		57EB272C2B4D062200C7283A /* FollowerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB272B2B4D062200C7283A /* FollowerListViewController.swift */; };
+		57EB272E2B4D089A00C7283A /* FollowerListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB272D2B4D089A00C7283A /* FollowerListCell.swift */; };
+		57EB27302B4D099800C7283A /* FollowerListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB272F2B4D099800C7283A /* FollowerListViewModel.swift */; };
+		57EB27322B4D0C0700C7283A /* Follower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27312B4D0C0700C7283A /* Follower.swift */; };
+		57EB27342B4D0C4900C7283A /* FollowerDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27332B4D0C4900C7283A /* FollowerDTO+Mapping.swift */; };
+		57EB27362B4D0C7300C7283A /* FollowingDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27352B4D0C7300C7283A /* FollowingDTO+Mapping.swift */; };
+		57EB27382B4D0C8C00C7283A /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27372B4D0C8C00C7283A /* Following.swift */; };
 		57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF112B494C3000A0DD09 /* PostRouter.swift */; };
 		57EBEF142B494C7900A0DD09 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF132B494C7900A0DD09 /* CommentRouter.swift */; };
 		57EBEF162B494C9000A0DD09 /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF152B494C9000A0DD09 /* LikeRouter.swift */; };
@@ -293,6 +301,14 @@
 		57EB27202B4BECFF00C7283A /* OthersProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfile.swift; sourceTree = "<group>"; };
 		57EB27222B4BED2600C7283A /* OthersProfileReadResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OthersProfileReadResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57EB27242B4C167000C7283A /* UnFollowResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnFollowResponse.swift; sourceTree = "<group>"; };
+		57EB27292B4D060A00C7283A /* FollowerListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListMainView.swift; sourceTree = "<group>"; };
+		57EB272B2B4D062200C7283A /* FollowerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewController.swift; sourceTree = "<group>"; };
+		57EB272D2B4D089A00C7283A /* FollowerListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListCell.swift; sourceTree = "<group>"; };
+		57EB272F2B4D099800C7283A /* FollowerListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListViewModel.swift; sourceTree = "<group>"; };
+		57EB27312B4D0C0700C7283A /* Follower.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Follower.swift; sourceTree = "<group>"; };
+		57EB27332B4D0C4900C7283A /* FollowerDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FollowerDTO+Mapping.swift"; sourceTree = "<group>"; };
+		57EB27352B4D0C7300C7283A /* FollowingDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FollowingDTO+Mapping.swift"; sourceTree = "<group>"; };
+		57EB27372B4D0C8C00C7283A /* Following.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
 		57EBEF112B494C3000A0DD09 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		57EBEF132B494C7900A0DD09 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
 		57EBEF152B494C9000A0DD09 /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
@@ -858,6 +874,8 @@
 				57E697162B2F20B100294ABA /* Like.swift */,
 				57F870E72B284DC800370D3A /* Profile.swift */,
 				57EB27202B4BECFF00C7283A /* OthersProfile.swift */,
+				57EB27312B4D0C0700C7283A /* Follower.swift */,
+				57EB27372B4D0C8C00C7283A /* Following.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -929,6 +947,7 @@
 				57F956E32B24CE1C00A86F43 /* Profile */,
 				57E696EA2B2B901200294ABA /* ProfileEdit */,
 				57DE62BE2B31B1E5001EFCC8 /* OthersProfile */,
+				57EB27262B4CFDBD00C7283A /* FollowerList */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -989,6 +1008,33 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		57EB27262B4CFDBD00C7283A /* FollowerList */ = {
+			isa = PBXGroup;
+			children = (
+				57EB27272B4CFDD000C7283A /* View */,
+				57EB27282B4CFDD400C7283A /* ViewModel */,
+			);
+			path = FollowerList;
+			sourceTree = "<group>";
+		};
+		57EB27272B4CFDD000C7283A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57EB27292B4D060A00C7283A /* FollowerListMainView.swift */,
+				57EB272B2B4D062200C7283A /* FollowerListViewController.swift */,
+				57EB272D2B4D089A00C7283A /* FollowerListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		57EB27282B4CFDD400C7283A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57EB272F2B4D099800C7283A /* FollowerListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		57EBEF0E2B494A3600A0DD09 /* Router */ = {
 			isa = PBXGroup;
 			children = (
@@ -1038,6 +1084,8 @@
 				57F956EB2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift */,
 				57E696F52B2CDC1900294ABA /* ProfileUpdateRequest.swift */,
 				57EB27222B4BED2600C7283A /* OthersProfileReadResponseDTO+Mapping.swift */,
+				57EB27332B4D0C4900C7283A /* FollowerDTO+Mapping.swift */,
+				57EB27352B4D0C7300C7283A /* FollowingDTO+Mapping.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1268,6 +1316,7 @@
 				57D5FA432B1376DD00A76420 /* EmailSuccess.swift in Sources */,
 				57DC50AD2B0F665200B1F293 /* InfoInputView.swift in Sources */,
 				5705C9C82B45717F00E1D806 /* NetworkRepository.swift in Sources */,
+				57EB27362B4D0C7300C7283A /* FollowingDTO+Mapping.swift in Sources */,
 				5715F2B52B3A2561008C0A45 /* ImageCell.swift in Sources */,
 				57FDA8D82B376B2C0080AB2C /* ProfileImageButton.swift in Sources */,
 				57E696D82B2A372800294ABA /* CommentMainView.swift in Sources */,
@@ -1277,6 +1326,8 @@
 				57D5FA412B1376C500A76420 /* EmailError.swift in Sources */,
 				57FB02082B1893E1003CAD51 /* BupInputViewController.swift in Sources */,
 				570C72F02B3FF84700E61FC2 /* NetworkError.swift in Sources */,
+				57EB272E2B4D089A00C7283A /* FollowerListCell.swift in Sources */,
+				57EB272A2B4D060A00C7283A /* FollowerListMainView.swift in Sources */,
 				57F870E82B284DC800370D3A /* Profile.swift in Sources */,
 				57FDA8EA2B377FBE0080AB2C /* InputCommunicationButtonStackView.swift in Sources */,
 				570C72E12B3EB1F800E61FC2 /* UIImageView+RequestModifier.swift in Sources */,
@@ -1329,6 +1380,7 @@
 				57E98E182B0B6C9000330C6B /* BaseViewController.swift in Sources */,
 				57E635D62B1C979B00B9F112 /* BupContentInput.swift in Sources */,
 				57FBCB632B15F08600C83C93 /* BupNewsfeedViewController.swift in Sources */,
+				57EB27342B4D0C4900C7283A /* FollowerDTO+Mapping.swift in Sources */,
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */,
 				57FDA8DA2B376B550080AB2C /* UIImage+Resize.swift in Sources */,
@@ -1350,6 +1402,7 @@
 				57FDA8E02B376E950080AB2C /* TimeLabel.swift in Sources */,
 				57BDFAF62B15B063006CAE1F /* ReconfrimError.swift in Sources */,
 				57F50FB12B1F973000E15811 /* PostReadRequest.swift in Sources */,
+				57EB27302B4D099800C7283A /* FollowerListViewModel.swift in Sources */,
 				57D5FA2B2B1328BD00A76420 /* NicknameError.swift in Sources */,
 				57E696EE2B2B903E00294ABA /* ProfileEditViewController.swift in Sources */,
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
@@ -1359,6 +1412,8 @@
 				57FB02062B1893D6003CAD51 /* BupInputMainView.swift in Sources */,
 				57E5979E2B1F0F0500C5251C /* NicknameLabel.swift in Sources */,
 				570E01B42B1828FE00D1E012 /* BaseCollectionReusableView.swift in Sources */,
+				57EB27322B4D0C0700C7283A /* Follower.swift in Sources */,
+				57EB27382B4D0C8C00C7283A /* Following.swift in Sources */,
 				57EB27232B4BED2600C7283A /* OthersProfileReadResponseDTO+Mapping.swift in Sources */,
 				57E98E242B0B6F1000330C6B /* LoginViewModel.swift in Sources */,
 				57FDA8EF2B38CE810080AB2C /* ImageCollectionView.swift in Sources */,
@@ -1389,6 +1444,7 @@
 				57E696E92B2B804800294ABA /* Extension+UITextView.swift in Sources */,
 				57E696E42B2B4BE900294ABA /* FollowingButton.swift in Sources */,
 				57DC50A72B0F654600B1F293 /* UserDetailMainView.swift in Sources */,
+				57EB272C2B4D062200C7283A /* FollowerListViewController.swift in Sources */,
 				57EBEF182B494CA700A0DD09 /* AccountRouter.swift in Sources */,
 				57E98E162B0B6C8200330C6B /* BaseView.swift in Sources */,
 				57E696E02B2A39FA00294ABA /* CommentCell.swift in Sources */,

@@ -11,7 +11,7 @@ struct OthersProfile: Hashable {
     let id: String
     let nick: String
     let profileImageString: String?
-    let followers: [Followers]?
+    let followers: [Follower]?
     let following: [Following]?
     let hostID: String
 }

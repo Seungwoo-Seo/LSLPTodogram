@@ -18,7 +18,7 @@ struct ProfileResponseDTO: Decodable {
     let nick: String
     let email: String
     let posts: [String]
-    let followers: [FollowersDTO]?
+    let followers: [FollowerDTO]?
     let following: [FollowingDTO]?
     let profileImageString: String?
     let phoneNum: String?
@@ -34,8 +34,8 @@ extension ProfileResponseDTO {
             nick: nick,
             email: email,
             posts: posts,
-            followers: followers.map { $0.map {$0.toDomain} },
-            following: following.map { $0.map {$0.toDomain} },
+            followers: followers.map { $0.map {$0.toDomain()} },
+            following: following.map { $0.map {$0.toDomain()} },
             profileImageString: profileImageString,
             phoneNum: phoneNum,
             birthDay: birthDay

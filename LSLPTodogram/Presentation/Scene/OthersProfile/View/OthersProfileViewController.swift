@@ -22,6 +22,8 @@ final class OthersProfileViewController: BaseViewController {
         let viewDidLoad = rx.sentMessage(#selector(UIViewController.viewDidLoad))
             .map { _ in Void() }
         let pull = mainView.tableView.refreshControl!.rx.controlEvent(.valueChanged).asObservable()
+        // followers
+        let didTapFollowersButton = PublishRelay<Void>()
         // follow
         let followState = PublishRelay<(othersID: String, isSelected: Bool)>()
         // like
@@ -32,6 +34,7 @@ final class OthersProfileViewController: BaseViewController {
         let input = OthersProfileViewModel.Input(
             trigger: Observable.merge(viewDidLoad, pull),
             prefetchRows: mainView.tableView.rx.prefetchRows,
+            didTapFollowersButton: didTapFollowersButton,
             followState: followState,
             rowOfLikebutton: rowOfLikebutton,
             didTapLikeButtonOfId: didTapLikeButtonOfId,
@@ -50,6 +53,10 @@ final class OthersProfileViewController: BaseViewController {
                 ) as! OthersProfileCell
 
                 cell.configure(item)
+
+                cell.followersButton.rx.tap
+                    .bind(to: didTapFollowersButton)
+                    .disposed(by: cell.disposeBag)
 
                 // 팔로우 버튼 누르면
                 let didTapFollowButton = cell.followButton.rx.tap
@@ -179,6 +186,24 @@ final class OthersProfileViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
 
+        output.fetching
+            .drive(mainView.tableView.refreshControl!.rx.isRefreshing)
+            .disposed(by: disposeBag)
+
+        output.error
+            .map { $0.description }
+            .drive(rx.presentAlertToNetworkingErrorDescription)
+            .disposed(by: disposeBag)
+
+        output.followers
+            .emit(with: self) { owner, followers in
+                let vm = FollowerListViewModel(followers: followers)
+                let vc = FollowerListViewController(vm)
+                let navi = UINavigationController(rootViewController: vc)
+                owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+
         output.changedSegmentItems
             .bind(with: self) { owner, items in
                 var snapshot = owner.mainView.dataSource.snapshot()
@@ -233,6 +258,38 @@ extension OthersProfileViewController: UITableViewDelegate {
         case .profile: return 0
         case .bup: return UITableView.automaticDimension
         }
+    }
+
+}
+
+private extension Reactive where Base: OthersProfileViewController {
+
+    var presentAlertToNetworkingErrorDescription: Binder<String> {
+        return Binder(base) { (vc, description) in
+            let alert = UIAlertController(
+                title: description,
+                message: nil,
+                preferredStyle: .alert
+            )
+            let confirm = UIAlertAction(
+                title: "로그인 화면으로",
+                style: .default
+            ) { _ in
+                vc.windowReset()
+            }
+            alert.addAction(confirm)
+            vc.present(alert, animated: true)
+        }
+    }
+}
+
+private extension OthersProfileViewController {
+
+    func windowReset() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        sceneDelegate?.window?.rootViewController = LoginViewController()
+        sceneDelegate?.window?.makeKeyAndVisible()
     }
 
 }

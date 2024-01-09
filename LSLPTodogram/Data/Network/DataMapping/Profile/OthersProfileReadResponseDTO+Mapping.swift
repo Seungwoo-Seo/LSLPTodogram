@@ -9,7 +9,7 @@ import Foundation
 
 struct OthersProfileReadResponseDTO: Decodable {
     let posts: [String]?
-    let followers: [FollowersDTO]?
+    let followers: [FollowerDTO]?
     let following: [FollowingDTO]?
     let _id: String
     let nick: String
@@ -26,8 +26,8 @@ extension OthersProfileReadResponseDTO {
             id: _id,
             nick: nick,
             profileImageString: profile,
-            followers: followers.map { $0.map {$0.toDomain} },
-            following: following.map { $0.map {$0.toDomain} },
+            followers: followers.map { $0.map {$0.toDomain()} },
+            following: following.map { $0.map {$0.toDomain()} },
             hostID: hostID
         )
     }

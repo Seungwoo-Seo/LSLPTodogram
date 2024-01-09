@@ -22,6 +22,9 @@ final class ProfileViewController: BaseViewController {
         let viewDidLoad = rx.sentMessage(#selector(UIViewController.viewDidLoad))
             .map { _ in Void() }
         let pull = mainView.tableView.refreshControl!.rx.controlEvent(.valueChanged).asObservable()
+        // followers
+        let didTapFollowersButton = PublishRelay<Void>()
+        // like
         let rowOfLikebutton = PublishRelay<Int>()
         let didTapLikeButtonOfId = PublishRelay<String>()
         let likeState = PublishRelay<(row: Int, isSelected: Bool)>()
@@ -29,6 +32,7 @@ final class ProfileViewController: BaseViewController {
         let input = ProfileViewModel.Input(
             trigger: Observable.merge(viewDidLoad, pull),
             prefetchRows: mainView.tableView.rx.prefetchRows,
+            didTapFollowersButton: didTapFollowersButton,
             rowOfLikebutton: rowOfLikebutton,
             didTapLikeButtonOfId: didTapLikeButtonOfId,
             likeState: likeState
@@ -46,6 +50,10 @@ final class ProfileViewController: BaseViewController {
                 ) as! ProfileCell
 
                 cell.configure(profile)
+
+                cell.followersButton.rx.tap
+                    .bind(to: didTapFollowersButton)
+                    .disposed(by: cell.disposeBag)
 
                 cell.profileEditButton.rx.tap
                     .bind(with: self) { owner, _ in
@@ -174,6 +182,15 @@ final class ProfileViewController: BaseViewController {
         output.error
             .map { $0.description }
             .drive(rx.presentAlertToNetworkingErrorDescription)
+            .disposed(by: disposeBag)
+
+        output.followers
+            .emit(with: self) { owner, followers in
+                let vm = FollowerListViewModel(followers: followers)
+                let vc = FollowerListViewController(vm)
+                let navi = UINavigationController(rootViewController: vc)
+                owner.present(navi, animated: true)
+            }
             .disposed(by: disposeBag)
     }
 

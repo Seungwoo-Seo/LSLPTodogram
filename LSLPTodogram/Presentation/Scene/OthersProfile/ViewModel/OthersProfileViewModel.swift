@@ -12,6 +12,8 @@ import RxSwift
 final class OthersProfileViewModel: ViewModelType {
     private let disposeBag = DisposeBag()
 
+    private var othersProfile: OthersProfile?
+
     private var baseItems: [OthersProfileItemIdentifiable] = []
     let items: BehaviorRelay<[OthersProfileItemIdentifiable]> = BehaviorRelay(value: [])
 
@@ -38,6 +40,7 @@ final class OthersProfileViewModel: ViewModelType {
     struct Input {
         let trigger: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
+        let didTapFollowersButton: PublishRelay<Void>
         let followState: PublishRelay<(othersID: String, isSelected: Bool)>
         let rowOfLikebutton: PublishRelay<Int>
         let didTapLikeButtonOfId: PublishRelay<String>
@@ -48,6 +51,7 @@ final class OthersProfileViewModel: ViewModelType {
         let items: BehaviorRelay<[OthersProfileItemIdentifiable]>
         let fetching: Driver<Bool>
         let error: Driver<NetworkError>
+        let followers: Signal<[Follower]>
         let followButtonIsSelected: Signal<Bool>
         let changedSegmentItems: PublishRelay<[OthersProfileItemIdentifiable]>
     }
@@ -76,8 +80,10 @@ final class OthersProfileViewModel: ViewModelType {
 
         othersProfile
             .bind(with: self) { owner, domain in
+                owner.othersProfile = nil
                 owner.likeState.removeAll()
                 owner.baseItems.removeAll()
+                owner.othersProfile = domain
                 owner.baseItems.insert(OthersProfileItemIdentifiable.profile(domain), at: 0)
                 owner.items.accept(owner.baseItems)
             }
@@ -126,6 +132,18 @@ final class OthersProfileViewModel: ViewModelType {
                             .disposed(by: owner.disposeBag)
                         }
                     }
+                }
+            }
+            .disposed(by: disposeBag)
+
+        let followers: PublishSubject<[Follower]> = PublishSubject()
+
+        input.didTapFollowersButton
+            .bind(with: self) { owner, _ in
+                if let profile = owner.othersProfile,
+                   let _followers = profile.followers,
+                   !_followers.isEmpty {
+                    followers.onNext(_followers)
                 }
             }
             .disposed(by: disposeBag)
@@ -218,6 +236,7 @@ final class OthersProfileViewModel: ViewModelType {
             items: items,
             fetching: fetching,
             error: errors,
+            followers: followers.asSignal(onErrorJustReturn: []),
             followButtonIsSelected: followButtonIsSelected.asSignal { _ in return Signal.empty() },
             changedSegmentItems: changedSegmentItems
         )
