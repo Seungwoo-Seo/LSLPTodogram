@@ -96,96 +96,6 @@ final class BupCell: BaseTableViewCell {
         }
     }
 
-    func configure(item: Bup) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
-        profileNicknameButton.updateTitle(title: item.creator.nick)
-        contentLabel.text = item.content
-
-//        communication
-        if let likeCache = likeCache {
-            // 있으면 캐시를 따라가고
-            if let likes = likeCache.bup.likes {
-
-                if likeCache.status {
-                    countButtonStackView.likeCountButton.configuration?.title = "\(likes.count + 1) 좋아요"
-                    communicationButtonStackView.likeButton.isSelected = true
-                } else {
-                    countButtonStackView.likeCountButton.configuration?.title = "\(likes.count - 1) 좋아요"
-                    communicationButtonStackView.likeButton.isSelected = false
-                }
-            } else {
-                countButtonStackView.likeCountButton.configuration?.title = "0 좋아요"
-            }
-
-        } else {
-            // 없으면 기본을 간다.
-            if let likes = item.likes {
-                // likes가 있으면 카운팅을 해주고
-                countButtonStackView.likeCountButton.configuration?.title = "\(likes.count) 좋아요"
-
-                if likes.contains(item.creator.id) {
-                    communicationButtonStackView.likeButton.isSelected = true
-                } else {
-                    communicationButtonStackView.likeButton.isSelected = false
-                }
-
-            } else {
-                countButtonStackView.likeCountButton.configuration?.title = "0 좋아요"
-            }
-        }
-
-
-
-        if let comments = item.comments {
-            countButtonStackView.commentCountButton.configuration?.title = "\(comments.count) 답글"
-        } else {
-            countButtonStackView.commentCountButton.configuration?.title = "0 답글"
-        }
-
-
-        baseImageUrls = item.image
-        if let images = item.image {
-            //           let _ = item.width,
-            //           let height = item.height {
-            let height = 200.0
-            // 1개
-            if images.count == 1 {
-                imageCollectionView.snp.remakeConstraints { make in
-                    make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
-                    make.horizontalEdges.equalTo(contentLabel)
-                    make.height.equalTo(height/2)
-                }
-
-                layoutIfNeeded()
-
-                // 1개 이상
-            } else if images.count > 1  {
-                imageCollectionView.snp.remakeConstraints { make in
-                    make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
-                    make.horizontalEdges.equalToSuperview()
-                    make.height.equalTo(height)
-                }
-
-                layoutIfNeeded()
-                
-            } else {
-                // 0개
-                imageCollectionView.snp.remakeConstraints { make in
-                    make.top.equalTo(contentLabel.snp.bottom)
-                    make.horizontalEdges.equalToSuperview()
-                    make.height.equalTo(0)
-                }
-
-                layoutIfNeeded()
-
-                imageUrls.accept([])
-            }
-
-            imageUrls.accept(images)
-        }
-
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
 
@@ -262,7 +172,7 @@ final class BupCell: BaseTableViewCell {
         lineView.snp.makeConstraints { make in
             make.top.equalTo(profileImageButton.snp.bottom).offset(offset)
             make.centerX.equalTo(profileImageButton)
-            make.bottom.equalTo(communicationButtonStackView)
+            make.bottom.equalTo(countButtonStackView)
         }
 
         contentLabel.snp.makeConstraints { make in

@@ -98,7 +98,6 @@
 		57E697152B2F208F00294ABA /* Creator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697142B2F208F00294ABA /* Creator.swift */; };
 		57E697172B2F20B100294ABA /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697162B2F20B100294ABA /* Like.swift */; };
 		57E6971B2B2FBA0000294ABA /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E6971A2B2FB9FF00294ABA /* Extension+UIButton.swift */; };
-		57E697202B307D2200294ABA /* Extension+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E6971F2B307D2200294ABA /* Extension+UITableView.swift */; };
 		57E935772B261AD50098F28E /* ProfileMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E935762B261AD50098F28E /* ProfileMainView.swift */; };
 		57E935882B2749EC0098F28E /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E935872B2749EC0098F28E /* ProfileCell.swift */; };
 		57E9358A2B274A040098F28E /* BupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E935892B274A040098F28E /* BupCell.swift */; };
@@ -282,7 +281,6 @@
 		57E697142B2F208F00294ABA /* Creator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Creator.swift; sourceTree = "<group>"; };
 		57E697162B2F20B100294ABA /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		57E6971A2B2FB9FF00294ABA /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
-		57E6971F2B307D2200294ABA /* Extension+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UITableView.swift"; sourceTree = "<group>"; };
 		57E935762B261AD50098F28E /* ProfileMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileMainView.swift; sourceTree = "<group>"; };
 		57E935872B2749EC0098F28E /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		57E935892B274A040098F28E /* BupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupCell.swift; sourceTree = "<group>"; };
@@ -995,7 +993,6 @@
 			isa = PBXGroup;
 			children = (
 				57E6971A2B2FB9FF00294ABA /* Extension+UIButton.swift */,
-				57E6971F2B307D2200294ABA /* Extension+UITableView.swift */,
 				57E696E82B2B804800294ABA /* Extension+UITextView.swift */,
 				57FDA8D92B376B550080AB2C /* UIImage+Resize.swift */,
 				570C72E02B3EB1F800E61FC2 /* UIImageView+RequestModifier.swift */,
@@ -1376,7 +1373,6 @@
 				57EB274A2B4D1ECB00C7283A /* BupDetailMainView.swift in Sources */,
 				570C72F32B42793100E61FC2 /* MyInterceptor.swift in Sources */,
 				5715F2D92B3B1B38008C0A45 /* BupInputCellViewModel.swift in Sources */,
-				57E697202B307D2200294ABA /* Extension+UITableView.swift in Sources */,
 				57E696DA2B2A373200294ABA /* CommentViewController.swift in Sources */,
 				57DE62C62B31B2D6001EFCC8 /* OthersProfileViewModel.swift in Sources */,
 				57E935882B2749EC0098F28E /* ProfileCell.swift in Sources */,

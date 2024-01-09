@@ -18,25 +18,27 @@ final class BupNewsfeedViewModel: ViewModelType {
     private let baseParameters = PostReadRequest(next: nil)
     private lazy var nextParameters = baseParameters
 
+    var likeState: [Int: Bool] = [:]
+
     struct Input {
         let trigger: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
         let postCreatorId: PublishRelay<String>
         let rowOfLikebutton: PublishRelay<Int>
+        let didTapLikeButtonOfId: PublishRelay<String>
+        let likeState: PublishRelay<(row: Int, isSelected: Bool)>
     }
 
     struct Output {
         let items: BehaviorRelay<[Bup]>
         let fetching: Driver<Bool>
         let postCreatorState: PublishRelay<(isMine: Bool, id: String)>
-        let likeStatus: PublishRelay<(row: Int, status: Bool, bup: Bup)>
         let error: Driver<NetworkError>
     }
 
     func transform(input: Input) -> Output {
         // MARK: - Output
         let postCreatorState = PublishRelay<(isMine: Bool, id: String)>()
-        let likeStatus = PublishRelay<(row: Int, status: Bool, bup: Bup)>()
 
         let activityIndicator = ActivityIndicator()
         let errorTracker = ErrorTracker()
@@ -92,7 +94,7 @@ final class BupNewsfeedViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
-        // 좋아요
+        // 포스트 주인
         input.postCreatorId
             .bind(with: self) { owner, postCreatorId in
                 let myId = KeychainManager.read(key: KeychainKey.id.rawValue) ?? ""
@@ -109,37 +111,35 @@ final class BupNewsfeedViewModel: ViewModelType {
 
 
         // MARK: - likeButton
-
-        // 유저가 누른거임
-        let localLikeState = input.rowOfLikebutton
-            .withLatestFrom(items) { $1[$0].id }
-            .flatMapLatest {
+        input.didTapLikeButtonOfId
+            .flatMapLatest { (id) in
                 return NetworkManager.shared.request(
                     type: LikeUpdateResponseDTO.self,
-                    api: LikeRouter.update(id: $0)
+                    api: LikeRouter.update(id: id),
+                    error: NetworkError.LikeUpdateError.self
                 )
-                .catch { error in
-                    print("❌", error.localizedDescription)
-                    return Single.never()
-                }
+                .trackActivity(activityIndicator)
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
             }
-            .map { $0.toDomain().status }
-            .withLatestFrom(input.rowOfLikebutton) { [unowned self] in
-                return (row: $1, status: $0, bup: self.baseItems[$1])
+            .withLatestFrom(input.likeState) { (domain: $0, likeState: $1) }
+            .bind(with: self) { owner, value in
+                // MARK: 현재로썬 굳이 response 값을 사용할 필요가 없어졌다.
             }
-            .share()
+            .disposed(by: disposeBag)
 
-        // 컬렉션에 저장하고
-        localLikeState
-            .bind(to: likeStatus)
+        input.likeState
+            .bind(with: self) { owner, localLikeState in
+                owner.likeState.updateValue(localLikeState.isSelected, forKey: localLikeState.row)
+            }
             .disposed(by: disposeBag)
 
 
         return Output(
             items: items,
             fetching: fetching,
-            postCreatorState: postCreatorState,
-            likeStatus: likeStatus,            
+            postCreatorState: postCreatorState,          
             error: errors
         )
     }

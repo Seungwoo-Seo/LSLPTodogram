@@ -26,14 +26,20 @@ final class BupNewsfeedViewController: BaseViewController {
             .controlEvent(.valueChanged)
             .asObservable()
 
-        let rowOfLikebutton = PublishRelay<Int>()
         let postCreatorId = PublishRelay<String>()
+
+        // like
+        let rowOfLikebutton = PublishRelay<Int>()
+        let didTapLikeButtonOfId = PublishRelay<String>()
+        let likeState = PublishRelay<(row: Int, isSelected: Bool)>()
 
         let input = BupNewsfeedViewModel.Input(
             trigger: Observable.merge(viewDidLoad, pull),
             prefetchRows: mainView.tableView.rx.prefetchRows,
             postCreatorId: postCreatorId,
-            rowOfLikebutton: rowOfLikebutton
+            rowOfLikebutton: rowOfLikebutton,
+            didTapLikeButtonOfId: didTapLikeButtonOfId,
+            likeState: likeState
         )
         let output = viewModel.transform(input: input)
 
@@ -43,7 +49,7 @@ final class BupNewsfeedViewController: BaseViewController {
                     withIdentifier: BupCell.identifier
                 ) as? BupCell else {return UITableViewCell()}
 
-                cell.configure(item: item)
+                cell.configure(item: item, likeState: viewModel.likeState[row])
 
                 cell.imageUrls
                     .bind(to: cell.imageCollectionView.rx.items(cellIdentifier: ImageCell.identifier)) { index, string, cell in
@@ -63,9 +69,40 @@ final class BupNewsfeedViewController: BaseViewController {
                     .bind(to: postCreatorId)
                     .disposed(by: cell.disposeBag)
 
-                cell.communicationButtonStackView.likeButton.rx.tap
-                    .withLatestFrom(Observable.just(row))
-                    .bind(to: rowOfLikebutton)
+                // 좋아요 버튼 누르면
+                let didTapLikeButton = cell.communicationButtonStackView.likeButton.rx.tap
+                    .scan(item.isIliked) { lastState, _ in !lastState } // isSelected 상태 토글
+                    .flatMapLatest { isSelected in
+                        Observable<Void>.create { observer in
+                            // UI 업데이트
+                            cell.communicationButtonStackView.likeButton.isSelected = isSelected
+                            let countString = item.localLikesCountString(isSelected: isSelected)
+                            cell.countButtonStackView.likeCountButton.updateTitle(title: countString)
+                            observer.onNext(Void())
+                            observer.onCompleted()
+                            return Disposables.create()
+                        }
+                    }
+                    .share()
+
+                let rowAndIsSelected = Observable.combineLatest(
+                    Observable.just(row),
+                    cell.communicationButtonStackView.likeButton.rx.observe(\.isSelected)
+                )
+
+                // 이벤트가 발생한 좋아요 버튼의 정보를 viewModel로 전달
+                didTapLikeButton
+                    .withLatestFrom(rowAndIsSelected)
+                    .bind(with: self) { owner, rowAndIsSelected in
+                        likeState.accept(rowAndIsSelected)
+                    }
+                    .disposed(by: cell.disposeBag)
+
+                // 무분별한 API request를 방지하기 위해 throttle operator 사용
+                didTapLikeButton
+                    .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+                    .withLatestFrom(Observable.just(item.id))
+                    .bind(to: didTapLikeButtonOfId)
                     .disposed(by: cell.disposeBag)
 
                 cell.communicationButtonStackView.commentButton.rx.tap
@@ -101,10 +138,6 @@ final class BupNewsfeedViewController: BaseViewController {
                     owner.navigationController?.pushViewController(vc, animated: true)
                 }
             }
-            .disposed(by: disposeBag)
-
-        output.likeStatus
-            .bind(to: mainView.tableView.rx.likeButtonUpdate)
             .disposed(by: disposeBag)
 
         output.fetching
