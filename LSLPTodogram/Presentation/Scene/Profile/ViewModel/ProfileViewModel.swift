@@ -35,6 +35,7 @@ final class ProfileViewModel: ViewModelType {
         let trigger: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
         let didTapFollowersButton: PublishRelay<Void>
+        let didTapFollowingsButton: PublishRelay<Void>
         let rowOfLikebutton: PublishRelay<Int>
         let didTapLikeButtonOfId: PublishRelay<String>
         let likeState: PublishRelay<(row: Int, isSelected: Bool)>
@@ -45,6 +46,7 @@ final class ProfileViewModel: ViewModelType {
         let fetching: Driver<Bool>
         let error: Driver<NetworkError>
         let followers: Signal<[Follower]>
+        let followings: Signal<[Following]>
         let changedSegmentItems: PublishRelay<[ProfileItemIdentifiable]>
     }
 
@@ -130,7 +132,9 @@ final class ProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         let followers: PublishSubject<[Follower]> = PublishSubject()
+        let followings: PublishSubject<[Following]> = PublishSubject()
 
+        // MARK: - 팔로워, 팔로잉
         input.didTapFollowersButton
             .bind(with: self) { owner, _ in
                 if let profile = owner.profile,
@@ -141,6 +145,15 @@ final class ProfileViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        input.didTapFollowingsButton
+            .bind(with: self) { owner, _ in
+                if let profile = owner.profile,
+                   let _followings = profile.following,
+                   !_followings.isEmpty {
+                    followings.onNext(_followings)
+                }
+            }
+            .disposed(by: disposeBag)
 
         // MARK: - likeButton
         input.didTapLikeButtonOfId
@@ -189,6 +202,7 @@ final class ProfileViewModel: ViewModelType {
             fetching: fetching,
             error: errors,
             followers: followers.asSignal(onErrorJustReturn: []),
+            followings: followings.asSignal(onErrorJustReturn: []),
             changedSegmentItems: changedSegmentItems
         )
     }

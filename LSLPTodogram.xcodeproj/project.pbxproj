@@ -138,6 +138,10 @@
 		57EB27342B4D0C4900C7283A /* FollowerDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27332B4D0C4900C7283A /* FollowerDTO+Mapping.swift */; };
 		57EB27362B4D0C7300C7283A /* FollowingDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27352B4D0C7300C7283A /* FollowingDTO+Mapping.swift */; };
 		57EB27382B4D0C8C00C7283A /* Following.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27372B4D0C8C00C7283A /* Following.swift */; };
+		57EB273D2B4D1A7500C7283A /* FollowingListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB273C2B4D1A7500C7283A /* FollowingListViewModel.swift */; };
+		57EB273F2B4D1A8100C7283A /* FollowingListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB273E2B4D1A8100C7283A /* FollowingListMainView.swift */; };
+		57EB27412B4D1A8B00C7283A /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27402B4D1A8B00C7283A /* FollowingListViewController.swift */; };
+		57EB27432B4D1AAB00C7283A /* FollowingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27422B4D1AAB00C7283A /* FollowingListCell.swift */; };
 		57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF112B494C3000A0DD09 /* PostRouter.swift */; };
 		57EBEF142B494C7900A0DD09 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF132B494C7900A0DD09 /* CommentRouter.swift */; };
 		57EBEF162B494C9000A0DD09 /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF152B494C9000A0DD09 /* LikeRouter.swift */; };
@@ -309,6 +313,10 @@
 		57EB27332B4D0C4900C7283A /* FollowerDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FollowerDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57EB27352B4D0C7300C7283A /* FollowingDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FollowingDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57EB27372B4D0C8C00C7283A /* Following.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Following.swift; sourceTree = "<group>"; };
+		57EB273C2B4D1A7500C7283A /* FollowingListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewModel.swift; sourceTree = "<group>"; };
+		57EB273E2B4D1A8100C7283A /* FollowingListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListMainView.swift; sourceTree = "<group>"; };
+		57EB27402B4D1A8B00C7283A /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
+		57EB27422B4D1AAB00C7283A /* FollowingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListCell.swift; sourceTree = "<group>"; };
 		57EBEF112B494C3000A0DD09 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		57EBEF132B494C7900A0DD09 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
 		57EBEF152B494C9000A0DD09 /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
@@ -948,6 +956,7 @@
 				57E696EA2B2B901200294ABA /* ProfileEdit */,
 				57DE62BE2B31B1E5001EFCC8 /* OthersProfile */,
 				57EB27262B4CFDBD00C7283A /* FollowerList */,
+				57EB27392B4D1A5200C7283A /* FollowingList */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1031,6 +1040,33 @@
 			isa = PBXGroup;
 			children = (
 				57EB272F2B4D099800C7283A /* FollowerListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57EB27392B4D1A5200C7283A /* FollowingList */ = {
+			isa = PBXGroup;
+			children = (
+				57EB273A2B4D1A5F00C7283A /* View */,
+				57EB273B2B4D1A6300C7283A /* ViewModel */,
+			);
+			path = FollowingList;
+			sourceTree = "<group>";
+		};
+		57EB273A2B4D1A5F00C7283A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57EB273E2B4D1A8100C7283A /* FollowingListMainView.swift */,
+				57EB27402B4D1A8B00C7283A /* FollowingListViewController.swift */,
+				57EB27422B4D1AAB00C7283A /* FollowingListCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		57EB273B2B4D1A6300C7283A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57EB273C2B4D1A7500C7283A /* FollowingListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1339,6 +1375,7 @@
 				57BDFAF22B15B043006CAE1F /* PasswordError.swift in Sources */,
 				57E98E122B0B6C6700330C6B /* BaseImageView.swift in Sources */,
 				57048C062B283BE000E6D39E /* BupSegmentHeader.swift in Sources */,
+				57EB27412B4D1A8B00C7283A /* FollowingListViewController.swift in Sources */,
 				57E935772B261AD50098F28E /* ProfileMainView.swift in Sources */,
 				57EBEF1C2B494CC900A0DD09 /* ProfileRouter.swift in Sources */,
 				57E696F82B2CDFAB00294ABA /* RouterProtocol.swift in Sources */,
@@ -1381,11 +1418,13 @@
 				57E635D62B1C979B00B9F112 /* BupContentInput.swift in Sources */,
 				57FBCB632B15F08600C83C93 /* BupNewsfeedViewController.swift in Sources */,
 				57EB27342B4D0C4900C7283A /* FollowerDTO+Mapping.swift in Sources */,
+				57EB273F2B4D1A8100C7283A /* FollowingListMainView.swift in Sources */,
 				57DC50652B0E35BC00B1F293 /* EmailViewModel.swift in Sources */,
 				57FBCB672B15F0A900C83C93 /* BupNewsfeedViewModel.swift in Sources */,
 				57FDA8DA2B376B550080AB2C /* UIImage+Resize.swift in Sources */,
 				57DC509D2B0F3B1200B1F293 /* PasswordViewController.swift in Sources */,
 				57D5FA332B133D9700A76420 /* ErrorLabel.swift in Sources */,
+				57EB273D2B4D1A7500C7283A /* FollowingListViewModel.swift in Sources */,
 				57D5FA2F2B1328E400A76420 /* BirthDayError.swift in Sources */,
 				57D5FA3C2B133F2400A76420 /* InfoInputTitleLabel.swift in Sources */,
 				57E635DC2B1CEDF600B9F112 /* PostCreateResponse.swift in Sources */,
@@ -1434,6 +1473,7 @@
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponseDTO.swift in Sources */,
 				57EF40232B44B29E0078F196 /* SesacAuthenticator.swift in Sources */,
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
+				57EB27432B4D1AAB00C7283A /* FollowingListCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
 				57DE62C42B31B240001EFCC8 /* OthersProfileMainView.swift in Sources */,
 				57E98E1A2B0B6CDD00330C6B /* ViewIdentifiable.swift in Sources */,

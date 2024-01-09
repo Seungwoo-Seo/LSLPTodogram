@@ -24,6 +24,8 @@ final class ProfileViewController: BaseViewController {
         let pull = mainView.tableView.refreshControl!.rx.controlEvent(.valueChanged).asObservable()
         // followers
         let didTapFollowersButton = PublishRelay<Void>()
+        // followings
+        let didTapFollowingsButton = PublishRelay<Void>()
         // like
         let rowOfLikebutton = PublishRelay<Int>()
         let didTapLikeButtonOfId = PublishRelay<String>()
@@ -33,6 +35,7 @@ final class ProfileViewController: BaseViewController {
             trigger: Observable.merge(viewDidLoad, pull),
             prefetchRows: mainView.tableView.rx.prefetchRows,
             didTapFollowersButton: didTapFollowersButton,
+            didTapFollowingsButton: didTapFollowingsButton,
             rowOfLikebutton: rowOfLikebutton,
             didTapLikeButtonOfId: didTapLikeButtonOfId,
             likeState: likeState
@@ -51,8 +54,14 @@ final class ProfileViewController: BaseViewController {
 
                 cell.configure(profile)
 
+                // 팔로워 버튼
                 cell.followersButton.rx.tap
                     .bind(to: didTapFollowersButton)
+                    .disposed(by: cell.disposeBag)
+
+                // 팔로잉 버튼
+                cell.followingButton.rx.tap
+                    .bind(to: didTapFollowingsButton)
                     .disposed(by: cell.disposeBag)
 
                 cell.profileEditButton.rx.tap
@@ -188,6 +197,15 @@ final class ProfileViewController: BaseViewController {
             .emit(with: self) { owner, followers in
                 let vm = FollowerListViewModel(followers: followers)
                 let vc = FollowerListViewController(vm)
+                let navi = UINavigationController(rootViewController: vc)
+                owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        output.followings
+            .emit(with: self) { owner, followings in
+                let vm = FollowingListViewModel(followings: followings)
+                let vc = FollowingListViewController(vm)
                 let navi = UINavigationController(rootViewController: vc)
                 owner.present(navi, animated: true)
             }

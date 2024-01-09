@@ -41,6 +41,7 @@ final class OthersProfileViewModel: ViewModelType {
         let trigger: Observable<Void>
         let prefetchRows: ControlEvent<[IndexPath]>
         let didTapFollowersButton: PublishRelay<Void>
+        let didTapFollowingsButton: PublishRelay<Void>
         let followState: PublishRelay<(othersID: String, isSelected: Bool)>
         let rowOfLikebutton: PublishRelay<Int>
         let didTapLikeButtonOfId: PublishRelay<String>
@@ -52,6 +53,7 @@ final class OthersProfileViewModel: ViewModelType {
         let fetching: Driver<Bool>
         let error: Driver<NetworkError>
         let followers: Signal<[Follower]>
+        let followings: Signal<[Following]>
         let followButtonIsSelected: Signal<Bool>
         let changedSegmentItems: PublishRelay<[OthersProfileItemIdentifiable]>
     }
@@ -137,7 +139,9 @@ final class OthersProfileViewModel: ViewModelType {
             .disposed(by: disposeBag)
 
         let followers: PublishSubject<[Follower]> = PublishSubject()
+        let followings: PublishSubject<[Following]> = PublishSubject()
 
+        // MARK: - 팔로워, 팔로잉
         input.didTapFollowersButton
             .bind(with: self) { owner, _ in
                 if let profile = owner.othersProfile,
@@ -148,7 +152,17 @@ final class OthersProfileViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
-        // MARK: - follow
+        input.didTapFollowingsButton
+            .bind(with: self) { owner, _ in
+                if let profile = owner.othersProfile,
+                   let _followings = profile.following,
+                   !_followings.isEmpty {
+                    followings.onNext(_followings)
+                }
+            }
+            .disposed(by: disposeBag)
+
+        // MARK: - 팔로우, 언팔로우
         let followState = input.followState
             .share()
 
@@ -237,6 +251,7 @@ final class OthersProfileViewModel: ViewModelType {
             fetching: fetching,
             error: errors,
             followers: followers.asSignal(onErrorJustReturn: []),
+            followings: followings.asSignal(onErrorJustReturn: []),
             followButtonIsSelected: followButtonIsSelected.asSignal { _ in return Signal.empty() },
             changedSegmentItems: changedSegmentItems
         )
