@@ -17,9 +17,6 @@ final class OthersProfileViewModel: ViewModelType {
     private var baseItems: [OthersProfileItemIdentifiable] = []
     let items: BehaviorRelay<[OthersProfileItemIdentifiable]> = BehaviorRelay(value: [])
 
-    private var commentBaseItems: [OthersProfileItemIdentifiable] = [
-        OthersProfileItemIdentifiable.empty("아직 답글을 게시하지 않았습니다.")
-    ]
     private var repostBaseItems: [OthersProfileItemIdentifiable] = [
         OthersProfileItemIdentifiable.empty("아직 Bup을 리포스트하지 않았습니다.")
     ]
@@ -238,8 +235,6 @@ final class OthersProfileViewModel: ViewModelType {
                     if !owner.baseItems.isEmpty {
                         changedSegmentItems.accept(Array(owner.baseItems.suffix(from: 1)))
                     }
-                } else if index == 1 {
-                    changedSegmentItems.accept(owner.commentBaseItems)
                 } else {
                     changedSegmentItems.accept(owner.repostBaseItems)
                 }

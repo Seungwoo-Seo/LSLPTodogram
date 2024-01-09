@@ -258,8 +258,8 @@ extension OthersProfileViewController: UITableViewDelegate {
             return nil
         case .bup:
             let header = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: BupSegmentHeader.identifier
-            ) as! BupSegmentHeader
+                withIdentifier: OthersBupSegmentHeader.identifier
+            ) as! OthersBupSegmentHeader
 
             header.underlineSegmentedControl.rx.selectedSegmentIndex
                 .bind(to: viewModel.segmentIndex)

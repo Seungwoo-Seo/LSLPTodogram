@@ -32,7 +32,7 @@ final class OthersProfileMainView: BaseView {
     lazy var tableView = {
         let view = BaseTableView(frame: .zero, style: .plain)
         view.register(OthersProfileCell.self, forCellReuseIdentifier: OthersProfileCell.identifier)
-        view.register(BupSegmentHeader.self, forHeaderFooterViewReuseIdentifier: BupSegmentHeader.identifier)
+        view.register(OthersBupSegmentHeader.self, forHeaderFooterViewReuseIdentifier: OthersBupSegmentHeader.identifier)
         view.register(BupCell.self, forCellReuseIdentifier: BupCell.identifier)
         view.register(EmptyCell.self, forCellReuseIdentifier: EmptyCell.identifier)
         view.refreshControl = refresh

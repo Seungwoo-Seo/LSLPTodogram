@@ -166,6 +166,7 @@
 		57F956E72B24CE4200A86F43 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956E62B24CE4200A86F43 /* ProfileViewController.swift */; };
 		57F956E92B24CE4D00A86F43 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956E82B24CE4D00A86F43 /* ProfileViewModel.swift */; };
 		57F956EC2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F956EB2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift */; };
+		57FAF8CA2B4D508400889F8D /* OthersBupSegmentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FAF8C92B4D508400889F8D /* OthersBupSegmentHeader.swift */; };
 		57FB01FE2B1873AF003CAD51 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */; };
 		57FB02042B1893CD003CAD51 /* BupInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02032B1893CD003CAD51 /* BupInputViewModel.swift */; };
 		57FB02062B1893D6003CAD51 /* BupInputMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FB02052B1893D6003CAD51 /* BupInputMainView.swift */; };
@@ -344,6 +345,7 @@
 		57F956E62B24CE4200A86F43 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		57F956E82B24CE4D00A86F43 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		57F956EB2B24DA9700A86F43 /* ProfileResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		57FAF8C92B4D508400889F8D /* OthersBupSegmentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersBupSegmentHeader.swift; sourceTree = "<group>"; };
 		57FB01FD2B1873AF003CAD51 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		57FB02032B1893CD003CAD51 /* BupInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInputViewModel.swift; sourceTree = "<group>"; };
 		57FB02052B1893D6003CAD51 /* BupInputMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInputMainView.swift; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 			children = (
 				57DE62C32B31B23F001EFCC8 /* OthersProfileMainView.swift */,
 				57DE62C12B31B235001EFCC8 /* OthersProfileViewController.swift */,
+				57FAF8C92B4D508400889F8D /* OthersBupSegmentHeader.swift */,
 				577B9C592B32D272002D8A4A /* OthersProfileCell.swift */,
 			);
 			path = View;
@@ -1424,6 +1427,7 @@
 				57F6DDA92B2150340090C646 /* CreatorDTO+Mapping.swift in Sources */,
 				57F50FB32B1F979900E15811 /* PostDTO+Mapping.swift in Sources */,
 				57EB27212B4BECFF00C7283A /* OthersProfile.swift in Sources */,
+				57FAF8CA2B4D508400889F8D /* OthersBupSegmentHeader.swift in Sources */,
 				57E696DC2B2A373D00294ABA /* CommentViewModel.swift in Sources */,
 				570BB0C82B4B030E00A5B0B7 /* UnderlineSegmentedControl.swift in Sources */,
 				57D5FA3E2B1340A000A76420 /* InfoInputButton.swift in Sources */,

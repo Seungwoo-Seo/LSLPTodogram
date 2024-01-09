@@ -1,16 +1,16 @@
 //
-//  BupSegmentHeader.swift
+//  OthersBupSegmentHeader.swift
 //  LSLPTodogram
 //
-//  Created by 서승우 on 2023/12/12.
+//  Created by 서승우 on 2024/01/09.
 //
 
 import UIKit
 import RxSwift
 
-final class BupSegmentHeader: BaseTableViewHeaderFooterView {
+final class OthersBupSegmentHeader: BaseTableViewHeaderFooterView {
     var disposeBag = DisposeBag()
-    
+
     let underlineSegmentedControl = UnderlineSegmentedControl(items: ["Bup", "리포스트"])
 
     override func prepareForReuse() {
