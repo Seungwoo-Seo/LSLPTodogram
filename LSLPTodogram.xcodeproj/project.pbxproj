@@ -91,7 +91,7 @@
 		57E696FE2B2E141800294ABA /* AccountValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E696FD2B2E141800294ABA /* AccountValidator.swift */; };
 		57E697002B2E26FA00294ABA /* CommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E696FF2B2E26FA00294ABA /* CommentTableView.swift */; };
 		57E697022B2E4DB400294ABA /* CommentTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697012B2E4DB400294ABA /* CommentTableViewModel.swift */; };
-		57E697042B2E6B7D00294ABA /* CommentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697032B2E6B7D00294ABA /* CommentDTO.swift */; };
+		57E697042B2E6B7D00294ABA /* CommentDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697032B2E6B7D00294ABA /* CommentDTO+Mapping.swift */; };
 		57E697072B2ECEC700294ABA /* LikeReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697062B2ECEC700294ABA /* LikeReadRequest.swift */; };
 		57E6970E2B2EFDC600294ABA /* BaseTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E6970D2B2EFDC600294ABA /* BaseTableView.swift */; };
 		57E697112B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E697102B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift */; };
@@ -142,6 +142,11 @@
 		57EB273F2B4D1A8100C7283A /* FollowingListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB273E2B4D1A8100C7283A /* FollowingListMainView.swift */; };
 		57EB27412B4D1A8B00C7283A /* FollowingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27402B4D1A8B00C7283A /* FollowingListViewController.swift */; };
 		57EB27432B4D1AAB00C7283A /* FollowingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27422B4D1AAB00C7283A /* FollowingListCell.swift */; };
+		57EB27482B4D1EC000C7283A /* BupDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27472B4D1EC000C7283A /* BupDetailViewModel.swift */; };
+		57EB274A2B4D1ECB00C7283A /* BupDetailMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB27492B4D1ECB00C7283A /* BupDetailMainView.swift */; };
+		57EB274C2B4D1ED400C7283A /* BupDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB274B2B4D1ED400C7283A /* BupDetailViewController.swift */; };
+		57EB274E2B4D22CD00C7283A /* BupDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB274D2B4D22CD00C7283A /* BupDetailCell.swift */; };
+		57EB27502B4D22D700C7283A /* BupDetailCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EB274F2B4D22D700C7283A /* BupDetailCommentCell.swift */; };
 		57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF112B494C3000A0DD09 /* PostRouter.swift */; };
 		57EBEF142B494C7900A0DD09 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF132B494C7900A0DD09 /* CommentRouter.swift */; };
 		57EBEF162B494C9000A0DD09 /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57EBEF152B494C9000A0DD09 /* LikeRouter.swift */; };
@@ -154,7 +159,7 @@
 		57F101792B19DFF900BE333F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F101782B19DFF900BE333F /* MainTabBarController.swift */; };
 		57F50FB12B1F973000E15811 /* PostReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F50FB02B1F973000E15811 /* PostReadRequest.swift */; };
 		57F50FB32B1F979900E15811 /* PostDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F50FB22B1F979900E15811 /* PostDTO+Mapping.swift */; };
-		57F6DDA92B2150340090C646 /* CreatorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDA82B2150340090C646 /* CreatorDTO.swift */; };
+		57F6DDA92B2150340090C646 /* CreatorDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDA82B2150340090C646 /* CreatorDTO+Mapping.swift */; };
 		57F6DDAB2B2178F70090C646 /* JoinDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAA2B2178F70090C646 /* JoinDTO.swift */; };
 		57F6DDAD2B2179090090C646 /* JoinError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDAC2B2179090090C646 /* JoinError.swift */; };
 		57F6DDBB2B21C90D0090C646 /* MainTabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */; };
@@ -270,7 +275,7 @@
 		57E696FD2B2E141800294ABA /* AccountValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountValidator.swift; sourceTree = "<group>"; };
 		57E696FF2B2E26FA00294ABA /* CommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableView.swift; sourceTree = "<group>"; };
 		57E697012B2E4DB400294ABA /* CommentTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewModel.swift; sourceTree = "<group>"; };
-		57E697032B2E6B7D00294ABA /* CommentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentDTO.swift; sourceTree = "<group>"; };
+		57E697032B2E6B7D00294ABA /* CommentDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57E697062B2ECEC700294ABA /* LikeReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeReadRequest.swift; sourceTree = "<group>"; };
 		57E6970D2B2EFDC600294ABA /* BaseTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableView.swift; sourceTree = "<group>"; };
 		57E697102B2F124400294ABA /* LikeUpdateResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikeUpdateResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
@@ -317,6 +322,11 @@
 		57EB273E2B4D1A8100C7283A /* FollowingListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListMainView.swift; sourceTree = "<group>"; };
 		57EB27402B4D1A8B00C7283A /* FollowingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListViewController.swift; sourceTree = "<group>"; };
 		57EB27422B4D1AAB00C7283A /* FollowingListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListCell.swift; sourceTree = "<group>"; };
+		57EB27472B4D1EC000C7283A /* BupDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupDetailViewModel.swift; sourceTree = "<group>"; };
+		57EB27492B4D1ECB00C7283A /* BupDetailMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupDetailMainView.swift; sourceTree = "<group>"; };
+		57EB274B2B4D1ED400C7283A /* BupDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupDetailViewController.swift; sourceTree = "<group>"; };
+		57EB274D2B4D22CD00C7283A /* BupDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupDetailCell.swift; sourceTree = "<group>"; };
+		57EB274F2B4D22D700C7283A /* BupDetailCommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupDetailCommentCell.swift; sourceTree = "<group>"; };
 		57EBEF112B494C3000A0DD09 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
 		57EBEF132B494C7900A0DD09 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
 		57EBEF152B494C9000A0DD09 /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
@@ -328,7 +338,7 @@
 		57F101782B19DFF900BE333F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		57F50FB02B1F973000E15811 /* PostReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostReadRequest.swift; sourceTree = "<group>"; };
 		57F50FB22B1F979900E15811 /* PostDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostDTO+Mapping.swift"; sourceTree = "<group>"; };
-		57F6DDA82B2150340090C646 /* CreatorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorDTO.swift; sourceTree = "<group>"; };
+		57F6DDA82B2150340090C646 /* CreatorDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreatorDTO+Mapping.swift"; sourceTree = "<group>"; };
 		57F6DDAA2B2178F70090C646 /* JoinDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinDTO.swift; sourceTree = "<group>"; };
 		57F6DDAC2B2179090090C646 /* JoinError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinError.swift; sourceTree = "<group>"; };
 		57F6DDBA2B21C90D0090C646 /* MainTabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewModel.swift; sourceTree = "<group>"; };
@@ -774,7 +784,8 @@
 				57F50FB02B1F973000E15811 /* PostReadRequest.swift */,
 				576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO+Mapping.swift */,
 				57F50FB22B1F979900E15811 /* PostDTO+Mapping.swift */,
-				57F6DDA82B2150340090C646 /* CreatorDTO.swift */,
+				57F6DDA82B2150340090C646 /* CreatorDTO+Mapping.swift */,
+				57E697032B2E6B7D00294ABA /* CommentDTO+Mapping.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -793,7 +804,6 @@
 		57E696D52B2A327B00294ABA /* Comment */ = {
 			isa = PBXGroup;
 			children = (
-				57E697032B2E6B7D00294ABA /* CommentDTO.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -950,6 +960,7 @@
 				57DC50512B0E26FE00B1F293 /* Login */,
 				57DC50522B0E338700B1F293 /* Join */,
 				57FBCB5F2B15F05400C83C93 /* BupNewsfeed */,
+				57EB27442B4D1E9900C7283A /* BupDetail */,
 				57FB02002B188FC1003CAD51 /* BupInput */,
 				57E696D62B2A371200294ABA /* Comment */,
 				57F956E32B24CE1C00A86F43 /* Profile */,
@@ -1067,6 +1078,34 @@
 			isa = PBXGroup;
 			children = (
 				57EB273C2B4D1A7500C7283A /* FollowingListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		57EB27442B4D1E9900C7283A /* BupDetail */ = {
+			isa = PBXGroup;
+			children = (
+				57EB27452B4D1EAB00C7283A /* View */,
+				57EB27462B4D1EB100C7283A /* ViewModel */,
+			);
+			path = BupDetail;
+			sourceTree = "<group>";
+		};
+		57EB27452B4D1EAB00C7283A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				57EB27492B4D1ECB00C7283A /* BupDetailMainView.swift */,
+				57EB274B2B4D1ED400C7283A /* BupDetailViewController.swift */,
+				57EB274D2B4D22CD00C7283A /* BupDetailCell.swift */,
+				57EB274F2B4D22D700C7283A /* BupDetailCommentCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		57EB27462B4D1EB100C7283A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				57EB27472B4D1EC000C7283A /* BupDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1324,7 +1363,7 @@
 			files = (
 				5705C9D12B46A71800E1D806 /* BupCellViewModel.swift in Sources */,
 				57F101792B19DFF900BE333F /* MainTabBarController.swift in Sources */,
-				57E697042B2E6B7D00294ABA /* CommentDTO.swift in Sources */,
+				57E697042B2E6B7D00294ABA /* CommentDTO+Mapping.swift in Sources */,
 				5715F2B32B3A2535008C0A45 /* ImageCollectionViewLayout.swift in Sources */,
 				57FB020A2B189D98003CAD51 /* BaseTableViewHeaderFooterView.swift in Sources */,
 				57DC50612B0E359A00B1F293 /* EmailMainView.swift in Sources */,
@@ -1334,6 +1373,7 @@
 				57FDA8D42B3766920080AB2C /* BaseStackView.swift in Sources */,
 				57E697022B2E4DB400294ABA /* CommentTableViewModel.swift in Sources */,
 				57D5FA312B1337A600A76420 /* BaseTabmanViewController.swift in Sources */,
+				57EB274A2B4D1ECB00C7283A /* BupDetailMainView.swift in Sources */,
 				570C72F32B42793100E61FC2 /* MyInterceptor.swift in Sources */,
 				5715F2D92B3B1B38008C0A45 /* BupInputCellViewModel.swift in Sources */,
 				57E697202B307D2200294ABA /* Extension+UITableView.swift in Sources */,
@@ -1358,6 +1398,7 @@
 				57E696D82B2A372800294ABA /* CommentMainView.swift in Sources */,
 				57EBEF1E2B494D0400A0DD09 /* NetworkBase.swift in Sources */,
 				57E98E0C2B0B6C2F00330C6B /* Base.swift in Sources */,
+				57EB274C2B4D1ED400C7283A /* BupDetailViewController.swift in Sources */,
 				57EBEF122B494C3000A0DD09 /* PostRouter.swift in Sources */,
 				57D5FA412B1376C500A76420 /* EmailError.swift in Sources */,
 				57FB02082B1893E1003CAD51 /* BupInputViewController.swift in Sources */,
@@ -1384,7 +1425,7 @@
 				576920FB2B1E51A800B8CE80 /* PostCreateRequest.swift in Sources */,
 				570C72EE2B3FA1AB00E61FC2 /* SesacAuthenticationCredential.swift in Sources */,
 				570C72E32B3EF1F300E61FC2 /* CommentOwnerCell.swift in Sources */,
-				57F6DDA92B2150340090C646 /* CreatorDTO.swift in Sources */,
+				57F6DDA92B2150340090C646 /* CreatorDTO+Mapping.swift in Sources */,
 				57F50FB32B1F979900E15811 /* PostDTO+Mapping.swift in Sources */,
 				57EB27212B4BECFF00C7283A /* OthersProfile.swift in Sources */,
 				57E696DC2B2A373D00294ABA /* CommentViewModel.swift in Sources */,
@@ -1447,6 +1488,7 @@
 				57D5FA3A2B133EBA00A76420 /* BaseTextField.swift in Sources */,
 				57E696E72B2B73C300294ABA /* Comment.swift in Sources */,
 				577B9C5A2B32D272002D8A4A /* OthersProfileCell.swift in Sources */,
+				57EB27482B4D1EC000C7283A /* BupDetailViewModel.swift in Sources */,
 				57F6DDAD2B2179090090C646 /* JoinError.swift in Sources */,
 				57FB02062B1893D6003CAD51 /* BupInputMainView.swift in Sources */,
 				57E5979E2B1F0F0500C5251C /* NicknameLabel.swift in Sources */,
@@ -1471,8 +1513,10 @@
 				57F6DDAB2B2178F70090C646 /* JoinDTO.swift in Sources */,
 				57BDFAF02B15B02E006CAE1F /* PasswordSuccess.swift in Sources */,
 				57DC50882B0EEDF600B1F293 /* EmailValidationResponseDTO.swift in Sources */,
+				57EB27502B4D22D700C7283A /* BupDetailCommentCell.swift in Sources */,
 				57EF40232B44B29E0078F196 /* SesacAuthenticator.swift in Sources */,
 				57E98E102B0B6C5700330C6B /* BaseCell.swift in Sources */,
+				57EB274E2B4D22CD00C7283A /* BupDetailCell.swift in Sources */,
 				57EB27432B4D1AAB00C7283A /* FollowingListCell.swift in Sources */,
 				57E98DE02B0B660000330C6B /* SceneDelegate.swift in Sources */,
 				57DE62C42B31B240001EFCC8 /* OthersProfileMainView.swift in Sources */,

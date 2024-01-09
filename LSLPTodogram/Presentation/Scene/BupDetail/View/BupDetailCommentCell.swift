@@ -1,0 +1,76 @@
+//
+//  BupDetailCommentCell.swift
+//  LSLPTodogram
+//
+//  Created by 서승우 on 2024/01/09.
+//
+
+import UIKit
+import RxSwift
+
+final class BupDetailCommentCell: BaseTableViewCell {
+    let profileImageButton = ProfileImageButton()
+    let profileNicknameButton = ProfileNicknameButton()
+    let timeLabel = TimeLabel()
+    let ellipsisButton = CommunicationButton(style: .ellipsis)
+    let contentLabel = ContentLabel()
+
+    func configure(_ item: Comment) {
+        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        profileNicknameButton.updateTitle(title: item.creator.nick)
+        timeLabel.text = item.time
+        contentLabel.text = item.content
+    }
+
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        backgroundColor = Color.clear
+        contentView.backgroundColor = Color.clear
+    }
+
+    override func initialHierarchy() {
+        super.initialHierarchy()
+
+        [
+            profileImageButton,
+            profileNicknameButton,
+            timeLabel,
+            ellipsisButton,
+            contentLabel
+        ].forEach { contentView.addSubview($0) }
+    }
+
+    override func initialLayout() {
+        super.initialLayout()
+
+        let offset = 8
+        let inset = 8
+        profileImageButton.snp.makeConstraints { make in
+            make.top.leading.equalToSuperview().inset(inset)
+        }
+
+        profileNicknameButton.snp.makeConstraints { make in
+            make.top.equalTo(profileImageButton)
+            make.leading.equalTo(profileImageButton.snp.trailing).offset(offset)
+        }
+
+        timeLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileNicknameButton)
+            make.leading.equalTo(profileNicknameButton.snp.trailing).offset(offset)
+        }
+
+        ellipsisButton.snp.makeConstraints { make in
+            make.verticalEdges.equalTo(timeLabel)
+            make.leading.equalTo(timeLabel.snp.trailing).offset(offset)
+            make.trailing.equalToSuperview().inset(inset)
+        }
+
+        contentLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageButton.snp.bottom).offset(offset)
+            make.horizontalEdges.equalToSuperview().inset(inset)
+            make.bottom.equalToSuperview().inset(inset)
+        }
+    }
+
+}

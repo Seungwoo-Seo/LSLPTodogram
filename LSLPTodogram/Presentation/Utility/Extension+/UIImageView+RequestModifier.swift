@@ -10,11 +10,9 @@ import Kingfisher
 
 extension UIImageView {
 
-    func requestModifier(
-        with string: String,
-        token: String
-    ) {
+    func requestModifier(with string: String) {
         let url = URL(string: NetworkBase.baseURL + string)
+        let token = KeychainManager.read(key: KeychainKey.token.rawValue) ?? ""
 
         let modifier = AnyModifier { request in
             var r = request

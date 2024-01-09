@@ -104,6 +104,7 @@ final class ProfileViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        // MARK: - Prefetch
         input.prefetchRows
             .bind(with: self) { owner, indexPaths in
                 for indexPath in indexPaths {

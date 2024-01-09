@@ -34,9 +34,7 @@ final class CommentTableView: BaseTableView {
                             guard let cell = cell as? ImageCell else {return}
 
                             cell.removeButton.isHidden = true
-
-                            let token = KeychainManager.read(key: KeychainKey.token.rawValue) ?? ""
-                            cell.imageView.requestModifier(with: string, token: token)
+                            cell.imageView.requestModifier(with: string)
                         }
                         .disposed(by: cell.disposeBag)
 

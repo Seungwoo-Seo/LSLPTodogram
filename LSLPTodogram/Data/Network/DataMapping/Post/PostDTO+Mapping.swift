@@ -34,7 +34,7 @@ extension PostDTO {
     func toBup(hostID: String) -> Bup {
         return Bup(
             id: _id,
-            creator: creator.toDomain,
+            creator: creator.toDomain(),
             content: content,
             time: time,
             width: stringToCGFloat(width),
@@ -42,7 +42,7 @@ extension PostDTO {
             image: image,
             hashTags: hashTags,
             likes: likes,
-            comments: comments?.compactMap { $0.toDomain },
+            comments: comments?.compactMap { $0.toDomain() },
             hostID: hostID
         )
     }

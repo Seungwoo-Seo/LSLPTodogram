@@ -50,8 +50,7 @@ final class BupNewsfeedViewController: BaseViewController {
                         guard let cell = cell as? ImageCell else {return}
 
                         cell.removeButton.isHidden = true
-                        let token = KeychainManager.read(key: KeychainKey.token.rawValue) ?? ""
-                        cell.imageView.requestModifier(with: string, token: token)
+                        cell.imageView.requestModifier(with: string)
                     }
                     .disposed(by: cell.disposeBag)
 
@@ -79,6 +78,14 @@ final class BupNewsfeedViewController: BaseViewController {
                     .disposed(by: cell.disposeBag)
 
                 return cell
+            }
+            .disposed(by: disposeBag)
+
+        mainView.tableView.rx.modelSelected(Bup.self)
+            .bind(with: self) { owner, bup in
+                let vm = BupDetailViewModel(postId: bup.id, hostId: bup.hostID)
+                let vc = BupDetailViewController(vm)
+                owner.navigationController?.pushViewController(vc, animated: true)
             }
             .disposed(by: disposeBag)
 
