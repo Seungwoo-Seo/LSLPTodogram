@@ -69,6 +69,22 @@ final class BupNewsfeedViewController: BaseViewController {
                     .bind(to: postCreatorId)
                     .disposed(by: cell.disposeBag)
 
+                // MARK: - ellipsis
+                cell.ellipsisButton.rx.tap
+                    .withLatestFrom(Observable.zip(Observable.just(row), Observable.just(item)))
+                    .bind(with: self) { owner, cellInfo in
+                        if item.creator.id == item.hostID {
+                            let vm = EllipsisViewModel(cellInfo: cellInfo)
+                            let vc = EllipsisViewController(vm)
+                            owner.presentPanModal(vc)
+                        } else {
+                            let vm = OthersEllipsisViewModel(cellInfo: cellInfo)
+                            let vc = OthersEllipsisViewController(vm)
+                            owner.presentPanModal(vc)
+                        }
+                    }
+                    .disposed(by: cell.disposeBag)
+
                 // 좋아요 버튼 누르면
                 let didTapLikeButton = cell.communicationButtonStackView.likeButton.rx.tap
                     .scan(item.isIliked) { lastState, _ in !lastState } // isSelected 상태 토글

@@ -109,6 +109,15 @@ final class BupNewsfeedViewModel: ViewModelType {
             }
             .disposed(by: disposeBag)
 
+        // 삭제 버튼 눌렸다면
+        NotificationCenterManager.removeBup
+            .addObserver()
+            .compactMap { $0 as? Int }
+            .bind(with: self) { owner, row in
+                owner.baseItems.remove(at: row)
+                owner.items.accept(owner.baseItems)
+            }
+            .disposed(by: disposeBag)
 
         // MARK: - likeButton
         input.didTapLikeButtonOfId

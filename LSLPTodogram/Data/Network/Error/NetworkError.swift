@@ -12,6 +12,7 @@ protocol NetworkErrorProtocol: Error {
     associatedtype RefreshError: NetworkAPIError
     associatedtype PostCreateError: NetworkAPIError
     associatedtype PostReadError: NetworkAPIError
+    associatedtype PostDeleteError: NetworkAPIError
     associatedtype ProfileReadError: NetworkAPIError
     associatedtype LikeUpdateError: NetworkAPIError
     associatedtype OthersProfileReadError: NetworkAPIError
@@ -149,6 +150,33 @@ enum NetworkError: NetworkErrorProtocol {
             case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
             case .forbidden: return "접근 권한 없음"
             case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+    }
+
+    /// 포스트 삭제 에러
+    enum PostDeleteError: Int, NetworkAPIError {
+        case invalidAccessToken = 401       // 유효하지 않은 액세스 토큰
+        case forbidden = 403                // 접근 권한이 없음
+        case invalidPost = 410              // 이미 삭제된 게시글에 삭제 요청을 한 경우
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+        case noPermission = 445             // 본인이 작성한 게시글이 아닐 경우
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .invalidPost: return "삭제할 게시글을 찾을 수 없습니다"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            case .noPermission: return "게시글 삭제 권한이 없습니다"
             }
         }
     }
