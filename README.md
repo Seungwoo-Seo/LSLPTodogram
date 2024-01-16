@@ -25,23 +25,24 @@
 
 ## 🚀 주요 기능
 
-- 타임라인으로 본인과 타인의 게시글 탐색 기능 구현
-- 게시글 CRUD 구현
-- 본인과 타인의 게시글에 좋아요/취소 기능 구현
-- 본인과 타인의 게시글에 댓글 CRUD 기능 구현
-- 타인 계정 팔로우/언팔로우 기능 구현
-- 회원가입 및 로그인 기능 구현
+- 게시글 목록
+- 게시글 CRUD
+- 본인과 타인의 게시글에 좋아요/취소
+- 본인과 타인의 게시글에 댓글 CRUD
+- 타인 계정 팔로우/언팔로우
+- 회원인증
+
+## 🛠 구현 기술
+
+- Cursor 기반 페이지네이션
 
 ## 💻 기술 스택
 
 - Swift
 - MVVM, Router, Input-Output, Singleton
-- UIKit, CodeBase UI, AutoLayout
-- RxSwift, RxDataSource
-- Codable, Diffable DataSource, Compositional Layout, Keychain
-- Alamofire
-- SnapKit, Kingfisher, Tabman, IQKeyboardManager, PanModal
-- SPM
+- UIKit
+- Codable, CodeBase UI, AutoLayout, Diffable DataSource, Compositional Layout, Keychain
+- RxSwift, RxDataSource, Alamofire, SnapKit, Kingfisher, Tabman, IQKeyboardManager, PanModal
 
 ## 📱 서비스
 
