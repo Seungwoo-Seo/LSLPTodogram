@@ -25,8 +25,7 @@
 
 ## 🚀 주요 기능
 
-- 게시글 목록
-- 게시글 CRUD
+- 게시글 목록 및 상세 정보 조회
 - 본인과 타인의 게시글에 좋아요/취소
 - 본인과 타인의 게시글에 댓글 CRUD
 - 타인 계정 팔로우/언팔로우
@@ -36,14 +35,16 @@
 
 - `Alamofire`를 기반으로 `multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
 - `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
-- `Cursor` 기반 페이지네이션 구현
+- `cursor`기반 페이지네이션 구현
+- `Keychain`을 활용하여 `AccessToken`과 `RefreshToken`의 `CRUD` 구현
+- `Optimistic UI` 구현
 
 ## 💻 기술 스택
 
 - Swift
 - MVVM, Router, Input-Output, Singleton
-- UIKit
-- Codable, CodeBase UI, AutoLayout, Diffable DataSource, Compositional Layout, Keychain
+- UIKit, PotosUI
+- Codable, CodeBase UI, AutoLayout, DiffableDataSource, CompositionalLayout, Keychain
 - RxSwift, RxDataSource, Alamofire, SnapKit, Kingfisher, Tabman, IQKeyboardManager, PanModal
 
 ## 📱 서비스
@@ -53,6 +54,10 @@
 - 개발 기간 : 2023년 11월 20일 ~ 2023년 12월 20일 (1개월)
 
 ## 🚧 기술적 도전
+
+// 여기에 그 레이아웃 업데이트가 와야제 ㅋ
+
+// 
 
 <!-- 프로젝트를 진행하면서 겪은 기술적인 도전과 어떻게 해결했는지에 대한 설명을 추가한다. -->
 ### 1. Alamofire AuthenticationInterceptor를 활용한 AccessToken 만료 갱신, RefreshToken 만료 로직 처리
@@ -207,11 +212,7 @@ input.likeState
 ~~~swift
 ~~~
 
-### 3. 동적 레이아웃
-- **문제 상황**</br>
-- **해결 방법**</br>
-~~~swift
-~~~
+### 3. multipart
 
 ## 📝 회고
 
