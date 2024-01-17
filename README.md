@@ -34,7 +34,9 @@
 
 ## 🛠 구현 기술
 
-- Cursor 기반 페이지네이션
+- `Alamofire`를 기반으로 `multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
+- `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
+- `Cursor` 기반 페이지네이션 구현
 
 ## 💻 기술 스택
 
