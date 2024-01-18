@@ -41,11 +41,11 @@
 
 ## 💻 기술 스택
 
-- Swift
-- MVVM, Router, Input-Output, Singleton
-- UIKit, PotosUI
-- Codable, CodeBase UI, AutoLayout, DiffableDataSource, CompositionalLayout, Keychain
-- RxSwift, RxDataSource, Alamofire, SnapKit, Kingfisher, Tabman, IQKeyboardManager, PanModal
+- `Swift`
+- `MVVM`, `Router`, `Input-Output`, `Singleton`
+- `UIKit`, `PhotosUI`
+- `Codable`, `CodeBase UI`, `AutoLayout`, `DiffableDataSource`, `CompositionalLayout`, `Keychain`
+- `RxSwift`, `RxDataSource`, `Alamofire`, `SnapKit`, `Kingfisher`, `Tabman`, `IQKeyboardManager`, `PanModal`
 
 ## 📱 서비스
 
@@ -55,17 +55,20 @@
 
 ## 🚧 기술적 도전
 
-// 여기에 그 레이아웃 업데이트가 와야제 ㅋ
+// 기술적 도전
+// 1. 옽티머시기 ui 구현한고 (좋아요, 팔로우)
+// 2. 인터셉터
 
-// 
+// 트러블 슈팅
+// 1. 여기에 그 레이아웃 업데이트가 와야제 
+// 2. multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
 
 <!-- 프로젝트를 진행하면서 겪은 기술적인 도전과 어떻게 해결했는지에 대한 설명을 추가한다. -->
-### 1. Alamofire AuthenticationInterceptor를 활용한 AccessToken 만료 갱신, RefreshToken 만료 로직 처리
+### 1. `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
 - **도전 상황**</br>
-
+대부분의 API 요청 `Header`에 `AccessToken`을 넣어줘야 했습니다. 매번 요청 로직을 작성할 때마다 `Keychain`에 저장된 `token`을 넣어주고, 매번 `에러 핸들링` 코드를 작성하는게 불편하게 느껴졌습니다. 이 불편함을 개선하기 위해 `Alamofire 5.2`에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
 
 - **도전 결과**</br>
-AuthenticationCredential 구현
 ~~~swift
 import Foundation
 import Alamofire
@@ -77,7 +80,6 @@ struct SesacAuthenticationCredential: AuthenticationCredential {
     var requiresRefresh: Bool = false
 }
 ~~~
-Authenticator 구현
 ~~~swift
 import Foundation
 import Alamofire
