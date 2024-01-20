@@ -66,7 +66,7 @@
 <!-- 프로젝트를 진행하면서 겪은 기술적인 도전과 어떻게 해결했는지에 대한 설명을 추가한다. -->
 ### 1. `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
 - **도전 상황**</br>
-대부분의 API 요청 `Header`에 `AccessToken`을 넣어줘야 했습니다. 매번 요청 로직을 작성할 때마다 `Keychain`에 저장된 `token`을 넣어주고, 매번 `에러 핸들링` 하는게 불편하게 느껴졌습니다. 이 불편함을 개선하기 위해 `Alamofire 5.2`에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
+대부분의 API 요청 Header에 `AccessToken`을 넣어줘야 했습니다. 매번 요청 로직을 작성할 때마다 Keychain에 저장된 `token`을 넣어주고, 매번 에러 핸들링 하는게 불편하게 느껴졌습니다. 이 불편함을 개선하기 위해 Alamofire 5.2에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
 
 - **도전 결과**</br>
 ~~~swift
