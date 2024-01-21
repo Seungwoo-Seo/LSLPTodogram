@@ -10,6 +10,12 @@ import RxCocoa
 import RxSwift
 
 final class ProfileViewController: BaseViewController {
+    private let settingBarButtonItem = {
+        let barButtonItem = UIBarButtonItem()
+        barButtonItem.image = UIImage(systemName: "gearshape")
+        barButtonItem.style = .plain
+        return barButtonItem
+    }()
     private let mainView = ProfileMainView()
     private let disposeBag = DisposeBag()
 
@@ -209,6 +215,13 @@ final class ProfileViewController: BaseViewController {
                 owner.present(navi, animated: true)
             }
             .disposed(by: disposeBag)
+
+        settingBarButtonItem.rx.tap
+            .bind(with: self) { owner, _ in
+                let vc = SettingViewController()
+                owner.navigationController?.pushViewController(vc, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 
     override func loadView() {
@@ -224,6 +237,14 @@ final class ProfileViewController: BaseViewController {
         super.initialAttributes()
 
         mainView.tableView.delegate = self
+        navigationController?.navigationBar.tintColor = Color.black
+        navigationItem.backButtonTitle = ""
+    }
+
+    override func initialHierarchy() {
+        super.initialHierarchy()
+
+        navigationItem.rightBarButtonItem = settingBarButtonItem
     }
 
 }
