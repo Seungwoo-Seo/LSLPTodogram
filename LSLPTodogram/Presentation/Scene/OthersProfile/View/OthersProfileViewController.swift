@@ -299,14 +299,3 @@ private extension Reactive where Base: OthersProfileViewController {
         }
     }
 }
-
-private extension OthersProfileViewController {
-
-    func windowReset() {
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        sceneDelegate?.window?.rootViewController = LoginViewController()
-        sceneDelegate?.window?.makeKeyAndVisible()
-    }
-
-}

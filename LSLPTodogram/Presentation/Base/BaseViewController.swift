@@ -27,11 +27,19 @@ class BaseViewController: UIViewController, Base {
     }
 
     func initialAttributes() {
+        navigationController?.navigationBar.tintColor = Color.white
         view.backgroundColor = Color.systemBackground
     }
 
     func initialHierarchy() {}
 
     func initialLayout() {}
+
+    func windowReset() {
+        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        let sceneDelegate = windowScene?.delegate as? SceneDelegate
+        sceneDelegate?.window?.rootViewController = LoginViewController()
+        sceneDelegate?.window?.makeKeyAndVisible()
+    }
 
 }

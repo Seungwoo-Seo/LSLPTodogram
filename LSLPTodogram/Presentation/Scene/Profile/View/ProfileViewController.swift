@@ -302,13 +302,6 @@ private extension Reactive where Base: ProfileViewController {
 
 private extension ProfileViewController {
 
-    func windowReset() {
-        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-        let sceneDelegate = windowScene?.delegate as? SceneDelegate
-        sceneDelegate?.window?.rootViewController = LoginViewController()
-        sceneDelegate?.window?.makeKeyAndVisible()
-    }
-
     func presentProfileEditViewController() {
         let viewModel = ProfileEditViewModel()
         let vc = ProfileEditViewController(viewModel)
