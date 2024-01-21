@@ -18,6 +18,7 @@ protocol NetworkErrorProtocol: Error {
     associatedtype OthersProfileReadError: NetworkAPIError
     associatedtype FollowError: NetworkAPIError
     associatedtype UnFollowError: NetworkAPIError
+    associatedtype WithdrawError: NetworkAPIError
 
     var description: String {get}
 }
@@ -307,4 +308,28 @@ enum NetworkError: NetworkErrorProtocol {
             }
         }
     }
+
+    enum WithdrawError: Int, NetworkAPIError {
+        case invalidAccessToken = 401
+        case forbidden = 403                // 접근 권한이 없음
+        case accessTokenExpiration = 419    // 액세스 토큰 만료
+
+        init?(statusCode: Int) {
+            if let error = Self.init(rawValue: statusCode) {
+                self = error
+            } else {
+                return nil
+            }
+        }
+
+        var description: String {
+            switch self {
+            case .invalidAccessToken: return "유효하지 않은 액세스 토큰"
+            case .forbidden: return "접근 권한 없음"
+            case .accessTokenExpiration: return "액세스 토큰 만료"
+            }
+        }
+
+    }
+
 }
