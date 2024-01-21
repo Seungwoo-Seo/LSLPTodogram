@@ -20,7 +20,7 @@ extension CreatorDTO {
         return Creator(
             id: _id ?? "id 파싱 실패",
             nick: nick ?? "닉네임 파싱 실패",
-            profile: profile ?? "person"
+            profile: profile
         )
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit.UIImage
 import RxCocoa
 import RxSwift
 
@@ -13,6 +14,8 @@ final class ProfileEditViewModel: ViewModelType {
     private let disposeBag = DisposeBag()
 
     private let existingProfile = BehaviorRelay<Profile>(value: Profile(_id: "", nick: "", email: "", posts: [], followers: [], following: [], profileImageString: "", phoneNum: "", birthDay: ""))
+
+    var profileImage: UIImage?
 
     struct Input {
         let nicknameText: ControlProperty<String>
@@ -31,6 +34,7 @@ final class ProfileEditViewModel: ViewModelType {
         let completeState: PublishRelay<Result<Void, Error>>
         let cancelState: PublishRelay<Bool>
         let npb: BehaviorRelay<Bool>
+        let error: Driver<NetworkError>
     }
 
     func transform(input: Input) -> Output {
@@ -40,6 +44,11 @@ final class ProfileEditViewModel: ViewModelType {
         let completeState = PublishRelay<Result<Void, Error>>()
         let cancelState = PublishRelay<Bool>()
         let npb = BehaviorRelay(value: false)
+
+        let errorTracker = ErrorTracker()
+        let errors = errorTracker
+            .compactMap { $0 as? NetworkError }
+            .asDriver()
 
         let token = BehaviorRelay(value: KeychainManager.read(key: KeychainKey.token.rawValue) ?? "")
 
@@ -137,63 +146,116 @@ final class ProfileEditViewModel: ViewModelType {
                 existingProfile
             )
 
-        input.completeBarButtonItemTapped
-            .withLatestFrom(npbp) { (nickname: $1.0, phoneNum: $1.1, birthDay: $1.2, existing: $1.3) }
-            .flatMapLatest {
-                return AccountValidator.shared.validate(
-                    nickname: $0.nickname,
-                    phoneNum: $0.phoneNum,
-                    birthDay: $0.birthDay,
-                    existing: $0.existing
-                )
-                .catch { error in
-                    completeState.accept(.failure(error))
-                    return Single.never()
+        // 있는 것만 검사하고 업데이트 쳐버려
+        let profileEditTrigger = input.completeBarButtonItemTapped.share()
+
+        let nickname = profileEditTrigger
+            .withLatestFrom(input.nicknameText)
+
+        let phoneNum = profileEditTrigger
+            .withLatestFrom(input.phoneNumText)
+
+        let birthDay = profileEditTrigger
+            .withLatestFrom(input.birthDayText)
+
+        let profileImage = profileEditTrigger
+            .withUnretained(self)
+            .map { (owner, _) in owner.profileImage }
+
+        Observable
+            .combineLatest(nickname, phoneNum, birthDay, profileImage)
+            .map { value in
+                let request: ProfileUpdateRequest
+                if let profileImage = value.3 {
+                    request = ProfileUpdateRequest(
+                        nick: value.0,
+                        phoneNum: value.1,
+                        birthDay: value.2,
+                        files: [profileImage]
+                    )
+                } else {
+                    request = ProfileUpdateRequest(
+                        nick: value.0,
+                        phoneNum: value.1,
+                        birthDay: value.2,
+                        files: nil
+                    )
                 }
-            }
-            .withLatestFrom(token) { body, token in
-                return (token: token, body: body)
+                return request
             }
             .flatMapLatest {
                 return NetworkManager.shared.upload(
                     type: ProfileResponseDTO.self,
-                    api: ProfileRouter.update(body: $0.body)
+                    api: ProfileRouter.update(body: $0)
                 )
-                .catch { error in
-                    print("❌ 네트워크 에러 ", error.localizedDescription)
-                    completeState.accept(.failure(error))
-                    return Single.never()
-                }
+                .trackError(errorTracker)
+                .catch { _ in Observable.empty() }
+                .map { $0.toDomain() }
             }
-            .map { _ in Void() }
-            .bind(with: self) { owner, void in
-                completeState.accept(.success(void))
+            .bind(with: self) { owner, profile in
+                print("변경되었습니다.")
             }
             .disposed(by: disposeBag)
 
-        input.cancelBarButtonItemTapped
-            .withLatestFrom(npbp) { (nickname: $1.0, phoneNum: $1.1, birthDay: $1.2) }
-            .map {
-                if $0.nickname.isEmpty && $0.phoneNum.isEmpty && $0.birthDay.isEmpty {
-                    return true
-                } else {
-                    return false
-                }
-            }
-            .bind(to: cancelState)
-            .disposed(by: disposeBag)
 
-        npbp
-            .map { (nickname: $0.0, phoneNum: $0.1, birthDay: $0.2) }
-            .map {
-                if $0.nickname.isEmpty && $0.phoneNum.isEmpty && $0.birthDay.isEmpty {
-                    return false
-                } else {
-                    return true
-                }
-            }
-            .bind(to: npb)
-            .disposed(by: disposeBag)
+
+//        input.completeBarButtonItemTapped
+//            .withLatestFrom(npbp) { (nickname: $1.0, phoneNum: $1.1, birthDay: $1.2, existing: $1.3) }
+//            .flatMapLatest {
+//                return AccountValidator.shared.validate(
+//                    nickname: $0.nickname,
+//                    phoneNum: $0.phoneNum,
+//                    birthDay: $0.birthDay,
+//                    existing: $0.existing
+//                )
+//                .catch { error in
+//                    completeState.accept(.failure(error))
+//                    return Single.never()
+//                }
+//            }
+//            .withLatestFrom(token) { body, token in
+//                return (token: token, body: body)
+//            }
+//            .flatMapLatest {
+//                return NetworkManager.shared.upload(
+//                    type: ProfileResponseDTO.self,
+//                    api: ProfileRouter.update(body: $0.body)
+//                )
+//                .catch { error in
+//                    print("❌ 네트워크 에러 ", error.localizedDescription)
+//                    completeState.accept(.failure(error))
+//                    return Single.never()
+//                }
+//            }
+//            .map { _ in Void() }
+//            .bind(with: self) { owner, void in
+//                completeState.accept(.success(void))
+//            }
+//            .disposed(by: disposeBag)
+//
+//        input.cancelBarButtonItemTapped
+//            .withLatestFrom(npbp) { (nickname: $1.0, phoneNum: $1.1, birthDay: $1.2) }
+//            .map {
+//                if $0.nickname.isEmpty && $0.phoneNum.isEmpty && $0.birthDay.isEmpty {
+//                    return true
+//                } else {
+//                    return false
+//                }
+//            }
+//            .bind(to: cancelState)
+//            .disposed(by: disposeBag)
+//
+//        npbp
+//            .map { (nickname: $0.0, phoneNum: $0.1, birthDay: $0.2) }
+//            .map {
+//                if $0.nickname.isEmpty && $0.phoneNum.isEmpty && $0.birthDay.isEmpty {
+//                    return false
+//                } else {
+//                    return true
+//                }
+//            }
+//            .bind(to: npb)
+//            .disposed(by: disposeBag)
 
         return Output(
             isProfile: isProfile,
@@ -202,7 +264,8 @@ final class ProfileEditViewModel: ViewModelType {
             birthDayState: birthDayState,
             completeState: completeState,
             cancelState: cancelState,
-            npb: npb
+            npb: npb,
+            error: errors
         )
     }
 
