@@ -29,12 +29,13 @@
 - 본인과 타인의 게시글에 좋아요/취소
 - 본인과 타인의 게시글에 댓글 CRUD
 - 타인 계정 팔로우/언팔로우
+- 해시태그
 - 회원인증
 
-## 🛠 구현 기술
+## 🛠 구현 기능
 
-- `Alamofire`를 기반으로 `multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
-- `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
+- `multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
+- `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 구현
 - `cursor`기반 페이지네이션 구현
 - `Keychain`을 활용하여 `AccessToken`과 `RefreshToken`의 `CRUD` 구현
 - `Optimistic UI` 구현
@@ -44,7 +45,8 @@
 - `Swift`
 - `MVVM`, `Router`, `Input-Output`, `Singleton`
 - `UIKit`, `PhotosUI`
-- `Codable`, `CodeBase UI`, `AutoLayout`, `DiffableDataSource`, `CompositionalLayout`, `Keychain`
+- `CodeBase UI`, `AutoLayout`
+- `Codable`, `DiffableDataSource`, `CompositionalLayout`, `Keychain`
 - `RxSwift`, `RxDataSource`, `Alamofire`, `SnapKit`, `Kingfisher`, `Tabman`, `IQKeyboardManager`, `PanModal`
 
 ## 📱 서비스
@@ -222,7 +224,7 @@ input.likeState
 프로젝트를 마무리하면서 몇 가지 느낀 점과 개선할 사항들을 회고로 정리하겠습니다.
 
 👍 성취한 점
-1. **Alamofire AuthenticationInterceptor를 활용한 JWT AccessToken 만료 갱신, RefreshToken 만료 로직 처리**</br>
+1. **Alamofire AuthenticationInterceptor를 활용한 JWT AccessToken 만료 갱신, RefreshToken 만료 처리**</br>
 
 🤔 개선할 점
 1. ****</br>
