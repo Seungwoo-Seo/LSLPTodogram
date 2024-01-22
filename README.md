@@ -36,10 +36,11 @@
 ## 🛠 구현 기능
 
 - `multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
-- `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 구현
+- `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
 - `cursor`기반 페이지네이션 구현
-- `Keychain`을 활용하여 `AccessToken`과 `RefreshToken`의 `CRUD` 구현
 - `Optimistic UI` 구현
+- `Router Pattern`을 활용해 네트워크 레이어의 가독성 및 재사용성을 향상
+- `Keychain`을 활용하여 `AccessToken`과 `RefreshToken`의 `CRUD` 구현
 
 ## 💻 기술 스택
 
@@ -301,15 +302,11 @@ final class SesacAuthenticator: Authenticator {
 ~~~
 
 ## 📝 회고
-
-<!-- 프로젝트를 마무리하면서 느낀 소회, 개선점, 다음에 시도해보고 싶은 것 등을 정리한다. -->
-👍 성취한 점
-1. **Alamofire AuthenticationInterceptor를 활용한 JWT AccessToken 만료 갱신, RefreshToken 만료 처리**</br>
-
-
-🤔 개선할 점
-- 프로젝트 규모가 점점 커지면서 viewModel 또한 점점 커져갔고 유지보수를 하기도 점점 어려워졌습니다. viewModel을 역할을 줄여주고 싶었고 `UseCase`에 대한 필요성을 자연스럽게 느꼈습니다. 추후 `클린 아키텍처`를 적용해보겠습니다.
-
+- `RxSwift`를 적용하여 `반응평 프로그래밍`에 대한 플로우를 이해할 수 있었습니다.
+- `JWT`를 활용한 `사용자 인증` 플로우를 이해할 수 있었습니다.
+- `Router 패턴`을 통해 네트워크 레이어의 가독성 및 재사용성 향상을 경험할 수 있었습니다.
+- 프로젝트 규모가 점점 커지면서 viewModel 또한 점점 커져갔고 유지보수를 하기도 점점 어려워졌습니다. viewModel에도 개선이 필요하다고 느꼈습니다.
+  
 ## 🖼 아이콘 출처 및 저작권 정보
 
 이 프로젝트에서 사용된 아이콘들은 아래와 같은 출처에서 제공되었습니다. 각 아이콘의 저작권은 해당 제작자에게 있습니다. 아이콘을 사용하려면 각 아이콘의 출처로 이동하여 저작권 관련 정보를 확인하세요.
