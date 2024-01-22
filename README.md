@@ -66,11 +66,12 @@
 // 2. multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
 
 <!-- 프로젝트를 진행하면서 겪은 기술적인 도전과 어떻게 해결했는지에 대한 설명을 추가한다. -->
-### 1. `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
+### 1. `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 개선하기
 - **도전 상황**</br>
-대부분의 API 요청 Header에 `AccessToken`을 넣어줘야 했습니다. 매번 요청 로직을 작성할 때마다 Keychain에 저장된 `token`을 넣어주고, 매번 에러 핸들링 하는게 불편하게 느껴졌습니다. 이 불편함을 개선하기 위해 Alamofire 5.2에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
+대부분의 API 요청 Header에 `AccessToken`을 넣어줘야 했습니다. AccessToken 만료 시(419) `RefreshToken`으로 재요청 로직과 리프레시 토큰 마저 만료 시 `로그인 화면으로 전환` 로직이 필요했습니다. 매 요청마다 중복된 코드를 개선하고 싶었고 Alamofire 5.2에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
 
 - **도전 결과**</br>
+interceptor를 외부에서 만들어서 request 메서드 파라미터로 전달해주는 것만으로 모든 처리가 가능케 되었습니다.
 ~~~swift
 import Foundation
 import Alamofire
@@ -136,6 +137,38 @@ final class SesacAuthenticator: Authenticator {
         let accessToken = HTTPHeader.authorization(credential.accessToken).value
         return urlRequest.headers["Authorization"] == accessToken
     }
+}
+~~~
+~~~swift
+final class NetworkManager {
+    ...
+
+    func request<T: Decodable, E: NetworkAPIError>(
+        type: T.Type,
+        api: URLRequestConvertible,
+        error: E.Type,
+        interceptor: AuthenticationInterceptor<SesacAuthenticator>
+    ) -> Single<T> {
+        return Single<T>.create { observer in
+            AF
+                .request(api, interceptor: interceptor)
+                .validate(statusCode: 200...299)
+                .responseDecodable(of: type) { [weak self] (response) in
+                    guard let self else {return}
+                    switch response.result {
+                    case .success(let success):
+                        observer(.success(success))
+
+                    case .failure(let afError):
+                        self.handleNetworkError(error: afError, observer: observer, errorType: error)
+                    }
+                }
+
+            return Disposables.create()
+        }
+    }
+
+    ...
 }
 ~~~
 
