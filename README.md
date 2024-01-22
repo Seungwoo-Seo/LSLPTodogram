@@ -174,6 +174,45 @@ final class NetworkManager {
 
 ## 🛠 트러블 슈팅
 
+### 1. `interceptor` 구현 후 서버로부터 419(액세스 토큰 만료)를 응답 받았을 때 `무한 재귀` 이슈
+- **문제 상황**</br>
+Alamofire에서 제공해주는 `AuthenticationInterceptor`를 적용하여 액세스 토큰 만료 시 리프레시 토큰으로 토큰 갱신 요청을 보냈었습니다. 그런데 이 때 `무한 재귀`에 걸리면서 어마어마한 요청을 보내게 되고 서버로부터 429(과호출)을 응답 받게 되었습니다.
+
+- **문제 원인**</br>
+액세스 토큰 만료 시 리프레시 토큰으로 갱신 요청 로직을 `Authenticator` 객체의 `refresh 메서드`에서 작성하고, 여기서 받은 응답을 `completion으로 전달`하게 되는데, completion으로 `error`를 전달 받게 되면 Alamofire 내부적으로 `retry`를 하게 됩니다. 그런데! 여기서 제가 인터셉터를 사용한 request 메서드를 또 사용해서 무한 재귀에 걸리게 되는 것이였습니다.
+
+- **해결 방법**</br>
+이미 interceptor가 `419를 잡아서` 이 Flow를 타게 된 것이기 때문에 리프래시 토큰으로 액세스 토큰 갱신 요청을 보낼 땐 interceptor를 `사용하지 않는` request 메서드를 사용하므로 해결했습니다.
+~~~swift
+final class SesacAuthenticator: Authenticator {
+    ...
+
+    func refresh(
+        _ credential: SesacAuthenticationCredential,
+        for session: Alamofire.Session,
+        completion: @escaping (Result<SesacAuthenticationCredential, Error>) -> Void
+    ) {
+        NetworkManager.shared.request(
+            type: RefreshResponse.self,
+            api: AccountRouter.refresh(refreshToken: credential.refreshToken)
+        )
+        .subscribe { response in
+            let credential = SesacAuthenticationCredential(
+                accessToken: response.token,
+                refreshToken: credential.refreshToken
+            )
+            completion(.success(credential))
+
+        } onFailure: { error in
+            completion(.failure(error))
+        }
+        .disposed(by: disposeBag)
+    }
+
+    ...
+}
+~~~
+
 <!-- 프로젝트 중 발생한 문제와 그 해결 방법에 대한 내용을 기록한다. -->
 ### 1. 좋아요 이벤트가 발생하면 모든 request를 보낼 것인가?
 - **문제 상황**</br>
