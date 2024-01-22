@@ -57,14 +57,6 @@
 
 ## 🚧 기술적 도전
 
-// 기술적 도전
-// 1. 옽티머시기 ui 구현한고 (좋아요, 팔로우)
-// 2. 인터셉
-
-// 트러블 슈팅
-// 1. 여기에 그 레이아웃 업데이트가 와야제 
-// 2. multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
-
 <!-- 프로젝트를 진행하면서 겪은 기술적인 도전과 어떻게 해결했는지에 대한 설명을 추가한다. -->
 ### 1. `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 개선하기
 - **도전 상황**</br>
@@ -172,54 +164,15 @@ final class NetworkManager {
 }
 ~~~
 
-## 🛠 트러블 슈팅
+### 2. Optimistic UI 도전
+- **도전 상황**</br>
+좋아요와 팔로우/언팔로우의 경우 사용자가 해당 버튼들을 누를 때마다 서버와 통신을 한다는게 리소스 낭비지 않을까? 라고 생각했습니다. 또, 만약 악성 사용자가 수천, 수만번 좋아요/팔로우/언팔로우를 한다면 생각지도 못한 트래픽이 발생하고 그것은 곧 `비용 이슈`가 발생할 수 있겠다라는 결론을 얻었었습니다. 그래서 키워드를 찾던 중 `Optimistic UI`를 알게 되었고 적용해 보았습니다.
 
-### 1. `interceptor` 구현 후 서버로부터 419(액세스 토큰 만료)를 응답 받았을 때 `무한 재귀` 이슈
-- **문제 상황**</br>
-Alamofire에서 제공해주는 `AuthenticationInterceptor`를 적용하여 액세스 토큰 만료 시 리프레시 토큰으로 토큰 갱신 요청을 보냈었습니다. 그런데 이 때 `무한 재귀`에 걸리면서 어마어마한 요청을 보내게 되고 서버로부터 429(과호출)을 응답 받게 되었습니다.
-
-- **문제 원인**</br>
-액세스 토큰 만료 시 리프레시 토큰으로 갱신 요청 로직을 `Authenticator` 객체의 `refresh 메서드`에서 작성하고, 여기서 받은 응답을 `completion으로 전달`하게 되는데, completion으로 `error`를 전달 받게 되면 Alamofire 내부적으로 `retry`를 하게 됩니다. 그런데! 여기서 제가 인터셉터를 사용한 request 메서드를 또 사용해서 무한 재귀에 걸리게 되는 것이였습니다.
-
-- **해결 방법**</br>
-이미 interceptor가 `419를 잡아서` 이 Flow를 타게 된 것이기 때문에 리프래시 토큰으로 액세스 토큰 갱신 요청을 보낼 땐 interceptor를 `사용하지 않는` request 메서드를 사용하므로 해결했습니다.
+- **도전 결과**</br>
+좋아요 이벤트가 발생하면 서버의 `응답을 기다리지 않고` `즉각 UI를 업데이트` 하고, 무분별한 API request를 방지하기 위해 `throttle operator` 사용해 구현했습니다.
 ~~~swift
-final class SesacAuthenticator: Authenticator {
-    ...
+// ViewController
 
-    func refresh(
-        _ credential: SesacAuthenticationCredential,
-        for session: Alamofire.Session,
-        completion: @escaping (Result<SesacAuthenticationCredential, Error>) -> Void
-    ) {
-        NetworkManager.shared.request(
-            type: RefreshResponse.self,
-            api: AccountRouter.refresh(refreshToken: credential.refreshToken)
-        )
-        .subscribe { response in
-            let credential = SesacAuthenticationCredential(
-                accessToken: response.token,
-                refreshToken: credential.refreshToken
-            )
-            completion(.success(credential))
-
-        } onFailure: { error in
-            completion(.failure(error))
-        }
-        .disposed(by: disposeBag)
-    }
-
-    ...
-}
-~~~
-
-<!-- 프로젝트 중 발생한 문제와 그 해결 방법에 대한 내용을 기록한다. -->
-### 1. 좋아요 이벤트가 발생하면 모든 request를 보낼 것인가?
-- **문제 상황**</br>
-
-- **해결 방법**</br>
-
-~~~swift
 // 좋아요 버튼 누르면
 let didTapLikeButton = cell.communicationButtonStackView.likeButton.rx.tap
     .scan(item.isIliked) { lastState, _ in !lastState } // isSelected 상태 토글
@@ -257,6 +210,8 @@ didTapLikeButton
     .disposed(by: cell.disposeBag)
 ~~~
 ~~~swift
+// ViewModel
+
 input.didTapLikeButtonOfId
     .flatMapLatest { (id) in
         return NetworkManager.shared.request(
@@ -271,7 +226,7 @@ input.didTapLikeButtonOfId
     }
     .withLatestFrom(input.likeState) { (domain: $0, likeState: $1) }
     .bind(with: self) { owner, value in
-        // MARK: 현재로썬 굳이 response 값을 사용할 필요가 없어졌다.
+        // MARK: 굳이 response 값을 사용할 필요가 없어졌다.
     }
     .disposed(by: disposeBag)
 
@@ -282,19 +237,71 @@ input.likeState
     .disposed(by: disposeBag)
 ~~~
 
-### 2. 팔로우
+
+## 🛠 트러블 슈팅
+
+### 1. API request 메서드를 `Single`로 구현했을 때 에러 핸들링 시 `스트림 종료` 이슈
 - **문제 상황**</br>
+API 요청 메서드를 Single로 구현하고 viewModel에서 `catch 오퍼레이터`를 사용해서 `에러 핸들링`을 하면 스트림이 종료가 되서 한 번 요청하면 그 뒤로 요청이 되질 않았습니다.
+
+- **문제 원인**</br>
+`catch 오퍼레이터`는 특정 값을 return하고 onComplete를 방출하여 시퀀스를 종료했기 때문입니다.
+
 - **해결 방법**</br>
+`catch 오퍼레이터`의 위치를 변경하여 해결하였습니다. 기존엔 flatMapLatest의 결과를 catch 했었지만 `내부에서` catch를 사용하므로써 스트림을 종료시키지 않을 수 있었습니다.
 ~~~swift
+.flatMapLatest { [unowned self] _ in
+    return NetworkManager.shared.request(
+        type: PostReadResponseDTO.self,
+        api: PostRouter.read(parameters: self.baseParameters),
+        error: NetworkError.PostReadError.self
+    )
+    .catch { _ in Single.never() }
+}
 ~~~
 
-### 3. multipart
+### 2. `interceptor` 구현 후 서버로부터 419(액세스 토큰 만료)를 응답 받았을 때 `무한 재귀` 이슈
+- **문제 상황**</br>
+Alamofire에서 제공해주는 `AuthenticationInterceptor`를 적용하여 액세스 토큰 만료 시 리프레시 토큰으로 토큰 갱신 요청을 보냈었습니다. 그런데 이 때 `무한 재귀`에 걸리면서 어마어마한 요청을 보내게 되고 서버로부터 429(과호출)을 응답 받게 되었습니다.
+
+- **문제 원인**</br>
+액세스 토큰 만료 시 리프레시 토큰으로 갱신 요청 로직을 `Authenticator` 객체의 `refresh 메서드`에서 작성하고, 여기서 받은 응답을 `completion으로 전달`하게 되는데, completion으로 `error`를 전달 받게 되면 Alamofire 내부적으로 `retry`를 하게 됩니다. 그런데! 여기서 제가 인터셉터를 사용한 request 메서드를 또 사용해서 무한 재귀에 걸리게 되는 것이였습니다.
+
+- **해결 방법**</br>
+이미 interceptor가 `419를 잡아서` 이 Flow를 타게 된 것이기 때문에 리프래시 토큰으로 액세스 토큰 갱신 요청을 보낼 땐 interceptor를 `사용하지 않는` request 메서드를 사용해서 해결했습니다.
+~~~swift
+final class SesacAuthenticator: Authenticator {
+    ...
+
+    func refresh(
+        _ credential: SesacAuthenticationCredential,
+        for session: Alamofire.Session,
+        completion: @escaping (Result<SesacAuthenticationCredential, Error>) -> Void
+    ) {
+        NetworkManager.shared.request(
+            type: RefreshResponse.self,
+            api: AccountRouter.refresh(refreshToken: credential.refreshToken)
+        )
+        .subscribe { response in
+            let credential = SesacAuthenticationCredential(
+                accessToken: response.token,
+                refreshToken: credential.refreshToken
+            )
+            completion(.success(credential))
+
+        } onFailure: { error in
+            completion(.failure(error))
+        }
+        .disposed(by: disposeBag)
+    }
+
+    ...
+}
+~~~
 
 ## 📝 회고
 
 <!-- 프로젝트를 마무리하면서 느낀 소회, 개선점, 다음에 시도해보고 싶은 것 등을 정리한다. -->
-프로젝트를 마무리하면서 몇 가지 느낀 점과 개선할 사항들을 회고로 정리하겠습니다.
-
 👍 성취한 점
 1. **Alamofire AuthenticationInterceptor를 활용한 JWT AccessToken 만료 갱신, RefreshToken 만료 처리**</br>
 
