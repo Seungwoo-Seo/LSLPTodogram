@@ -308,3 +308,15 @@ final class SesacAuthenticator: Authenticator {
 ## 🖼 아이콘 출처 및 저작권 정보
 
 이 프로젝트에서 사용된 아이콘들은 아래와 같은 출처에서 제공되었습니다. 각 아이콘의 저작권은 해당 제작자에게 있습니다. 아이콘을 사용하려면 각 아이콘의 출처로 이동하여 저작권 관련 정보를 확인하세요.
+
+- [Mohamed Nohassi](https://unsplash.com/ko/@coopery?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Jay Antol](https://unsplash.com/ko/@jae462?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Mikhail Vasilyev](https://unsplash.com/ko/@miklevasilyev?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Tim Mossholder](https://unsplash.com/ko/@timmossholder?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Jamie Street](https://unsplash.com/ko/@jamie452?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Elias Maurer](https://unsplash.com/ko/@elmaurer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Alison Wang](https://unsplash.com/ko/@alison_wang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Anshita Nair](https://unsplash.com/ko/@anshitan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Glen Carrie](https://unsplash.com/ko/@glencarrie?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Yulia Matvienko](https://unsplash.com/ko/@yuliamatvienko?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- [Shubham Dhage](https://unsplash.com/ko/@theshubhamdhage?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
