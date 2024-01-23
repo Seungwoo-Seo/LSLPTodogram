@@ -26,9 +26,9 @@
 
 ## 🚀 주요 기능
 
-- 게시글 목록 및 상세 정보 조회
+- 게시글 작성/조회/삭제
 - 본인과 타인의 게시글에 좋아요/취소
-- 본인과 타인의 게시글에 댓글 CRUD
+- 본인과 타인의 게시글에 댓글
 - 타인 계정 팔로우/언팔로우
 - 해시태그
 - 회원인증
@@ -39,7 +39,6 @@
 - `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
 - `cursor`기반 페이지네이션 구현
 - `Optimistic UI` 구현
-- `Router Pattern`을 활용해 네트워크 레이어의 가독성 및 재사용성을 향상
 - `Keychain`을 활용하여 `AccessToken`과 `RefreshToken`의 `CRUD` 구현
 
 ## 💻 기술 스택
@@ -302,8 +301,9 @@ final class SesacAuthenticator: Authenticator {
 ~~~
 
 ## 📝 회고
-- `RxSwift`를 적용하여 `반응평 프로그래밍`에 대한 플로우를 이해할 수 있었습니다.
+- `RxSwift`를 적용하여 `반응형 프로그래밍`에 대한 플로우를 이해할 수 있었습니다.
 - `JWT`를 활용한 `사용자 인증` 플로우를 이해할 수 있었습니다.
+- `Optimistic UI`를 통해 트래픽 감소 및 비용 절감 효과를 경험할 수 있었습니다.
 - `Router 패턴`을 통해 네트워크 레이어의 가독성 및 재사용성 향상을 경험할 수 있었습니다.
 - 프로젝트 규모가 점점 커지면서 viewModel 또한 점점 커져갔고 유지보수를 하기도 점점 어려워졌습니다. viewModel에도 개선이 필요하다고 느꼈습니다.
   
