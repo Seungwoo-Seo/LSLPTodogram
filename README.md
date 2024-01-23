@@ -2,16 +2,14 @@
 
 > 일상을 공유하고 유저끼리 소통할 수 있는 SNS앱입니다.
 
-<!--
 <p align="center">
-  <img src="https://github.com/Seungwoo-Seo/ExemplaryRestaurantIB/assets/72753868/f7674e21-7dab-4d82-b0f3-17434679f683" width="130">
-  <img src="https://github.com/Seungwoo-Seo/ExemplaryRestaurantIB/assets/72753868/e50718e4-8afc-4c1d-bbce-ef2a8aca5024" width="130">
-  <img src="https://github.com/Seungwoo-Seo/ExemplaryRestaurantIB/assets/72753868/90ae0dcd-99ab-462b-b0a1-b3653c8827cc" width="130">
-  <img src="https://github.com/Seungwoo-Seo/ExemplaryRestaurantIB/assets/72753868/a7fb2876-dc56-4ce7-a9cc-1c5dd1e99f89" width="130">
-  <img src="https://github.com/Seungwoo-Seo/ExemplaryRestaurantIB/assets/72753868/0db88594-bb32-46ec-8346-3ce1b01da748" width="130">
-  <img src="https://github.com/Seungwoo-Seo/ExemplaryRestaurantIB/assets/72753868/184e3b7d-8b74-4228-b2f3-767c618a9e7d" width="130">
+  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/ec89b313-3382-45a7-b4e2-f60802bcb00e" width="130">
+  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/2b711c5e-0e3d-4386-b7f6-7fc881f2eb4c" width="130">
+  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/0702fe8e-f003-43c7-b1e7-f0e22bd0b6ea" width="130">
+  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/85acdc26-fffb-43e4-89be-c61015e641f4" width="130">
+  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/dc0ea6ff-b193-446e-9a27-11ac29b829f8" width="130">
+  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/e0384b0b-6148-44cc-a0e2-93f3bcb3f00b" width="130">
 </p>
--->
 
 ## 목차
 
