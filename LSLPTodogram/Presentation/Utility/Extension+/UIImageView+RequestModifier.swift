@@ -23,7 +23,7 @@ extension UIImageView {
 
         kf.setImage(
             with: url,
-            placeholder: UIImage(systemName: "heart"),
+            placeholder: nil,
             options: [.requestModifier(modifier)]
         )
     }

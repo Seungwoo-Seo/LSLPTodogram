@@ -27,6 +27,7 @@ final class BupCell: BaseTableViewCell {
     var likeCache: (row: Int, status: Bool, bup: Bup)?
     var baseImageUrls: [String]?
     let imageUrls = BehaviorRelay<[String]>(value: [])
+    var height: CGFloat?
 
     func bind(_ viewModel: BupCellViewModel) {
         // TODO: - updateImage
@@ -81,15 +82,15 @@ final class BupCell: BaseTableViewCell {
 
         baseImageUrls = item.image
         if let images = item.image {
-            //           let _ = item.width,
-            //           let height = item.height {
-            let height = 200.0
+            self.height = item.height
+            let height = item.height ?? 0
+
             // 1개
             if images.count == 1 {
                 imageCollectionView.snp.remakeConstraints { make in
                     make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
                     make.horizontalEdges.equalTo(contentLabel)
-                    make.height.equalTo(height/2)
+                    make.height.equalTo(height)
                 }
 
                 layoutIfNeeded()
@@ -131,10 +132,10 @@ final class BupCell: BaseTableViewCell {
         super.draw(rect)
 
         if let urls = baseImageUrls {
-            let height = 200.0
+            let height = height ?? 0
             if urls.count == 1 {
                 imageCollectionView.collectionViewLayout = ImageCollectionViewLayout.one(
-                    size: CGSize(width: imageCollectionView.bounds.width, height: height/2)
+                    size: CGSize(width: imageCollectionView.bounds.width, height: height)
                 ).layout
             } else if urls.count > 1 {
                 imageCollectionView.collectionViewLayout = ImageCollectionViewLayout.many(
@@ -190,7 +191,6 @@ final class BupCell: BaseTableViewCell {
 
         ellipsisButton.snp.makeConstraints { make in
             make.verticalEdges.equalTo(timeLabel)
-            make.leading.equalTo(timeLabel.snp.trailing).offset(offset)
             make.trailing.equalToSuperview().inset(inset)
         }
 

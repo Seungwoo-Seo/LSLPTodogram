@@ -140,6 +140,14 @@ final class ProfileViewController: BaseViewController {
                     }
                     .disposed(by: cell.disposeBag)
 
+                cell.countButtonStackView.commentCountButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        let vm = BupDetailViewModel(postId: item.id, hostId: item.hostID)
+                        let vc = BupDetailViewController(vm)
+                        owner.navigationController?.pushViewController(vc, animated: true)
+                    }
+                    .disposed(by: cell.disposeBag)
+
                 return cell
 
             case .empty(let placeholder):
@@ -250,6 +258,16 @@ final class ProfileViewController: BaseViewController {
 }
 
 extension ProfileViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let item = viewModel.items.value[indexPath.row + 1]
+        if case .bup(let bup) = item {
+            let vm = BupDetailViewModel(postId: bup.id, hostId: bup.creator.id)
+            let vc = BupDetailViewController(vm)
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let section = ProfileSection.allCases[section]

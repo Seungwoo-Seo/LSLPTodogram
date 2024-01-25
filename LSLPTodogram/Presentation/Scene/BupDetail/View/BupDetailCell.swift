@@ -24,6 +24,7 @@ final class BupDetailCell: BaseTableViewCell {
 
     var baseImageUrls: [String]?
     let imageUrls = BehaviorRelay<[String]>(value: [])
+    var height: CGFloat?
 
     func configure(item: Bup, likeState: Bool?) {
         if let profileString = item.creator.profile {
@@ -35,7 +36,10 @@ final class BupDetailCell: BaseTableViewCell {
             profileImageButton.updateImage(image: UIImage(named: "profile"))
         }
         profileNicknameButton.updateTitle(title: item.creator.nick)
-        contentLabel.text = item.content
+        if let content = item.content {
+            contentLabel.setHashTags(text: content)
+        }
+
         if let difference = calculateTimeDifference(from: item.time) {
             switch difference {
             case .seconds(let seconds):
@@ -66,17 +70,29 @@ final class BupDetailCell: BaseTableViewCell {
 
         baseImageUrls = item.image
         if let images = item.image {
-            //           let _ = item.width,
-            //           let height = item.height {
-            let height = 200.0
-            if images.count != 0 {
+            self.height = item.height
+            let height = item.height ?? 0
+
+            // 1개
+            if images.count == 1 {
                 imageCollectionView.snp.remakeConstraints { make in
                     make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
-                    make.horizontalEdges.equalToSuperview()
-                    make.height.equalTo(height/2)
+                    make.horizontalEdges.equalTo(contentLabel)
+                    make.height.equalTo(height)
                 }
 
                 layoutIfNeeded()
+
+                // 1개 이상
+            } else if images.count > 1  {
+                imageCollectionView.snp.remakeConstraints { make in
+                    make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
+                    make.horizontalEdges.equalToSuperview()
+                    make.height.equalTo(height)
+                }
+
+                layoutIfNeeded()
+
             } else {
                 // 0개
                 imageCollectionView.snp.remakeConstraints { make in
@@ -94,14 +110,20 @@ final class BupDetailCell: BaseTableViewCell {
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        disposeBag = DisposeBag()
+    }
+
     override func draw(_ rect: CGRect) {
         super.draw(rect)
 
         if let urls = baseImageUrls {
-            let height = 200.0
+            let height = height ?? 0
             if urls.count == 1 {
                 imageCollectionView.collectionViewLayout = ImageCollectionViewLayout.detailOne(
-                    size: CGSize(width: imageCollectionView.bounds.width - 16, height: height/2)
+                    size: CGSize(width: imageCollectionView.bounds.width - 16, height: height)
                 ).layout
             } else if urls.count > 1 {
                 imageCollectionView.collectionViewLayout = ImageCollectionViewLayout.detailMany(
@@ -151,12 +173,11 @@ final class BupDetailCell: BaseTableViewCell {
 
         timeLabel.snp.makeConstraints { make in
             make.top.equalTo(profileImageButton)
-            make.leading.equalTo(profileNicknameButton.snp.trailing).offset(offset)
+            make.trailing.equalTo(ellipsisButton.snp.leading).offset(-offset)
         }
 
         ellipsisButton.snp.makeConstraints { make in
             make.verticalEdges.equalTo(timeLabel)
-            make.leading.equalTo(timeLabel.snp.trailing).offset(offset)
             make.trailing.equalToSuperview().inset(inset)
         }
 
