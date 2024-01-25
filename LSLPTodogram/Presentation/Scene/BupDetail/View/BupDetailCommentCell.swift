@@ -18,7 +18,23 @@ final class BupDetailCommentCell: BaseTableViewCell {
     func configure(_ item: Comment) {
         profileImageButton.updateImage(image: UIImage(named: "profile"))
         profileNicknameButton.updateTitle(title: item.creator.nick)
-        timeLabel.text = item.time
+
+        if let difference = calculateTimeDifference(from: item.time) {
+            switch difference {
+            case .seconds(let seconds):
+                timeLabel.text = "\(seconds)초 전"
+            case .minutes(let minutes):
+                timeLabel.text = "\(minutes)분 전"
+            case .hours(let hours):
+                timeLabel.text = "\(hours)시간 전"
+            case .days(let days):
+                timeLabel.text = "\(days)일 전"
+            }
+        } else {
+            timeLabel.text = "Invalid date format"
+        }
+
+
         contentLabel.text = item.content
     }
 

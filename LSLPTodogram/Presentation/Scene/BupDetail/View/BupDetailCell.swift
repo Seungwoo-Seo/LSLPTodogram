@@ -29,6 +29,21 @@ final class BupDetailCell: BaseTableViewCell {
         profileImageButton.updateImage(image: UIImage(named: "profile"))
         profileNicknameButton.updateTitle(title: item.creator.nick)
         contentLabel.text = item.content
+        if let difference = calculateTimeDifference(from: item.time) {
+            switch difference {
+            case .seconds(let seconds):
+                timeLabel.text = "\(seconds)초 전"
+            case .minutes(let minutes):
+                timeLabel.text = "\(minutes)분 전"
+            case .hours(let hours):
+                timeLabel.text = "\(hours)시간 전"
+            case .days(let days):
+                timeLabel.text = "\(days)일 전"
+            }
+        } else {
+            timeLabel.text = "Invalid date format"
+        }
+
         communicationButtonStackView.likeButton.isSelected = item.isIliked
         countButtonStackView.likeCountButton.updateTitle(title: item.serverLikesCountString())
         countButtonStackView.commentCountButton.updateTitle(title: item.commentCountString())
