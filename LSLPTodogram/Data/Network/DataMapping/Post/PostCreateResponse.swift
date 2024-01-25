@@ -10,7 +10,7 @@ import Foundation
 struct PostCreateResponse: Decodable {
 //    "likes": [],
     let image: [String]?
-//    "hashTags": [],
+    let hashTags: [String]?
 //    "comments": [],
     let _id: String
     let creator: CreatorDTO
