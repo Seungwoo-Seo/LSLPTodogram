@@ -12,7 +12,7 @@ final class TimeLabel: BaseLabel {
     override func initialAttributes() {
         super.initialAttributes()
 
-        textColor = Color.lightGray
+        textColor = Color.white.withAlphaComponent(0.5)
         font = .systemFont(ofSize: 15, weight: .semibold)
     }
 
