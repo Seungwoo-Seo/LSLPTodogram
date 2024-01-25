@@ -26,6 +26,7 @@
 		5715F2B32B3A2535008C0A45 /* ImageCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715F2B22B3A2535008C0A45 /* ImageCollectionViewLayout.swift */; };
 		5715F2B52B3A2561008C0A45 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715F2B42B3A2561008C0A45 /* ImageCell.swift */; };
 		5715F2D92B3B1B38008C0A45 /* BupInputCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5715F2D82B3B1B38008C0A45 /* BupInputCellViewModel.swift */; };
+		573F04312B5DBE4500471768 /* HashtagTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573F04302B5DBE4500471768 /* HashtagTextView.swift */; };
 		576920FB2B1E51A800B8CE80 /* PostCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */; };
 		576920FD2B1E5C5600B8CE80 /* PostReadResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO+Mapping.swift */; };
 		577B9C5A2B32D272002D8A4A /* OthersProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577B9C592B32D272002D8A4A /* OthersProfileCell.swift */; };
@@ -227,6 +228,7 @@
 		5715F2B22B3A2535008C0A45 /* ImageCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewLayout.swift; sourceTree = "<group>"; };
 		5715F2B42B3A2561008C0A45 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
 		5715F2D82B3B1B38008C0A45 /* BupInputCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BupInputCellViewModel.swift; sourceTree = "<group>"; };
+		573F04302B5DBE4500471768 /* HashtagTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagTextView.swift; sourceTree = "<group>"; };
 		576920FA2B1E51A800B8CE80 /* PostCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCreateRequest.swift; sourceTree = "<group>"; };
 		576920FC2B1E5C5600B8CE80 /* PostReadResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostReadResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		577B9C592B32D272002D8A4A /* OthersProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfileCell.swift; sourceTree = "<group>"; };
@@ -1042,6 +1044,7 @@
 				57FDA8DD2B376BB00080AB2C /* Button */,
 				57FDA8DE2B376E8B0080AB2C /* Label */,
 				570BB0C62B4B02F000A5B0B7 /* SegmentControl */,
+				573F04302B5DBE4500471768 /* HashtagTextView.swift */,
 			);
 			path = "View+";
 			sourceTree = "<group>";
@@ -1515,6 +1518,7 @@
 				57FB02082B1893E1003CAD51 /* BupInputViewController.swift in Sources */,
 				57FAF8E42B4E94FF00889F8D /* OthersEllipsisMainView.swift in Sources */,
 				570C72F02B3FF84700E61FC2 /* NetworkError.swift in Sources */,
+				573F04312B5DBE4500471768 /* HashtagTextView.swift in Sources */,
 				57EB272E2B4D089A00C7283A /* FollowerListCell.swift in Sources */,
 				57EB272A2B4D060A00C7283A /* FollowerListMainView.swift in Sources */,
 				57F870E82B284DC800370D3A /* Profile.swift in Sources */,
