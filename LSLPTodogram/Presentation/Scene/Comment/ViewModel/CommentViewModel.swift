@@ -47,7 +47,7 @@ final class CommentViewModel: ViewModelType {
                     return Single.never()
                 }
             }
-            .map { $0.toDomain }
+            .map { $0.toDomain() }
             .withUnretained(self)
             .map { CommentItemIdentifiable.comment($1) }
             .bind(with: self) { owner, item in

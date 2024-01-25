@@ -10,6 +10,12 @@ import RxCocoa
 import RxSwift
 
 final class ProfileEditMainView: BaseView {
+    let backgroundImageView = {
+        let view = UIImageView(image: UIImage(named: "fireBackground"))
+        view.alpha = 0.7
+        return view
+    }()
+    let profileImageButton = ProfileImageButton(size: CGSize(width: 100, height: 100))
     let nicknameView = InfoInputView(description: "닉네임", placeholder: "")
     let phoneNumView = InfoInputView(description: "핸드폰 번호", placeholder: "")
     let datePicker = {
@@ -26,10 +32,20 @@ final class ProfileEditMainView: BaseView {
         return view
     }()
 
+    override func initialAttributes() {
+        super.initialAttributes()
+
+        nicknameView.backgroundColor = Color.clear
+        phoneNumView.backgroundColor = Color.clear
+        birthDayView.backgroundColor = Color.clear
+    }
+
     override func initialHierarchy() {
         super.initialHierarchy()
 
+        addSubview(backgroundImageView)
         [
+            profileImageButton,
             nicknameView,
             phoneNumView,
             birthDayView
@@ -41,8 +57,17 @@ final class ProfileEditMainView: BaseView {
 
         let offset = 16
         let inset = 16
-        nicknameView.snp.makeConstraints { make in
+        backgroundImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+
+        profileImageButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(offset*2)
+            make.centerX.equalToSuperview()
+        }
+
+        nicknameView.snp.makeConstraints { make in
+            make.top.equalTo(profileImageButton.snp.bottom).offset(offset*2)
             make.horizontalEdges.equalToSuperview().inset(inset)
         }
 

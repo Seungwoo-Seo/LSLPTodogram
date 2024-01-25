@@ -32,7 +32,7 @@ final class MainTabBarViewModel {
     lazy var viewControllerList = [
         UINavigationController(rootViewController: bupNewsfeedViewController),
         fakeViewController,
-        profileViewController
+        UINavigationController(rootViewController: profileViewController)
     ]
 
     var bupInputViewController: UIViewController {

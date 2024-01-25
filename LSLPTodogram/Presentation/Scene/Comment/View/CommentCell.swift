@@ -27,6 +27,18 @@ final class CommentCell: BaseTableViewCell {
         return view
     }()
 
+    func configure(_ item: Profile) {
+        if let imageString = item.profileImageString {
+            profileImageButton.imageView?.requestModifier(with: imageString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
+        profileNicknameButton.updateTitle(title: item.nick)
+    }
+
     override func prepareForReuse() {
         super.prepareForReuse()
 
@@ -70,6 +82,38 @@ final class CommentCell: BaseTableViewCell {
             make.centerX.equalTo(profileImageButton)
             make.bottom.equalTo(commentTextView.snp.bottom)
         }
+    }
+}
+
+enum TimeDifference {
+    case seconds(Int)
+    case minutes(Int)
+    case hours(Int)
+    case days(Int)
+}
+
+func calculateTimeDifference(from dateString: String) -> TimeDifference? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
+    guard let date = dateFormatter.date(from: dateString) else {
+        return nil // 날짜 형식이 맞지 않는 경우 nil 반환
+    }
+
+    let currentDate = Date()
+    let calendar = Calendar.current
+    let components = calendar.dateComponents([.second, .minute, .hour, .day], from: date, to: currentDate)
+
+    if let days = components.day, days > 0 {
+        return .days(days)
+    } else if let hours = components.hour, hours > 0 {
+        return .hours(hours)
+    } else if let minutes = components.minute, minutes > 0 {
+        return .minutes(minutes)
+    } else if let seconds = components.second {
+        return .seconds(seconds)
+    } else {
+        return .seconds(0) // 기타 예외 상황에 대한 처리
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 import RxCocoa
 import RxSwift
 
@@ -104,6 +105,19 @@ final class ProfileEditViewController: BaseViewController {
             }
             .disposed(by: disposeBag)
 
+        mainView.profileImageButton.rx.tap
+            .bind(with: self) { owner, _ in
+                var config = PHPickerConfiguration(photoLibrary: .shared())
+                config.selectionLimit = 1
+                config.selection = .ordered
+                config.filter = .images
+                let picker = PHPickerViewController(configuration: config)
+                picker.delegate = owner
+                picker.title = "프로필 사진을 선택해주세요."
+                owner.present(picker, animated: true)
+            }
+            .disposed(by: disposeBag)
+
         output.completeState
             .bind(with: self) { owner, result in
                 switch result {
@@ -129,6 +143,11 @@ final class ProfileEditViewController: BaseViewController {
         output.npb
             .bind(to: self.rx.isModalInPresentation)
             .disposed(by: disposeBag)
+
+        output.error
+            .map { $0.description }
+            .drive(rx.presentAlertToNetworkingErrorDescription)
+            .disposed(by: disposeBag)
     }
 
     override func loadView() {
@@ -153,6 +172,50 @@ final class ProfileEditViewController: BaseViewController {
         navigationItem.rightBarButtonItem = completeBarButtonItem
     }
 
+}
+
+extension ProfileEditViewController: PHPickerViewControllerDelegate {
+
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+
+        for result in results {
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (image, error) in
+
+                    DispatchQueue.main.async {
+                        let image = image as? UIImage
+
+                        self?.viewModel.profileImage = image
+                        self?.mainView.profileImageButton.updateImage(image: image)
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+private extension Reactive where Base: ProfileEditViewController {
+
+    var presentAlertToNetworkingErrorDescription: Binder<String> {
+        return Binder(base) { (vc, description) in
+            let alert = UIAlertController(
+                title: description,
+                message: nil,
+                preferredStyle: .alert
+            )
+            let confirm = UIAlertAction(
+                title: "로그인 화면으로",
+                style: .default
+            ) { _ in
+                vc.windowReset()
+            }
+            alert.addAction(confirm)
+            vc.present(alert, animated: true)
+        }
+    }
 }
 
 private extension ProfileEditViewController {

@@ -75,7 +75,7 @@ final class JoinViewModel: ViewModelType {
             .flatMapLatest {
                 return NetworkManager.shared.request(
                     type: JoinDTO.self,
-                    api: Router.join(email: $0.email, password: $0.password, nick: $0.nick, phoneNum: $0.phoneNum, birthDay: $0.birthDay)
+                    api: AccountRouter.join(email: $0.email, password: $0.password, nick: $0.nick, phoneNum: $0.phoneNum, birthDay: $0.birthDay)
                 )
                 .catch { error in
                     print(error.localizedDescription)

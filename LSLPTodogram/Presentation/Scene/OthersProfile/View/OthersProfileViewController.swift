@@ -19,10 +19,29 @@ final class OthersProfileViewController: BaseViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
 
-        let itemOfFollowButton = PublishRelay<OthersProfile>()
+        let viewDidLoad = rx.sentMessage(#selector(UIViewController.viewDidLoad))
+            .map { _ in Void() }
+        let pull = mainView.tableView.refreshControl!.rx.controlEvent(.valueChanged).asObservable()
+        // followers
+        let didTapFollowersButton = PublishRelay<Void>()
+        // followings
+        let didTapFollowingsButton = PublishRelay<Void>()
+        // follow
+        let followState = PublishRelay<(othersID: String, isSelected: Bool)>()
+        // like
+        let rowOfLikebutton = PublishRelay<Int>()
+        let didTapLikeButtonOfId = PublishRelay<String>()
+        let likeState = PublishRelay<(row: Int, isSelected: Bool)>()
 
         let input = OthersProfileViewModel.Input(
-            itemOfFollowButton: itemOfFollowButton
+            trigger: Observable.merge(viewDidLoad, pull),
+            prefetchRows: mainView.tableView.rx.prefetchRows,
+            didTapFollowersButton: didTapFollowersButton,
+            didTapFollowingsButton: didTapFollowingsButton,
+            followState: followState,
+            rowOfLikebutton: rowOfLikebutton,
+            didTapLikeButtonOfId: didTapLikeButtonOfId,
+            likeState: likeState
         )
         let output = viewModel.transform(input: input)
 
@@ -38,38 +57,123 @@ final class OthersProfileViewController: BaseViewController {
 
                 cell.configure(item)
 
-                cell.followButton.rx.tap
-                    .withLatestFrom(Observable.just(item))
-                    .bind(to: itemOfFollowButton)
+                // 팔로워 버튼
+                cell.followersButton.rx.tap
+                    .bind(to: didTapFollowersButton)
                     .disposed(by: cell.disposeBag)
 
-                output.followState
-                    .bind(to: cell.followButton.rx.isSelected)
+                // 팔로잉 버튼
+                cell.followingButton.rx.tap
+                    .bind(to: didTapFollowingsButton)
+                    .disposed(by: cell.disposeBag)
+
+                // 팔로우 버튼 누르면
+                let didTapFollowButton = cell.followButton.rx.tap
+                    .scan(cell.followButton.isSelected) { lastState, _ in !lastState } // isSelected 상태 토글
+                    .flatMapLatest { isSelected in
+                        Observable<Void>.create { observer in
+                            // UI 업데이트
+                            cell.followButton.isSelected = isSelected
+                            cell.followButton.configuration?.title = item.localFollowStateToString(isSelected: isSelected)
+                            cell.followersButton.updateTitle(item.localFollowersCountToString(isSelected: isSelected))
+                            observer.onNext(Void())
+                            observer.onCompleted()
+                            return Disposables.create()
+                        }
+                    }
+                    .share()
+
+                didTapFollowButton
+                    .debug()
+                    .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+                    .withLatestFrom(cell.followButton.rx.observe(\.isSelected))
+                    .bind(with: self) { owner, isSelected in
+                        followState.accept((item.id, isSelected))
+                    }
                     .disposed(by: cell.disposeBag)
 
                 return cell
 
-            case .bup(let bup):
+            case .bup(let item):
                 let cell = tableView.dequeueReusableCell(
                     withIdentifier: BupCell.identifier,
                     for: indexPath
                 ) as! BupCell
 
-                cell.profileImageButton.configuration?.image = UIImage(systemName: "person")
-                cell.profileNicknameButton.configuration?.title = bup.creator.nick
-                cell.contentLabel.text = bup.content
-                
+                cell.configure(item: item, likeState: viewModel.likeState[indexPath.row])
+                cell.imageUrls
+                    .bind(to: cell.imageCollectionView.rx.items(cellIdentifier: ImageCell.identifier)) { index, string, cell in
+                        guard let cell = cell as? ImageCell else {return}
+
+                        cell.removeButton.isHidden = true
+                        cell.imageView.requestModifier(with: string)
+                    }
+                    .disposed(by: cell.disposeBag)
+
+                // 좋아요 버튼 누르면
+                let didTapLikeButton = cell.communicationButtonStackView.likeButton.rx.tap
+                    .scan(item.isIliked) { lastState, _ in !lastState } // isSelected 상태 토글
+                    .flatMapLatest { isSelected in
+                        Observable<Void>.create { observer in
+                            // UI 업데이트
+                            cell.communicationButtonStackView.likeButton.isSelected = isSelected
+                            let countString = item.localLikesCountString(isSelected: isSelected)
+                            cell.countButtonStackView.likeCountButton.updateTitle(title: countString)
+                            observer.onNext(Void())
+                            observer.onCompleted()
+                            return Disposables.create()
+                        }
+                    }
+                    .share()
+
+                let rowAndIsSelected = Observable.combineLatest(
+                    Observable.just(indexPath.row),
+                    cell.communicationButtonStackView.likeButton.rx.observe(\.isSelected)
+                )
+
+                // 이벤트가 발생한 좋아요 버튼의 정보를 viewModel로 전달
+                didTapLikeButton
+                    .withLatestFrom(rowAndIsSelected)
+                    .bind(with: self) { owner, rowAndIsSelected in
+                        likeState.accept(rowAndIsSelected)
+                    }
+                    .disposed(by: cell.disposeBag)
+
+                // 무분별한 API request를 방지하기 위해 throttle operator 사용
+                didTapLikeButton
+                    .throttle(.seconds(1), latest: false, scheduler: MainScheduler.instance)
+                    .withLatestFrom(Observable.just(item.id))
+                    .bind(to: didTapLikeButtonOfId)
+                    .disposed(by: cell.disposeBag)
+
+                cell.communicationButtonStackView.commentButton.rx.tap
+                    .bind(with: self) { owner, _ in
+                        let vm = CommentViewModel(bup: item)
+                        let vc = CommentViewController(vm)
+                        let navi = UINavigationController(rootViewController: vc)
+                        owner.present(navi, animated: true)
+                    }
+                    .disposed(by: cell.disposeBag)
+
+                return cell
+
+            case .empty(let placeholder):
+                let cell = tableView.dequeueReusableCell(
+                    withIdentifier: EmptyCell.identifier,
+                    for: indexPath
+                ) as! EmptyCell
+
+                cell.configure(placeholder: placeholder)
+
                 return cell
             }
         }
-
-        mainView.snapshot.appendSections(OthersProfileSection.allCases)
-        mainView.dataSource.apply(mainView.snapshot)
 
         output.items
             .bind(with: self) { owner, items in
                 var profiles: [OthersProfileItemIdentifiable] = []
                 var bups: [OthersProfileItemIdentifiable] = []
+                var placeholders: [OthersProfileItemIdentifiable] = []
 
                 for item in items {
                     switch item {
@@ -77,16 +181,55 @@ final class OthersProfileViewController: BaseViewController {
                         profiles.append(OthersProfileItemIdentifiable.profile(profile))
                     case .bup(let bup):
                         bups.append(OthersProfileItemIdentifiable.bup(bup))
+                    case .empty(let placeholder):
+                        placeholders.append(OthersProfileItemIdentifiable.empty(placeholder))
                     }
                 }
 
-                owner.mainView.snapshot.appendItems(profiles, toSection: .profile)
-                owner.mainView.snapshot.appendItems(bups, toSection: .bup)
-                owner.mainView.dataSource.apply(owner.mainView.snapshot)
+                var snapshot = NSDiffableDataSourceSnapshot<OthersProfileSection, OthersProfileItemIdentifiable>()
+                snapshot.appendSections(OthersProfileSection.allCases)
+                snapshot.appendItems(profiles, toSection: .profile)
+                snapshot.appendItems(bups, toSection: .bup)
+                owner.mainView.dataSource.apply(snapshot)
             }
             .disposed(by: disposeBag)
 
+        output.fetching
+            .drive(mainView.tableView.refreshControl!.rx.isRefreshing)
+            .disposed(by: disposeBag)
 
+        output.error
+            .map { $0.description }
+            .drive(rx.presentAlertToNetworkingErrorDescription)
+            .disposed(by: disposeBag)
+
+        output.followers
+            .emit(with: self) { owner, followers in
+                let vm = FollowerListViewModel(followers: followers)
+                let vc = FollowerListViewController(vm)
+                let navi = UINavigationController(rootViewController: vc)
+                owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        output.followings
+            .emit(with: self) { owner, followings in
+                let vm = FollowingListViewModel(followings: followings)
+                let vc = FollowingListViewController(vm)
+                let navi = UINavigationController(rootViewController: vc)
+                owner.present(navi, animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        output.changedSegmentItems
+            .bind(with: self) { owner, items in
+                var snapshot = owner.mainView.dataSource.snapshot()
+                snapshot.deleteSections([.bup])
+                snapshot.appendSections([.bup])
+                snapshot.appendItems(items, toSection: .bup)
+                owner.mainView.dataSource.apply(snapshot)
+            }
+            .disposed(by: disposeBag)
     }
 
     override func loadView() {
@@ -115,19 +258,11 @@ extension OthersProfileViewController: UITableViewDelegate {
             return nil
         case .bup:
             let header = tableView.dequeueReusableHeaderFooterView(
-                withIdentifier: BupSegmentHeader.identifier
-            ) as! BupSegmentHeader
+                withIdentifier: OthersBupSegmentHeader.identifier
+            ) as! OthersBupSegmentHeader
 
-            header.activeBupButton.rx.tap
-                .bind(with: self) { owner, _ in
-
-                }
-                .disposed(by: header.disposeBag)
-
-            header.historyBupButton.rx.tap
-                .bind(with: self) { owner, _ in
-//                    owner.presentProfileEditViewController()
-                }
+            header.underlineSegmentedControl.rx.selectedSegmentIndex
+                .bind(to: viewModel.segmentIndex)
                 .disposed(by: header.disposeBag)
 
             return header
@@ -142,4 +277,25 @@ extension OthersProfileViewController: UITableViewDelegate {
         }
     }
 
+}
+
+private extension Reactive where Base: OthersProfileViewController {
+
+    var presentAlertToNetworkingErrorDescription: Binder<String> {
+        return Binder(base) { (vc, description) in
+            let alert = UIAlertController(
+                title: description,
+                message: nil,
+                preferredStyle: .alert
+            )
+            let confirm = UIAlertAction(
+                title: "로그인 화면으로",
+                style: .default
+            ) { _ in
+                vc.windowReset()
+            }
+            alert.addAction(confirm)
+            vc.present(alert, animated: true)
+        }
+    }
 }

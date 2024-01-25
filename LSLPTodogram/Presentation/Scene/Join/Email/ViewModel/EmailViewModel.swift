@@ -71,7 +71,7 @@ final class EmailViewModel: ViewModelType {
             .flatMapLatest {
                 return NetworkManager.shared.request(
                     type: EmailValidationResponseDTO.self,
-                    api: Router.emailChek(email: $0)
+                    api: AccountRouter.emailChek(email: $0)
                 )
                 .catch { error in
                     let statusCode = error.asAFError?.responseCode ?? 500

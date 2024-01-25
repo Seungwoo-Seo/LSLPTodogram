@@ -21,13 +21,15 @@ final class ProfileImageButton: BaseButton {
         config.contentInsets = NSDirectionalEdgeInsets(
             top: 0, leading: 0, bottom: 0, trailing: 0
         )
-        config.cornerStyle = .capsule
         config.image = UIImage(named: "profile")?.resize(targetSize: size)
+        config.cornerStyle = .capsule
         configuration = config
     }
 
     func updateImage(image: UIImage?) {
         configuration?.image = image?.resize(targetSize: size)
+        imageView?.clipsToBounds = true
+        imageView?.layer.cornerRadius = size.height/2
     }
 
     override func initialAttributes() {

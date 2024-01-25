@@ -20,7 +20,7 @@ struct PostDTO: Decodable {
     let _id: String
     let creator: CreatorDTO
     let time: String
-    let content: String
+    let content: String?
     let width, height: String?
     let productID: String
     let likes: [String]?
@@ -31,17 +31,19 @@ struct PostDTO: Decodable {
 
 extension PostDTO {
 
-    func toBup() -> Bup {
+    func toBup(hostID: String) -> Bup {
         return Bup(
             id: _id,
-            creator: creator.toDomain,
+            creator: creator.toDomain(),
             content: content,
+            time: time,
             width: stringToCGFloat(width),
             height: stringToCGFloat(height),
             image: image,
             hashTags: hashTags,
             likes: likes,
-            comments: comments?.compactMap { $0.toDomain }
+            comments: comments?.compactMap { $0.toDomain() },
+            hostID: hostID
         )
     }
 

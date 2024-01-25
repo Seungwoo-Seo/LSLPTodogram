@@ -64,7 +64,14 @@ final class ProfileCell: BaseTableViewCell {
     }()
 
     func configure(_ item: Profile) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        if let imageString = item.profileImageString {
+            profileImageButton.imageView?.requestModifier(with: imageString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
         profileNicknameButton.updateTitle(title: item.nick)
         emailLabel.text = item.email
         followersButton.configuration?.title = "팔로워 \(item.followers?.count ?? 0)명"

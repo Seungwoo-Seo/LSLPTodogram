@@ -146,7 +146,8 @@ final class AccountValidator {
             let request = ProfileUpdateRequest(
                 nick: nickname,
                 phoneNum: phoneNum,
-                birthDay: birthDay
+                birthDay: birthDay,
+                files: nil
             )
 
             observer(.success(request))

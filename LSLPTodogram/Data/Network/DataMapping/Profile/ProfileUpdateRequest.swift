@@ -6,16 +6,23 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
 struct ProfileUpdateRequest: MultipartFormDataBody {
-    func imagesToData() -> [Data] {
-        []
-    }
-
     let nick: String?
     let phoneNum: String?
     let birthDay: String?
-//    let profile: Data
+    let files: [UIImage]?
+
+    func imagesToData() -> [Data] {
+        var results: [Data] = []
+
+        if let files {
+            results = files.compactMap { $0.jpegData(compressionQuality: 0.2) }
+        }
+
+        return results
+    }
 
     func asDictionary() -> [String : Data] {
         var resultDic: [String: Data] = [:]

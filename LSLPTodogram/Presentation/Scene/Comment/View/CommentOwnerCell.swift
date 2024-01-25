@@ -15,6 +15,7 @@ final class CommentOwnerCell: BaseTableViewCell {
 
     let profileImageButton = ProfileImageButton()
     let profileNicknameButton = ProfileNicknameButton()
+    let timeLabel = TimeLabel()
     let lineView = LineView()
     let contentLabel = ContentLabel()
     let imageCollectionView = ImageCollectionView(collectionViewLayout: .one(size: .zero))
@@ -23,9 +24,33 @@ final class CommentOwnerCell: BaseTableViewCell {
 
 
     func configure(item: Bup) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        if let profileString = item.creator.profile {
+            profileImageButton.imageView?.requestModifier(with: profileString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
         profileNicknameButton.updateTitle(title: item.creator.nick)
-        contentLabel.text = item.content
+        if let content = item.content {
+            contentLabel.setHashTags(text: content)
+        }
+
+        if let difference = calculateTimeDifference(from: item.time) {
+            switch difference {
+            case .seconds(let seconds):
+                timeLabel.text = "\(seconds)초 전"
+            case .minutes(let minutes):
+                timeLabel.text = "\(minutes)분 전"
+            case .hours(let hours):
+                timeLabel.text = "\(hours)시간 전"
+            case .days(let days):
+                timeLabel.text = "\(days)일 전"
+            }
+        } else {
+            timeLabel.text = "Invalid date format"
+        }
 
         if let images = item.image {
 //           let _ = item.width,
@@ -84,6 +109,8 @@ final class CommentOwnerCell: BaseTableViewCell {
         disposeBag = DisposeBag()
     }
 
+    
+
     override func initialAttributes() {
         super.initialAttributes()
 
@@ -97,6 +124,7 @@ final class CommentOwnerCell: BaseTableViewCell {
         [
             profileImageButton,
             profileNicknameButton,
+            timeLabel,
             lineView,
             contentLabel,
             imageCollectionView
@@ -116,6 +144,11 @@ final class CommentOwnerCell: BaseTableViewCell {
             make.top.equalTo(profileImageButton)
             make.leading.equalTo(profileImageButton.snp.trailing).offset(offset)
             make.trailing.lessThanOrEqualToSuperview().inset(inset)
+        }
+
+        timeLabel.snp.makeConstraints { make in
+            make.top.equalTo(profileImageButton)
+            make.trailing.equalToSuperview().offset(-offset)
         }
 
         lineView.snp.makeConstraints { make in

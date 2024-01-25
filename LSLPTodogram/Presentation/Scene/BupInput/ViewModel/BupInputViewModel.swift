@@ -65,7 +65,7 @@ final class BupInputViewModel: ViewModelType {
                     return Single.never()
                 }
             }
-            .map { $0.toDomain }
+            .map { $0.toDomain() }
             .bind(with: self) { owner, profile in
                 owner.baseItems = [profile]
                 owner.items.accept(owner.baseItems)
@@ -122,6 +122,7 @@ final class BupInputViewModel: ViewModelType {
         // MARK: - bupInputCellViewModel
         bupInputCellViewModel.upper_contentText
             .bind(with: self) { owner, text in
+                print(text)
                 owner.contentText = text
             }
             .disposed(by: disposeBag)
@@ -161,8 +162,8 @@ final class BupInputViewModel: ViewModelType {
 
                 group.notify(queue: .main) {
                     if let image = owner.baseImages.first {
-                        owner.width = image.size.width
-                        owner.height = image.size.height
+                        owner.width = image.size.width > 333 ? 333 : image.size.width
+                        owner.height = image.size.height > 300 ? 300 : image.size.height
                     }
 
                     owner.images.accept(owner.baseImages)

@@ -34,9 +34,7 @@ final class CommentTableView: BaseTableView {
                             guard let cell = cell as? ImageCell else {return}
 
                             cell.removeButton.isHidden = true
-
-                            let token = KeychainManager.read(key: KeychainKey.token.rawValue) ?? ""
-                            cell.imageView.requestModifier(with: string, token: token)
+                            cell.imageView.requestModifier(with: string)
                         }
                         .disposed(by: cell.disposeBag)
 
@@ -47,8 +45,8 @@ final class CommentTableView: BaseTableView {
                         withIdentifier: CommentCell.identifier
                     ) as? CommentCell else {return UITableViewCell()}
 
-                    cell.profileImageButton.updateImage(image: UIImage(named: "profile"))
-                    cell.profileNicknameButton.updateTitle(title: item.nick)
+                    cell.configure(item)
+//                    cell.configure(item: item)
 
 //                    Observable.just(item)
 //                        .bind(with: self) { owner, item in

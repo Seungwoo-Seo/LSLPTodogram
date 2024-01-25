@@ -29,7 +29,7 @@ final class SesacAuthenticator: Authenticator {
     ) {
         NetworkManager.shared.requestForUser(
             type: RefreshResponse.self,
-            api: Router.refresh(refreshToken: credential.refreshToken)
+            api: AccountRouter.refresh(refreshToken: credential.refreshToken)
         )
         .subscribe { response in
             let credential = SesacAuthenticationCredential(

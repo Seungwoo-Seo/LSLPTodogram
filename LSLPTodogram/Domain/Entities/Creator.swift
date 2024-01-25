@@ -10,5 +10,5 @@ import Foundation
 struct Creator: Hashable {
     let id: String
     let nick: String
-    let profile: String
+    let profile: String?
 }

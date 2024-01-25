@@ -13,7 +13,7 @@ final class FollowingButton: BaseButton {
         super.init(frame: .zero)
 
         var config = UIButton.Configuration.plain()
-        config.baseForegroundColor = Color.lightGray
+        config.baseForegroundColor = Color.white.withAlphaComponent(0.7)
         config.background.backgroundColor = Color.clear
         config.contentInsets = NSDirectionalEdgeInsets(
             top: 0, leading: 0, bottom: 0, trailing: 0
@@ -21,4 +21,9 @@ final class FollowingButton: BaseButton {
         config.title = "팔로잉 0명"
         configuration = config
     }
+
+    func updateTitle(_ title: String?) {
+        configuration?.title = title
+    }
+    
 }

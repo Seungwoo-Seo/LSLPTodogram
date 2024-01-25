@@ -11,14 +11,14 @@ import RxSwift
 final class OthersProfileCell: BaseTableViewCell {
     var disposeBag = DisposeBag()
 
-    let nicknameLabel = NicknameLabel(fontSize: 24, weight: .bold)
-    let profileImageView = ProfileImageView(image: UIImage(systemName: "person"))
+    let profileNicknameButton = ProfileNicknameButton(size: 24)
+    let profileImageButton = ProfileImageButton(size: CGSize(width: 60, height: 60))
 
     private lazy var fButtonStackView = {
         let view = UIStackView(arrangedSubviews: [followersButton, followingButton])
         view.axis = .horizontal
         view.alignment = .fill
-        view.distribution = .fillProportionally
+        view.distribution = .fillEqually
         view.spacing = 16
         return view
     }()
@@ -49,21 +49,19 @@ final class OthersProfileCell: BaseTableViewCell {
     }()
 
     func configure(_ item: OthersProfile) {
-        profileImageView.image = UIImage(systemName: "person")
-        nicknameLabel.text = item.nick
-        
-        followersButton.configuration?.title = "팔로워 \(item.followers?.count ?? 0)명"
-        followingButton.configuration?.title = "팔로잉 \(item.following?.count ?? 0)명"
-
-        // 이 사람 팔로워 목록에 내가 아이디가 있다면 true
-        // 없다면 false
-        if let followers = item.followers {
-            print("followers =====> ", followers)
-            print("myId =====> ", item.myId)
-            let isSelected = followers.contains(where: { $0.id == item.myId })
-            print("---->", isSelected)
-            followButton.isSelected = isSelected
+        if let imageString = item.profileImageString {
+            profileImageButton.imageView?.requestModifier(with: imageString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
         }
+        profileNicknameButton.updateTitle(title: item.nick)
+        followersButton.updateTitle(item.followersCountToString())
+        followingButton.updateTitle(item.followingCountToString())
+        followButton.isSelected = item.followStateToBool()
+        followButton.configuration?.title = item.followStateToString()
     }
 
     override func prepareForReuse() {
@@ -76,8 +74,8 @@ final class OthersProfileCell: BaseTableViewCell {
         super.initialHierarchy()
 
         [
-            nicknameLabel,
-            profileImageView,
+            profileNicknameButton,
+            profileImageButton,
             fButtonStackView,
             followButton
         ].forEach { contentView.addSubview($0) }
@@ -89,18 +87,18 @@ final class OthersProfileCell: BaseTableViewCell {
         let offset = 16
         let inset = 16
         let height = 44
-        nicknameLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview().inset(inset)
+        profileNicknameButton.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(inset)
+            make.leading.equalToSuperview().inset(inset)
+            make.trailing.lessThanOrEqualTo(profileImageButton.snp.leading).offset(-offset)
         }
 
-        profileImageView.snp.makeConstraints { make in
+        profileImageButton.snp.makeConstraints { make in
             make.top.trailing.equalToSuperview().inset(inset)
-            make.leading.equalTo(nicknameLabel.snp.trailing).offset(offset)
-            make.size.equalTo(50)
         }
 
         fButtonStackView.snp.makeConstraints { make in
-            make.top.equalTo(profileImageView.snp.bottom).offset(offset)
+            make.top.equalTo(profileImageButton.snp.bottom).offset(offset)
             make.leading.equalToSuperview().inset(inset)
             make.trailing.lessThanOrEqualToSuperview().inset(inset)
             make.height.equalTo(height)

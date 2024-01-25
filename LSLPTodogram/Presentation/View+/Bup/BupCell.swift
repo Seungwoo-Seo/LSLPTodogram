@@ -27,6 +27,7 @@ final class BupCell: BaseTableViewCell {
     var likeCache: (row: Int, status: Bool, bup: Bup)?
     var baseImageUrls: [String]?
     let imageUrls = BehaviorRelay<[String]>(value: [])
+    var height: CGFloat?
 
     func bind(_ viewModel: BupCellViewModel) {
         // TODO: - updateImage
@@ -35,68 +36,61 @@ final class BupCell: BaseTableViewCell {
             title: viewModel.bup.creator.nick
         )
         contentLabel.text = viewModel.bup.content
-
-        
     }
 
-    func configure(item: Bup) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
-        profileNicknameButton.updateTitle(title: item.creator.nick)
-        contentLabel.text = item.content
-
-//        communication
-        if let likeCache = likeCache {
-            // 있으면 캐시를 따라가고
-            if let likes = likeCache.bup.likes {
-
-                if likeCache.status {
-                    countButtonStackView.likeCountButton.configuration?.title = "\(likes.count + 1) 좋아요"
-                    communicationButtonStackView.likeButton.isSelected = true
-                } else {
-                    countButtonStackView.likeCountButton.configuration?.title = "\(likes.count - 1) 좋아요"
-                    communicationButtonStackView.likeButton.isSelected = false
-                }
-            } else {
-                countButtonStackView.likeCountButton.configuration?.title = "0 좋아요"
+    func configure(item: Bup, likeState: Bool?) {
+        if let profileString = item.creator.profile {
+            profileImageButton.imageView?.requestModifier(with: profileString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
             }
-
         } else {
-            // 없으면 기본을 간다.
-            if let likes = item.likes {
-                // likes가 있으면 카운팅을 해주고
-                countButtonStackView.likeCountButton.configuration?.title = "\(likes.count) 좋아요"
-
-                if likes.contains(item.creator.id) {
-                    communicationButtonStackView.likeButton.isSelected = true
-                } else {
-                    communicationButtonStackView.likeButton.isSelected = false
-                }
-
-            } else {
-                countButtonStackView.likeCountButton.configuration?.title = "0 좋아요"
-            }
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
+        profileNicknameButton.updateTitle(title: item.creator.nick)
+        if let content = item.content {
+            contentLabel.setHashTags(text: content)
         }
 
-
-
-        if let comments = item.comments {
-            countButtonStackView.commentCountButton.configuration?.title = "\(comments.count) 답글"
+        if let difference = calculateTimeDifference(from: item.time) {
+            switch difference {
+            case .seconds(let seconds):
+                timeLabel.text = "\(seconds)초 전"
+            case .minutes(let minutes):
+                timeLabel.text = "\(minutes)분 전"
+            case .hours(let hours):
+                timeLabel.text = "\(hours)시간 전"
+            case .days(let days):
+                timeLabel.text = "\(days)일 전"
+            }
         } else {
-            countButtonStackView.commentCountButton.configuration?.title = "0 답글"
+            timeLabel.text = "Invalid date format"
+        }
+
+        communicationButtonStackView.likeButton.isSelected = item.isIliked
+        countButtonStackView.likeCountButton.updateTitle(title: item.serverLikesCountString())
+        countButtonStackView.commentCountButton.updateTitle(title: item.commentCountString())
+
+        // 좋아요 버튼의 상태 업데이트
+        if let likeState = likeState {
+            communicationButtonStackView.likeButton.isSelected = likeState
+            countButtonStackView.likeCountButton.updateTitle(
+                title: item.localLikesCountString(isSelected: likeState)
+            )
         }
 
 
         baseImageUrls = item.image
         if let images = item.image {
-            //           let _ = item.width,
-            //           let height = item.height {
-            let height = 200.0
+            self.height = item.height
+            let height = item.height ?? 0
+
             // 1개
             if images.count == 1 {
                 imageCollectionView.snp.remakeConstraints { make in
                     make.top.equalTo(contentLabel.snp.bottom).offset(16/2)
                     make.horizontalEdges.equalTo(contentLabel)
-                    make.height.equalTo(height/2)
+                    make.height.equalTo(height)
                 }
 
                 layoutIfNeeded()
@@ -110,7 +104,7 @@ final class BupCell: BaseTableViewCell {
                 }
 
                 layoutIfNeeded()
-                
+
             } else {
                 // 0개
                 imageCollectionView.snp.remakeConstraints { make in
@@ -126,7 +120,6 @@ final class BupCell: BaseTableViewCell {
 
             imageUrls.accept(images)
         }
-
     }
 
     override func prepareForReuse() {
@@ -139,10 +132,10 @@ final class BupCell: BaseTableViewCell {
         super.draw(rect)
 
         if let urls = baseImageUrls {
-            let height = 200.0
+            let height = height ?? 0
             if urls.count == 1 {
                 imageCollectionView.collectionViewLayout = ImageCollectionViewLayout.one(
-                    size: CGSize(width: imageCollectionView.bounds.width, height: height/2)
+                    size: CGSize(width: imageCollectionView.bounds.width, height: height)
                 ).layout
             } else if urls.count > 1 {
                 imageCollectionView.collectionViewLayout = ImageCollectionViewLayout.many(
@@ -193,19 +186,18 @@ final class BupCell: BaseTableViewCell {
 
         timeLabel.snp.makeConstraints { make in
             make.top.equalTo(profileNicknameButton)
-            make.leading.equalTo(profileNicknameButton.snp.trailing).offset(offset)
+            make.trailing.equalTo(ellipsisButton.snp.leading).offset(-offset)
         }
 
         ellipsisButton.snp.makeConstraints { make in
             make.verticalEdges.equalTo(timeLabel)
-            make.leading.equalTo(timeLabel.snp.trailing).offset(offset)
             make.trailing.equalToSuperview().inset(inset)
         }
 
         lineView.snp.makeConstraints { make in
             make.top.equalTo(profileImageButton.snp.bottom).offset(offset)
             make.centerX.equalTo(profileImageButton)
-            make.bottom.equalTo(communicationButtonStackView)
+            make.bottom.equalTo(countButtonStackView)
         }
 
         contentLabel.snp.makeConstraints { make in
