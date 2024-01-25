@@ -20,7 +20,7 @@ struct PostDTO: Decodable {
     let _id: String
     let creator: CreatorDTO
     let time: String
-    let content: String
+    let content: String?
     let width, height: String?
     let productID: String
     let likes: [String]?

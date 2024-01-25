@@ -10,7 +10,7 @@ import Foundation
 struct Bup: Hashable {
     let id: String
     let creator: Creator
-    let content: String
+    let content: String?
     let time: String
     let width: CGFloat?
     let height: CGFloat?
