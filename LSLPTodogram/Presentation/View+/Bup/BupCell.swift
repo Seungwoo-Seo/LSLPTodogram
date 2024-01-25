@@ -47,7 +47,25 @@ final class BupCell: BaseTableViewCell {
             profileImageButton.updateImage(image: UIImage(named: "profile"))
         }
         profileNicknameButton.updateTitle(title: item.creator.nick)
-        contentLabel.text = item.content
+        if let content = item.content {
+            contentLabel.setHashTags(text: content)
+        }
+
+        if let difference = calculateTimeDifference(from: item.time) {
+            switch difference {
+            case .seconds(let seconds):
+                timeLabel.text = "\(seconds)초 전"
+            case .minutes(let minutes):
+                timeLabel.text = "\(minutes)분 전"
+            case .hours(let hours):
+                timeLabel.text = "\(hours)시간 전"
+            case .days(let days):
+                timeLabel.text = "\(days)일 전"
+            }
+        } else {
+            timeLabel.text = "Invalid date format"
+        }
+
         communicationButtonStackView.likeButton.isSelected = item.isIliked
         countButtonStackView.likeCountButton.updateTitle(title: item.serverLikesCountString())
         countButtonStackView.commentCountButton.updateTitle(title: item.commentCountString())
@@ -167,7 +185,7 @@ final class BupCell: BaseTableViewCell {
 
         timeLabel.snp.makeConstraints { make in
             make.top.equalTo(profileNicknameButton)
-            make.leading.equalTo(profileNicknameButton.snp.trailing).offset(offset)
+            make.trailing.equalTo(ellipsisButton.snp.leading).offset(-offset)
         }
 
         ellipsisButton.snp.makeConstraints { make in

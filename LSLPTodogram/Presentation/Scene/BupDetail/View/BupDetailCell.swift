@@ -26,7 +26,14 @@ final class BupDetailCell: BaseTableViewCell {
     let imageUrls = BehaviorRelay<[String]>(value: [])
 
     func configure(item: Bup, likeState: Bool?) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        if let profileString = item.creator.profile {
+            profileImageButton.imageView?.requestModifier(with: profileString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
         profileNicknameButton.updateTitle(title: item.creator.nick)
         contentLabel.text = item.content
         if let difference = calculateTimeDifference(from: item.time) {

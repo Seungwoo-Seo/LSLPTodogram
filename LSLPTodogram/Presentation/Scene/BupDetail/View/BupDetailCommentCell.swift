@@ -16,7 +16,14 @@ final class BupDetailCommentCell: BaseTableViewCell {
     let contentLabel = ContentLabel()
 
     func configure(_ item: Comment) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        if let profileString = item.creator.profile {
+            profileImageButton.imageView?.requestModifier(with: profileString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
         profileNicknameButton.updateTitle(title: item.creator.nick)
 
         if let difference = calculateTimeDifference(from: item.time) {
@@ -73,12 +80,11 @@ final class BupDetailCommentCell: BaseTableViewCell {
 
         timeLabel.snp.makeConstraints { make in
             make.top.equalTo(profileNicknameButton)
-            make.leading.equalTo(profileNicknameButton.snp.trailing).offset(offset)
+            make.trailing.equalTo(ellipsisButton.snp.leading).offset(-offset)
         }
 
         ellipsisButton.snp.makeConstraints { make in
             make.verticalEdges.equalTo(timeLabel)
-            make.leading.equalTo(timeLabel.snp.trailing).offset(offset)
             make.trailing.equalToSuperview().inset(inset)
         }
 

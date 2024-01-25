@@ -45,8 +45,8 @@ final class CommentTableView: BaseTableView {
                         withIdentifier: CommentCell.identifier
                     ) as? CommentCell else {return UITableViewCell()}
 
-                    cell.profileImageButton.updateImage(image: UIImage(named: "profile"))
-                    cell.profileNicknameButton.updateTitle(title: item.nick)
+                    cell.configure(item)
+//                    cell.configure(item: item)
 
 //                    Observable.just(item)
 //                        .bind(with: self) { owner, item in

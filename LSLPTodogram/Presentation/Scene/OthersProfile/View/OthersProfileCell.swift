@@ -49,7 +49,14 @@ final class OthersProfileCell: BaseTableViewCell {
     }()
 
     func configure(_ item: OthersProfile) {
-        profileImageButton.updateImage(image: UIImage(named: "profile"))
+        if let imageString = item.profileImageString {
+            profileImageButton.imageView?.requestModifier(with: imageString) { [weak self] (image) in
+                guard let self else {return}
+                self.profileImageButton.updateImage(image: image)
+            }
+        } else {
+            profileImageButton.updateImage(image: UIImage(named: "profile"))
+        }
         profileNicknameButton.updateTitle(title: item.nick)
         followersButton.updateTitle(item.followersCountToString())
         followingButton.updateTitle(item.followingCountToString())
