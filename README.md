@@ -1,52 +1,19 @@
 # Bupgram
 
-> 일상을 공유하고 유저끼리 소통할 수 있는 SNS앱입니다.
+> Bup(Burning Passion)을 공유하고 소통할 수 있는 SNS 서비스
 
 <p align="center">
-  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/ec89b313-3382-45a7-b4e2-f60802bcb00e" width="130">
-  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/2b711c5e-0e3d-4386-b7f6-7fc881f2eb4c" width="130">
-  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/0702fe8e-f003-43c7-b1e7-f0e22bd0b6ea" width="130">
-  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/85acdc26-fffb-43e4-89be-c61015e641f4" width="130">
-  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/dc0ea6ff-b193-446e-9a27-11ac29b829f8" width="130">
-  <img src="https://github.com/SSABOODA/PictureFlow/assets/72753868/e0384b0b-6148-44cc-a0e2-93f3bcb3f00b" width="130">
+  <img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/1b62cbf6-3c4c-4d74-8629-76912faa8edf" width="130">
+  <img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/32f9cbbd-a750-4bf3-a400-b85e00ba3eed" width="130">
+  <img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/eda01cb4-8001-4854-b9b1-8c20b7ad9c0a" width="130">
+  <img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/6b3a4956-c8a2-4547-83e4-02b8c77d90a1" width="130">
+  <img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/10127fd9-6d4e-405a-a22d-458be6659808" width="130">
+  <img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/f24d0a7c-7ef5-4350-90e0-7a394cb70dce" width="130">
 </p>
 
-## 목차
-
-- [🚀 주요 기능](#-주요-기능)
-- [🛠 구현 기능](#-구현-기능)
-- [💻 기술 스택](#-기술-스택)
-- [📱 서비스](#-서비스)
-- [🚧 기술적 도전](#-기술적-도전)
-- [🚨 트러블 슈팅](#-트러블-슈팅)
-- [📝 회고](#-회고)
-- [🖼 아이콘 출처 및 저작권 정보](#-아이콘-출처-및-저작권-정보)
-
-## 🚀 주요 기능
-
-- 게시글 작성/조회/삭제
-- 본인과 타인의 게시글에 좋아요/취소
-- 본인과 타인의 게시글에 댓글
-- 타인 계정 팔로우/언팔로우
-- 해시태그
-- 회원인증
-
-## 🛠 구현 기능
-
-- `multipart/form-data` 형식을 사용하여 `이미지를 업로드` 구현
-- `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 구현
-- `cursor`기반 페이지네이션 구현
-- `Optimistic UI` 구현
-- `Keychain`을 활용하여 `AccessToken`과 `RefreshToken`의 `CRUD` 구현
-
-## 💻 기술 스택
-
-- `Swift`
-- `MVVM`, `Router`, `Input-Output`, `Singleton`
-- `UIKit`, `PhotosUI`
-- `CodeBase UI`, `AutoLayout`
-- `Codable`, `DiffableDataSource`, `CompositionalLayout`, `Keychain`
-- `RxSwift`, `RxDataSource`, `Alamofire`, `SnapKit`, `Kingfisher`, `Tabman`, `IQKeyboardManager`, `PanModal`
+|메인 화면|본인 계정|게시글(Bup 작성)|댓글 작성|타인 계정|회원인증|
+|:---:|:---:|:---:|:---:|:---:|:---:|
+|<img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/b17127b8-6c28-495c-8bab-477e2b81c0b0" width="150">|<img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/fb58ef70-d0b5-45d1-a573-382c73dfc8e1" width="150">|<img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/e85dcccb-5258-4f9a-b51a-bee5f090647c" width="150">|<img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/89689a2f-ba5f-4705-9cf1-a6802485f736" width="150">|<img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/cae74492-0b01-49d3-a798-91ac7e73c7d3" width="150">|<img src="https://github.com/Seungwoo-Seo/LSLPTodogram/assets/72753868/90168835-5fa0-447e-bb93-23a9df9a3c12" width="150">|
 
 ## 📱 서비스
 
@@ -54,12 +21,38 @@
 - 개발 인원 : 1인
 - 개발 기간 : 2023년 11월 20일 ~ 2024년 1월 5일 (7주)
 
+## 🚀 서비스 기능
+
+- 이메일 회원인증 기능 제공
+- 게시글(Bup) 작성/조회/삭제/해시태그 기능 제공
+- 게시글 좋아요/댓글 기능 제공
+- 계정 팔로우/언팔로우 기능 제공
+
+## 🛠 사용 기술
+
+- Swift
+- UIKit, PhotosUI
+- MVVM, Input/Output Pattern, Router Pattern, Singleton
+- RxSwift, RxDataSource, Alamofire, SnapKit, Kingfisher, Tabman, IQKeyboardManager, PanModal
+- CodeBase UI, AutoLayout, Base, ViewIdentifiable, CompositionalLayout, DiffableDataSource, Codable, Keychain
+
+## 💻 핵심 설명
+
+- RxSwift + MVVM 구조 기반 Input/Output Pattern 적용
+- Alamofire 기반 Router Pattern 적용, Generic request 메소드 구현
+- multipart/form-data 기반 이미지 업로드 및 다운 샘플링 구현
+- AuthenticationInterceptor 사용해 JWT 기반 AccessToken 갱신/RefreshToken 만료 로직 구현
+- Keychain 활용해 AccessToken/RefreshToken CRUD 구현
+- cursor 기반 페이지네이션 을 통한 게시글 로드
+- 이미지 갯수에 따른 CollectionViewLayout 변경 및 Image Cell Sizing 구현
+- Rx throttle operater + Dictionary 를 통한 좋아요/팔로우 Optimistic UI 구현
+
 ## 🚧 기술적 도전
 
 <!-- 프로젝트를 진행하면서 겪은 기술적인 도전과 어떻게 해결했는지에 대한 설명을 추가한다. -->
 ### 1. `AuthenticationInterceptor`를 활용해 `JWT` 기반의 `AccessToken` 갱신과 `RefreshToken` 만료 로직 개선하기
 - **도전 상황**</br>
-대부분의 API 요청 Header에 `AccessToken`을 넣어줘야 했습니다. AccessToken 만료 시(419) `RefreshToken`으로 재요청 로직과 리프레시 토큰 마저 만료 시 `로그인 화면으로 전환` 로직이 필요했습니다. 매 요청마다 중복된 코드를 개선하고 싶었고 Alamofire 5.2에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
+AccessToken 만료 시(419) `RefreshToken`으로 재요청 로직과 리프레시 토큰 마저 만료 시 `로그인 화면으로 전환` 로직이 필요했습니다. 매 요청마다 중복된 코드를 개선하고 싶었고 Alamofire 5.2에 등장한 `AuthenticationInterceptor`를 적용해 보았습니다.
 
 - **도전 결과**</br>
 interceptor를 외부에서 만들어서 request 메서드 파라미터로 전달해주는 것만으로 모든 처리가 가능케 되었습니다.
@@ -237,17 +230,14 @@ input.likeState
 ~~~
 
 
-## 🛠 트러블 슈팅
+## 🚨 트러블 슈팅
 
-### 1. API request 메서드를 `Single`로 구현했을 때 에러 핸들링 시 `스트림 종료` 이슈
-- **문제 상황**</br>
-API 요청 메서드를 Single로 구현하고 viewModel에서 `catch 오퍼레이터`를 사용해서 `에러 핸들링`을 하면 스트림이 종료가 되서 한 번 요청하면 그 뒤로 요청이 되질 않았습니다.
-
+### 1. Single로 랩핑한 REST API request를 catch operator로 에러 핸들링 시 스트림 종료 이슈
 - **문제 원인**</br>
-`catch 오퍼레이터`는 특정 값을 return하고 onComplete를 방출하여 시퀀스를 종료했기 때문입니다.
+flatMapLatest 외부에서 catch operator 사용하여 completed 이벤트 방출 후 스트림 종료
 
 - **해결 방법**</br>
-`catch 오퍼레이터`의 위치를 변경하여 해결하였습니다. 기존엔 flatMapLatest의 결과를 catch 했었지만 `내부에서` catch를 사용하므로써 스트림을 종료시키지 않을 수 있었습니다.
+flatMapLatest 내부에서 catch operator로 에러 핸들링 및 스트림 유지
 ~~~swift
 .flatMapLatest { [unowned self] _ in
     return NetworkManager.shared.request(
@@ -259,15 +249,12 @@ API 요청 메서드를 Single로 구현하고 viewModel에서 `catch 오퍼레�
 }
 ~~~
 
-### 2. `interceptor` 구현 후 서버로부터 419(액세스 토큰 만료)를 응답 받았을 때 `무한 재귀` 이슈
-- **문제 상황**</br>
-Alamofire에서 제공해주는 `AuthenticationInterceptor`를 적용하여 액세스 토큰 만료 시 리프레시 토큰으로 토큰 갱신 요청을 보냈었습니다. 그런데 이 때 `무한 재귀`에 걸리면서 어마어마한 요청을 보내게 되고 서버로부터 429(과호출)을 응답 받게 되었습니다.
-
+### 2. AuthenticationInterceptor 기반 interceptor 구현 후 서버로부터 419(액세스 토큰 만료)를 응답받았을 때 무한 재귀 이슈
 - **문제 원인**</br>
-액세스 토큰 만료 시 리프레시 토큰으로 갱신 요청 로직을 `Authenticator` 객체의 `refresh 메서드`에서 작성하고, 여기서 받은 응답을 `completion으로 전달`하게 되는데, completion으로 `error`를 전달 받게 되면 Alamofire 내부적으로 `retry`를 하게 됩니다. 그런데! 여기서 제가 인터셉터를 사용한 request 메서드를 또 사용해서 무한 재귀에 걸리게 되는 것이였습니다.
-
+419를 잡았을 때 interceptor retry에서 갱신 request를 보낼 때도 interceptor를 사용했던 상황이 원인
+  
 - **해결 방법**</br>
-이미 interceptor가 `419를 잡아서` 이 Flow를 타게 된 것이기 때문에 리프래시 토큰으로 액세스 토큰 갱신 요청을 보낼 땐 interceptor를 `사용하지 않는` request 메서드를 사용해서 해결했습니다.
+이미 419를 잡았기 때문에 리프래시 토큰으로 갱신 요청을 보낼 땐 interceptor를 `사용하지 않는` request 메서드를 사용해서 해결
 ~~~swift
 final class SesacAuthenticator: Authenticator {
     ...
@@ -299,24 +286,8 @@ final class SesacAuthenticator: Authenticator {
 ~~~
 
 ## 📝 회고
-- `RxSwift`를 적용하여 `반응형 프로그래밍`에 대한 플로우를 이해할 수 있었습니다.
-- `JWT`를 활용한 `사용자 인증` 플로우를 이해할 수 있었습니다.
-- `Optimistic UI`를 통해 트래픽 감소 및 비용 절감 효과를 경험할 수 있었습니다.
-- `Router 패턴`을 통해 네트워크 레이어의 가독성 및 재사용성 향상을 경험할 수 있었습니다.
-- 프로젝트 규모가 점점 커지면서 viewModel 또한 점점 커져갔고 유지보수를 하기도 점점 어려워졌습니다. viewModel에도 개선이 필요하다고 느꼈습니다.
-  
-## 🖼 아이콘 출처 및 저작권 정보
-
-이 프로젝트에서 사용된 아이콘들은 아래와 같은 출처에서 제공되었습니다. 각 아이콘의 저작권은 해당 제작자에게 있습니다. 아이콘을 사용하려면 각 아이콘의 출처로 이동하여 저작권 관련 정보를 확인하세요.
-
-- [Mohamed Nohassi](https://unsplash.com/ko/@coopery?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Jay Antol](https://unsplash.com/ko/@jae462?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Mikhail Vasilyev](https://unsplash.com/ko/@miklevasilyev?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Tim Mossholder](https://unsplash.com/ko/@timmossholder?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Jamie Street](https://unsplash.com/ko/@jamie452?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Elias Maurer](https://unsplash.com/ko/@elmaurer?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Alison Wang](https://unsplash.com/ko/@alison_wang?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Anshita Nair](https://unsplash.com/ko/@anshitan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Glen Carrie](https://unsplash.com/ko/@glencarrie?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Yulia Matvienko](https://unsplash.com/ko/@yuliamatvienko?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
-- [Shubham Dhage](https://unsplash.com/ko/@theshubhamdhage?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) - Unsplash
+- `RxSwift`를 적용하여 `반응형 프로그래밍`에 대한 플로우를 경험
+- `JWT`를 활용한 `사용자 인증` 플로우를 경험
+- `Optimistic UI`를 통해 트래픽 감소 및 비용 절감 효과를 경험
+- `Router 패턴`을 통해 네트워크 레이어의 가독성 및 재사용성 향상을 경험
+- 프로젝트 규모가 커질수록 viewModel도 비대해졌고 viewModel에도 개선이 필요하다는 걸 경험
