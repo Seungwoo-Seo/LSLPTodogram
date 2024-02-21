@@ -38,14 +38,14 @@
 
 ## 💻 핵심 설명
 
-- RxSwift + MVVM 구조 기반 Input/Output Pattern 적용
-- Alamofire 기반 Router Pattern 적용, Generic request 메소드 구현
-- multipart/form-data 기반 이미지 업로드 및 다운 샘플링 구현
-- AuthenticationInterceptor 사용해 JWT 기반 AccessToken 갱신/RefreshToken 만료 로직 구현
+- RxSwift + MVVM 구조 기반 `Input/Output Pattern` 적용
+- Alamofire 기반 `Router Pattern` 적용, `Generic request` 메소드 구현
+- multipart/form-data 기반 `이미지 업로드` 및 `다운 샘플링` 구현
+- AuthenticationInterceptor 사용해 JWT 기반 `AccessToken 갱신/RefreshToken 만료` 로직 구현
 - Keychain 활용해 AccessToken/RefreshToken CRUD 구현
-- cursor 기반 페이지네이션 을 통한 게시글 로드
-- 이미지 갯수에 따른 CollectionViewLayout 변경 및 Image Cell Sizing 구현
-- Rx throttle operater + Dictionary 를 통한 좋아요/팔로우 Optimistic UI 구현
+- cursor 기반 `페이지 네이션`을 통한 게시글 로드
+- 이미지 개수에 따른 `CollectionViewLayout 변경` 및 `Image Cell Sizing` 구현
+- Rx throttle operater + Dictionary를 통한 좋아요/팔로우 `Optimistic UI` 구현
 
 ## 🚧 기술적 도전
 
